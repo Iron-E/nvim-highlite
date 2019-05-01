@@ -18,9 +18,9 @@ This colorscheme should be accepted by any Vim build or version on any platform 
 
 ## Installation
 
-### With a `'runtimepath'` manager
+### With a runtimepath manager
 
-Follow your `'runtimepath'` manager's instructions.
+Follow your runtimepath manager's instructions.
 
 ### With a plugin manager 
 
@@ -28,7 +28,10 @@ Follow your plugin manager's instructions.
 
 ### Manually
 
-Move `colors/$COLORSCHEME_NAME.vim` to `$HOME/.vim/colors/$COLORSCHEME_NAME.vim` (on UNIX-like systems) or `$HOME\vimfiles\colors\$COLORSCHEME_NAME.vim` (on Windows).
+Move `colors/$COLORSCHEME_NAME.vim` to:
+
+* `$HOME/.vim/colors/$COLORSCHEME_NAME.vim` on UNIX-like systems,
+* `$HOME\vimfiles\colors\$COLORSCHEME_NAME.vim` on Windows.
 
 ## Hacking
 
