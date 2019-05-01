@@ -1,6 +1,5 @@
 
-ERB_SOURCES = $(wildcard colors/*.erb)
-VIM_OUTPUTS = $(ERB_SOURCES:%.erb=%.vim)
+VIM_OUTPUTS = $(patsubst %.erb,%.vim,$(wildcard colors/*.erb))
 
 .PHONY: all
 
