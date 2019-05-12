@@ -13,7 +13,7 @@ The process is divided in four steps:
 3. define your highlight groups and links,
 4. and generate your colorscheme.
 
-Each step is throughly described in the colorscheme template: `src/rnb.erb`.
+Each step is thoroughly described in the colorscheme template: `src/rnb.erb`.
 
 ## How does it work?
 
@@ -30,3 +30,5 @@ The template is split into two sections of which only the first is of interest t
 #### Second section: the template
 
 ### The README template
+
+[//]: # ( Vim: set spell spelllang=en: )
