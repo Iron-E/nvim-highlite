@@ -4,6 +4,18 @@
 
 RNB is a template designed to help vimmers create their own colorschemes without much effort.
 
+In reality, Vim colorschemes are not that hard to write but there are several benefits to using a template such as RNB:
+
+* you can define/modify variables once instead of messing around with potentially botched substitutions,
+* you can distribute a lean colorscheme, free from unnecessary logic,
+* you can distribute the source alongside the colorscheme, making it easy for your users to experiment and adapt *your* colorschemes to *their* needs,
+* you can focus on the design of your colorscheme rather than its implementation,
+* you can start working on new colorscheme ideas very easily.
+
+## What do I need to use it?
+
+[ERB](https://ruby-doc.org/stdlib-2.6.3/libdoc/erb/rdoc/index.html), the templating engine used here, is part of Ruby's standard library so you will need [Ruby](https://www.ruby-lang.org/) to generate your colorscheme. Neither ERB nor Ruby knowledge is required, though.
+
 ## How do I use it?
 
 The process is divided in four steps:
@@ -15,20 +27,9 @@ The process is divided in four steps:
 
 Each step is thoroughly described in the colorscheme template: `src/rnb.erb`.
 
-## How does it work?
+## TODO
 
-The templates in this repository use ERB, Ruby's built-in templating system, so you will need a working Ruby installation to generate your colorscheme. Ruby knowledge is not needed at all, though.
+* `README.md` template
 
-This repository contains two templates: `src/rnb.erb`, the colorscheme template, and `src/readme.erb`, the README template.
-
-### The colorscheme template
-
-The template is split into two sections of which only the first is of interest to the casual user.
-
-#### First section: the settings
-
-#### Second section: the template
-
-### The README template
 
 [//]: # ( Vim: set spell spelllang=en: )
