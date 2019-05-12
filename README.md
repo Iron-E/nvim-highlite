@@ -18,14 +18,15 @@ In reality, Vim colorschemes are not that hard to write but there are several be
 
 ## How do I use it?
 
-The process is divided in four steps:
+The process is divided in five steps:
 
-1. start by editing your colorscheme's information,
-2. define your colors,
-3. define your highlight groups and links,
-4. and generate your colorscheme.
+1. rename `colors/rnb.erb` to `colors/name_of_your_colorscheme.erb`,
+2. start by editing your colorscheme's information,
+3. define your colors,
+4. define your highlight groups and links,
+5. and generate your colorscheme.
 
-Each step is thoroughly described in the colorscheme template: `src/rnb.erb`.
+Each step is thoroughly described in the colorscheme template: `colors/rnb.erb`.
 
 ## TODO
 

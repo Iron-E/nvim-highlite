@@ -1,7 +1,7 @@
 <%
     # RNB, A VIM COLORSCHEME TEMPLATE
     # Author:        Romain Lafourcade (https://github.com/romainl)
-    # Canonical URL: https://gist.github.com/romainl/5cd2f4ec222805f49eca
+    # Canonical URL: https://github.com/romainl/vim-rnb
 
     # This template is designed to help vimmers create their own colorschemes
     # without much effort.
@@ -9,13 +9,14 @@
     # You will need Ruby to generate your colorscheme but Ruby knowledge is
     # not needed at all.
     #
-    # The process is divided in four steps:
-    #   1. start by editing your colorscheme's information,
-    #   2. define your colors,
-    #   3. define your highlight groups and links,
-    #   4. and generate your colorscheme.
+    # The process is divided in five steps:
+    #   1. rename `colors/rnb.erb` to `colors/name_of_your_colorscheme.erb`,
+    #   2. start by editing your colorscheme's information,
+    #   3. define your colors,
+    #   4. define your highlight groups and links,
+    #   5. and generate your colorscheme.
 
-    # Step 1: information
+    # Step 2: information
     #
     # Make sure the name of your colorscheme is unique and attractive.
     # The description should fit in a single line with no linefeed.
@@ -29,7 +30,7 @@
         webpage:     "http://www.example.com"
     }
 
-    # Step 2: colors
+    # Step 3: colors
     #
     # black = [       give each color a distinctive name
     #   "#000000",    hexadecimal color used in GVim/MacVim or "NONE"
@@ -63,7 +64,7 @@
     cyan        = ["#00ffff", 14, "cyan"]
     white       = ["#ffffff", 15, "white"]
 
-    # Step 3: highlights
+    # Step 4: highlights
     #
     # You can define highlight groups like this:
     #
@@ -185,11 +186,15 @@
         white
     ]
 
-    # Step 4: generation
+    # Step 5: generation
     #
     # From a separate shell:
     #
     #     $ erb -T - bar.erb > bar.vim
+    #
+    # From a separate shell, with the make program:
+    #
+    #     $ make
     #
     # From Vim:
     #
