@@ -1,6 +1,14 @@
-# foobar-baz
+<%
+    # foo
+    information = {
+        name:        "rnb",
+        description: "Lorem ipsum dolor sit amet."
+    }
+    
+-%>
+# <%= information[:name] %>
 
-Here goes your elevator pitch for your colorscheme.
+<%= information[:description] %>
 
 ## Requirements
 
@@ -8,7 +16,7 @@ This colorscheme should be accepted by any Vim build or version on any platform 
 
 ### GUI Vim (GVim, MacVim)
 
-The colorscheme should work without any user intervention.
+This colorscheme should work without any user intervention.
 
 ### Color terminals capable of displaying "true colors"
 
@@ -30,16 +38,16 @@ Follow your plugin manager's instructions.
 
 ### Manually
 
-Move `colors/foobar-baz.vim` to:
+Move `colors/<%= information[:name] %>.vim` to:
 
-* `$HOME/.vim/colors/foobar-bazvim` on UNIX-like systems,
-* `$HOME\vimfiles\colors\foobar-bazvim` on Windows.
+* `$HOME/.vim/colors/<%= information[:name] %>.vim` on UNIX-like systems,
+* `$HOME\vimfiles\colors\<%= information[:name] %>.vim` on Windows.
 
 ## Activation
 
 Add the line below to your `vimrc`:
 
-    colorscheme foobar-baz
+    colorscheme <%= information[:name] %>
 
 and either reload your `vimrc`:
 
@@ -47,7 +55,7 @@ and either reload your `vimrc`:
 
 or start a new Vim session.
 
-NOTE: if you installed foobar-baz with the help of a plugin manager, make sure that line comes *after* any line related in one way or another to your plugin manager.
+NOTE: if you installed <%= information[:name] %> with the help of a plugin manager, make sure that line comes *after* any line related in one way or another to your plugin manager.
 
 ## Hacking
 

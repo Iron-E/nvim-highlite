@@ -1,6 +1,6 @@
-# foobar-baz
+# rnb
 
-Here goes your elevator pitch for your colorscheme.
+Lorem ipsum dolor sit amet.
 
 ## Requirements
 
