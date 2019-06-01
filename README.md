@@ -26,7 +26,7 @@ The process is divided in five steps:
 4. define your highlight groups and links,
 5. and generate your colorscheme.
 
-Each step is thoroughly described in the colorscheme template: `colors/rnb.erb`.
+Each step is thoroughly described in the colorscheme template itself in an effort to make it portable: if you ever decide to distribute your colorscheme you can simply package the template with it.
 
 ## TODO
 
