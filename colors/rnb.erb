@@ -76,9 +76,9 @@
     #   ]
     #
     # The sample above tells Vim to render normal text in dark gray against a white
-    # background, without any styling.
+    # background, without any other styling.
     #
-    # or link an highlight group to another:
+    # Or you can link an highlight group to another:
     #
     #   [ "Title", "Normal" ]
     #
@@ -96,7 +96,9 @@
     # background, with a red undercurl.
     #
     # You can add any custom highlight group to the standard list below but you shouldn't
-    # remove any if you want a working colorscheme.
+    # remove any if you want a working colorscheme. Most of them are described under
+    # :help highlight-default, the others are taken from :help group-name. Both help sections
+    # are good reads, by the way.
     highlights = [
         [ "Normal", white, darkgray, "NONE" ],
         [ "NonText", white, darkgray, "NONE" ],
@@ -166,7 +168,34 @@
     # is empty or if it doesn't contain exactly 16 items, the corresponding
     # Vim variable won't be set.
     #
-    # The expected values are colors defined in step 2.
+    # The expected values are colors defined in step 3.
+    #
+    # Terminal emulators use a basic palette of 16 colors that can be
+    # addressed by CLI and TUI tools via their name or their index, from
+    # 0 to 15. The list is not really standardized but it is generally
+    # assumed to look like this:
+    #
+    #   Index | Name
+    #  -------|-------------
+    #   0     | black
+    #   1     | darkred
+    #   2     | darkgreen
+    #   3     | darkyellow
+    #   4     | darkblue
+    #   5     | darkmagenta
+    #   6     | darkcyan
+    #   7     | gray
+    #   8     | darkgray
+    #   9     | red
+    #   10    | green
+    #   11    | yellow
+    #   12    | blue
+    #   13    | magenta
+    #   14    | cyan
+    #   15    | white
+    #
+    # While you are certainly free to make colors 0 to 7 shades of blue,
+    # this will inevitably cause usability issues so… be careful.
     terminal_ansi_colors = [
         black,
         darkred,
@@ -229,13 +258,14 @@
 
     # A few general advices:
     #
-    #   * The Windows console is limited to the 16 so-called "ANSI" colors but it has
-    #     a few of them interverted which makes numbers impractical. Use color names
+    #   * The Windows console is limited to the 16 so-called "ANSI" colors but it used to
+    #     have a few of them interverted which makes numbers impractical. Use color names
     #     instead of numbers: :help cterm-colors
     #   * The Windows console (yeah…) doesn't do italics, underlines or bolded text;
     #     it is limited to normal and reverse. Keep that in mind if you want
     #     your colorscheme to be usable in as many environments as possible by as many
     #     people as possible.
+    #   * Actually, terminal emulators rarely do italics.
     #   * All of the terminal emulators in use these days allow their users to
     #     change the 16 so-called "ANSI" colors. It is also possible on some platforms
     #     to change some or all of the 256 colors in the xterm palette. Don't take
