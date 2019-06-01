@@ -102,6 +102,7 @@
     highlights = [
         [ "Normal", white, darkgray, "NONE" ],
         [ "NonText", white, darkgray, "NONE" ],
+        [ "EndOfBuffer", white, darkgray, "NONE" ],
         [ "Comment", white, darkgray, "NONE" ],
         [ "Constant", white, darkgray, "NONE" ],
         [ "Error", white, darkgray, "NONE" ],
@@ -159,8 +160,11 @@
         [ "Question", white, darkgray, "NONE" ],
         [ "WarningMsg", "Error" ],
         [ "Cursor", white, darkgray, "NONE" ],
+        [ "CursorIM", "Cursor" ],
         [ "CursorColumn", white, darkgray, "NONE" ],
-        [ "QuickFixLine", white, darkgray, "NONE" ]
+        [ "QuickFixLine", white, darkgray, "NONE" ],
+        [ "Terminal", "Normal" ],
+        [ "Conceal", white, darkgray, "NONE"]
     ]
 
     # Define the color palette used by :terminal when in GUI Vim
