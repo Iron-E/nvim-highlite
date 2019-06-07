@@ -8,7 +8,7 @@ In reality, Vim colorschemes are not that hard to write but there are several be
 
 * you can define/modify variables once instead of messing around with potentially botched substitutions,
 * you can distribute a lean colorscheme, free from unnecessary logic,
-* you can distribute the source alongside the colorscheme, making it easy for your users to experiment and adapt *your* colorschemes to *their* needs,
+* you can distribute the source alongside the colorscheme, making it easy for your users to experiment and adapt *your* colorscheme to *their* needs,
 * you can focus on the design of your colorscheme rather than its implementation,
 * you can start working on new colorscheme ideas very easily.
 
@@ -26,7 +26,7 @@ The process is divided in five steps:
 4. define your highlight groups and links,
 5. and generate your colorscheme.
 
-Each step is thoroughly described in the colorscheme template itself in an effort to make it portable: if you ever decide to distribute your colorscheme you can simply package the template with it.
+Steps 2 to 5 are thoroughly described in the colorscheme template itself in an effort to make it portable: if you ever decide to distribute your colorscheme you can simply package the template with it.
 
 ## TODO
 
