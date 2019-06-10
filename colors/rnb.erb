@@ -122,7 +122,7 @@
     highlights = [
         [ "Normal", white, darkgray, "NONE" ],
         [ "NonText", white, darkgray, "NONE" ],
-        [ "EndOfBuffer", white, darkgray, "NONE" ],
+        [ "EndOfBuffer","NonText" ],
         [ "Comment", white, darkgray, "NONE" ],
         [ "Constant", white, darkgray, "NONE" ],
         [ "Error", white, darkgray, "NONE" ],
@@ -186,7 +186,9 @@
         [ "Terminal", "Normal" ],
         [ "Conceal", white, darkgray, "NONE" ],
         [ "ToolbarLine", white, darkgray, "NONE" ],
-        [ "ToolbarButton", white, darkgray, "NONE" ]
+        [ "ToolbarButton", white, darkgray, "NONE" ],
+        [ "debugPC", white, darkgray, "NONE" ],
+        [ "debugBreakpoint", white, darkgray, "NONE" ],
     ]
 
     # Define the color palette used by :terminal when in GUI Vim
