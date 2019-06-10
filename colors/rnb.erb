@@ -10,11 +10,30 @@
     # not needed at all.
     #
     # The process is divided in five steps:
-    #   1. rename `colors/rnb.erb` to `colors/name_of_your_colorscheme.erb`,
-    #   2. start by editing your colorscheme's information,
+    #   1. rename the template,
+    #   2. edit your colorscheme's information,
     #   3. define your colors,
     #   4. define your highlight groups and links,
     #   5. and generate your colorscheme.
+
+    # Step 1: renaming
+    #
+    # If this file is distributed with a colorscheme it's probably already named correctly
+    # and you can skip this step.
+    #
+    # If you forked/cloned/copied this repository to create your own colorscheme, you will have to
+    # rename this template to match the name of your colorscheme.
+    #
+    # NOTE: Vim doesn't really care about whitespace in the name of the colorscheme but it does for
+    # filenames so make sure your filename doesn't have any whitespace character.
+    #
+    #   colorscheme name | template filename | colorscheme filename
+    #  ------------------|-------------------|----------------------
+    #   foobar           | foobar.erb        | foobar.vim
+    #   foo-bar          | foo-bar.erb       | foo-bar.vim
+    #   foo_bar          | foo_bar.erb       | foo_bar.vim
+    #   foo bar          | foo-bar.erb or    | foo-bar.vim or
+    #                    | foo_bar.erb       | foo_bar.vim
 
     # Step 2: information
     #
@@ -43,10 +62,10 @@
     # ]
     #
     # If your colors are defined correctly, the resulting colorscheme is guaranteed
-    # to work in GVim (Windows/Linux), MacVim, and any properly set up terminal emulator.
+    # to work in GVim (Windows/Linux), MacVim (MacOS), and any properly set up terminal emulator.
     #
     # The colors below are the first 16 colors of the xterm palette. They
-    # are only here as an example, though. You can get rid of them, I won't be mad.
+    # are only here as an example, though, so you can get rid of them, I won't be mad.
     black       = ["#000000", 0, "black"]
     darkred     = ["#800000", 1, "darkred"]
     darkgreen   = ["#008000", 2, "darkgreen"]
@@ -78,7 +97,8 @@
     # The sample above tells Vim to render normal text in dark gray against a white
     # background, without any other styling.
     #
-    # Or you can link an highlight group to another:
+    # Or you can link an highlight group to another. Here, "Title" will inherit its style from
+    # "Normal":
     #
     #   [ "Title", "Normal" ]
     #
@@ -227,13 +247,14 @@
     #
     #     $ erb -T - bar.erb > bar.vim
     #
-    # From a separate shell, with the make program:
-    #
-    #     $ make
-    #
     # From Vim:
     #
     #     :!erb -T - % > %<.vim
+    #
+    # If this template comes with a Makefile, you can do it from a separate shell,
+    # with the make program:
+    #
+    #     $ make
 
     # These online resources can help you design your colorscheme:
     #
