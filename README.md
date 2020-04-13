@@ -38,6 +38,9 @@ The following colorschemes are known to be built with RNB:
 * [Sweet16](https://github.com/romainl/vim-sweet16)
 * [Paper](https://github.com/swalladge/paper.vim)
 * [Journeyman](https://github.com/markeganfuller/vim-journeyman)
+* [Warlock](https://github.com/hardselius/warlock)
+* [Cyberpunk-Neon](https://github.com/Roboron3042/Cyberpunk-Neon)
+* [Tutfish](https://github.com/benwr/tuftish)
 * (your colorscheme here, send us a PR!)
 
 ## TODO
