@@ -28,6 +28,18 @@ The process is divided in five steps:
 
 Steps 2 to 5 are thoroughly described in the colorscheme template itself in an effort to make it portable: if you ever decide to distribute your colorscheme you can simply package the template with it.
 
+## Built with RNB
+
+The following colorschemes are known to be built with RNB:
+
+* [Apprentice](https://github.com/romainl/Apprentice)
+* [Dichromatic](https://github.com/romainl/vim-dichromatic)
+* [Bruin](https://git.sr.ht/~romainl/vim-bruin)
+* [Sweet16](https://github.com/romainl/vim-sweet16)
+* [Paper](https://github.com/swalladge/paper.vim)
+* [Journeyman](https://github.com/markeganfuller/vim-journeyman)
+* (your colorscheme here, send us a PR!)
+
 ## TODO
 
 * `README.md` template
