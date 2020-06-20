@@ -457,10 +457,10 @@ local highlights = {
 	htmlH6 = {link='markdownH6'},
 
 	--[[ 4.0. vim-gitgutter / vim-signify ]]
-	GitGutterAdd          = {bg=NONE,  fg=green,   style = 'bold'},
-	GitGutterChange       = {bg=NONE,  fg=yellow,  style = 'bold'},
-	GitGutterDelete       = {bg=NONE,  fg=red,     style = 'bold'},
-	GitGutterChangeDelete = {bg=None,  fg=orange,  style = 'bold'},
+	GitGutterAdd          = {bg=NONE,  fg=green,   style=NONE},
+	GitGutterChange       = {bg=NONE,  fg=yellow,  style=NONE},
+	GitGutterDelete       = {bg=NONE,  fg=red,     style=NONE},
+	GitGutterChangeDelete = {bg=None,  fg=orange,  style=NONE},
 
 	SignifySignAdd          = {link='GitGutterAdd'         },
 	SignifySignChange       = {link='GitGutterChange'      },
