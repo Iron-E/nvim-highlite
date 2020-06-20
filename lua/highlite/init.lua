@@ -70,8 +70,8 @@ local name = 'highlite'
 local black = {'#202020', 0,   'black'}
 local gray  = {'#808080', 244, 'gray' }
 local gray_dark   = {'#353535', 236, 'darkgrey'}
-local gray_darker = {'#505050', 244, 'gray' }
-local gray_light  = {'#c0c0c0', 251, 'gray' }
+local gray_darker = {'#505050', 244, 'gray'}
+local gray_light  = {'#c0c0c0', 251, 'gray'}
 local white = {'#ffffff', 15, 'white'}
 
 local brown_light = {'#fca070', 178, 'darkyellow'}
@@ -372,13 +372,13 @@ local highlights = {
 
 	--[[ 3.0. Python ]]
 	pythonBrackets        = {link='Delimiter'       },
-	pythonBuiltinFunc     = {link=''                },
+	pythonBuiltinFunc     = {link='Operator'        },
 	pythonBuiltinObj      = {link='Type'            },
 	pythonBuiltinType     = {link='Type'            },
 	pythonClass           = {link='Structure'       },
 	pythonClassParameters = {link='pythonParameters'},
 	pythonDecorator       = {link='PreProc'         },
-	pythonDottedName      = {link=''                },
+	pythonDottedName      = {link='Identifier'      },
 	pythonError           = {link='Error'           },
 	pythonException       = {link='Exception'       },
 	pythonInclude         = {link='Include'         },
@@ -423,12 +423,12 @@ local highlights = {
 	tomlTable   = {link='StorageClass'},
 
 	--[[ 3.0. VimScript ]]
-	vimCommand = {link='Keyword' },
-	vimFuncKey = {link='Function'},
-	vimGroup   = {link='Type'    },
-	vimHiGroup = {link='Special' },
-	vimLet     = {link='Operator'},
-	vimMap     = {link='Label'   },
+	vimCommand = {link='Keyword'   },
+	vimFuncKey = {link='Function'  },
+	vimGroup   = {link='Type'      },
+	vimHiGroup = {link='Typedef'   },
+	vimLet     = {link='Operator'  },
+	vimMap     = {link='vimCommand'},
 
 	--[[ 3.0. XML ]]
 	xmlEndTag  = {link='xmlTag'   },
@@ -444,76 +444,48 @@ local highlights = {
 	ALEErrorSign   = {link = 'Error'  },
 	ALEWarningSign = {link = 'Warning'},
 
-	--[[ 4.0. vim-easymotion ]]
-	EasyMotionTarget        = {bg=NONE, --TODO },
-	EasyMotionTarget2First  = {'' , 162 , '' , 'bold' , 'bold' } ,
-	EasyMotionTarget2Second = {'' , 69  , '' , 'bold' , 'bold' } ,
+	--[[ 4.0. vim-jumpmotion / vim-easymotion ]]
+	EasyMotion = {link = 'IncSearch' },
+	JumpMotion = {link = 'EasyMotion'},
 
 	--[[ 4.0. vim-markdown ]]
-	htmlH1 = {'' , 68  , '' , 'bold' , 'bold'},
-	htmlH2 = {'' , 36  , '' , 'bold' , 'bold'},
-	htmlH3 = {'' , 114 , '' , 'bold' , 'bold'},
-	htmlH4 = {'' , 178 , '' , 'bold' , 'bold'},
-	htmlH5 = {'' , 68  , '' , NONE , NONE},
-	htmlH6 = {'' , 36  , '' , NONE , NONE},
+	htmlH1 = {link='markdownH1'},
+	htmlH2 = {link='markdownH2'},
+	htmlH3 = {link='markdownH3'},
+	htmlH4 = {link='markdownH4'},
+	htmlH5 = {link='markdownH5'},
+	htmlH6 = {link='markdownH6'},
+
+	--[[ 4.0. vim-gitgutter / vim-signify ]]
+	GitGutterAdd          = {bg=NONE,  fg=green,   style = 'bold'},
+	GitGutterChange       = {bg=NONE,  fg=yellow,  style = 'bold'},
+	GitGutterDelete       = {bg=NONE,  fg=red,     style = 'bold'},
+	GitGutterChangeDelete = {bg=None,  fg=orange,  style = 'bold'},
+
+	SignifySignAdd          = {link='GitGutterAdd'         },
+	SignifySignChange       = {link='GitGutterChange'      },
+	SignifySignDelete       = {link='GitGutterDelete'      },
+	SignifySignChangeDelete = {link='GitGutterChangeDelete'},
 
 	--[[ 4.0. vim-indent-guides ]]
-	IndentGuidesOdd = {''  , '' , 237 , NONE , NONE},
-	IndentGuidesEven = {'' , '' , 239 , NONE , NONE},
-
-	--[[ 4.0. vim-gitgutter ]]
-	GitGutterAdd = {''          , 36  , '' , NONE , NONE},
-	GitGutterChange = {''       , 178 , '' , NONE , NONE},
-	GitGutterDelete = {''       , 160 , '' , NONE , NONE},
-	GitGutterChangeDelete = {'' , 140 , '' , NONE , NONE},
+	IndentGuidesOdd  = {bg=gray_darker,  fg=NONE, style=NONE},
+	IndentGuidesEven = {bg=gray_dark,    fg=NONE, style=NONE},
 
 	--[[ 4.0. vim-signify ]]
-	SignifySignAdd = {''         , 36  , '' , NONE , NONE},
-	SignifySignChange = {''      , 178 , '' , NONE , NONE},
-	SignifySignDelete = {''      , 160 , '' , NONE , NONE},
-	SignifySignChangeDelete = {'', 140 , '' , NONE , NONE},
-
-	--[[ 4.0. vim-startify ]]
-	StartifyFile = {link='Normal'},
-	StartifyHeader = {''  , 177 , '' , NONE , NONE},
-	startifySection = {'' , 68  , '' , 'bold' , 'bold'},
-
-	--[[ 4.0. YouCompleteMe ]]
-	YcmErrorSection = {''   , 249 , 5  , NONE , NONE},
-	YcmWarningSection = {'' , 249 , 60 , NONE , NONE},
-
-	--[[ 4.0. vim-leader-guide ]]
-	LeaderGuideDesc = {link='Normal'},
-	LeaderGuideKeys = {''     , 169 , '' , 'bold' , 'bold'},
-	LeaderGuideBrackets = {'' , 36  , '' , NONE , NONE},
+	SignifySignAdd          = {bg=NONE, fg=green,   style = 'bold'},
+	SignifySignChange       = {bg=NONE, fg=yellow,  style = 'bold'},
+	SignifySignDelete       = {bg=NONE, fg=red,     style = 'bold'},
+	SignifySignChangeDelete = {bg=None, fg=orange,  style = 'bold'},
 
 	--[[ 4.0. NERDTree ]]
-	NERDTreeCWD = {''      , 169 , '' , 'bold' , 'bold'},
-	NERDTreeUp = {''       , 68  , '' , 'bold' , 'bold'},
-	NERDTreeDir = {''      , 68  , '' , 'bold' , 'bold'},
-	NERDTreeDirSlash = {'' , 68  , '' , 'bold' , 'bold'},
-	NERDTreeOpenable = {'' , 68  , '' , 'bold' , 'bold'},
-	NERDTreeClosable = {'' , 68  , '' , 'bold' , 'bold'},
-	NERDTreeExecFile = {'' , 167 , '' , 'bold' , 'bold'},
-	NERDTreeLinkTarget = {link='Tag'},
-
-	--[[ 4.0. Tagbar ]]
-	TagbarKind = {''             , 169 , '' , 'bold' , 'bold'},
-	TagbarScope = {''            , 169 , '' , 'bold' , 'bold'},
-	TagbarHighlight = {''        , 16  , 36 , 'bold' , 'bold'},
-	TagbarNestedKind = {''       , 68  , '' , 'bold' , 'bold'},
-	TagbarVisibilityPublic = {'' , 34  , '' , NONE , NONE},
-
-	--[[ 4.0. vim-signature ]]
-	SignatureMarkText = {'', 178, '', 'bold', 'bold'},
-
-	--[[ 4.0. vim_current_word ]]
-	CurrentWord = {''      , '' , bg1 , 'underline' , 'underline'},
-	CurrentWordTwins = {'' , '' , bg1 , NONE      , NONE},
-
-	--[[ 4.0. quick-scope ]]
-	QuickScopePrimary = {''   , 155 , '' , 'underline' , 'underline'},
-	QuickScopeSecondary = {'' , 81  , '' , 'underline' , 'underline'},
+	NERDTreeCWD        = {link='Label'           },
+	NERDTreeUp         = {link='Operator'        },
+	NERDTreeDir        = {link='Directory'       },
+	NERDTreeDirSlash   = {link='Delimiter'       },
+	NERDTreeOpenable   = {link='NERDTreeDir'     },
+	NERDTreeClosable   = {link='NERDTreeOpenable'},
+	NERDTreeExecFile   = {link='Function'        },
+	NERDTreeLinkTarget = {link='Tag'             },
 }
 
 --[[ Step 5: Terminal Colors
