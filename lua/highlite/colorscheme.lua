@@ -1,3 +1,5 @@
+--[[ NOTHING IN THIS FILE NEEDS TO BE EDITED BY THE USER. ]]
+
 return function(name, Normal, highlights, terminal_ansi_colors)
 	-- Clear the highlighting.
 	vim.cmd('hi clear')

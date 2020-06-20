@@ -171,18 +171,19 @@ local BG   = 'bg'
 local FG   = 'fg'
 local NONE = 'NONE'
 
+--[[ These are the ones you should edit. ]]
 -- This is the only highlight that must be defined separately.
 local Normal = {bg=black, fg=gray_light, style=NONE}
 
 -- This is where the rest of your highlights should go.
 local highlights = {
-	--[[ 1. Text Analysis ]]
+	--[[ 4.1. Text Analysis ]]
 	Comment     = {bg=NONE,        fg=gray,         style='italic'},
 	EndOfBuffer = {link='NonText'                                 },
 	NonText     = {bg=NONE,        fg=gray_darker,  style=NONE    },
 	Whitespace  = {link='NonText'                                 },
 
-	--[[ 1.1. Literals]]
+	--[[ 4.1.1. Literals]]
 	Constant  = {bg=NONE,       fg=orange_light,  style=NONE},
 	String    = {bg=NONE,       fg=green,         style=NONE},
 	Character = {bg=NONE,       fg=red_light,     style=NONE},
@@ -190,11 +191,11 @@ local highlights = {
 	Boolean   = {bg=NONE,       fg=yellow,        style=NONE},
 	Float     = {link='Number'                              },
 
-	--[[ 1.2. Identifiers]]
+	--[[ 4.1.2. Identifiers]]
 	Identifier = {bg=NONE, fg=FG,     style=NONE},
 	Function   = {bg=NONE, fg=purple, style=NONE},
 
-	--[[ 1.3. Syntax]]
+	--[[ 4.1.3. Syntax]]
 	Statement   = {bg=NONE,        fg=ice,         style=NONE    },
 	Conditional = {bg=NONE,        fg=ice,         style='italic'},
 	Repeat      = {link='Keyword'                                },
@@ -203,20 +204,20 @@ local highlights = {
 	Keyword     = {bg=NONE,        fg=turqoise,    style='bold'  },
 	Exception   = {bg=NONE,        fg=red,         style='bold'  },
 
-	--[[ 1.4. Metatextual Information]]
+	--[[ 4.1.4. Metatextual Information]]
 	PreProc   = {bg=NONE,      fg=tan,          style=NONE       },
 	Include   = {bg=NONE,      fg=green_light,  style='nocombine'},
 	Define    = {bg=NONE,      fg=blue,         style='nocombine'},
 	Macro     = {link='Define'                                   },
 	PreCondit = {bg=NONE,      fg=teal,         style='nocombine'},
 
-	--[[ 1.5. Semantics]]
+	--[[ 4.1.5. Semantics]]
 	Type         = {bg=NONE,  fg=cyan,          style=NONE    },
 	StorageClass = {bg=NONE,  fg=orange_light,  style='bold'  },
 	Structure    = {bg=NONE,  fg=blue,          style='bold'  },
 	Typedef      = {bg=NONE,  fg=cyan,          style='italic'},
 
-	--[[ 1.6. Edge Cases]]
+	--[[ 4.1.6. Edge Cases]]
 	Special        = {bg=NONE,           fg=magenta,  style=NONE  },
 	SpecialChar    = {link='Character'                            },
 	SpecialKey     = {link='Character'                            },
@@ -225,7 +226,7 @@ local highlights = {
 	SpecialComment = {bg=NONE,           fg=gray,     style='bold'},
 	Debug          = {link='WarningMsg'                           },
 
-	--[[ 1.7. Help Syntax]]
+	--[[ 4.1.7. Help Syntax]]
 	Underlined        = {bg=NONE,           fg=turqoise,  style='underline'          },
 	Ignore            = {bg=NONE,           fg=gray,      style=NONE                 },
 	Error             = {bg=red_dark,       fg=white,     style='bold'               },
@@ -233,21 +234,21 @@ local highlights = {
 	helpHyperTextJump = {link='Underlined'                                           },
 	helpSpecial       = {link='Function'                                             },
 
-	--[[ 2... Editor UI  ]]
-	--[[ 2.1. Status Line]]
+	--[[ 4.2... Editor UI  ]]
+	--[[ 4.2.1. Status Line]]
 	StatusLine       = {bg=gray_darker,        fg=green_light,  style=NONE},
 	StatusLineNC     = {bg=gray_darker,        fg=gray,         style=NONE},
 	StatusLineTerm   = {link='StatusLine'                                 },
 	StatusLineTermNC = {link='StatusLineNC'                               },
 
-	--[[ 2.2. Separators]]
+	--[[ 4.2.2. Separators]]
 	VertSplit   = {bg=NONE,         fg=gray_darker,  style=NONE     },
 	TabLine     = {bg=gray_darker,  fg=FG,           style=NONE     },
 	TabLineFill = {bg=NONE,         fg=FG,           style=NONE     },
 	TabLineSel  = {bg=gray_darker,  fg=FG,           style='inverse'},
 	Title       = {bg=NONE,         fg=NONE,         style='bold'   },
 
-	--[[ 2.3. Conditional Line Highlighting]]
+	--[[ 4.2.3. Conditional Line Highlighting]]
 	--Conceal={}
 	CursorLine      = {bg=gray_dark,       fg=NONE,  style=NONE     },
 	CursorLineNr    = {bg=gray_dark,       fg=pink,  style=NONE     },
@@ -258,75 +259,80 @@ local highlights = {
 	Visual          = {bg=NONE,            fg=NONE,  style='inverse'},
 	VisualNOS       = {bg=gray_darker,     fg=NONE,  style=NONE     },
 
-	--[[ 2.4. Popup Menu]]
+	--[[ 4.2.4. Popup Menu]]
 	Pmenu      = {bg=gray_dark,  fg=FG,    style=NONE},
 	PmenuSbar  = {bg=black,      fg=NONE,  style=NONE},
 	PmenuSel   = {bg=NONE,       fg=FG,    style=NONE},
 	PmenuThumb = {bg=white,      fg=NONE,  style=NONE},
 	WildMenu   = {bg=NONE,       fg=NONE,  style=NONE},
 
-	--[[ 2.5. Folds]]
+	--[[ 4.2.5. Folds]]
 	FoldColumn = {bg=gray_darker,   fg=NONE,   style='bold'  },
 	Folded     = {bg=purple_light,  fg=black,  style='italic'},
 
-	--[[ 2.6. Diffs]]
+	--[[ 4.2.6. Diffs]]
 	DiffAdd    = {bg=NONE,  fg=green_dark,  style='inverse'},
 	DiffChange = {bg=NONE,  fg=yellow,      style='inverse'},
 	DiffDelete = {bg=NONE,  fg=red,         style='inverse'},
 	DiffText   = {bg=NONE,  fg=NONE,        style='inverse'},
 
-	--[[ 2.7. Searching]]
+	--[[ 4.2.7. Searching]]
 	IncSearch  = {bg=NONE,  fg=NONE,   style='inverse'                 },
 	Search     = {bg=NONE,  fg=NONE,   style={'undercurl', color=white}},
 	MatchParen = {bg=NONE,  fg=green,  style={'bold', 'underline'     }},
 
-	--[[ 2.8. Spelling]]
+	--[[ 4.2.8. Spelling]]
 	SpellBad   = {bg=NONE,  fg=NONE,  style={'undercurl', color=red   }},
 	SpellCap   = {bg=NONE,  fg=NONE,  style={'undercurl', color=yellow}},
 	SpellLocal = {bg=NONE,  fg=NONE,  style={'undercurl', color=green }},
 	SpellRare  = {bg=NONE,  fg=NONE,  style={'undercurl', color=orange}},
 
-	--[[ 2.9. Conditional Column Highlighting]]
+	--[[ 4.2.9. Conditional Column Highlighting]]
 	ColorColumn = {bg=NONE,  fg=NONE,  style='inverse'},
 	SignColumn  = {bg=NONE,  fg=NONE,  style=NONE     },
 
-	--[[ 2.10. Messages]]
+	--[[ 4.2.10. Messages]]
 	ErrorMsg   = {bg=NONE,  fg=red_light,    style='bold'     },
 	ModeMsg    = {bg=NONE,  fg=yellow,       style=NONE       },
 	WarningMsg = {bg=NONE,  fg=orange,       style='bold'     },
 	Question   = {bg=NONE,  fg=orange_light, style='underline'},
 
-	--[[ 2.11. Cursor ]]
+	--[[ 4.2.11. Cursor ]]
 	Cursor   = {bg=NONE,           fg=NONE,  style='inverse'},
 	CursorIM = {link='Cursor'                               },
 	CursorColumn = {bg=gray_dark,  fg=NONE,  style=NONE     },
 
 	-- 2.12 Misc.
+	-- Directory     = {bg=NONE,       fg=ice,  style='bold'},
 	Directory     = {bg=NONE,       fg=ice,  style='bold'},
 	Terminal      = {link='Normal'                       },
 
-	--[[ 3. Programming Languages
+	--[[ 4.3. Programming Languages
 		Everything in this section is OPTIONAL. Feel free to remove everything
 		here if you don't want to define it, or add more if there's something
 		missing.
-	]]
-	--[[ 3.0. C ]]
+	--]]
+
+	--[[ 4.3.1. C ]]
 	cConstant    = {link='Constant'},
 	cCustomClass = {link='Type'    },
 
-	--[[ 3.0. C++ ]]
+	--[[ 4.3.2. C++ ]]
 	cppSTLexception = {link='Exception'},
 	cppSTLnamespace = {link='String'   },
 
-	--[[ 3.0. CSS ]]
+	--[[ 4.3.3 C# ]]
+	csLogicSymbols = {link='Operator'},
+
+	--[[ 4.3.4. CSS ]]
 	cssProp    = {link='Keyword'},
 	cssTagName = {link='Type'   },
 
-	--[[ 3.0. dot ]]
+	--[[ 4.3.5. dot ]]
 	dotKeyChar = {link='Character'},
 	dotType    = {link='Type'     },
 
-	--[[ 3.0. Go ]]
+	--[[ 4.3.6. Go ]]
 	goField                 = {link='Identifier'    } ,
 	goFloat                 = {link='Float'         } ,
 	goFormatSpecifier       = {link='Character'     } ,
@@ -339,38 +345,38 @@ local highlights = {
 	goTypeConstructor       = {link='goFunction'    } ,
 	goTypeName              = {link='Type'          } ,
 
-	--[[ 3.0. HTML ]]
+	--[[ 4.3.7. HTML ]]
 	htmlBold   = {bg=NONE, fg=NONE, style='bold'  },
 	htmlItalic = {bg=NONE, fg=NONE, style='italic'},
 	htmlSpecialTagName = {link='Tag'              },
 
-	--[[ 3.0. Java ]]
+	--[[ 4.3.8. Java ]]
 	javaClassDecl = {link='Structure'},
 
-	--[[ 3.0. JavaScript ]]
+	--[[ 4.3.9. JavaScript ]]
 	jsFuncBlock   = {link='Function'  },
 	jsObjectKey   = {link='Type'      },
 	jsReturn      = {link='Keyword'   },
 	jsVariableDef = {link='Identifier'},
 
-	--[[ 3.0. JSON ]]
+	--[[ 4.3.10. JSON ]]
 	jsonStringSQError = {link='Exception'},
 
-	--[[ 3.0. Make ]]
+	--[[ 4.3.11. Make ]]
 	makeCommands   = {link='Statment'},
 	makeSpecTarget = {link='Type'    },
 
-	--[[ 3.0. Markdown ]]
-	markdownH1 = {bg=NONE,        fg=FG,     style='bold'  },
-	markdownH2 = {bg=NONE,        fg=FG,     style='bold'  },
-	markdownH3 = {bg=NONE,        fg=FG,     style='bold'  },
-	markdownH4 = {bg=NONE,        fg=FG,     style='bold'  },
-	markdownH5 = {bg=NONE,        fg=FG,     style='bold'  },
-	markdownH6 = {bg=NONE,        fg=FG,     style='bold'  },
+	--[[ 4.3.12. Markdown ]]
+	markdownH14 = {bg=NONE,        fg=FG,     style='bold'  },
+	markdownH16 = {bg=NONE,        fg=FG,     style='bold'  },
+	markdownH18 = {bg=NONE,        fg=FG,     style='bold'  },
+	markdownH20 = {bg=NONE,        fg=FG,     style='bold'  },
+	markdownH22 = {bg=NONE,        fg=FG,     style='bold'  },
+	markdownH24 = {bg=NONE,        fg=FG,     style='bold'  },
 	mkdCode    = {link='Comment'                           },
 	mkdItalic  = {bg=NONE,        fg=green,  style='italic'},
 
-	--[[ 3.0. Python ]]
+	--[[ 4.3.19. Python ]]
 	pythonBrackets        = {link='Delimiter'       },
 	pythonBuiltinFunc     = {link='Operator'        },
 	pythonBuiltinObj      = {link='Type'            },
@@ -391,38 +397,38 @@ local highlights = {
 	pythonSpaceError      = {link='pythonError'     },
 	pythonStatement       = {link='Statement'       },
 
-	--[[ 3.0. Ruby ]]
+	--[[ 4.3.20. Ruby ]]
 	rubyClass                  = {link='Structure'},
 	rubyDefine                 = {link='Define'   },
 	rubyInterpolationDelimiter = {link='Delimiter'},
 
-	--[[ 3.0. Rust ]]
+	--[[ 4.3.21. Rust ]]
 	rustKeyword   = {link='Keyword'     },
 	rustModPath   = {link='Include'     },
 	rustScopeDecl = {link='Delimiter'   },
 	rustTrait     = {link='StorageClass'},
 
-	--[[ 3.0. Scala ]]
+	--[[ 4.3.22. Scala ]]
 	scalaKeyword        = {link='Keyword'   },
 	scalaNameDefinition = {link='Identifier'},
 
-	--[[ 3.0. shell ]]
+	--[[ 4.3.23. shell ]]
 	shFunctionKey = {link='Function' },
 	shLoop        = {link='Repeat'   },
 	shSet         = {link='Statement'},
 	shTestOpr     = {link='Debug'    },
 
-	--[[ 3.0. Solidity ]]
+	--[[ 4.3.24. Solidity ]]
 	solBuiltinType  = {link='Type'    },
 	solContract     = {link='Typedef' },
 	solContractName = {link='Function'},
 
-	--[[ 3.0. TOML ]]
+	--[[ 4.3.25. TOML ]]
 	tomlComment = {link='Comment'     },
 	tomlKey     = {link='Label'       },
 	tomlTable   = {link='StorageClass'},
 
-	--[[ 3.0. VimScript ]]
+	--[[ 4.3.26. VimScript ]]
 	vimCommand = {link='Keyword'   },
 	vimFuncKey = {link='Function'  },
 	vimGroup   = {link='Type'      },
@@ -430,25 +436,25 @@ local highlights = {
 	vimLet     = {link='Operator'  },
 	vimMap     = {link='vimCommand'},
 
-	--[[ 3.0. XML ]]
+	--[[ 4.3.27. XML ]]
 	xmlEndTag  = {link='xmlTag'   },
 	xmlTag     = {link='Delimiter'},
 	xmlTagName = {link='Keyword'  },
 
-	--[[ 4. Plugins
+	--[[ 4.4. Plugins
 		Everything in this section is OPTIONAL. Feel free to remove everything
 		here if you don't want to define it, or add more if there's something
 		missing.
 	]]
-	--[[ 4.0. ALE ]]
+	--[[ 4.4.1. ALE ]]
 	ALEErrorSign   = {link = 'Error'  },
 	ALEWarningSign = {link = 'Warning'},
 
-	--[[ 4.0. vim-jumpmotion / vim-easymotion ]]
+	--[[ 4.4.2. vim-jumpmotion / vim-easymotion ]]
 	EasyMotion = {link = 'IncSearch' },
 	JumpMotion = {link = 'EasyMotion'},
 
-	--[[ 4.0. vim-markdown ]]
+	--[[ 4.4.3. vim-markdown ]]
 	htmlH1 = {link='markdownH1'},
 	htmlH2 = {link='markdownH2'},
 	htmlH3 = {link='markdownH3'},
@@ -456,7 +462,7 @@ local highlights = {
 	htmlH5 = {link='markdownH5'},
 	htmlH6 = {link='markdownH6'},
 
-	--[[ 4.0. vim-gitgutter / vim-signify ]]
+	--[[ 4.4.4. vim-gitgutter / vim-signify ]]
 	GitGutterAdd          = {bg=NONE,  fg=green,   style=NONE},
 	GitGutterChange       = {bg=NONE,  fg=yellow,  style=NONE},
 	GitGutterDelete       = {bg=NONE,  fg=red,     style=NONE},
@@ -467,17 +473,11 @@ local highlights = {
 	SignifySignDelete       = {link='GitGutterDelete'      },
 	SignifySignChangeDelete = {link='GitGutterChangeDelete'},
 
-	--[[ 4.0. vim-indent-guides ]]
+	--[[ 4.4.5. vim-indent-guides ]]
 	IndentGuidesOdd  = {bg=gray_darker,  fg=NONE, style=NONE},
 	IndentGuidesEven = {bg=gray_dark,    fg=NONE, style=NONE},
 
-	--[[ 4.0. vim-signify ]]
-	SignifySignAdd          = {bg=NONE, fg=green,   style = 'bold'},
-	SignifySignChange       = {bg=NONE, fg=yellow,  style = 'bold'},
-	SignifySignDelete       = {bg=NONE, fg=red,     style = 'bold'},
-	SignifySignChangeDelete = {bg=None, fg=orange,  style = 'bold'},
-
-	--[[ 4.0. NERDTree ]]
+	--[[ 4.4.7. NERDTree ]]
 	NERDTreeCWD        = {link='Label'           },
 	NERDTreeUp         = {link='Operator'        },
 	NERDTreeDir        = {link='Directory'       },
