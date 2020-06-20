@@ -177,10 +177,10 @@ local Normal = {bg=black, fg=gray_light, style=NONE}
 -- This is where the rest of your highlights should go.
 local highlights = {
 	--[[ 1. Text Analysis ]]
-	Comment     = {bg=NONE,        fg=gray,       style='italic'},
-	EndOfBuffer = {link='NonText'                               },
-	NonText     = {bg=NONE,        fg=gray_dark,  style=NONE    },
-	Whitespace  = {link='NonText'                               },
+	Comment     = {bg=NONE,        fg=gray,         style='italic'},
+	EndOfBuffer = {link='NonText'                                 },
+	NonText     = {bg=NONE,        fg=gray_darker,  style=NONE    },
+	Whitespace  = {link='NonText'                                 },
 
 	--[[ 1.1. Literals]]
 	Constant  = {bg=NONE,       fg=orange_light,  style=NONE},
