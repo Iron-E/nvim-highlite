@@ -99,4 +99,7 @@ return function(name, Normal, highlights, terminal_ansi_colors)
 	for index, color in ipairs(terminal_ansi_colors) do
 		vim.g['terminal_color_' .. index] = color[HEX]
 	end
+
+	vim.o.background = 'dark'
+	vim.g.indent_guides_auto_colors = 0
 end

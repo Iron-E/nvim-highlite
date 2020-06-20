@@ -21,10 +21,10 @@ Usage is simple. This repository should be cloned with `git clone https://github
 1. Rename `lua/highlite/` to `lua/<name of your colorscheme>/`.
 2. Follow the directions in [lua/`<name of your colorscheme>`/init.lua](lua/highlite/init.lua).
 3. Rename `colors/highlite.vim` to `colors/<name of your colorscheme>.vim`.
-4. Follow the instructions in [`colors/highlite.vim`](colors/highlite.vim).
+4. Follow the instructions in [colors/`<name of your colorscheme>`.vim](colors/highlite.vim).
 
 ## Examples
 
-The following colorschemes are built using `nvim-highlite`:
+This repository in itself is an example of how to use `nvim-highlite`. Aside from this, the following colorschemes are built using `nvim-highlite`:
 
 * (if you use this, open an issue and I'll add it here!)
