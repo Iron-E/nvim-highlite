@@ -1,51 +1,30 @@
-# Vim-RNB, a Vim colorscheme template
+# Introduction
 
-## What is this thing?
+`nvim-highlite` is a colorscheme template repository for Neovim 0.5+.
 
-RNB is a template designed to help vimmers create their own colorschemes without much effort.
+This project aims to make the following
 
-In reality, Vim colorschemes are not that hard to write but there are several benefits to using a template such as RNB:
+* You can define/modify variables once instead of messing around with potentially botched substitutions.
+* You can distribute a lean colorscheme, free from unnecessary logic.
+* You can distribute the source alongside the colorscheme, making it easy for your users to experiment and adapt *your* colorscheme to *their* needs.
+* You can focus on the design of your colorscheme rather than its implementation.
+* You can start working on new colorscheme ideas very easily.
 
-* you can define/modify variables once instead of messing around with potentially botched substitutions,
-* you can distribute a lean colorscheme, free from unnecessary logic,
-* you can distribute the source alongside the colorscheme, making it easy for your users to experiment and adapt *your* colorscheme to *their* needs,
-* you can focus on the design of your colorscheme rather than its implementation,
-* you can start working on new colorscheme ideas very easily.
+# Prerequisites
 
-## What do I need to use it?
+1. Neovim 0.5+
 
-[ERB](https://ruby-doc.org/stdlib-2.6.3/libdoc/erb/rdoc/index.html), the templating engine used here, is part of Ruby's standard library so you will need [Ruby](https://www.ruby-lang.org/) to generate your colorscheme. Neither ERB nor Ruby knowledge is required, though.
+# Usage
 
-## How do I use it?
+Usage is simple. This repository should be cloned with `git clone https://github.com/Iron-E/nvim-highlite`, and then:
 
-The process is divided in five steps:
+1. Rename `lua/highlite/` to `lua/<name of your colorscheme>/`.
+2. Follow the directions in [lua/`<name of your colorscheme>`/init.lua](lua/highlite/init.lua).
+3. Rename `colors/highlite.vim` to `colors/<name of your colorscheme>.vim`.
+4. Follow the instructions in [`colors/highlite.vim`](colors/highlite.vim).
 
-1. rename `colors/rnb.erb` to `colors/name_of_your_colorscheme.erb`,
-2. start by editing your colorscheme's information,
-3. define your colors,
-4. define your highlight groups and links,
-5. and generate your colorscheme.
+## Examples
 
-Steps 2 to 5 are thoroughly described in the colorscheme template itself in an effort to make it portable: if you ever decide to distribute your colorscheme you can simply package the template with it.
+The following colorschemes are built using `nvim-highlite`:
 
-## Built with RNB
-
-The following colorschemes are known to be built with RNB:
-
-* [Apprentice](https://github.com/romainl/Apprentice)
-* [Dichromatic](https://github.com/romainl/vim-dichromatic)
-* [Bruin](https://git.sr.ht/~romainl/vim-bruin)
-* [Sweet16](https://github.com/romainl/vim-sweet16)
-* [Paper](https://github.com/swalladge/paper.vim)
-* [Journeyman](https://github.com/markeganfuller/vim-journeyman)
-* [Warlock](https://github.com/hardselius/warlock)
-* [Cyberpunk-Neon](https://github.com/Roboron3042/Cyberpunk-Neon)
-* [Tutfish](https://github.com/benwr/tuftish)
-* (your colorscheme here, send us a PR!)
-
-## TODO
-
-* `README.md` template
-
-
-[//]: # ( Vim: set spell spelllang=en: )
+* (if you use this, open an issue and I'll add it here!)
