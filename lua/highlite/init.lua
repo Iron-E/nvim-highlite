@@ -218,13 +218,13 @@ local highlights = {
 	Typedef      = {bg=NONE,  fg=cyan,          style='italic'},
 
 	--[[ 4.1.6. Edge Cases]]
-	Special        = {bg=NONE,           fg=magenta,  style=NONE  },
-	SpecialChar    = {link='Character'                            },
-	SpecialKey     = {link='Character'                            },
-	Tag            = {link='Underlined'                           },
-	Delimiter      = {bg=NONE,           fg=white,    style=NONE  },
-	SpecialComment = {bg=NONE,           fg=gray,     style='bold'},
-	Debug          = {link='WarningMsg'                           },
+	Special        = {bg=NONE,           fg=magenta,  style=NONE                 },
+	SpecialChar    = {link='Character'                                           },
+	SpecialKey     = {link='Character'                                           },
+	Tag            = {link='Underlined'                                          },
+	Delimiter      = {bg=NONE,           fg=white,    style=NONE                 },
+	SpecialComment = {bg=NONE,           fg=gray,     style={'bold', 'nocombine'}},
+	Debug          = {link='WarningMsg'                                          },
 
 	--[[ 4.1.7. Help Syntax]]
 	Underlined        = {bg=NONE,           fg=turqoise,  style='underline'          },
