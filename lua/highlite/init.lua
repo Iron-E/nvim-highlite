@@ -456,10 +456,11 @@ local highlights = {
 	vimMap     = {link='vimCommand'},
 
 	--[[ 4.3.28. XML ]]
-	xmlAttrib  = {link='Label'},
+	xmlAttrib  = {link='Label'    },
 	xmlEndTag  = {link='Exception'},
+	xmlEqual   = {link='Operator' },
 	xmlTag     = {link='Delimiter'},
-	xmlTagName = {link='Define'},
+	xmlTagName = {link='Define'   },
 
 	--[[ 4.4. Plugins
 		Everything in this section is OPTIONAL. Feel free to remove everything
