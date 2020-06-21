@@ -278,7 +278,7 @@ local highlights = {
 
 	--[[ 4.2.7. Searching]]
 	IncSearch  = {bg=NONE,  fg=NONE,   style='inverse'                 },
-	Search     = {bg=NONE,  fg=NONE,   style={'undercurl', color=white}},
+	Search     = {bg=NONE,  fg=NONE,   style={'underline', color=white}},
 	MatchParen = {bg=NONE,  fg=green,  style={'bold', 'underline'     }},
 
 	--[[ 4.2.8. Spelling]]
@@ -328,55 +328,74 @@ local highlights = {
 	cssProp    = {link='Keyword'},
 	cssTagName = {link='Type'   },
 
-	--[[ 4.3.5. dot ]]
+	--[[ 4.3.5. Dart ]]
+	dartLibrary = {link='Statement'},
+
+	--[[ 4.3.6. dot ]]
 	dotKeyChar = {link='Character'},
 	dotType    = {link='Type'     },
 
-	--[[ 4.3.6. Go ]]
-	goField                 = {link='Identifier'    } ,
-	goFloat                 = {link='Float'         } ,
-	goFormatSpecifier       = {link='Character'     } ,
-	goFunction              = {link='Function'      } ,
-	goFunctionCall          = {link='goFunction'    } ,
-	goMethodCall            = {link='goFunctionCall'} ,
-	goPredefinedIdentifiers = {link='Operator'      } ,
-	goReceiverType          = {link='goTypeName'    } ,
-	goType                  = {link='Structure'     } ,
-	goTypeConstructor       = {link='goFunction'    } ,
-	goTypeName              = {link='Type'          } ,
+	--[[ 4.3.7. Go ]]
+	goBlock                 = {link='Delimiter'            },
+	goBoolean               = {link='Boolean'              },
+	goBuiltins              = {link='Operator'             },
+	goField                 = {link='Identifier'           },
+	goFloat                 = {link='Float'                },
+	goFormatSpecifier       = {link='Character'            },
+	goFunction              = {link='Function'             },
+	goFunctionCall          = {link='goFunction'           },
+	goFunctionReturn        = {bg=NONE, fg=NONE, style=NONE},
+	goMethodCall            = {link='goFunctionCall'       },
+	goParamType             = {link='goReceiverType'       },
+	goPointerOperator       = {link='SpecialChar'          },
+	goPredefinedIdentifiers = {link='Constant'             },
+	goReceiver              = {link='goBlock'              },
+	goReceiverType          = {link='goTypeName'           },
+	goSimpleParams          = {link='goBlock'              },
+	goType                  = {link='Type'                 },
+	goTypeConstructor       = {link='goFunction'           },
+	goTypeName              = {link='Type'                 },
+	goVarAssign             = {bg=NONE, fg=NONE, style=NONE},
+	goVarDefs               = {link='goVarAssign'          },
 
-	--[[ 4.3.7. HTML ]]
+	--[[ 4.3.8. HTML ]]
 	htmlBold   = {bg=NONE, fg=NONE, style='bold'  },
 	htmlItalic = {bg=NONE, fg=NONE, style='italic'},
 	htmlSpecialTagName = {link='Tag'              },
 
-	--[[ 4.3.8. Java ]]
+	--[[ 4.3.9. Java ]]
 	javaClassDecl = {link='Structure'},
 
-	--[[ 4.3.9. JavaScript ]]
+	--[[ 4.3.10. JavaScript ]]
 	jsFuncBlock   = {link='Function'  },
 	jsObjectKey   = {link='Type'      },
 	jsReturn      = {link='Keyword'   },
 	jsVariableDef = {link='Identifier'},
 
-	--[[ 4.3.10. JSON ]]
+	--[[ 4.3.11. JSON ]]
 	jsonStringSQError = {link='Exception'},
 
-	--[[ 4.3.11. Make ]]
+	--[[ 4.3.12. Make ]]
 	makeCommands   = {link='Statment'},
 	makeSpecTarget = {link='Type'    },
 
-	--[[ 4.3.12. Markdown ]]
-	markdownH14 = {bg=NONE,        fg=FG,     style='bold'  },
-	markdownH16 = {bg=NONE,        fg=FG,     style='bold'  },
-	markdownH18 = {bg=NONE,        fg=FG,     style='bold'  },
-	markdownH20 = {bg=NONE,        fg=FG,     style='bold'  },
-	markdownH22 = {bg=NONE,        fg=FG,     style='bold'  },
-	markdownH24 = {bg=NONE,        fg=FG,     style='bold'  },
-	mkdCode    = {link='Comment'                           },
-	mkdItalic  = {bg=NONE,        fg=green,  style='italic'},
+	--[[ 4.3.13. Markdown ]]
+	markdownH1       = {bg=NONE,          fg=green_dark,  style='bold'  },
+	markdownH2       = {bg=NONE,          fg=red_light,   style='bold'  },
+	markdownH3       = {bg=NONE,          fg=green,       style='bold'  },
+	markdownH4       = {bg=NONE,          fg=magenta,     style='bold'  },
+	markdownH5       = {bg=NONE,          fg=orange,      style='bold'  },
+	markdownH6       = {bg=NONE,          fg=yellow,      style='bold'  },
+	htmlBold         = {link='mkdBold'                                  },
+	htmlItalic       = {link='mkdItalic'                                },
+	mkdBold          = {bg=NONE,          fg='green',     style='bold'  },
+	mkdCode          = {link='Comment'                                  },
+	mkdCodeDelimiter = {link='Delimiter'                                },
+	mkdItalic        = {bg=NONE,          fg=green,       style='italic'},
+	mkdListItem      = {link='Special'                                  },
+	texMathZoneY     = {link='String'                                   },
 
-	--[[ 4.3.19. Python ]]
+	--[[ 4.3.20. Python ]]
 	pythonBrackets        = {link='Delimiter'       },
 	pythonBuiltinFunc     = {link='Operator'        },
 	pythonBuiltinObj      = {link='Type'            },
@@ -397,38 +416,38 @@ local highlights = {
 	pythonSpaceError      = {link='pythonError'     },
 	pythonStatement       = {link='Statement'       },
 
-	--[[ 4.3.20. Ruby ]]
+	--[[ 4.3.21. Ruby ]]
 	rubyClass                  = {link='Structure'},
 	rubyDefine                 = {link='Define'   },
 	rubyInterpolationDelimiter = {link='Delimiter'},
 
-	--[[ 4.3.21. Rust ]]
+	--[[ 4.3.22. Rust ]]
 	rustKeyword   = {link='Keyword'     },
 	rustModPath   = {link='Include'     },
 	rustScopeDecl = {link='Delimiter'   },
 	rustTrait     = {link='StorageClass'},
 
-	--[[ 4.3.22. Scala ]]
+	--[[ 4.3.23. Scala ]]
 	scalaKeyword        = {link='Keyword'   },
 	scalaNameDefinition = {link='Identifier'},
 
-	--[[ 4.3.23. shell ]]
+	--[[ 4.3.24. shell ]]
 	shFunctionKey = {link='Function' },
 	shLoop        = {link='Repeat'   },
 	shSet         = {link='Statement'},
 	shTestOpr     = {link='Debug'    },
 
-	--[[ 4.3.24. Solidity ]]
+	--[[ 4.3.25. Solidity ]]
 	solBuiltinType  = {link='Type'    },
 	solContract     = {link='Typedef' },
 	solContractName = {link='Function'},
 
-	--[[ 4.3.25. TOML ]]
+	--[[ 4.3.26. TOML ]]
 	tomlComment = {link='Comment'     },
 	tomlKey     = {link='Label'       },
 	tomlTable   = {link='StorageClass'},
 
-	--[[ 4.3.26. VimScript ]]
+	--[[ 4.3.27. VimScript ]]
 	vimCommand = {link='Keyword'   },
 	vimFuncKey = {link='Function'  },
 	vimGroup   = {link='Type'      },
@@ -436,10 +455,11 @@ local highlights = {
 	vimLet     = {link='Operator'  },
 	vimMap     = {link='vimCommand'},
 
-	--[[ 4.3.27. XML ]]
-	xmlEndTag  = {link='xmlTag'   },
+	--[[ 4.3.28. XML ]]
+	xmlAttrib  = {link='Label'},
+	xmlEndTag  = {link='Exception'},
 	xmlTag     = {link='Delimiter'},
-	xmlTagName = {link='Keyword'  },
+	xmlTagName = {link='Define'},
 
 	--[[ 4.4. Plugins
 		Everything in this section is OPTIONAL. Feel free to remove everything
@@ -447,8 +467,18 @@ local highlights = {
 		missing.
 	]]
 	--[[ 4.4.1. ALE ]]
-	ALEErrorSign   = {link = 'Error'  },
-	ALEWarningSign = {link = 'Warning'},
+	ALEErrorSign   = {link='ErrorMsg'  },
+	ALEWarningSign = {link='WarningMsg'},
+
+	--[[ 4.4.2. coc.nvim ]]
+	CocErrorHighlight   = {bg=NONE,               fg=NONE,  style={'undercurl', color='red'    }},
+	CocErrorSign        = {link='ALEErrorSign'                                                  },
+	CocHintHighlight    = {bg=NONE,               fg=NONE,  style={'undercurl', color='magenta'}},
+	CocHintSign         = {link='Special'                                                       },
+	CocInfoHighlight    = {bg=NONE,               fg=NONE,  style={'undercurl', color='yellow' }},
+	CocInfoSign         = {link='Todo'                                                          },
+	CocWarningHighlight = {bg=NONE,               fg=NONE,  style={'undercurl', color='orange' }},
+	CocWarningSign      = {link='ALEWarningSign'                                                },
 
 	--[[ 4.4.2. vim-jumpmotion / vim-easymotion ]]
 	EasyMotion = {link = 'IncSearch' },
