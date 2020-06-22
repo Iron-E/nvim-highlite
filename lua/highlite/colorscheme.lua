@@ -3,7 +3,10 @@
 -- Clear the highlighting.
 vim.cmd('hi clear')
 
+-- Set the background to dark.
 vim.o.background = 'dark'
+
+-- Disable automatic coloring for the IndentGuides plugin.
 vim.g.indent_guides_auto_colors = 0
 
 -- If the syntax has been enabled, reset it.
@@ -12,7 +15,7 @@ if vim.fn.exists('syntax_on') then vim.cmd('syntax reset') end
 -- Determine which set of colors to use.
 local use_hex_and_256 = string.find(vim.fn.expand('$TERM'), '256')
 	or vim.g.t_Co >= 256
-	or vim.fn.has("gui_running")
+	or vim.fn.has('gui_running')
 
 -- If we aren't using the hex and 256 colorset, then set the &t_Co variable to 16.
 if not use_hex_and_256 then vim.g.t_Co = 16 end
@@ -66,7 +69,7 @@ local function highlight(highlight_group, attributes) -- {{{ †
 
 			-- If we're using hex populate the gui* attr args.
 			if use_hex_and_256 then highlight_cmd[#highlight_cmd + 1] =
-				' gui='   .. selected_attributes
+				' gui=' .. selected_attributes
 			end
 		end
 
@@ -102,6 +105,6 @@ return function(name, Normal, highlights, terminal_ansi_colors)
 
 	-- Set the terminal colors.
 	for index, color in ipairs(terminal_ansi_colors) do
-		vim.g['terminal_color_' .. index] = color[HEX]
+		vim.g['terminal_color_' .. index] = get(color, HEX)
 	end
 end
