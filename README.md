@@ -4,13 +4,15 @@
 
 This template's focus is on compatability with [semantic highlighting](https://medium.com/@evnbr/coding-in-color-3a6db2743a1e).
 
+It provides a large supply of defaults for plugins and programming languages as a result of defining a smaller set of "categorical" highlights (you can read more about this at Neovim's `group-name` help page).
+
 # Prerequisites
 
 1. Neovim 0.5+
 
 # Usage
 
-Usage is simple. This repository should be cloned with `git clone https://github.com/Iron-E/nvim-highlite`, and then:
+This repository should be cloned with `git clone https://github.com/Iron-E/nvim-highlite`, and then:
 
 1. Rename `lua/highlite/` to `lua/<name of your colorscheme>/`.
 2. Follow the directions in [lua/`<name of your colorscheme>`/init.lua](lua/highlite/init.lua).

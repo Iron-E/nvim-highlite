@@ -65,6 +65,8 @@ local name = 'highlite'
 
 	If your colors are defined correctly, the resulting colorscheme is guaranteed
 	to work in GVim (Windows/Linux), MacVim (MacOS), and any properly set up terminal emulator.
+
+	NOTE: |Replace-mode| will probably be useful here.
 ]]
 
 local black = {'#202020', 0,   'black'}
@@ -164,6 +166,14 @@ local purple_dark  = {'#c700ff', 38,  'darkmagenta'}
 	remove any if you want a working colorscheme. Most of them are described under
 	:help highlight-default, the others are taken from :help group-name. Both help sections
 	are good reads, by the way.
+
+	NOTE: |Replace-mode| will probably be useful here.
+
+	NOTE: /As long as you do not remove any highlight groups or colors/, you can safely
+	      ignore any highlight groups that are `link`ed others.
+			For example, programming languages almost exclusively link to the 1st
+			and 2nd sections, so as long as you define everything there you will automatically
+			be defining the rest of the highlights.
 ]]
 
 --[[ DO NOT EDIT THESE. You can use them instead of string literals. ]]
@@ -222,7 +232,7 @@ local highlights = {
 	SpecialChar    = {link='Character'                                           },
 	SpecialKey     = {link='Character'                                           },
 	Tag            = {link='Underlined'                                          },
-	Delimiter      = {bg=NONE,           fg=gray,     style=NONE                 },
+	Delimiter      = {link='Normal'                                              },
 	SpecialComment = {bg=NONE,           fg=gray,     style={'bold', 'nocombine'}},
 	Debug          = {link='WarningMsg'                                          },
 
@@ -380,20 +390,21 @@ local highlights = {
 	makeSpecTarget = {link='Type'    },
 
 	--[[ 4.3.13. Markdown ]]
-	markdownH1       = {bg=NONE,          fg=green_dark,  style='bold'  },
-	markdownH2       = {bg=NONE,          fg=red_light,   style='bold'  },
-	markdownH3       = {bg=NONE,          fg=green,       style='bold'  },
-	markdownH4       = {bg=NONE,          fg=magenta,     style='bold'  },
-	markdownH5       = {bg=NONE,          fg=orange,      style='bold'  },
-	markdownH6       = {bg=NONE,          fg=yellow,      style='bold'  },
-	htmlBold         = {link='mkdBold'                                  },
-	htmlItalic       = {link='mkdItalic'                                },
-	mkdBold          = {bg=NONE,          fg='green',     style='bold'  },
-	mkdCode          = {link='Comment'                                  },
-	mkdCodeDelimiter = {link='Delimiter'                                },
-	mkdItalic        = {bg=NONE,          fg=green,       style='italic'},
-	mkdListItem      = {link='Special'                                  },
-	texMathZoneY     = {link='String'                                   },
+	markdownH1          = {bg=NONE,          fg=green_dark,  style='bold'  },
+	markdownH2          = {bg=NONE,          fg=red_light,   style='bold'  },
+	markdownH3          = {bg=NONE,          fg=green,       style='bold'  },
+	markdownH4          = {bg=NONE,          fg=magenta,     style='bold'  },
+	markdownH5          = {bg=NONE,          fg=orange,      style='bold'  },
+	markdownH6          = {bg=NONE,          fg=yellow,      style='bold'  },
+	htmlBold            = {link='mkdBold'                                  },
+	htmlItalic          = {link='mkdItalic'                                },
+	mkdBold             = {bg=NONE,          fg='green',     style='bold'  },
+	mkdCode             = {link='Comment'                                  },
+	mkdCodeDelimiter    = {link='Delimiter'                                },
+	mkdItalic           = {bg=NONE,          fg=green,       style='italic'},
+	mkdListItem         = {link='Special'                                  },
+	mkdNonListItemBlock = {bg=NONE,          fg=gray,        style=NONE    },
+	texMathZoneY        = {link='String'                                   },
 
 	--[[ 4.3.20. Python ]]
 	pythonBrackets        = {link='Delimiter'       },
