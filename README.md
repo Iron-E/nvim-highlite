@@ -1,3 +1,7 @@
+# Default Settings Preview
+
+* Coming soon
+
 # Introduction
 
 `nvim-highlite` is a colorscheme template repository for Neovim 0.5+.
@@ -18,6 +22,10 @@ This repository should be cloned with `git clone https://github.com/Iron-E/nvim-
 2. Follow the directions in [lua/`<name of your colorscheme>`/init.lua](lua/highlite/init.lua).
 3. Rename `colors/highlite.vim` to `colors/<name of your colorscheme>.vim`.
 4. Follow the instructions in [colors/`<name of your colorscheme>`.vim](colors/highlite.vim).
+5. Install the colorscheme:
+	* With a plugin manager (like [`vim-plug`](https://github.com/junegunn/vim-plug)).
+	* By merging the [colors](colors) and [lua](lua) folders with the ones in your `stdpath('config')` directory.
+6. Source with `colorscheme highlite` / `colorscheme <name of colorscheme>` in your [init.vim]($HOME/.config/init.vim).
 
 ## Examples
 
