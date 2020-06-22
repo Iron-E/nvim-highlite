@@ -2,13 +2,7 @@
 
 `nvim-highlite` is a colorscheme template repository for Neovim 0.5+.
 
-This project aims to make the following
-
-* You can define/modify variables once instead of messing around with potentially botched substitutions.
-* You can distribute a lean colorscheme, free from unnecessary logic.
-* You can distribute the source alongside the colorscheme, making it easy for your users to experiment and adapt *your* colorscheme to *their* needs.
-* You can focus on the design of your colorscheme rather than its implementation.
-* You can start working on new colorscheme ideas very easily.
+This template's focus is on compatability with [semantic highlighting](https://medium.com/@evnbr/coding-in-color-3a6db2743a1e).
 
 # Prerequisites
 

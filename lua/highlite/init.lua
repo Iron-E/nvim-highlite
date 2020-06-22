@@ -192,7 +192,7 @@ local highlights = {
 	Float     = {link='Number'                              },
 
 	--[[ 4.1.2. Identifiers]]
-	Identifier = {bg=NONE, fg=FG,     style=NONE},
+	Identifier = {bg=NONE, fg=white,  style=NONE},
 	Function   = {bg=NONE, fg=purple, style=NONE},
 
 	--[[ 4.1.3. Syntax]]
@@ -222,7 +222,7 @@ local highlights = {
 	SpecialChar    = {link='Character'                                           },
 	SpecialKey     = {link='Character'                                           },
 	Tag            = {link='Underlined'                                          },
-	Delimiter      = {bg=NONE,           fg=white,    style=NONE                 },
+	Delimiter      = {bg=NONE,           fg=gray,     style=NONE                 },
 	SpecialComment = {bg=NONE,           fg=gray,     style={'bold', 'nocombine'}},
 	Debug          = {link='WarningMsg'                                          },
 
