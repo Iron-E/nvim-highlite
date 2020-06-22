@@ -459,12 +459,13 @@ local highlights = {
 	tomlTable   = {link='StorageClass'},
 
 	--[[ 4.3.27. VimScript ]]
-	vimCommand = {link='Keyword'   },
-	vimFuncKey = {link='Function'  },
-	vimGroup   = {link='Type'      },
-	vimHiGroup = {link='Typedef'   },
-	vimLet     = {link='Operator'  },
-	vimMap     = {link='vimCommand'},
+	vimCommand   = {link = 'Keyword'   },
+	vimFuncKey   = {link = 'Function'  },
+	vimGroup     = {link = 'Type'      },
+	vimHiGroup   = {link = 'Typedef'   },
+	vimIsCommand = {link = 'vimCommand'},
+	vimLet       = {link = 'Operator'  },
+	vimMap       = {link = 'vimCommand'},
 
 	--[[ 4.3.28. XML ]]
 	xmlAttrib  = {link='Label'    },
