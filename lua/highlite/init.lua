@@ -174,8 +174,10 @@ local purple_light = {'#af60af', 63,  'magenta'}
 			be defining the rest of the highlights.
 ]]
 
---[[ DO NOT EDIT THESE. You can use them instead of string literals. ]]
-local BG   = 'bg'
+--[[ DO NOT EDIT THESE. You can use them instead of string literals.
+	Feel free to uncomment `BG`. It is not used by default so it is commented out.
+]]
+-- local BG   = 'bg'
 local FG   = 'fg'
 local NONE = 'NONE'
 
@@ -241,6 +243,9 @@ local highlights = {
 	Todo              = {bg=NONE,           fg=yellow,    style={'bold', 'underline'}},
 	helpHyperTextJump = {link='Underlined'                                           },
 	helpSpecial       = {link='Function'                                             },
+	Hint              = {bg=magenta,        fg=black,     style='bold'               },
+	Info              = {bg=pink_light,     fg=black,     style='bold'               },
+	Warning           = {bg=orange,         fg=black,     style='bold'               },
 
 	--[[ 4.2... Editor UI  ]]
 	--[[ 4.2.1. Status Line]]
@@ -301,16 +306,35 @@ local highlights = {
 
 	--[[ 4.2.10. Messages]]
 	ErrorMsg   = {bg=NONE,  fg=red_light,    style='bold'     },
+	HintMsg    = {bg=NONE,  fg=magenta,      style='bold'     },
+	InfoMsg    = {bg=NONE,  fg=pink_light,   style='bold'     },
 	ModeMsg    = {bg=NONE,  fg=yellow,       style=NONE       },
 	WarningMsg = {bg=NONE,  fg=orange,       style='bold'     },
 	Question   = {bg=NONE,  fg=orange_light, style='underline'},
 
-	--[[ 4.2.11. Cursor ]]
+	--[[ 4.2.11. LSP ]]
+	LspDiagnosticsError = {link='Error'           },
+	LspDiagnosticsErrorFloating = {link='ErrorMsg'},
+	LspDiagnosticsErrorSign = {link='ErrorMsg'    },
+
+	LspDiagnosticsWarning         = {link='Warning'   },
+	LspDiagnosticsWarningFloating = {link='WarningMsg'},
+	LspDiagnosticsWarningSign     = {link='WarningMsg'},
+
+	LspDiagnosticsHint = {link='Hint'           },
+	LspDiagnosticsHintFloating = {link='HintMsg'},
+	LspDiagnosticsHintSign = {link='HintMsg'    },
+
+	LspDiagnosticsInformation = {link='Info'           },
+	LspDiagnosticsInformationFloating = {link='InfoMsg'},
+	LspDiagnosticsInformationSign = {link='InfoMsg'    },
+
+	--[[ 4.2.12. Cursor ]]
 	Cursor   = {bg=NONE,           fg=NONE,  style='inverse'},
 	CursorIM = {link='Cursor'                               },
 	CursorColumn = {bg=gray_dark,  fg=NONE,  style=NONE     },
 
-	-- 2.12 Misc.
+	--[[ 4.2.13. Misc ]]
 	-- Directory     = {bg=NONE,       fg=ice,  style='bold'},
 	Directory     = {bg=NONE,       fg=ice,  style='bold'},
 	Terminal      = {link='Normal'                       },
@@ -319,8 +343,7 @@ local highlights = {
 		Everything in this section is OPTIONAL. Feel free to remove everything
 		here if you don't want to define it, or add more if there's something
 		missing.
-	--]]
-
+	]]
 	--[[ 4.3.1. C ]]
 	cConstant    = {link='Constant'},
 	cCustomClass = {link='Type'    },
@@ -363,7 +386,7 @@ local highlights = {
 	goType                  = {link='Type'                 },
 	goTypeConstructor       = {link='goFunction'           },
 	goTypeName              = {link='Type'                 },
-	goVarAssign             = {bg=NONE, fg=NONE, style=NONE},
+	goVarAssign             = {link='Identifier'           },
 	goVarDefs               = {link='goVarAssign'          },
 
 	--[[ 4.3.8. HTML ]]
@@ -483,9 +506,9 @@ local highlights = {
 	CocErrorHighlight   = {bg=NONE,               fg=NONE,  style={'undercurl', color='red'    }},
 	CocErrorSign        = {link='ALEErrorSign'                                                  },
 	CocHintHighlight    = {bg=NONE,               fg=NONE,  style={'undercurl', color='magenta'}},
-	CocHintSign         = {link='Special'                                                       },
-	CocInfoHighlight    = {bg=NONE,               fg=NONE,  style={'undercurl', color='yellow' }},
-	CocInfoSign         = {link='Todo'                                                          },
+	CocHintSign         = {link='HintMsg'                                                       },
+	CocInfoHighlight    = {bg=NONE,               fg=NONE,  style={'undercurl', color='white'  }},
+	CocInfoSign         = {link='InfoMsg'                                                       },
 	CocWarningHighlight = {bg=NONE,               fg=NONE,  style={'undercurl', color='orange' }},
 	CocWarningSign      = {link='ALEWarningSign'                                                },
 
@@ -526,24 +549,6 @@ local highlights = {
 	NERDTreeExecFile   = {link='Function'        },
 	NERDTreeLinkTarget = {link='Tag'             },
 }
-
-if vim.lsp then
-	highlights.LspDiagnosticsError         = {link='CocErrorHighlight'}
-	highlights.LspDiagnosticsErrorFloating = {link='ErrorMsg'}
-	highlights.LspDiagnosticsErrorSign     = {link='CocErrorSign'}
-
-	highlights.LspDiagnosticsWarning         = {link='CocWarningHighlight'}
-	highlights.LspDiagnosticsWarningFloating = {link='WarningMsg'}
-	highlights.LspDiagnosticsWarningSign     = {link='CocWarningSign'}
-
-	highlights.LspDiagnosticsInformation         = {link='CocInfoHighlight'}
-	highlights.LspDiagnosticsInformationFloating = {bg=NONE, fg=ice, style=NONE}
-	highlights.LspDiagnosticsInformationSign     = {link='CocInfoSign'}
-
-	highlights.LspDiagnosticsHint         = {link = 'CocHintHighlight'}
-	highlights.LspDiagnosticsHintFloating = {bg=NONE, fg=magenta, style=NONE}
-	highlights.LspDiagnosticsHintSign     = {link='CocHintSign'}
-end
 
 --[[ Step 5: Terminal Colors
 	Define the color palette used by :terminal when in GUI Vim
