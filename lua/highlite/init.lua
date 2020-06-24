@@ -527,7 +527,7 @@ local highlights = {
 	NERDTreeLinkTarget = {link='Tag'             },
 }
 
-if vim.api.call_function('has', {'nvim-0.5'}) then
+if vim.api.nvim_call_function('has', {'nvim-0.5'}) then
 	highlights.LspDiagnosticsError         = {link='CocErrorHighlight'}
 	highlights.LspDiagnosticsErrorFloating = {link='ErrorMsg'}
 	highlights.LspDiagnosticsErrorSign     = {link='CocErrorSign'}
