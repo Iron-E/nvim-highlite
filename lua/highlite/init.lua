@@ -76,7 +76,6 @@ local gray_darker = {'#505050', 244, 'gray'}
 local gray_light  = {'#c0c0c0', 251, 'gray'}
 local white = {'#ffffff', 15, 'white'}
 
-local brown_light = {'#fca070', 178, 'darkyellow'}
 local tan         = {'#f4c069', 180, 'darkyellow'}
 
 local red       = {'#ee4a59', 196, 'red'}
@@ -104,7 +103,6 @@ local pink         = {'#ffa6ff', 162, 'magenta'}
 local pink_light   = {'#ffb7b7', 38,  'white'}
 local purple       = {'#cf55f0', 129, 'magenta'}
 local purple_light = {'#af60af', 63,  'magenta'}
-local purple_dark  = {'#c700ff', 38,  'darkmagenta'}
 
 --[[ Step 4: highlights
 	You can define highlight groups like this:
@@ -396,8 +394,6 @@ local highlights = {
 	markdownH4          = {bg=NONE,          fg=magenta,     style='bold'  },
 	markdownH5          = {bg=NONE,          fg=orange,      style='bold'  },
 	markdownH6          = {bg=NONE,          fg=yellow,      style='bold'  },
-	htmlBold            = {link='mkdBold'                                  },
-	htmlItalic          = {link='mkdItalic'                                },
 	mkdBold             = {bg=NONE,          fg='green',     style='bold'  },
 	mkdCode             = {link='Comment'                                  },
 	mkdCodeDelimiter    = {link='Delimiter'                                },
@@ -509,7 +505,7 @@ local highlights = {
 	GitGutterAdd          = {bg=NONE,  fg=green,   style=NONE},
 	GitGutterChange       = {bg=NONE,  fg=yellow,  style=NONE},
 	GitGutterDelete       = {bg=NONE,  fg=red,     style=NONE},
-	GitGutterChangeDelete = {bg=None,  fg=orange,  style=NONE},
+	GitGutterChangeDelete = {bg=NONE,  fg=orange,  style=NONE},
 
 	SignifySignAdd          = {link='GitGutterAdd'         },
 	SignifySignChange       = {link='GitGutterChange'      },
@@ -530,6 +526,24 @@ local highlights = {
 	NERDTreeExecFile   = {link='Function'        },
 	NERDTreeLinkTarget = {link='Tag'             },
 }
+
+if vim.api.call_function('has', {'nvim-0.5'}) then
+	highlights.LspDiagnosticsError         = {link='CocErrorHighlight'}
+	highlights.LspDiagnosticsErrorFloating = {link='ErrorMsg'}
+	highlights.LspDiagnosticsErrorSign     = {link='CocErrorSign'}
+
+	highlights.LspDiagnosticsWarning         = {link='CocWarningHighlight'}
+	highlights.LspDiagnosticsWarningFloating = {link='WarningMsg'}
+	highlights.LspDiagnosticsWarningSign     = {link='CocWarningSign'}
+
+	highlights.LspDiagnosticsInformation         = {link='CocInfoHighlight'}
+	highlights.LspDiagnosticsInformationFloating = {bg=NONE, fg=ice, style=NONE}
+	highlights.LspDiagnosticsInformationSign     = {link='CocInfoSign'}
+
+	highlights.LspDiagnosticsHint         = {link = 'CocHintHighlight'}
+	highlights.LspDiagnosticsHintFloating = {bg=NONE, fg=magenta, style=NONE}
+	highlights.LspDiagnosticsHintSign     = {link='CocHintSign'}
+end
 
 --[[ Step 5: Terminal Colors
 	Define the color palette used by :terminal when in GUI Vim
