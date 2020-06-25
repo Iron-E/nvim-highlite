@@ -505,14 +505,14 @@ local highlight_groups = {
 	ALEWarningSign = {link='WarningMsg'},
 
 	--[[ 4.4.2. coc.nvim ]]
-	CocErrorHighlight   = {bg=NONE,               fg=NONE,  style={'undercurl', color='red'    }},
-	CocErrorSign        = {link='ALEErrorSign'                                                  },
-	CocHintHighlight    = {bg=NONE,               fg=NONE,  style={'undercurl', color='magenta'}},
-	CocHintSign         = {link='HintMsg'                                                       },
-	CocInfoHighlight    = {bg=NONE,               fg=NONE,  style={'undercurl', color='white'  }},
-	CocInfoSign         = {link='InfoMsg'                                                       },
-	CocWarningHighlight = {bg=NONE,               fg=NONE,  style={'undercurl', color='orange' }},
-	CocWarningSign      = {link='ALEWarningSign'                                                },
+	CocErrorHighlight   = {bg=NONE,               fg=NONE,  style={'undercurl', color='red'       }},
+	CocErrorSign        = {link='ALEErrorSign'                                                     },
+	CocHintHighlight    = {bg=NONE,               fg=NONE,  style={'undercurl', color='magenta'   }},
+	CocHintSign         = {link='HintMsg'                                                          },
+	CocInfoHighlight    = {bg=NONE,               fg=NONE,  style={'undercurl', color='pink_light'}},
+	CocInfoSign         = {link='InfoMsg'                                                          },
+	CocWarningHighlight = {bg=NONE,               fg=NONE,  style={'undercurl', color='orange'    }},
+	CocWarningSign      = {link='ALEWarningSign'                                                   },
 
 	--[[ 4.4.2. vim-jumpmotion / vim-easymotion ]]
 	EasyMotion = {link = 'IncSearch' },
