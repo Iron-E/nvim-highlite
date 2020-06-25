@@ -1,5 +1,3 @@
---[[ NOTHING IN THIS FILE NEEDS TO BE EDITED BY THE USER. ]]
-
 -- Clear the highlighting.
 vim.cmd('hi clear')
 
