@@ -418,7 +418,7 @@ local highlight_groups = {
 	mkdCodeDelimiter    = {link='Delimiter'                                },
 	mkdItalic           = {bg=NONE,          fg=green,       style='italic'},
 	mkdListItem         = {link='Special'                                  },
-	mkdNonListItemBlock = {bg=NONE,          fg=gray,        style=NONE    },
+	mkdNonListItemBlock = {link='Normal'                                   },
 	texMathZoneY        = {link='String'                                   },
 
 	--[[ 4.3.20. Python ]]

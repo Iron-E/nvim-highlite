@@ -1,6 +1,6 @@
 # Default Settings Preview
 
-* Coming soon
+![lua preview](./media/preview.png "Lua Preview")
 
 # Introduction
 
