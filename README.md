@@ -6,7 +6,12 @@
 
 `nvim-highlite` is a colorscheme template repository for Neovim 0.5+.
 
-This template's focus is on compatability with [semantic highlighting](https://medium.com/@evnbr/coding-in-color-3a6db2743a1e).
+This template's focus is on two things:
+
+1. Compatability with [semantic highlighting](https://medium.com/@evnbr/coding-in-color-3a6db2743a1e).
+	* I was using colorschemes that often did not provide enough highlight groups to provide distinction between tokens.
+2. Visibility in any range of blue-light.
+	* I use redshift often, and I many colorschemes did not allow for me to see when I had lower color temperatures.
 
 It provides a large supply of defaults for plugins and programming languages as a result of defining a smaller set of "categorical" highlights (you can read more about this at Neovim's `group-name` help page).
 
