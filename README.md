@@ -21,16 +21,7 @@ It provides a large supply of defaults for plugins and programming languages as 
 
 # Usage
 
-This repository should be cloned with `git clone https://github.com/Iron-E/nvim-highlite`, and then:
-
-1. Rename `lua/highlite/` to `lua/<name of your colorscheme>/`.
-2. Follow the directions in [lua/`<name of your colorscheme>`/init.lua](lua/highlite/init.lua).
-3. Rename `colors/highlite.vim` to `colors/<name of your colorscheme>.vim`.
-4. Follow the instructions in [colors/`<name of your colorscheme>`.vim](colors/highlite.vim).
-5. Install the colorscheme:
-	* With a plugin manager (like [`vim-plug`](https://github.com/junegunn/vim-plug)).
-	* By merging the [colors](colors) and [lua](lua) folders with the ones in your `stdpath('config')` directory.
-6. Source with `colorscheme highlite` / `colorscheme <name of colorscheme>` in your [init.vim]($HOME/.config/init.vim).
+This repository should be cloned with `git clone https://github.com/Iron-E/nvim-highlite`, and then follow the instructions in [`colors/highlite.vim`](colors/highlite.vim).
 
 ## Examples
 
