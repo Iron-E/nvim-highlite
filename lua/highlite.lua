@@ -1,3 +1,5 @@
+--[[ NOTHING INSIDE THIS FILE NEEDS TO BE EDITED BY THE USER. ]]
+
 -- Clear the highlighting.
 vim.cmd('hi clear')
 
@@ -89,10 +91,7 @@ local function highlight(highlight_group, attributes) -- {{{ †
 	vim.cmd(table.concat(highlight_cmd))
 end --}}} ‡
 
-return function(name, Normal, highlights, terminal_ansi_colors)
-	-- Set the name of the current colorscheme.
-	vim.g.colors_name = string.lower(name)
-
+return function(Normal, highlights, terminal_ansi_colors)
 	-- Highlight the baseline.
 	highlight('Normal', Normal)
 

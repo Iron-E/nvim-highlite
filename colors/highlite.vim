@@ -1,4 +1,5 @@
-" NOTHING IN THIS FILE NEEDS TO BE EDITED BY THE USER.
+" This file should be edited by the user.
+" Read the instructions of each section and then edit them as desired.
 lua << EOF
 --[[ Highlite, a Neovim colorscheme template.
 	* Author:     Iron-E (https://github.com/Iron-E)
@@ -10,12 +11,9 @@ lua << EOF
 ]]
 
 --[[ Introduction
-	This template is designed to help vimmers create their own colorschemes
-	without much effort.
+	This template is designed to help Neovim users create their own colorschemes without much effort.
 
-	You will not need any additional tooling to run this file. Just open it
-	in Neovim and follow the instructions— the colorscheme will generate
-	be generated automatically.
+	You will not need any additional tooling to run this file. Just open it in Neovim and follow the instructions.
 
 	The process is divided in five steps:
 	1. Rename the template,
@@ -26,11 +24,10 @@ lua << EOF
 ]]
 
 --[[ Step 1: Renaming
-	If this file is distributed with a colorscheme it's probably already named correctly
-	and you can skip this step.
-
-	If you forked/cloned/copied this repository to create your own colorscheme, you will have to
-	rename this template to match the name of your colorscheme.
+	* If this file is distributed with a colorscheme it's probably already named correctly
+	  and you can skip this step.
+	* If you forked/cloned/copied this repository to create your own colorscheme, you will have to
+	  rename this template to match the name of your colorscheme.
 
 	NOTE: Neovim doesn't really care about whitespace in the name of the colorscheme but it does for
 	filenames so make sure your filename doesn't have any whitespace character.
@@ -41,13 +38,19 @@ lua << EOF
 	| foo-bar           | foo_bar     | foo-bar.lua       |
 	| foo bar           | foo_bar     | foo-bar.lua or    |
 	| foo_bar           | foo_bar     | foo_bar.lua       |
+
+	Rename the following files:
+	* `colors/highlite.vim`
+	* `lua/highlite.lua`
+
+	Where 'highlite' is the name of your colorscheme.
 ]]
 
 --[[ Step 2: Information
-	Make sure the name of your colorscheme is unique and attractive.
+	This is the name of your colorscheme which will be used as per |g:colors_name|.
 ]]
 
-local name = 'highlite'
+vim.g.colors_name = 'highlite'
 
 --[[ Step 3: Colors
 	Next you will define all of the colors that you will use for the color scheme.
@@ -113,25 +116,20 @@ local purple_light = {'#af60af', 63,  'magenta'}
 	<highlight group name> = {
 		bg=<color>, -- The color used for background color, or use 'NONE', 'fg' or 'bg'
 		fg=<color>, -- The color used for foreground color, or use 'NONE', 'fg' or 'bg'
-		 -- Style can be 'bold', 'italic', and more. See |attr-list| for more information.
-		style=<cterm>
-		-- style can also have a color, and/or multiple <cterm>s.
-		style={<cterm> [, <cterm>] [color=<color>]})
+		--[[ Style can be 'bold', 'italic', and more. See |attr-list| for more information.
+			Style can also have a color, and/or multiple <cterm>s.
+		]]
+		style=<cterm>|{<cterm> [, <cterm>] [color=<color>]})
 	}
 ```
 
-	The sample above tells Vim to render normal text in dark gray against a white
-	background, without any other styling.
-
-	Or you can link an highlight group to another. Here, 'Title' will inherit its style from
-	'Normal':
+	Or you can link an highlight group to another.
 
 ```lua
-	Title = {link='Normal'}
+	<highlight group name> = {link='<highlight group name>'}
 ```
 
-	In GUI Vim, there is an additional color for the undercurl used to
-	highlight spelling mistakes:
+	Here is an example:
 
 ```lua
 	SpellBad = { -- ← name of the highlight group
@@ -159,21 +157,19 @@ local purple_light = {'#af60af', 63,  'magenta'}
 	}
 ```
 
-	The sample above tells Vim to render badly spelled words in red against the current
-	background, with a red undercurl.
-
 	You can add any custom highlight group to the standard list below but you shouldn't
 	remove any if you want a working colorscheme. Most of them are described under
-	:help highlight-default, the others are taken from :help group-name. Both help sections
-	are good reads, by the way.
+	|highlight-default|, some from |group-name|, and others from common syntax groups.
+	Both help sections are good reads.
 
 	NOTE: |Replace-mode| will probably be useful here.
 
 	NOTE: /As long as you do not remove any highlight groups or colors/, you can safely
 	      ignore any highlight groups that are `link`ed others.
-			For example, programming languages almost exclusively link to the 1st
-			and 2nd sections, so as long as you define everything there you will automatically
-			be defining the rest of the highlights.
+	      For example, programming languages almost exclusively link to the 1st
+	      and 2nd sections, so as long as you define everything there you will automatically
+	      be defining the rest of the highlights, which is one of the benefits of using
+	      this template.
 ]]
 
 --[[ DO NOT EDIT `BG`, `FG`, or `NONE`.
@@ -608,11 +604,9 @@ local terminal_ansi_colors = {
 }
 
 --[[ Step 5: Sourcing
-	When you wish to load your colorscheme, you will not use the `colorscheme` command like normal.
-
-	Instead, you will source this file with `:luafile stdpath('config') . '/lua/<filename>.lua'`
-
-	See `:help luafile` and `:help stdpath` for more information.
+	When you wish to load your colorscheme, simply add this folder with a plugin manager
+	and then use `colorscheme <your colorscheme name>`. For example, in my configuration,
+	I source highlite by using `colorscheme highlite`.
 
 	These online resources can help you design your colorscheme:
 
@@ -641,17 +635,16 @@ local terminal_ansi_colors = {
 	12. 'I Made My Own Colour Scheme and You Can Too!'.
 		* https://cmcenroe.me/2018/04/03/colour-scheme.html
 
-	A few general advices:
+	A few things to note:
 
-	* The Windows console is limited to the 16 so-called 'ANSI' colors but it used to
+	* The Windows console (`cmd`) is limited to the 16 so-called 'ANSI' colors but it used to
 			have a few of them interverted which makes numbers impractical. Use color names
 			instead of numbers: :help cterm-colors
-		* The Windows console (yeah…) doesn't do italics, underlines or bolded text;
-				it is limited to normal and reverse. Keep that in mind if you want
-				your colorscheme to be usable in as many environments as possible by as many
-				people as possible.
-			* Actually, terminal emulators rarely do italics.
-		* The Windows Terminal, however, is capable of more.
+		* The Windows console doesn't do italics, underlines or bolded text;
+			it is limited to normal and reverse. Keep that in mind if you want
+			your colorscheme to be usable in as many environments as possible by as many
+			people as possible.
+		* The Windows TERMINAL, however, is capable of more.
 	* All of the terminal emulators in use these days allow their users to
 		change the 16 so-called 'ANSI' colors. It is also possible on some platforms
 		to change some or all of the 256 colors in the xterm palette. Don't take
@@ -670,8 +663,8 @@ local terminal_ansi_colors = {
 		is correctly set up if they want to enjoy the best possible experience.
 ]]
 
+-- Change 'highlite' to the name of your colorscheme as defined in step 1.
 require('highlite')(
-	name,
 	highlight_group_normal,
 	highlight_groups,
 	terminal_ansi_colors
