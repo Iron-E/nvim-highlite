@@ -116,9 +116,7 @@ local purple_light = {'#af60af', 63,  'magenta'}
 	<highlight group name> = {
 		bg=<color>, -- The color used for background color, or use 'NONE', 'fg' or 'bg'
 		fg=<color>, -- The color used for foreground color, or use 'NONE', 'fg' or 'bg'
-		--[[ Style can be 'bold', 'italic', and more. See |attr-list| for more information.
-			Style can also have a color, and/or multiple <cterm>s.
-		]]
+		-- Style can be 'bold', 'italic', and more. See |attr-list| for more information. It can also have a color, and/or multiple <cterm>s.
 		style=<cterm>|{<cterm> [, <cterm>] [color=<color>]})
 	}
 ```
