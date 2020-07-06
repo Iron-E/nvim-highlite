@@ -208,7 +208,7 @@ local highlight_groups = {
 	Label       = {bg=NONE,        fg=pink,        style='italic'},
 	Operator    = {bg=NONE,        fg=green_dark,  style=NONE    },
 	Keyword     = {bg=NONE,        fg=turqoise,    style='bold'  },
-	Exception   = {bg=NONE,        fg=red,         style='bold'  },
+	Exception   = {bg=NONE,        fg=red_light,   style='bold'  },
 
 	--[[ 4.1.4. Metatextual Information]]
 	PreProc   = {bg=NONE,      fg=tan,          style=NONE       },
@@ -301,7 +301,7 @@ local highlight_groups = {
 	SignColumn  = {bg=NONE,  fg=NONE,  style=NONE     },
 
 	--[[ 4.2.10. Messages]]
-	ErrorMsg   = {bg=NONE,  fg=red_light,    style='bold'     },
+	ErrorMsg   = {bg=NONE,  fg=red,          style='bold'     },
 	HintMsg    = {bg=NONE,  fg=magenta,      style='bold'     },
 	InfoMsg    = {bg=NONE,  fg=pink_light,   style='bold'     },
 	ModeMsg    = {bg=NONE,  fg=yellow,       style=NONE       },
@@ -324,6 +324,8 @@ local highlight_groups = {
 	LspDiagnosticsInformation = {link='Info'           },
 	LspDiagnosticsInformationFloating = {link='InfoMsg'},
 	LspDiagnosticsInformationSign = {link='InfoMsg'    },
+
+	LspDiagnosticsUnderline = {link='CocErrorHighlight'},
 
 	--[[ 4.2.12. Cursor ]]
 	Cursor   = {bg=NONE,           fg=NONE,  style='inverse'},
