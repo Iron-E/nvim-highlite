@@ -325,7 +325,11 @@ local highlight_groups = {
 	LspDiagnosticsInformationFloating = {link='InfoMsg'},
 	LspDiagnosticsInformationSign = {link='InfoMsg'    },
 
-	LspDiagnosticsUnderline = {link='CocErrorHighlight'},
+	LspDiagnosticsUnderline = {bg=NONE, fg=NONE, style={'undercurl', color=white}},
+	LspDiagnosticsUnderlineError = {link='CocErrorHighlight'    },
+	LspDiagnosticsUnderlineHint = {link='CocHintHighlight'      },
+	LspDiagnosticsUnderlineInfo = {link='CocInfoHighlight'      },
+	LspDiagnosticsUnderlineWarning = {link='CocWarningHighlight'},
 
 	--[[ 4.2.12. Cursor ]]
 	Cursor   = {bg=NONE,           fg=NONE,  style='inverse'},
