@@ -337,7 +337,6 @@ local highlight_groups = {
 	CursorColumn = {bg=gray_dark,  fg=NONE,  style=NONE     },
 
 	--[[ 4.2.13. Misc ]]
-	-- Directory     = {bg=NONE,       fg=ice,  style='bold'},
 	Directory     = {bg=NONE,       fg=ice,  style='bold'},
 	Terminal      = {link='Normal'                       },
 
