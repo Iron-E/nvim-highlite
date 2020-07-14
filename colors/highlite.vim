@@ -224,7 +224,7 @@ local highlight_groups = {
 	Typedef      = {bg=NONE,  fg=cyan,          style='italic'},
 
 	--[[ 4.1.6. Edge Cases]]
-	Special        = {bg=NONE,           fg=magenta,  style=NONE                 },
+	Special        = {bg=NONE,           fg=magenta,  style='bold'               },
 	SpecialChar    = {link='Character'                                           },
 	SpecialKey     = {link='Character'                                           },
 	Tag            = {link='Underlined'                                          },
@@ -425,16 +425,16 @@ local highlight_groups = {
 	makeSpecTarget = {link='Type'    },
 
 	--[[ 4.3.13. Markdown ]]
-	markdownH1          = {bg=NONE,          fg=green_dark,  style='bold'  },
-	markdownH2          = {bg=NONE,          fg=red_light,   style='bold'  },
-	markdownH3          = {bg=NONE,          fg=green,       style='bold'  },
-	markdownH4          = {bg=NONE,          fg=magenta,     style='bold'  },
-	markdownH5          = {bg=NONE,          fg=orange,      style='bold'  },
-	markdownH6          = {bg=NONE,          fg=yellow,      style='bold'  },
-	mkdBold             = {bg=NONE,          fg='green',     style='bold'  },
+	markdownH1          = {bg=NONE,          fg=red,          style='bold'  },
+	markdownH2          = {bg=NONE,          fg=orange,       style='bold'  },
+	markdownH3          = {bg=NONE,          fg=yellow,       style='bold'  },
+	markdownH4          = {bg=NONE,          fg=green_dark,   style='bold'  },
+	markdownH5          = {bg=NONE,          fg=cyan,         style='bold'  },
+	markdownH6          = {bg=NONE,          fg=purple_light, style='bold'  },
+	mkdBold             = {link='SpecialChar'},
 	mkdCode             = {link='Comment'                                  },
 	mkdCodeDelimiter    = {link='Delimiter'                                },
-	mkdItalic           = {bg=NONE,          fg=green,       style='italic'},
+	mkdItalic           = {link='SpecialChar'},
 	mkdListItem         = {link='Special'                                  },
 	mkdNonListItemBlock = {link='Normal'                                   },
 	texMathZoneY        = {link='String'                                   },
