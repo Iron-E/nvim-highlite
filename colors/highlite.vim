@@ -354,7 +354,20 @@ local highlight_groups = {
 	cppSTLnamespace = {link='String'   },
 
 	--[[ 4.3.3 C# ]]
+	csBraces    = {link='Delimiter'},
+	csClass     = {link='Structure'},
+	csClassType = {link='Type'},
+	csContextualStatement = {link='Conditional'},
+	csEndColon  = {link='Delimiter'},
 	csLogicSymbols = {link='Operator'},
+	csModifier  = {link='PreProc'},
+	csNew       = {link='Operator'},
+	csNewType   = {link='Type'},
+	csParens    = {link='Delimiter'},
+	csRepeat    = {link='Repeat'},
+	csStorage   = {link='StorageClass'},
+	csUnspecifiedStatement = {link='Statement'},
+	csXmlTag    = {link='Tag'},
 
 	--[[ 4.3.4. CSS ]]
 	cssProp    = {link='Keyword'},
@@ -479,13 +492,14 @@ local highlight_groups = {
 	tomlTable   = {link='StorageClass'},
 
 	--[[ 4.3.27. VimScript ]]
-	vimCommand   = {link = 'Keyword'   },
-	vimFuncKey   = {link = 'Function'  },
-	vimGroup     = {link = 'Type'      },
-	vimHiGroup   = {link = 'Typedef'   },
-	vimIsCommand = {link = 'vimCommand'},
-	vimLet       = {link = 'Operator'  },
-	vimMap       = {link = 'vimCommand'},
+	vimCommand   = {link='Keyword'   },
+	vimFuncKey   = {link='Function'  },
+	vimGroup     = {link='Type'      },
+	vimHiGroup   = {link='Typedef'   },
+	vimIsCommand = {link='vimCommand'},
+	vimLet       = {link='Operator'  },
+	vimMap       = {link='vimCommand'},
+	vimNotFunc   = {link='Statement'},
 
 	--[[ 4.3.28. XML ]]
 	xmlAttrib  = {link='Label'    },
