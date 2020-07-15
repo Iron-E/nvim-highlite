@@ -422,6 +422,23 @@ local highlight_groups = {
 	--[[ 4.3.11. JSON ]]
 	jsonStringSQError = {link='Exception'},
 
+	--[[ 4.3.12. Lua ]]
+	luaBraces       = {link='Structure'},
+	luaBrackets     = {link='Delimiter'},
+	luaBuiltin      = {link='Keyword'},
+	luaComma        = {link='Delimiter'},
+	luaFuncCall     = {link='Function'},
+	luaFuncId       = {link='luaNoise'},
+	luaFuncKeyword  = {link='Function'},
+	luaFuncName     = {link='Normal'},
+	luaFuncParens   = {link='Delimiter'},
+	luaFuncTable    = {link='Structure'},
+	luaLocal        = {link='Type'},
+	luaNoise        = {link='Operator'},
+	luaParens       = {link='Delimiter'},
+	luaSpecialTable = {link='Normal'},
+	luaSpecialValue = {link='Function'},
+
 	--[[ 4.3.12. Make ]]
 	makeCommands   = {link='Statment'},
 	makeSpecTarget = {link='Type'    },
