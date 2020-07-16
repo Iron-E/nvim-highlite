@@ -74,13 +74,13 @@ local function highlight(highlight_group, attributes) -- {{{ †
 		local style = attributes.style
 		if type(style) == 'table' then
 			-- Concat all of the entries together with a comma between before styling.
-			stylize(table.concat(style, ','))
+			stylize(highlight_cmd, table.concat(style, ','))
 
 			if style.color then -- there won't is a color for undercurl.
 				highlight_cmd[#highlight_cmd + 1] = ' guisp='..get(style.color, HEX)
 			end
 		else -- just style the single entry.
-			stylize(style)
+			stylize(highlight_cmd, style)
 		end
 	end
 
