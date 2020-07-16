@@ -209,6 +209,7 @@ local highlight_groups = {
 	Operator    = {bg=NONE,  fg=green_dark, style=NONE    },
 	Keyword     = {bg=NONE,  fg=teal,       style=NONE    },
 	Exception   = {bg=NONE,  fg=red_light,  style='bold'  },
+	Noise       = 'Delimiter',
 
 	--[[ 4.1.4. Metatextual Information]]
 	PreProc   = {bg=NONE,  fg=tan,         style=NONE       },
@@ -372,8 +373,22 @@ local highlight_groups = {
 	csXmlTagName = 'Define',
 
 	--[[ 4.3.4. CSS ]]
-	cssProp    = 'Keyword',
-	cssTagName = 'Type',
+	cssBraces     = 'Delimiter',
+	cssProp       = 'Keyword',
+	cssSelectorOp = 'Operator',
+	cssTagName    = 'Type',
+	cssTagName    = 'htmlTagName',
+	scssAmpersand = 'Special',
+	scssAttribute = 'Normal',
+	scssBoolean   = 'Boolean',
+	scssDefault   = 'Keyword',
+	scssElse      = 'PreCondit',
+	scssIf        = 'PreCondit',
+	scssInclude   = 'Include',
+	scssSelectorChar = 'Operator',
+	scssSelectorName = 'Label',
+	scssVariable  = 'Define',
+	scssVariableAssignment = 'Operator',
 
 	--[[ 4.3.5. Dart ]]
 	dartLibrary = 'Statement',
@@ -406,9 +421,21 @@ local highlight_groups = {
 	goVarDefs               = 'goVarAssign',
 
 	--[[ 4.3.8. HTML ]]
-	htmlBold   = {bg=NONE, fg=NONE, style='bold'  },
-	htmlItalic = {bg=NONE, fg=NONE, style='italic'},
-	htmlSpecialTagName = 'Tag',
+	htmlArg     = 'Label',
+	htmlBold    = {bg=NONE, fg=gray_light, style='bold'},
+	htmlTitle   = 'htmlBold',
+	htmlEndTag  = 'htmlTag',
+	htmlH1      = 'markdownH1',
+	htmlH2      = 'markdownH2',
+	htmlH3      = 'markdownH3',
+	htmlH4      = 'markdownH4',
+	htmlH5      = 'markdownH5',
+	htmlH6      = 'markdownH6',
+	htmlItalic  = {bg=NONE, fg=NONE, style='italic'},
+	htmlSpecialTagName = 'Keyword',
+	htmlTag     = 'Special',
+	htmlTagN    = 'Typedef',
+	htmlTagName = 'Type',
 
 	--[[ 4.3.9. Java ]]
 	javaClassDecl = 'Structure',
@@ -420,6 +447,11 @@ local highlight_groups = {
 	jsVariableDef = 'Identifier',
 
 	--[[ 4.3.11. JSON ]]
+	jsonBraces = 'luaBraces',
+	jsonKeywordMatch = 'Delimiter',
+	jsonNull   = 'Constant',
+	jsonQuote  = 'String',
+	jsonString = 'Normal',
 	jsonStringSQError = 'Exception',
 
 	--[[ 4.3.12. Lua ]]
@@ -452,9 +484,11 @@ local highlight_groups = {
 	markdownH6          = {bg=NONE,  fg=purple_light,  style='bold'},
 	mkdBold             = 'SpecialChar',
 	mkdCode             = 'Comment',
-	mkdCodeDelimiter    = 'Delimiter',
-	mkdItalic           = 'SpecialChar',
+	mkdCodeDelimiter    = 'mkdBold',
+	mkdCodeStart        = 'mkdHeading',
+	mkdItalic           = 'mkdBold',
 	mkdListItem         = 'Special',
+	mkdHeading          = 'Delimiter',
 	mkdNonListItemBlock = 'Normal',
 	texMathZoneY        = 'String',
 
@@ -496,9 +530,10 @@ local highlight_groups = {
 
 	--[[ 4.3.24. shell ]]
 	shFunctionKey = 'Function',
-	shLoop        = 'Repeat',
-	shSet         = 'Statement',
-	shTestOpr     = 'Debug',
+	shLoop    = 'Repeat',
+	shQuote   = 'Delimiter',
+	shSet     = 'Statement',
+	shTestOpr = 'Debug',
 
 	--[[ 4.3.25. Solidity ]]
 	solBuiltinType  = 'Type',
@@ -511,6 +546,7 @@ local highlight_groups = {
 	tomlTable   = 'StorageClass',
 
 	--[[ 4.3.27. VimScript ]]
+	helpSpecial    = 'Special',
 	vimFgBgAttrib  = 'Constant',
 	vimHiCterm     = 'Label',
 	vimHiCtermFgBg = 'vimHiCterm',
@@ -522,11 +558,11 @@ local highlight_groups = {
 	vimSetEqual    = 'Operator',
 
 	--[[ 4.3.28. XML ]]
-	xmlAttrib  = 'Label',
-	xmlEndTag  = 'Exception',
+	xmlAttrib  = 'htmlArg',
+	xmlEndTag  = 'xmlTag',
 	xmlEqual   = 'Operator',
-	xmlTag     = 'Delimiter',
-	xmlTagName = 'Define',
+	xmlTag     = 'htmlTag',
+	xmlTagName = 'htmlTagName',
 
 	--[[ 4.4. Plugins
 		Everything in this section is OPTIONAL. Feel free to remove everything
@@ -550,14 +586,6 @@ local highlight_groups = {
 	--[[ 4.4.2. vim-jumpmotion / vim-easymotion ]]
 	EasyMotion = 'IncSearch',
 	JumpMotion = 'EasyMotion',
-
-	--[[ 4.4.3. vim-markdown ]]
-	htmlH1 = 'markdownH1',
-	htmlH2 = 'markdownH2',
-	htmlH3 = 'markdownH3',
-	htmlH4 = 'markdownH4',
-	htmlH5 = 'markdownH5',
-	htmlH6 = 'markdownH6',
 
 	--[[ 4.4.4. vim-gitgutter / vim-signify ]]
 	GitGutterAdd          = {bg=NONE,  fg=green,   style=NONE},
