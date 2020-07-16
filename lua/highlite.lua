@@ -50,12 +50,10 @@ end or function(command, attributes) command[#command + 1] =
 end
 
 -- This function appends `selected_attributes` to the end of `highlight_cmd`.
-local function stylize(command, attributes)
+local stylize = use_hex_and_256 and function(command, attributes)
+	command[#command + 1] = ' cterm='..attributes..' gui='..attributes
+end or function(command, attributes)
 	command[#command + 1] = ' cterm='..attributes
-
-	if use_hex_and_256 then -- we're using hex populate the gui* attributes.
-		command[#command + 1] = ' gui='..attributes
-	end
 end
 
 -- Generate a `:highlight` command from a group and some attributes.
