@@ -26,6 +26,38 @@ local BIT_16  = 3
 local BIT_256 = 2
 local HEX     = 1
 
+-- Get the color value of a color variable, or "NONE" as a default.
+local function get(color, index)
+	if type(color) == 'table' and color[index] then
+		return color[index]
+	elseif type(color) == 'string' then
+		return color
+	else
+		return "NONE"
+	end
+end
+
+--[[ If using hex and 256-bit colors, then populate the gui* and cterm* args.
+	If using 16-bit colors, just populate the cterm* args. ]]
+local colorize = use_hex_and_256 and function(command, attributes) command[#command + 1] =
+	' ctermbg='..get(attributes.bg, BIT_256)
+	..' ctermfg='..get(attributes.fg, BIT_256)
+	..' guibg='..get(attributes.bg, HEX)
+	..' guifg='..get(attributes.fg, HEX)
+end or function(command, attributes) command[#command + 1] =
+	' ctermbg='..get(attributes.bg, BIT_16)
+	..' ctermfg='..get(attributes.fg, BIT_16)
+end
+
+-- This function appends `selected_attributes` to the end of `highlight_cmd`.
+local function stylize(command, attributes)
+	command[#command + 1] = ' cterm='..attributes
+
+	if use_hex_and_256 then -- we're using hex populate the gui* attributes.
+		command[#command + 1] = ' gui='..attributes
+	end
+end
+
 -- Generate a `:highlight` command from a group and some attributes.
 local function highlight(highlight_group, attributes) -- {{{ †
 	local highlight_cmd = {'hi! ', highlight_group}
@@ -33,59 +65,22 @@ local function highlight(highlight_group, attributes) -- {{{ †
 		or attributes.link
 
 	if link then -- `highlight_group` is a link to another group.
-		highlight_cmd[3] = highlight_cmd[2] .. ' '
+		highlight_cmd[3] = highlight_cmd[2]..' '
 		highlight_cmd[2] = 'link '
 		highlight_cmd[4] = link
 	else -- the `highlight_group` is uniquely defined.
-		local bg    = attributes.bg
-		local fg    = attributes.fg
+		colorize(highlight_cmd, attributes)
+
 		local style = attributes.style
-
-		-- Get the color value of a color variable, or "NONE" as a default.
-		local function get(color, index)
-			if type(color) == 'table' and color[index] then
-				return color[index]
-			elseif type(color) == 'string' then
-				return color
-			else
-				return "NONE"
-			end
-		end
-
-		-- If using hex and 256-bit colors, then populate the gui* and cterm* args.
-		if use_hex_and_256 then highlight_cmd[#highlight_cmd + 1] =
-			' ctermbg=' .. get(bg, BIT_256)
-			.. ' ctermfg=' .. get(fg, BIT_256)
-			.. ' guibg='   .. get(bg, HEX)
-			.. ' guifg='   .. get(fg, HEX)
-		-- If using 16-bit colors, just populate the cterm* args.
-		else highlight_cmd[#highlight_cmd + 1] =
-			' ctermbg=' .. get(bg, BIT_16)
-			.. ' ctermfg=' .. get(fg, BIT_16)
-		end
-
-		-- This function appends `selected_attributes` to the end of `highlight_cmd`.
-		local function append_style(selected_attributes)
-			highlight_cmd[#highlight_cmd + 1] = ' cterm=' .. selected_attributes
-
-			-- If we're using hex populate the gui* attr args.
-			if use_hex_and_256 then highlight_cmd[#highlight_cmd + 1] =
-				' gui=' .. selected_attributes
-			end
-		end
-
 		if type(style) == 'table' then
-			-- Concat all of the entries together with a comma between.
-			local style_all = table.concat(style, ',')
+			-- Concat all of the entries together with a comma between before styling.
+			stylize(table.concat(style, ','))
 
-			-- There will always be a cterm attr arg.
-			append_style(style_all)
-
-			-- There won't always be a `guisp`.
-			if style.color then highlight_cmd[#highlight_cmd + 1] =
-				' guisp=' .. get(style.color, HEX)
+			if style.color then -- there won't is a color for undercurl.
+				highlight_cmd[#highlight_cmd + 1] = ' guisp='..get(style.color, HEX)
 			end
-		else append_style(style)
+		else -- just style the single entry.
+			stylize(style)
 		end
 	end
 
@@ -103,6 +98,6 @@ return function(Normal, highlights, terminal_ansi_colors)
 
 	-- Set the terminal colors.
 	for index, color in ipairs(terminal_ansi_colors) do
-		vim.g['terminal_color_' .. index] = color[HEX] or color[BIT_256] or color[BIT_16] or 'NONE'
+		vim.g['terminal_color_'..index] = color[HEX] or color[BIT_256] or color[BIT_16]
 	end
 end
