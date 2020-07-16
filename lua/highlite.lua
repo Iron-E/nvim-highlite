@@ -26,27 +26,6 @@ local BIT_16  = 3
 local BIT_256 = 2
 local HEX     = 1
 
--- This function appends `selected_attributes` to the end of some `command`.
-local function append_style(command, selected_attributes)
-	command[#command + 1] = ' cterm=' .. selected_attributes
-
-	-- If we're using hex populate the gui* attr args.
-	if use_hex_and_256 then command[#command + 1] =
-		' gui=' .. selected_attributes
-	end
-end
-
--- Get the color value of a color variable, or "NONE" as a default.
-local function get(color, index)
-	if type(color) == 'table' and color[index] then
-		return color[index]
-	elseif type(color) == 'string' then
-		return color
-	else
-		return "NONE"
-	end
-end
-
 -- Generate a `:highlight` command from a group and some attributes.
 local function highlight(highlight_group, attributes) -- {{{ †
 	local highlight_cmd = {'hi! ', highlight_group}
@@ -62,6 +41,17 @@ local function highlight(highlight_group, attributes) -- {{{ †
 		local fg    = attributes.fg
 		local style = attributes.style
 
+		-- Get the color value of a color variable, or "NONE" as a default.
+		local function get(color, index)
+			if type(color) == 'table' and color[index] then
+				return color[index]
+			elseif type(color) == 'string' then
+				return color
+			else
+				return "NONE"
+			end
+		end
+
 		-- If using hex and 256-bit colors, then populate the gui* and cterm* args.
 		if use_hex_and_256 then highlight_cmd[#highlight_cmd + 1] =
 			' ctermbg=' .. get(bg, BIT_256)
@@ -74,18 +64,28 @@ local function highlight(highlight_group, attributes) -- {{{ †
 			.. ' ctermfg=' .. get(fg, BIT_16)
 		end
 
+		-- This function appends `selected_attributes` to the end of `highlight_cmd`.
+		local function append_style(selected_attributes)
+			highlight_cmd[#highlight_cmd + 1] = ' cterm=' .. selected_attributes
+
+			-- If we're using hex populate the gui* attr args.
+			if use_hex_and_256 then highlight_cmd[#highlight_cmd + 1] =
+				' gui=' .. selected_attributes
+			end
+		end
+
 		if type(style) == 'table' then
 			-- Concat all of the entries together with a comma between.
 			local style_all = table.concat(style, ',')
 
 			-- There will always be a cterm attr arg.
-			append_style(highlight_cmd, style_all)
+			append_style(style_all)
 
 			-- There won't always be a `guisp`.
 			if style.color then highlight_cmd[#highlight_cmd + 1] =
 				' guisp=' .. get(style.color, HEX)
 			end
-		else append_style(highlight_cmd, style)
+		else append_style(style)
 		end
 	end
 
@@ -103,6 +103,6 @@ return function(Normal, highlights, terminal_ansi_colors)
 
 	-- Set the terminal colors.
 	for index, color in ipairs(terminal_ansi_colors) do
-		vim.g['terminal_color_' .. index] = get(color, HEX)
+		vim.g['terminal_color_' .. index] = color[HEX] or color[BIT_256] or color[BIT_16] or 'NONE'
 	end
 end
