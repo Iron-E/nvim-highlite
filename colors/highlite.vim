@@ -1,6 +1,6 @@
-" This file should be edited by the user.
-" Read the instructions of each section and then edit them as desired.
 lua << EOF
+-- This file should be edited by the user. Read the instructions of each section and then edit them as desired.
+
 --[[ Highlite, a Neovim colorscheme template.
 	* Author:     Iron-E (https://github.com/Iron-E)
 	* Repository: https://github.com/nvim-highlite
@@ -124,7 +124,7 @@ local purple_light = {'#af60af', 63,  'magenta'}
 	Or you can link an highlight group to another.
 
 ```lua
-	<highlight group name> = {link='<highlight group name>'}
+	<highlight group name> = '<highlight group name>'
 ```
 
 	Here is an example:
@@ -184,38 +184,38 @@ local highlight_group_normal = {bg=black, fg=gray_light, style=NONE}
 -- This is where the rest of your highlights should go.
 local highlight_groups = {
 	--[[ 4.1. Text Analysis ]]
-	Comment     = {bg=NONE,        fg=gray,         style='italic'},
-	EndOfBuffer = {link='NonText'                                 },
-	NonText     = {bg=NONE,        fg=gray_darker,  style=NONE    },
-	Whitespace  = {link='NonText'                                 },
+	Comment     = {bg=NONE,   fg=gray,         style='italic'},
+	EndOfBuffer = 'NonText',
+	NonText     = {bg=NONE,   fg=gray_darker,  style=NONE},
+	Whitespace  = 'NonText',
 
 	--[[ 4.1.1. Literals]]
-	Constant  = {bg=NONE,       fg=orange_light,  style=NONE},
-	String    = {bg=NONE,       fg=green,         style=NONE},
-	Character = {bg=NONE,       fg=red_light,     style=NONE},
-	Number    = {bg=NONE,       fg=pink_light,    style=NONE},
-	Boolean   = {bg=NONE,       fg=yellow,        style=NONE},
-	Float     = {link='Number'                              },
+	Constant  = {bg=NONE,  fg=orange_light,  style=NONE},
+	String    = {bg=NONE,  fg=green,         style=NONE},
+	Character = {bg=NONE,  fg=red_light,     style=NONE},
+	Number    = {bg=NONE,  fg=pink_light,    style=NONE},
+	Boolean   = {bg=NONE,  fg=yellow,        style=NONE},
+	Float     = 'Number',
 
 	--[[ 4.1.2. Identifiers]]
 	Identifier = {bg=NONE, fg=FG,     style=NONE},
 	Function   = {bg=NONE, fg=purple, style=NONE},
 
 	--[[ 4.1.3. Syntax]]
-	Statement   = {bg=NONE,        fg=ice,        style=NONE    },
-	Conditional = {bg=NONE,        fg=ice,        style='italic'},
-	Repeat      = {bg=NONE,        fg=turqoise,   style='bold'  },
-	Label       = {bg=NONE,        fg=pink,       style='italic'},
-	Operator    = {bg=NONE,        fg=green_dark, style=NONE    },
-	Keyword     = {bg=NONE,        fg=teal,       style=NONE    },
-	Exception   = {bg=NONE,        fg=red_light,  style='bold'  },
+	Statement   = {bg=NONE,  fg=ice,        style=NONE    },
+	Conditional = {bg=NONE,  fg=ice,        style='italic'},
+	Repeat      = {bg=NONE,  fg=turqoise,   style='bold'  },
+	Label       = {bg=NONE,  fg=pink,       style='italic'},
+	Operator    = {bg=NONE,  fg=green_dark, style=NONE    },
+	Keyword     = {bg=NONE,  fg=teal,       style=NONE    },
+	Exception   = {bg=NONE,  fg=red_light,  style='bold'  },
 
 	--[[ 4.1.4. Metatextual Information]]
-	PreProc   = {bg=NONE,      fg=tan,         style=NONE       },
-	Include   = {bg=NONE,      fg=green_light, style='nocombine'},
-	Define    = {bg=NONE,      fg=blue,        style='nocombine'},
-	Macro     = {bg=NONE,      fg=blue,        style='italic'   },
-	PreCondit = {bg=NONE,      fg=tan,         style='italic'   },
+	PreProc   = {bg=NONE,  fg=tan,         style=NONE       },
+	Include   = {bg=NONE,  fg=green_light, style='nocombine'},
+	Define    = {bg=NONE,  fg=blue,        style='nocombine'},
+	Macro     = {bg=NONE,  fg=blue,        style='italic'   },
+	PreCondit = {bg=NONE,  fg=tan,         style='italic'   },
 
 	--[[ 4.1.5. Semantics]]
 	Type         = {bg=NONE,  fg=cyan,          style=NONE    },
@@ -224,49 +224,49 @@ local highlight_groups = {
 	Typedef      = {bg=NONE,  fg=cyan,          style='italic'},
 
 	--[[ 4.1.6. Edge Cases]]
-	Special        = {bg=NONE,           fg=magenta,  style='bold'               },
-	SpecialChar    = {link='Character'                                           },
-	SpecialKey     = {link='Character'                                           },
-	Tag            = {link='Underlined'                                          },
-	Delimiter      = {bg=NONE,           fg=white,    style=NONE                 },
-	SpecialComment = {bg=NONE,           fg=gray,     style={'bold', 'nocombine'}},
-	Debug          = {link='WarningMsg'                                          },
+	Special        = {bg=NONE,      fg=magenta,  style='bold'},
+	SpecialChar    = 'Character',
+	SpecialKey     = 'Character',
+	Tag            = 'Underlined',
+	Delimiter      = {bg=NONE,      fg=white,    style=NONE},
+	SpecialComment = {bg=NONE,      fg=gray,     style={'bold', 'nocombine'}},
+	Debug          = 'WarningMsg',
 
 	--[[ 4.1.7. Help Syntax]]
-	Underlined        = {bg=NONE,           fg=turqoise,  style='underline'          },
-	Ignore            = {bg=NONE,           fg=gray,      style=NONE                 },
-	Error             = {bg=red_dark,       fg=white,     style='bold'               },
-	Todo              = {bg=NONE,           fg=yellow,    style={'bold', 'underline'}},
-	helpHyperTextJump = {link='Underlined'                                           },
-	helpSpecial       = {link='Function'                                             },
-	Hint              = {bg=magenta,        fg=black,     style='bold'               },
-	Info              = {bg=pink_light,     fg=black,     style='bold'               },
-	Warning           = {bg=orange,         fg=black,     style='bold'               },
+	Underlined        = {bg=NONE,        fg=turqoise,  style='underline'},
+	Ignore            = {bg=NONE,        fg=gray,      style=NONE       },
+	Error             = {bg=red_dark,    fg=white,     style='bold'     },
+	Todo              = {bg=NONE,        fg=yellow,    style={'bold', 'underline'}},
+	helpHyperTextJump = 'Underlined',
+	helpSpecial       = 'Function',
+	Hint              = {bg=magenta,     fg=black,  style='bold'},
+	Info              = {bg=pink_light,  fg=black,  style='bold'},
+	Warning           = {bg=orange,      fg=black,  style='bold'},
 
 	--[[ 4.2... Editor UI  ]]
 	--[[ 4.2.1. Status Line]]
-	StatusLine       = {bg=gray_darker,        fg=green_light,  style=NONE},
-	StatusLineNC     = {bg=gray_darker,        fg=gray,         style=NONE},
-	StatusLineTerm   = {link='StatusLine'                                 },
-	StatusLineTermNC = {link='StatusLineNC'                               },
+	StatusLine       = {bg=gray_darker,  fg=green_light,  style=NONE},
+	StatusLineNC     = {bg=gray_darker,  fg=gray,         style=NONE},
+	StatusLineTerm   = 'StatusLine',
+	StatusLineTermNC = 'StatusLineNC',
 
 	--[[ 4.2.2. Separators]]
-	VertSplit   = {bg=NONE,         fg=gray_darker,  style=NONE     },
-	TabLine     = {bg=gray_darker,  fg=FG,           style=NONE     },
-	TabLineFill = {bg=NONE,         fg=FG,           style=NONE     },
+	VertSplit   = {bg=NONE,         fg=gray_darker,  style=NONE},
+	TabLine     = {bg=gray_darker,  fg=FG,           style=NONE},
+	TabLineFill = {bg=NONE,         fg=FG,           style=NONE},
 	TabLineSel  = {bg=gray_darker,  fg=FG,           style='inverse'},
 	Title       = {bg=NONE,         fg=NONE,         style='bold'   },
 
 	--[[ 4.2.3. Conditional Line Highlighting]]
 	--Conceal={}
-	CursorLine      = {bg=gray_dark,       fg=NONE,  style=NONE     },
-	CursorLineNr    = {bg=gray_dark,       fg=pink,  style=NONE     },
-	debugBreakpoint = {link='ErrorMsg'                              },
-	debugPC         = {link='ColorColumn'                           },
-	LineNr          = {bg=NONE,            fg=gray,  style=NONE     },
-	QuickFixLine    = {bg=gray_darker,     fg=NONE,  style=NONE     },
-	Visual          = {bg=NONE,            fg=NONE,  style='inverse'},
-	VisualNOS       = {bg=gray_darker,     fg=NONE,  style=NONE     },
+	CursorLine      = {bg=gray_dark,    fg=NONE,  style=NONE},
+	CursorLineNr    = {bg=gray_dark,    fg=pink,  style=NONE},
+	debugBreakpoint = 'ErrorMsg',
+	debugPC         = 'ColorColumn',
+	LineNr          = {bg=NONE,         fg=gray,  style=NONE},
+	QuickFixLine    = {bg=gray_darker,  fg=NONE,  style=NONE},
+	Visual          = {bg=NONE,         fg=NONE,  style='inverse'},
+	VisualNOS       = {bg=gray_darker,  fg=NONE,  style=NONE},
 
 	--[[ 4.2.4. Popup Menu]]
 	Pmenu      = {bg=gray_dark,  fg=FG,    style=NONE},
@@ -286,7 +286,7 @@ local highlight_groups = {
 	DiffText   = {bg=NONE,  fg=NONE,        style='inverse'},
 
 	--[[ 4.2.7. Searching]]
-	IncSearch  = {bg=NONE,  fg=NONE,   style='inverse'                 },
+	IncSearch  = {bg=NONE,  fg=NONE,   style='inverse'},
 	Search     = {bg=NONE,  fg=NONE,   style={'underline', color=white}},
 	MatchParen = {bg=NONE,  fg=green,  style={'bold', 'underline'     }},
 
@@ -298,47 +298,47 @@ local highlight_groups = {
 
 	--[[ 4.2.9. Conditional Column Highlighting]]
 	ColorColumn = {bg=NONE,  fg=NONE,  style='inverse'},
-	SignColumn  = {bg=NONE,  fg=NONE,  style=NONE     },
+	SignColumn  = {bg=NONE,  fg=NONE,  style=NONE},
 
 	--[[ 4.2.10. Messages]]
-	ErrorMsg   = {bg=NONE,  fg=red,          style='bold'     },
-	HintMsg    = {bg=NONE,  fg=magenta,      style='bold'     },
-	InfoMsg    = {bg=NONE,  fg=pink_light,   style='bold'     },
-	ModeMsg    = {bg=NONE,  fg=yellow,       style=NONE       },
-	WarningMsg = {bg=NONE,  fg=orange,       style='bold'     },
+	ErrorMsg   = {bg=NONE,  fg=red,          style='bold'},
+	HintMsg    = {bg=NONE,  fg=magenta,      style='bold'},
+	InfoMsg    = {bg=NONE,  fg=pink_light,   style='bold'},
+	ModeMsg    = {bg=NONE,  fg=yellow,       style=NONE  },
+	WarningMsg = {bg=NONE,  fg=orange,       style='bold'},
 	Question   = {bg=NONE,  fg=orange_light, style='underline'},
 
 	--[[ 4.2.11. LSP ]]
-	LspDiagnosticsError = {link='Error'           },
-	LspDiagnosticsErrorFloating = {link='ErrorMsg'},
-	LspDiagnosticsErrorSign = {link='ErrorMsg'    },
+	LspDiagnosticsError = 'Error',
+	LspDiagnosticsErrorFloating = 'ErrorMsg',
+	LspDiagnosticsErrorSign = 'ErrorMsg',
 
-	LspDiagnosticsWarning = {link='Warning'           },
-	LspDiagnosticsWarningFloating = {link='WarningMsg'},
-	LspDiagnosticsWarningSign = {link='WarningMsg'    },
+	LspDiagnosticsWarning = 'Warning',
+	LspDiagnosticsWarningFloating = 'WarningMsg',
+	LspDiagnosticsWarningSign = 'WarningMsg',
 
-	LspDiagnosticsHint = {link='Hint'           },
-	LspDiagnosticsHintFloating = {link='HintMsg'},
-	LspDiagnosticsHintSign = {link='HintMsg'    },
+	LspDiagnosticsHint = 'Hint',
+	LspDiagnosticsHintFloating = 'HintMsg',
+	LspDiagnosticsHintSign = 'HintMsg',
 
-	LspDiagnosticsInformation = {link='Info'           },
-	LspDiagnosticsInformationFloating = {link='InfoMsg'},
-	LspDiagnosticsInformationSign = {link='InfoMsg'    },
+	LspDiagnosticsInformation = 'Info',
+	LspDiagnosticsInformationFloating = 'InfoMsg',
+	LspDiagnosticsInformationSign = 'InfoMsg',
 
 	LspDiagnosticsUnderline = {bg=NONE, fg=NONE, style={'undercurl', color=white}},
-	LspDiagnosticsUnderlineError = {link='CocErrorHighlight'    },
-	LspDiagnosticsUnderlineHint = {link='CocHintHighlight'      },
-	LspDiagnosticsUnderlineInfo = {link='CocInfoHighlight'      },
-	LspDiagnosticsUnderlineWarning = {link='CocWarningHighlight'},
+	LspDiagnosticsUnderlineError = 'CocErrorHighlight',
+	LspDiagnosticsUnderlineHint = 'CocHintHighlight',
+	LspDiagnosticsUnderlineInfo = 'CocInfoHighlight',
+	LspDiagnosticsUnderlineWarning = 'CocWarningHighlight',
 
 	--[[ 4.2.12. Cursor ]]
 	Cursor   = {bg=NONE,           fg=NONE,  style='inverse'},
-	CursorIM = {link='Cursor'                               },
+	CursorIM = 'Cursor',
 	CursorColumn = {bg=gray_dark,  fg=NONE,  style=NONE     },
 
 	--[[ 4.2.13. Misc ]]
 	Directory     = {bg=NONE,       fg=ice,  style='bold'},
-	Terminal      = {link='Normal'                       },
+	Terminal      = 'Normal',
 
 	--[[ 4.3. Programming Languages
 		Everything in this section is OPTIONAL. Feel free to remove everything
@@ -346,186 +346,187 @@ local highlight_groups = {
 		missing.
 	]]
 	--[[ 4.3.1. C ]]
-	cConstant    = {link='Constant'},
-	cCustomClass = {link='Type'    },
+	cConstant    = 'Constant',
+	cCustomClass = 'Type',
 
 	--[[ 4.3.2. C++ ]]
-	cppSTLexception = {link='Exception'},
-	cppSTLnamespace = {link='String'   },
+	cppSTLexception = 'Exception',
+	cppSTLnamespace = 'String',
 
 	--[[ 4.3.3 C# ]]
-	csBraces     = {link='Delimiter'},
-	csClass      = {link='Structure'},
-	csClassType  = {link='Type'},
-	csContextualStatement = {link='Conditional'},
-	csEndColon   = {link='Delimiter'},
-	csLogicSymbols = {link='Operator'},
-	csModifier   = {link='Keyword'},
-	csNew        = {link='Operator'},
-	csNewType    = {link='Type'},
-	csParens     = {link='Delimiter'},
-	csPreCondit  = {link='PreProc'},
-	csRepeat     = {link='Repeat'},
-	csStorage    = {link='StorageClass'},
-	csUnspecifiedStatement = {link='Statement'},
-	csXmlTag     = {link='Define'},
-	csXmlTagName = {link='Define'},
+	csBraces     = 'Delimiter',
+	csClass      = 'Structure',
+	csClassType  = 'Type',
+	csContextualStatement = 'Conditional',
+	csEndColon   = 'Delimiter',
+	csLogicSymbols = 'Operator',
+	csModifier   = 'Keyword',
+	csNew        = 'Operator',
+	csNewType    = 'Type',
+	csParens     = 'Delimiter',
+	csPreCondit  = 'PreProc',
+	csRepeat     = 'Repeat',
+	csStorage    = 'StorageClass',
+	csUnspecifiedStatement = 'Statement',
+	csXmlTag     = 'Define',
+	csXmlTagName = 'Define',
 
 	--[[ 4.3.4. CSS ]]
-	cssProp    = {link='Keyword'},
-	cssTagName = {link='Type'   },
+	cssProp    = 'Keyword',
+	cssTagName = 'Type',
 
 	--[[ 4.3.5. Dart ]]
-	dartLibrary = {link='Statement'},
+	dartLibrary = 'Statement',
 
 	--[[ 4.3.6. dot ]]
-	dotKeyChar = {link='Character'},
-	dotType    = {link='Type'     },
+	dotKeyChar = 'Character',
+	dotType    = 'Type',
 
 	--[[ 4.3.7. Go ]]
-	goBlock                 = {link='Delimiter'            },
-	goBoolean               = {link='Boolean'              },
-	goBuiltins              = {link='Operator'             },
-	goField                 = {link='Identifier'           },
-	goFloat                 = {link='Float'                },
-	goFormatSpecifier       = {link='Character'            },
-	goFunction              = {link='Function'             },
-	goFunctionCall          = {link='goFunction'           },
+	goBlock                 = 'Delimiter',
+	goBoolean               = 'Boolean',
+	goBuiltins              = 'Operator',
+	goField                 = 'Identifier',
+	goFloat                 = 'Float',
+	goFormatSpecifier       = 'Character',
+	goFunction              = 'Function',
+	goFunctionCall          = 'goFunction',
 	goFunctionReturn        = {bg=NONE, fg=NONE, style=NONE},
-	goMethodCall            = {link='goFunctionCall'       },
-	goParamType             = {link='goReceiverType'       },
-	goPointerOperator       = {link='SpecialChar'          },
-	goPredefinedIdentifiers = {link='Constant'             },
-	goReceiver              = {link='goBlock'              },
-	goReceiverType          = {link='goTypeName'           },
-	goSimpleParams          = {link='goBlock'              },
-	goType                  = {link='Type'                 },
-	goTypeConstructor       = {link='goFunction'           },
-	goTypeName              = {link='Type'                 },
-	goVarAssign             = {link='Identifier'           },
-	goVarDefs               = {link='goVarAssign'          },
+	goMethodCall            = 'goFunctionCall',
+	goParamType             = 'goReceiverType',
+	goPointerOperator       = 'SpecialChar',
+	goPredefinedIdentifiers = 'Constant',
+	goReceiver              = 'goBlock',
+	goReceiverType          = 'goTypeName',
+	goSimpleParams          = 'goBlock',
+	goType                  = 'Type',
+	goTypeConstructor       = 'goFunction',
+	goTypeName              = 'Type',
+	goVarAssign             = 'Identifier',
+	goVarDefs               = 'goVarAssign',
 
 	--[[ 4.3.8. HTML ]]
 	htmlBold   = {bg=NONE, fg=NONE, style='bold'  },
 	htmlItalic = {bg=NONE, fg=NONE, style='italic'},
-	htmlSpecialTagName = {link='Tag'              },
+	htmlSpecialTagName = 'Tag',
 
 	--[[ 4.3.9. Java ]]
-	javaClassDecl = {link='Structure'},
+	javaClassDecl = 'Structure',
 
 	--[[ 4.3.10. JavaScript ]]
-	jsFuncBlock   = {link='Function'  },
-	jsObjectKey   = {link='Type'      },
-	jsReturn      = {link='Keyword'   },
-	jsVariableDef = {link='Identifier'},
+	jsFuncBlock   = 'Function',
+	jsObjectKey   = 'Type',
+	jsReturn      = 'Keyword',
+	jsVariableDef = 'Identifier',
 
 	--[[ 4.3.11. JSON ]]
-	jsonStringSQError = {link='Exception'},
+	jsonStringSQError = 'Exception',
 
 	--[[ 4.3.12. Lua ]]
-	luaBraces       = {link='Structure'},
-	luaBrackets     = {link='Delimiter'},
-	luaBuiltin      = {link='Keyword'},
-	luaComma        = {link='Delimiter'},
-	luaFuncCall     = {link='Function'},
-	luaFuncId       = {link='luaNoise'},
-	luaFuncKeyword  = {link='Function'},
-	luaFuncName     = {link='Normal'},
-	luaFuncParens   = {link='Delimiter'},
-	luaFuncTable    = {link='Structure'},
-	luaLocal        = {link='Type'},
-	luaNoise        = {link='Operator'},
-	luaParens       = {link='Delimiter'},
-	luaSpecialTable = {link='Normal'},
-	luaSpecialValue = {link='Function'},
+	luaBraces       = 'Structure',
+	luaBrackets     = 'Delimiter',
+	luaBuiltin      = 'Keyword',
+	luaComma        = 'Delimiter',
+	luaFuncCall     = 'Function',
+	luaFuncId       = 'luaNoise',
+	luaFuncKeyword  = 'Function',
+	luaFuncName     = 'Identifier',
+	luaFuncParens   = 'Delimiter',
+	luaFuncTable    = 'Structure',
+	luaLocal        = 'Type',
+	luaNoise        = 'Operator',
+	luaParens       = 'Delimiter',
+	luaSpecialTable = 'Identifier',
+	luaSpecialValue = 'Function',
 
 	--[[ 4.3.12. Make ]]
-	makeCommands   = {link='Statment'},
-	makeSpecTarget = {link='Type'    },
+	makeCommands   = 'Statment',
+	makeSpecTarget = 'Type',
 
 	--[[ 4.3.13. Markdown ]]
-	markdownH1          = {bg=NONE,          fg=red,          style='bold'  },
-	markdownH2          = {bg=NONE,          fg=orange,       style='bold'  },
-	markdownH3          = {bg=NONE,          fg=yellow,       style='bold'  },
-	markdownH4          = {bg=NONE,          fg=green_dark,   style='bold'  },
-	markdownH5          = {bg=NONE,          fg=cyan,         style='bold'  },
-	markdownH6          = {bg=NONE,          fg=purple_light, style='bold'  },
-	mkdBold             = {link='SpecialChar'},
-	mkdCode             = {link='Comment'                                  },
-	mkdCodeDelimiter    = {link='Delimiter'                                },
-	mkdItalic           = {link='SpecialChar'},
-	mkdListItem         = {link='Special'                                  },
-	mkdNonListItemBlock = {link='Normal'                                   },
-	texMathZoneY        = {link='String'                                   },
+	markdownH1          = {bg=NONE,  fg=red,           style='bold'},
+	markdownH2          = {bg=NONE,  fg=orange,        style='bold'},
+	markdownH3          = {bg=NONE,  fg=yellow,        style='bold'},
+	markdownH4          = {bg=NONE,  fg=green_dark,    style='bold'},
+	markdownH5          = {bg=NONE,  fg=cyan,          style='bold'},
+	markdownH6          = {bg=NONE,  fg=purple_light,  style='bold'},
+	mkdBold             = 'SpecialChar',
+	mkdCode             = 'Comment',
+	mkdCodeDelimiter    = 'Delimiter',
+	mkdItalic           = 'SpecialChar',
+	mkdListItem         = 'Special',
+	mkdNonListItemBlock = 'Normal',
+	texMathZoneY        = 'String',
 
 	--[[ 4.3.20. Python ]]
-	pythonBrackets        = {link='Delimiter'       },
-	pythonBuiltinFunc     = {link='Operator'        },
-	pythonBuiltinObj      = {link='Type'            },
-	pythonBuiltinType     = {link='Type'            },
-	pythonClass           = {link='Structure'       },
-	pythonClassParameters = {link='pythonParameters'},
-	pythonDecorator       = {link='PreProc'         },
-	pythonDottedName      = {link='Identifier'      },
-	pythonError           = {link='Error'           },
-	pythonException       = {link='Exception'       },
-	pythonInclude         = {link='Include'         },
-	pythonIndentError     = {link='pythonError'     },
-	pythonLambdaExpr      = {link='pythonOperator'  },
-	pythonOperator        = {link='Operator'        },
-	pythonParam           = {link='Identifier'      },
-	pythonParameters      = {link='Delimiter'       },
-	pythonSelf            = {link='Statement'       },
-	pythonSpaceError      = {link='pythonError'     },
-	pythonStatement       = {link='Statement'       },
+	pythonBrackets        = 'Delimiter',
+	pythonBuiltinFunc     = 'Operator',
+	pythonBuiltinObj      = 'Type',
+	pythonBuiltinType     = 'Type',
+	pythonClass           = 'Structure',
+	pythonClassParameters = 'pythonParameters',
+	pythonDecorator       = 'PreProc',
+	pythonDottedName      = 'Identifier',
+	pythonError           = 'Error',
+	pythonException       = 'Exception',
+	pythonInclude         = 'Include',
+	pythonIndentError     = 'pythonError',
+	pythonLambdaExpr      = 'pythonOperator',
+	pythonOperator        = 'Operator',
+	pythonParam           = 'Identifier',
+	pythonParameters      = 'Delimiter',
+	pythonSelf            = 'Statement',
+	pythonSpaceError      = 'pythonError',
+	pythonStatement       = 'Statement',
 
 	--[[ 4.3.21. Ruby ]]
-	rubyClass                  = {link='Structure'},
-	rubyDefine                 = {link='Define'   },
-	rubyInterpolationDelimiter = {link='Delimiter'},
+	rubyClass                  = 'Structure',
+	rubyDefine                 = 'Define',
+	rubyInterpolationDelimiter = 'Delimiter',
 
 	--[[ 4.3.22. Rust ]]
-	rustKeyword   = {link='Keyword'     },
-	rustModPath   = {link='Include'     },
-	rustScopeDecl = {link='Delimiter'   },
-	rustTrait     = {link='StorageClass'},
+	rustKeyword   = 'Keyword',
+	rustModPath   = 'Include',
+	rustScopeDecl = 'Delimiter',
+	rustTrait     = 'StorageClass',
 
 	--[[ 4.3.23. Scala ]]
-	scalaKeyword        = {link='Keyword'   },
-	scalaNameDefinition = {link='Identifier'},
+	scalaKeyword        = 'Keyword',
+	scalaNameDefinition = 'Identifier',
 
 	--[[ 4.3.24. shell ]]
-	shFunctionKey = {link='Function' },
-	shLoop        = {link='Repeat'   },
-	shSet         = {link='Statement'},
-	shTestOpr     = {link='Debug'    },
+	shFunctionKey = 'Function',
+	shLoop        = 'Repeat',
+	shSet         = 'Statement',
+	shTestOpr     = 'Debug',
 
 	--[[ 4.3.25. Solidity ]]
-	solBuiltinType  = {link='Type'    },
-	solContract     = {link='Typedef' },
-	solContractName = {link='Function'},
+	solBuiltinType  = 'Type',
+	solContract     = 'Typedef',
+	solContractName = 'Function',
 
 	--[[ 4.3.26. TOML ]]
-	tomlComment = {link='Comment'     },
-	tomlKey     = {link='Label'       },
-	tomlTable   = {link='StorageClass'},
+	tomlComment = 'Comment',
+	tomlKey     = 'Label',
+	tomlTable   = 'StorageClass',
 
 	--[[ 4.3.27. VimScript ]]
-	vimCommand   = {link='Keyword'   },
-	vimFuncKey   = {link='Function'  },
-	vimGroup     = {link='Type'      },
-	vimHiGroup   = {link='Typedef'   },
-	vimIsCommand = {link='vimCommand'},
-	vimLet       = {link='Operator'  },
-	vimMap       = {link='vimCommand'},
-	vimNotFunc   = {link='Statement'},
+	vimFgBgAttrib  = 'Constant',
+	vimHiCterm     = 'Label',
+	vimHiCtermFgBg = 'vimHiCterm',
+	vimHiGroup     = 'Typedef',
+	vimHiGui       = 'vimHiCterm',
+	vimHiGuiFgBg   = 'vimHiGui',
+	vimHiKeyList   = 'Operator',
+	vimOption      = 'Define',
+	vimSetEqual    = 'Operator',
 
 	--[[ 4.3.28. XML ]]
-	xmlAttrib  = {link='Label'    },
-	xmlEndTag  = {link='Exception'},
-	xmlEqual   = {link='Operator' },
-	xmlTag     = {link='Delimiter'},
-	xmlTagName = {link='Define'   },
+	xmlAttrib  = 'Label',
+	xmlEndTag  = 'Exception',
+	xmlEqual   = 'Operator',
+	xmlTag     = 'Delimiter',
+	xmlTagName = 'Define',
 
 	--[[ 4.4. Plugins
 		Everything in this section is OPTIONAL. Feel free to remove everything
@@ -533,30 +534,30 @@ local highlight_groups = {
 		missing.
 	]]
 	--[[ 4.4.1. ALE ]]
-	ALEErrorSign   = {link='ErrorMsg'  },
-	ALEWarningSign = {link='WarningMsg'},
+	ALEErrorSign   = 'ErrorMsg',
+	ALEWarningSign = 'WarningMsg',
 
 	--[[ 4.4.2. coc.nvim ]]
-	CocErrorHighlight   = {bg=NONE,               fg=NONE,  style={'undercurl', color='red'       }},
-	CocErrorSign        = {link='ALEErrorSign'                                                     },
-	CocHintHighlight    = {bg=NONE,               fg=NONE,  style={'undercurl', color='magenta'   }},
-	CocHintSign         = {link='HintMsg'                                                          },
-	CocInfoHighlight    = {bg=NONE,               fg=NONE,  style={'undercurl', color='pink_light'}},
-	CocInfoSign         = {link='InfoMsg'                                                          },
-	CocWarningHighlight = {bg=NONE,               fg=NONE,  style={'undercurl', color='orange'    }},
-	CocWarningSign      = {link='ALEWarningSign'                                                   },
+	CocErrorHighlight   = {bg=NONE,  fg=NONE,  style={'undercurl', color='red'       }},
+	CocHintHighlight    = {bg=NONE,  fg=NONE,  style={'undercurl', color='magenta'   }},
+	CocInfoHighlight    = {bg=NONE,  fg=NONE,  style={'undercurl', color='pink_light'}},
+	CocWarningHighlight = {bg=NONE,  fg=NONE,  style={'undercurl', color='orange'    }},
+	CocErrorSign   = 'ALEErrorSign',
+	CocHintSign    = 'HintMsg',
+	CocInfoSign    = 'InfoMsg',
+	CocWarningSign = 'ALEWarningSign',
 
 	--[[ 4.4.2. vim-jumpmotion / vim-easymotion ]]
-	EasyMotion = {link = 'IncSearch' },
-	JumpMotion = {link = 'EasyMotion'},
+	EasyMotion = 'IncSearch',
+	JumpMotion = 'EasyMotion',
 
 	--[[ 4.4.3. vim-markdown ]]
-	htmlH1 = {link='markdownH1'},
-	htmlH2 = {link='markdownH2'},
-	htmlH3 = {link='markdownH3'},
-	htmlH4 = {link='markdownH4'},
-	htmlH5 = {link='markdownH5'},
-	htmlH6 = {link='markdownH6'},
+	htmlH1 = 'markdownH1',
+	htmlH2 = 'markdownH2',
+	htmlH3 = 'markdownH3',
+	htmlH4 = 'markdownH4',
+	htmlH5 = 'markdownH5',
+	htmlH6 = 'markdownH6',
 
 	--[[ 4.4.4. vim-gitgutter / vim-signify ]]
 	GitGutterAdd          = {bg=NONE,  fg=green,   style=NONE},
@@ -564,24 +565,24 @@ local highlight_groups = {
 	GitGutterDelete       = {bg=NONE,  fg=red,     style=NONE},
 	GitGutterChangeDelete = {bg=NONE,  fg=orange,  style=NONE},
 
-	SignifySignAdd          = {link='GitGutterAdd'         },
-	SignifySignChange       = {link='GitGutterChange'      },
-	SignifySignDelete       = {link='GitGutterDelete'      },
-	SignifySignChangeDelete = {link='GitGutterChangeDelete'},
+	SignifySignAdd          = 'GitGutterAdd',
+	SignifySignChange       = 'GitGutterChange',
+	SignifySignDelete       = 'GitGutterDelete',
+	SignifySignChangeDelete = 'GitGutterChangeDelete',
 
 	--[[ 4.4.5. vim-indent-guides ]]
-	IndentGuidesOdd  = {bg=gray_darker,  fg=NONE, style=NONE},
-	IndentGuidesEven = {bg=gray_dark,    fg=NONE, style=NONE},
+	IndentGuidesOdd  = {bg=gray_darker,  fg=NONE,  style=NONE},
+	IndentGuidesEven = {bg=gray_dark,    fg=NONE,  style=NONE},
 
 	--[[ 4.4.7. NERDTree ]]
-	NERDTreeCWD        = {link='Label'           },
-	NERDTreeUp         = {link='Operator'        },
-	NERDTreeDir        = {link='Directory'       },
-	NERDTreeDirSlash   = {link='Delimiter'       },
-	NERDTreeOpenable   = {link='NERDTreeDir'     },
-	NERDTreeClosable   = {link='NERDTreeOpenable'},
-	NERDTreeExecFile   = {link='Function'        },
-	NERDTreeLinkTarget = {link='Tag'             },
+	NERDTreeCWD        = 'Label',
+	NERDTreeUp         = 'Operator',
+	NERDTreeDir        = 'Directory',
+	NERDTreeDirSlash   = 'Delimiter',
+	NERDTreeOpenable   = 'NERDTreeDir',
+	NERDTreeClosable   = 'NERDTreeOpenable',
+	NERDTreeExecFile   = 'Function',
+	NERDTreeLinkTarget = 'Tag',
 }
 
 --[[ Step 5: Terminal Colors
@@ -706,6 +707,7 @@ require('highlite')(
 	terminal_ansi_colors
 )
 
-EOF
+-- Thanks to Romain Lafourcade (https://github.com/romainl) for the original template (romainl/vim-rnb).
+-- vim: ft=lua
 
-" Thanks to Romain Lafourcade (https://github.com/romainl) for the original template (romainl/vim-rnb).
+EOF

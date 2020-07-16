@@ -1,4 +1,5 @@
 --[[ NOTHING INSIDE THIS FILE NEEDS TO BE EDITED BY THE USER. ]]
+local vim = vim
 
 -- Clear the highlighting.
 vim.cmd('hi clear')
@@ -39,13 +40,13 @@ end
 -- Generate a `:highlight` command from a group and some attributes.
 local function highlight(highlight_group, attributes) -- {{{ †
 	local highlight_cmd = {'hi! ', highlight_group}
-	local link = attributes.link
+	local link = (type(attributes) == 'string' and attributes)
+		or attributes.link
 
-	-- If the `highlight_group` is a link to another group.
-	if attributes.link then
+	if link then -- `highlight_group` is a link to another group.
 		highlight_cmd[3] = highlight_cmd[2] .. ' '
 		highlight_cmd[2] = 'link '
-		highlight_cmd[4] = attributes.link
+		highlight_cmd[4] = link
 	else -- the `highlight_group` is uniquely defined.
 		local bg    = attributes.bg
 		local fg    = attributes.fg
