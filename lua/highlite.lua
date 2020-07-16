@@ -26,6 +26,16 @@ local BIT_16  = 3
 local BIT_256 = 2
 local HEX     = 1
 
+-- This function appends `selected_attributes` to the end of some `command`.
+local function append_style(command, selected_attributes)
+	command[#command + 1] = ' cterm=' .. selected_attributes
+
+	-- If we're using hex populate the gui* attr args.
+	if use_hex_and_256 then command[#command + 1] =
+		' gui=' .. selected_attributes
+	end
+end
+
 -- Get the color value of a color variable, or "NONE" as a default.
 local function get(color, index)
 	if type(color) == 'table' and color[index] then
@@ -64,28 +74,18 @@ local function highlight(highlight_group, attributes) -- {{{ †
 			.. ' ctermfg=' .. get(fg, BIT_16)
 		end
 
-		-- This function appends `selected_attributes` to the end of the `highlight_cmd`.
-		local function append_style(selected_attributes)
-			highlight_cmd[#highlight_cmd + 1] = ' cterm=' .. selected_attributes
-
-			-- If we're using hex populate the gui* attr args.
-			if use_hex_and_256 then highlight_cmd[#highlight_cmd + 1] =
-				' gui=' .. selected_attributes
-			end
-		end
-
 		if type(style) == 'table' then
 			-- Concat all of the entries together with a comma between.
 			local style_all = table.concat(style, ',')
 
 			-- There will always be a cterm attr arg.
-			append_style(style_all)
+			append_style(highlight_cmd, style_all)
 
 			-- There won't always be a `guisp`.
 			if style.color then highlight_cmd[#highlight_cmd + 1] =
 				' guisp=' .. get(style.color, HEX)
 			end
-		else append_style(style)
+		else append_style(highlight_cmd, style)
 		end
 	end
 
