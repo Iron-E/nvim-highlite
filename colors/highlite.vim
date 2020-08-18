@@ -360,6 +360,7 @@ local highlight_groups = {
 	csClassType  = 'Type',
 	csContextualStatement = 'Conditional',
 	csEndColon   = 'Delimiter',
+	csGeneric    = 'Typedef',
 	csLogicSymbols = 'Operator',
 	csModifier   = 'Keyword',
 	csNew        = 'Operator',
