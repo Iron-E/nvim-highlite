@@ -225,12 +225,12 @@ local highlight_groups = {
 	Typedef      = {bg=NONE,  fg=cyan,          style='italic'},
 
 	--[[ 4.1.6. Edge Cases]]
-	Special        = {bg=NONE,      fg=magenta,  style='bold'},
-	SpecialChar    = 'Character',
+	Special        = {bg=NONE,      fg=magenta,    style='bold'},
+	SpecialChar    = {bg=NONE,      fg=red_light,  style='italic'},
 	SpecialKey     = 'Character',
 	Tag            = 'Underlined',
-	Delimiter      = {bg=NONE,      fg=white,    style=NONE},
-	SpecialComment = {bg=NONE,      fg=gray,     style={'bold', 'nocombine'}},
+	Delimiter      = {bg=NONE,      fg=white,      style=NONE},
+	SpecialComment = {bg=NONE,      fg=gray,       style={'bold', 'nocombine'}},
 	Debug          = 'WarningMsg',
 
 	--[[ 4.1.7. Help Syntax]]
@@ -361,7 +361,9 @@ local highlight_groups = {
 	csContextualStatement = 'Conditional',
 	csEndColon   = 'Delimiter',
 	csGeneric    = 'Typedef',
-	csLogicSymbols = 'Operator',
+	csInterpolation = 'Include',
+	csInterpolationDelimiter = 'SpecialChar',
+	csLogicSymbols  = 'Operator',
 	csModifier   = 'Keyword',
 	csNew        = 'Operator',
 	csNewType    = 'Type',
