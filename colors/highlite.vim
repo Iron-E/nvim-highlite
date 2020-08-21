@@ -462,10 +462,11 @@ local highlight_groups = {
 	luaBrackets     = 'Delimiter',
 	luaBuiltin      = 'Keyword',
 	luaComma        = 'Delimiter',
+	luaFuncArgName  = 'Identifier',
 	luaFuncCall     = 'Function',
 	luaFuncId       = 'luaNoise',
-	luaFuncKeyword  = 'Function',
-	luaFuncName     = 'Identifier',
+	luaFuncKeyword  = 'Type',
+	luaFuncName     = 'Function',
 	luaFuncParens   = 'Delimiter',
 	luaFuncTable    = 'Structure',
 	luaLocal        = 'Type',
@@ -532,6 +533,7 @@ local highlight_groups = {
 	scalaNameDefinition = 'Identifier',
 
 	--[[ 4.3.24. shell ]]
+	shDerefSimple = 'SpecialChar',
 	shFunctionKey = 'Function',
 	shLoop    = 'Repeat',
 	shQuote   = 'Delimiter',
