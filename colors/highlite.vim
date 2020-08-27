@@ -490,10 +490,11 @@ local highlight_groups = {
 	mkdCode             = 'Comment',
 	mkdCodeDelimiter    = 'mkdBold',
 	mkdCodeStart        = 'mkdHeading',
+	mkdHeading          = 'Delimiter',
 	mkdItalic           = 'mkdBold',
 	mkdListItem         = 'Special',
-	mkdHeading          = 'Delimiter',
 	mkdNonListItemBlock = 'Normal',
+	mkdRule             = 'Underline'
 	texMathZoneY        = 'String',
 
 	--[[ 4.3.20. Python ]]
