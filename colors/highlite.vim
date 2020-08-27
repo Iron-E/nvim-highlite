@@ -494,7 +494,7 @@ local highlight_groups = {
 	mkdItalic           = 'mkdBold',
 	mkdListItem         = 'Special',
 	mkdNonListItemBlock = 'Normal',
-	mkdRule             = 'Underline'
+	mkdRule             = 'Underline',
 	texMathZoneY        = 'String',
 
 	--[[ 4.3.20. Python ]]
