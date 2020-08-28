@@ -66,8 +66,12 @@ local function highlight(highlight_group, attributes) -- {{{ †
 		highlight_cmd[3] = highlight_cmd[2]..' '
 		highlight_cmd[2] = 'link '
 		highlight_cmd[4] = link
-	else -- the `highlight_group` is uniquely defined.
+	else -- The `highlight_group` is uniquely defined.
 		colorize(highlight_cmd, attributes)
+
+		if attributes.blend then -- There is a value for the `highlight-blend` field.
+			highlight_cmd[#highlight_cmd + 1] = ' blend='..attributes.blend
+		end
 
 		local style = attributes.style
 		if type(style) == 'table' then
