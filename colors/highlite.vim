@@ -571,6 +571,9 @@ local highlight_groups = {
 	xmlTag     = 'htmlTag',
 	xmlTagName = 'htmlTagName',
 
+	--[[ 4.3.29. SQL ]]
+	sqlKeyword = 'Keyword',
+
 	--[[ 4.4. Plugins
 		Everything in this section is OPTIONAL. Feel free to remove everything
 		here if you don't want to define it, or add more if there's something
