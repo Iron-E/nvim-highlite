@@ -81,7 +81,7 @@ local gray_darker = {'#505050', 244, 'gray'}
 local gray_light  = {'#c0c0c0', 251, 'gray'}
 local white = {'#ffffff', 15, 'white'}
 
-local tan         = {'#f4c069', 180, 'darkyellow'}
+local tan = {'#f4c069', 180, 'darkyellow'}
 
 local red       = {'#ee4a59', 196, 'red'}
 local red_dark  = {'#a80000', 124, 'darkred'}
@@ -573,6 +573,9 @@ local highlight_groups = {
 
 	--[[ 4.3.29. SQL ]]
 	sqlKeyword = 'Keyword',
+
+	--[[ 4.3.30. dos INI ]]
+	dosiniHeader = 'Title',
 
 	--[[ 4.4. Plugins
 		Everything in this section is OPTIONAL. Feel free to remove everything
