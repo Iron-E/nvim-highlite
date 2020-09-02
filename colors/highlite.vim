@@ -577,6 +577,13 @@ local highlight_groups = {
 	--[[ 4.3.30. dos INI ]]
 	dosiniHeader = 'Title',
 
+	--[[ 4.3.31. Crontab ]]
+	crontabDay  = 'StorageClass',
+	crontabDow  = 'String',
+	crontabHr   = 'Number',
+	crontabMin  = 'Float',
+	crontabMnth = 'Structure',
+
 	--[[ 4.4. Plugins
 		Everything in this section is OPTIONAL. Feel free to remove everything
 		here if you don't want to define it, or add more if there's something
