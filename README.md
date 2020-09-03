@@ -30,7 +30,21 @@ This template's _design_ focuses on:
 
 # Usage
 
-This repository should be cloned with `git clone https://github.com/Iron-E/nvim-highlite`, and then follow the instructions in [`colors/highlite.vim`](colors/highlite.vim).
+1. This repository should be forked, or cloned with `git clone https://github.com/Iron-E/nvim-highlite`.
+2. Follow the instructions in [`colors/highlite.vim`](colors/highlite.vim).
+	* If you are on a Unix system, use the [setup script](setup.sh) like so:
+	```sh
+	chmod +x ./setup.sh
+	./setup.sh highlite <colorscheme>
+	```
+	Where `<colorscheme>` is the name of your desired colorscheme.
+	* If you are on Windows, rename the files manually.
+
+## FAQ
+
+> Why am I receiving `E5108: Error executing lua [string ":lua"]:1: module '<colorscheme>' not found`?
+
+* Ensure your colorscheme's base folder is in Neovim's `rtp` before sourcing.
 
 ## Examples
 
