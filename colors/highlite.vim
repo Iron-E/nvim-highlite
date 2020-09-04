@@ -632,6 +632,18 @@ local highlight_groups = {
 	NERDTreeClosable   = 'NERDTreeOpenable',
 	NERDTreeExecFile   = 'Function',
 	NERDTreeLinkTarget = 'Tag',
+
+	--[[ 4.4.8. nvim-treesitter ]]
+	TSConstBuiltin = 'Constant',
+	TSStringRegex  = 'SpecialChar',
+	TSStringEscape = 'Character',
+
+	TSFuncBuiltin = 'Function',
+	TSConstructor = 'Typedef',
+
+	TSVariableBuiltin = 'Identifier',
+
+	TSURI = 'Tag',
 }
 
 --[[ Step 5: Terminal Colors
