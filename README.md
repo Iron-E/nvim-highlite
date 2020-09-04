@@ -30,6 +30,8 @@ This template's _design_ focuses on:
 
 # Usage
 
+## Creating Your Own
+
 1. This repository should be forked, or cloned with `git clone https://github.com/Iron-E/nvim-highlite`.
 2. Follow the instructions in [`colors/highlite.vim`](colors/highlite.vim).
 	* If you are on a Unix system, use the [setup script](setup.sh) like so:
@@ -39,6 +41,22 @@ This template's _design_ focuses on:
 	```
 	Where `<colorscheme>` is the name of your desired colorscheme.
 	* If you are on Windows, rename the files manually.
+
+## Just The Defaults
+
+1. Install a plugin manager such as [`vim-plug`](https://github.com/junegunn/vim-plug) and use it to "plug" this repository.
+	```viml
+	" vim-plug example
+	Plug "Iron-E/nvim-highlite"
+	```
+2. Specify this colorscheme as your default colorscheme in the `init.vim`:
+	```viml
+	" Enable 24-bit color output. Only do this if your environment supports it.
+	" This plugin works 100% fine with 8-bit, 16-bit, and 24-bit colors.
+	set setmguicolors
+	" Use the colorscheme
+	colorscheme highlite
+	```
 
 ## FAQ
 
