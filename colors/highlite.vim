@@ -5,7 +5,7 @@ lua << EOF
 	* Author:     Iron-E (https://github.com/Iron-E)
 	* Repository: https://github.com/nvim-highlite
 
-	Rewrite of RNB, a Vim colorsheme template.
+	Initially forked from vim-rnb, a Vim colorsheme template:
 	* Author:        Romain Lafourcade (https://github.com/romainl)
 	* Canonical URL: https://github.com/romainl/vim-rnb
 ]]
@@ -35,8 +35,8 @@ lua << EOF
 	| colorscheme name  | module name | template filename |
 	|:-----------------:|:-----------:|:-----------------:|
 	| foobar            | foobar      | foobar.lua        |
-	| foo-bar           | foo_bar     | foo-bar.lua       |
-	| foo bar           | foo_bar     | foo-bar.lua or    |
+	| foo-bar           | foo_bar     | foo_bar.lua       |
+	| foo bar           | foo_bar     | foo_bar.lua       |
 	| foo_bar           | foo_bar     | foo_bar.lua       |
 
 	Rename the following files:
@@ -44,7 +44,11 @@ lua << EOF
 	* `lua/highlite.lua`
 
 	Where 'highlite' is the name of your colorscheme.
+
+	TIP: If you are on a Unix-based system (or have WSL on Windows) you can use the setup script at the root of this repo.
+	     See the README for more details.
 ]]
+
 
 --[[ Step 2: Information
 	In this step you will define information that helps Neovim process:
@@ -80,12 +84,12 @@ vim.o.background = 'dark'
 	NOTE: |Replace-mode| will probably be useful here.
 ]]
 
-local black = {'#202020', 0,   'black'}
-local gray  = {'#808080', 244, 'gray' }
+local black       = {'#202020', 0,   'black'}
+local gray        = {'#808080', 244, 'gray'}
 local gray_dark   = {'#353535', 236, 'darkgrey'}
 local gray_darker = {'#505050', 244, 'gray'}
 local gray_light  = {'#c0c0c0', 251, 'gray'}
-local white = {'#ffffff', 15, 'white'}
+local white       = {'#ffffff', 15,  'white'}
 
 local tan = {'#f4c069', 180, 'darkyellow'}
 
@@ -93,7 +97,7 @@ local red       = {'#ee4a59', 196, 'red'}
 local red_dark  = {'#a80000', 124, 'darkred'}
 local red_light = {'#ff4090', 203, 'red'}
 
-local orange = {'#ff8900', 208, 'darkyellow'}
+local orange       = {'#ff8900', 208, 'darkyellow'}
 local orange_light = {'#f0af00', 214, 'yellow'}
 
 local yellow = {'#f0df33', 220, 'yellow'}
@@ -127,8 +131,6 @@ local purple_light = {'#af60af', 63,  'magenta'}
 		style=<cterm>|{<cterm> [, <cterm>] [color=<color>]})
 	}
 ```
-
-	TIP: Any fields which are set to `NONE` can be safely left out.
 
 	You can also link one highlight group to another:
 
