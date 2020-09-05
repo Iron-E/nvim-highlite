@@ -350,8 +350,7 @@ local highlight_groups = {
 	CursorColumn = {bg=gray_dark},
 
 	--[[ 4.2.13. Misc ]]
-	Directory     = {fg=ice, style='bold'},
-	Terminal      = 'Normal',
+	Directory = {fg=ice, style='bold'},
 
 	--[[ 4.3. Programming Languages
 		Everything in this section is OPTIONAL. Feel free to remove everything
@@ -394,14 +393,14 @@ local highlight_groups = {
 	cssTagName    = 'Type',
 	cssTagName    = 'htmlTagName',
 	scssAmpersand = 'Special',
-	scssAttribute = 'Normal',
+	scssAttribute = 'Label',
 	scssBoolean   = 'Boolean',
 	scssDefault   = 'Keyword',
 	scssElse      = 'PreCondit',
 	scssIf        = 'PreCondit',
 	scssInclude   = 'Include',
 	scssSelectorChar = 'Operator',
-	scssSelectorName = 'Label',
+	scssSelectorName = 'Identifier',
 	scssVariable  = 'Define',
 	scssVariableAssignment = 'Operator',
 
@@ -463,10 +462,10 @@ local highlight_groups = {
 
 	--[[ 4.3.11. JSON ]]
 	jsonBraces = 'luaBraces',
-	jsonKeywordMatch = 'Delimiter',
+	jsonKeywordMatch = 'Operator',
 	jsonNull   = 'Constant',
-	jsonQuote  = 'String',
-	jsonString = 'Normal',
+	jsonQuote  = 'Delimiter',
+	jsonString = 'String',
 	jsonStringSQError = 'Exception',
 
 	--[[ 4.3.12. Lua ]]
@@ -505,7 +504,7 @@ local highlight_groups = {
 	mkdHeading          = 'Delimiter',
 	mkdItalic           = 'mkdBold',
 	mkdListItem         = 'Special',
-	mkdNonListItemBlock = 'Normal',
+	mkdNonListItemBlock = {},
 	mkdRule             = 'Underlined',
 	texMathZoneY        = 'String',
 
