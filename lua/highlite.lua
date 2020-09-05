@@ -4,9 +4,6 @@ local vim = vim
 -- Clear the highlighting.
 vim.cmd('hi clear')
 
--- Set the background to dark.
-vim.o.background = 'dark'
-
 -- Disable automatic coloring for the IndentGuides plugin.
 vim.g.indent_guides_auto_colors = 0
 
@@ -14,17 +11,19 @@ vim.g.indent_guides_auto_colors = 0
 if vim.fn.exists('syntax_on') then vim.cmd('syntax reset') end
 
 -- Determine which set of colors to use.
-local use_hex_and_256 = string.find(vim.fn.expand('$TERM'), '256')
+local using_hex_or_256 = vim.g.termguicolors
 	or vim.g.t_Co >= 256
 	or vim.fn.has('gui_running')
+	or string.find(vim.fn.expand('$TERM'), '256')
 
 -- If we aren't using the hex and 256 colorset, then set the &t_Co variable to 16.
-if not use_hex_and_256 then vim.g.t_Co = 16 end
+if not using_hex_or_256 then vim.g.t_Co = 16 end
 
 -- These are constants for the indexes in the colors that were defined before.
-local BIT_16  = 3
-local BIT_256 = 2
-local HEX     = 1
+local PALETTE_ANSI = 3
+local PALETTE_256  = 2
+local PALETTE_HEX  = 1
+local NONE = "NONE"
 
 -- Get the color value of a color variable, or "NONE" as a default.
 local function get(color, index)
@@ -33,24 +32,24 @@ local function get(color, index)
 	elseif type(color) == 'string' then
 		return color
 	else
-		return "NONE"
+		return NONE
 	end
 end
 
 --[[ If using hex and 256-bit colors, then populate the gui* and cterm* args.
 	If using 16-bit colors, just populate the cterm* args. ]]
-local colorize = use_hex_and_256 and function(command, attributes) command[#command + 1] =
-	' ctermbg='..get(attributes.bg, BIT_256)
-	..' ctermfg='..get(attributes.fg, BIT_256)
-	..' guibg='..get(attributes.bg, HEX)
-	..' guifg='..get(attributes.fg, HEX)
+local colorize = using_hex_or_256 and function(command, attributes) command[#command + 1] =
+	' ctermbg='..get(attributes.bg, PALETTE_256)
+	..' ctermfg='..get(attributes.fg, PALETTE_256)
+	..' guibg='..get(attributes.bg, PALETTE_HEX)
+	..' guifg='..get(attributes.fg, PALETTE_HEX)
 end or function(command, attributes) command[#command + 1] =
-	' ctermbg='..get(attributes.bg, BIT_16)
-	..' ctermfg='..get(attributes.fg, BIT_16)
+	' ctermbg='..get(attributes.bg, PALETTE_ANSI)
+	..' ctermfg='..get(attributes.fg, PALETTE_ANSI)
 end
 
 -- This function appends `selected_attributes` to the end of `highlight_cmd`.
-local stylize = use_hex_and_256 and function(command, attributes)
+local stylize = using_hex_or_256 and function(command, attributes)
 	command[#command + 1] = ' cterm='..attributes..' gui='..attributes
 end or function(command, attributes)
 	command[#command + 1] = ' cterm='..attributes
@@ -73,13 +72,13 @@ local function highlight(highlight_group, attributes) -- {{{ †
 			highlight_cmd[#highlight_cmd + 1] = ' blend='..attributes.blend
 		end
 
-		local style = attributes.style
+		local style = attributes.style or NONE
 		if type(style) == 'table' then
 			-- Concat all of the entries together with a comma between before styling.
 			stylize(highlight_cmd, table.concat(style, ','))
 
 			if style.color then -- there won't is a color for undercurl.
-				highlight_cmd[#highlight_cmd + 1] = ' guisp='..get(style.color, HEX)
+				highlight_cmd[#highlight_cmd + 1] = ' guisp='..get(style.color, PALETTE_HEX)
 			end
 		else -- just style the single entry.
 			stylize(highlight_cmd, style)
@@ -100,6 +99,6 @@ return function(Normal, highlights, terminal_ansi_colors)
 
 	-- Set the terminal colors.
 	for index, color in ipairs(terminal_ansi_colors) do
-		vim.g['terminal_color_'..index] = color[HEX] or color[BIT_256] or color[BIT_16]
+		vim.g['terminal_color_'..index] = color[PALETTE_HEX] or color[PALETTE_256] or color[PALETTE_ANSI]
 	end
 end
