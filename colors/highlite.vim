@@ -614,9 +614,9 @@ local highlight_groups = {
 	GitGutterDelete       = {bg=NONE,  fg=red,     style=NONE},
 	GitGutterChangeDelete = {bg=NONE,  fg=orange,  style=NONE},
 
-	SignifySignAdd          = 'GitGutterAdd',
-	SignifySignChange       = 'GitGutterChange',
-	SignifySignDelete       = 'GitGutterDelete',
+	SignifySignAdd    = 'GitGutterAdd',
+	SignifySignChange = 'GitGutterChange',
+	SignifySignDelete = 'GitGutterDelete',
 	SignifySignChangeDelete = 'GitGutterChangeDelete',
 
 	--[[ 4.4.5. vim-indent-guides ]]
@@ -624,26 +624,23 @@ local highlight_groups = {
 	IndentGuidesEven = {bg=gray_dark,    fg=NONE,  style=NONE},
 
 	--[[ 4.4.7. NERDTree ]]
-	NERDTreeCWD        = 'Label',
-	NERDTreeUp         = 'Operator',
-	NERDTreeDir        = 'Directory',
-	NERDTreeDirSlash   = 'Delimiter',
-	NERDTreeOpenable   = 'NERDTreeDir',
-	NERDTreeClosable   = 'NERDTreeOpenable',
-	NERDTreeExecFile   = 'Function',
+	NERDTreeCWD = 'Label',
+	NERDTreeUp  = 'Operator',
+	NERDTreeDir = 'Directory',
+	NERDTreeDirSlash = 'Delimiter',
+	NERDTreeOpenable = 'NERDTreeDir',
+	NERDTreeClosable = 'NERDTreeOpenable',
+	NERDTreeExecFile = 'Function',
 	NERDTreeLinkTarget = 'Tag',
 
 	--[[ 4.4.8. nvim-treesitter ]]
 	TSConstBuiltin = 'Constant',
-	TSStringRegex  = 'SpecialChar',
+	TSConstructor  = 'Typedef',
+	TSFuncBuiltin  = 'Function',
 	TSStringEscape = 'Character',
-
-	TSFuncBuiltin = 'Function',
-	TSConstructor = 'Typedef',
-
-	TSVariableBuiltin = 'Identifier',
-
+	TSStringRegex  = 'SpecialChar',
 	TSURI = 'Tag',
+	TSVariableBuiltin = 'Identifier',
 }
 
 --[[ Step 5: Terminal Colors
