@@ -183,11 +183,11 @@ local purple_light = {'#af60af', 63,  'magenta'}
 ]]
 
 --[[ DO NOT EDIT `BG`, `FG`, or `NONE`.
-	Feel free to uncomment `BG`. It is not used by default so it is commented out.
+	Feel free to uncomment `BG` and `NONE`. They are not used by default so they are commented out.
 ]]
 -- local BG   = 'bg'
 local FG   = 'fg'
-local NONE = 'NONE'
+-- local NONE = 'NONE'
 
 --[[ These are the ones you should edit. ]]
 -- This is the only highlight that must be defined separately.
