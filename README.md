@@ -53,7 +53,7 @@ This template's _design_ focuses on:
 	```viml
 	" Enable 24-bit color output. Only do this if your environment supports it.
 	" This plugin works 100% fine with 8-bit, 16-bit, and 24-bit colors.
-	set setmguicolors
+	set termguicolors
 	" Use the colorscheme
 	colorscheme highlite
 	```
