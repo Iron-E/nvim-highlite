@@ -5,7 +5,7 @@ lua << EOF
 	* Author:     Iron-E (https://github.com/Iron-E)
 	* Repository: https://github.com/nvim-highlite
 
-	Rewrite of RNB, a Vim colorsheme template.
+	Initially forked from vim-rnb, a Vim colorsheme template:
 	* Author:        Romain Lafourcade (https://github.com/romainl)
 	* Canonical URL: https://github.com/romainl/vim-rnb
 ]]
@@ -35,8 +35,8 @@ lua << EOF
 	| colorscheme name  | module name | template filename |
 	|:-----------------:|:-----------:|:-----------------:|
 	| foobar            | foobar      | foobar.lua        |
-	| foo-bar           | foo_bar     | foo-bar.lua       |
-	| foo bar           | foo_bar     | foo-bar.lua or    |
+	| foo-bar           | foo_bar     | foo_bar.lua       |
+	| foo bar           | foo_bar     | foo_bar.lua       |
 	| foo_bar           | foo_bar     | foo_bar.lua       |
 
 	Rename the following files:
@@ -44,13 +44,23 @@ lua << EOF
 	* `lua/highlite.lua`
 
 	Where 'highlite' is the name of your colorscheme.
+
+	TIP: If you are on a Unix-based system (or have WSL on Windows) you can use the setup script at the root of this repo.
+	     See the README for more details.
 ]]
+
 
 --[[ Step 2: Information
-	This is the name of your colorscheme which will be used as per |g:colors_name|.
+	In this step you will define information that helps Neovim process:
+
+	1. How users access your colorscheme;
+	2. How your colorscheme should be rendered.
 ]]
 
+-- This is the name of your colorscheme which will be used as per |g:colors_name|.
 vim.g.colors_name = 'highlite'
+-- This is the kind of colorscheme you are creating. Either 'light' or 'dark'
+vim.o.background = 'dark'
 
 --[[ Step 3: Colors
 	Next you will define all of the colors that you will use for the color scheme.
@@ -60,8 +70,8 @@ vim.g.colors_name = 'highlite'
 ```lua
 	<color name> = { -- Give each color a distinctive name.
 		'#<hex color code>', -- Hexadecimal color used in GVim/MacVim or 'NONE'.
-		<256-bit color code>, -- Integer 0–255 used by terminals supporting 256 colors or 'NONE'.
-		'<16-bit color code>' -- color name used by less capable color terminals, can be 'darkred',
+		<16-bit color code>, -- Integer 0–255 used by terminals supporting 256 colors or 'NONE'.
+		'<ANSI color name>'  -- color name used by less capable color terminals, can be 'darkred',
 		                       'red', 'darkgreen', 'green', 'darkyellow', 'yellow', 'darkblue',
 		                       'blue', 'darkmagenta', 'magenta', 'black', 'darkgrey', 'grey',
 		                       'white', or 'NONE'
@@ -74,12 +84,12 @@ vim.g.colors_name = 'highlite'
 	NOTE: |Replace-mode| will probably be useful here.
 ]]
 
-local black = {'#202020', 0,   'black'}
-local gray  = {'#808080', 244, 'gray' }
+local black       = {'#202020', 0,   'black'}
+local gray        = {'#808080', 244, 'gray'}
 local gray_dark   = {'#353535', 236, 'darkgrey'}
 local gray_darker = {'#505050', 244, 'gray'}
 local gray_light  = {'#c0c0c0', 251, 'gray'}
-local white = {'#ffffff', 15, 'white'}
+local white       = {'#ffffff', 15,  'white'}
 
 local tan = {'#f4c069', 180, 'darkyellow'}
 
@@ -87,7 +97,7 @@ local red       = {'#ee4a59', 196, 'red'}
 local red_dark  = {'#a80000', 124, 'darkred'}
 local red_light = {'#ff4090', 203, 'red'}
 
-local orange = {'#ff8900', 208, 'darkyellow'}
+local orange       = {'#ff8900', 208, 'darkyellow'}
 local orange_light = {'#f0af00', 214, 'yellow'}
 
 local yellow = {'#f0df33', 220, 'yellow'}
@@ -114,31 +124,32 @@ local purple_light = {'#af60af', 63,  'magenta'}
 
 ```lua
 	<highlight group name> = {
-		bg=<color>, -- The color used for background color, or use 'NONE', 'fg' or 'bg'
-		fg=<color>, -- The color used for foreground color, or use 'NONE', 'fg' or 'bg'
+		bg=<color>, -- The color used for background color, or use `NONE`, `FG` or `BG`
+		fg=<color>, -- The color used for foreground color, or use `NONE`, `FG` or `BG`
 		blend=<integer> -- The |highlight-blend| value, if one is desired.
 		-- Style can be 'bold', 'italic', and more. See |attr-list| for more information. It can also have a color, and/or multiple <cterm>s.
 		style=<cterm>|{<cterm> [, <cterm>] [color=<color>]})
 	}
 ```
 
-	Or you can link an highlight group to another.
+	You can also link one highlight group to another:
 
 ```lua
 	<highlight group name> = '<highlight group name>'
 ```
 
-	Here is an example:
+	Here is an example to define `SpellBad` and then link some new group `SpellWorse` to it:
 
 ```lua
 	SpellBad = { -- ← name of the highlight group
-		bg='NONE', -- background color
+		bg=NONE, -- background color
 		fg=red, -- foureground color
 		style={ -- the style
 			'undercurl', -- undercurl (squiggly line)
 			color=red -- the color of the undercurl
 		}
-	}
+	},
+	SpellWorse = 'SpellBad'
 ```
 
 	If you weren't satisfied with undercurl, and also wanted another effect, you can
@@ -164,7 +175,7 @@ local purple_light = {'#af60af', 63,  'magenta'}
 	NOTE: |Replace-mode| will probably be useful here.
 
 	NOTE: /As long as you do not remove any highlight groups or colors/, you can safely
-	      ignore any highlight groups that are `link`ed others.
+	      ignore any highlight groups that are `link`ed to others.
 	      For example, programming languages almost exclusively link to the 1st
 	      and 2nd sections, so as long as you define everything there you will automatically
 	      be defining the rest of the highlights, which is one of the benefits of using
