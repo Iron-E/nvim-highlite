@@ -11,13 +11,13 @@ vim.g.indent_guides_auto_colors = 0
 if vim.fn.exists('syntax_on') then vim.cmd('syntax reset') end
 
 -- Determine which set of colors to use.
-local using_hex_or_256 = vim.g.termguicolors
-	or vim.g.t_Co >= 256
+local using_hex_or_256 = tonumber(vim.o.t_Co) >= 256
+	or vim.o.termguicolors
 	or vim.fn.has('gui_running')
 	or string.find(vim.fn.expand('$TERM'), '256')
 
 -- If we aren't using the hex and 256 colorset, then set the &t_Co variable to 16.
-if not using_hex_or_256 then vim.g.t_Co = 16 end
+if not using_hex_or_256 then vim.o.t_Co = 16 end
 
 -- These are constants for the indexes in the colors that were defined before.
 local PALETTE_ANSI = 3
@@ -98,7 +98,7 @@ return function(Normal, highlights, terminal_ansi_colors)
 	end
 
 	-- Set the terminal colors.
-	for index, color in ipairs(terminal_ansi_colors) do
-		vim.g['terminal_color_'..index] = color[PALETTE_HEX] or color[PALETTE_256] or color[PALETTE_ANSI]
-	end
+	if using_hex_or_256 then for index, color in ipairs(terminal_ansi_colors) do
+		vim.g['terminal_color_'..index] = vim.o.termguicolors and color[PALETTE_HEX] or color[PALETTE_256]
+	end end
 end
