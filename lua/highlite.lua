@@ -72,7 +72,16 @@ end --}}} ‡
 
 -- Generate a `:highlight` command from a group and some attributes.
 local function highlight(highlight_group, attributes) -- {{{ †
+	-- The base highlight command
 	local highlight_cmd = {'hi! ', highlight_group}
+
+	-- Take care of special instructions for certain background colors.
+	if attributes[vim.o.background] then
+		attributes.__index = attributes
+		attributes = setmetatable(attributes[vim.o.background], attributes)
+	end
+
+	-- Determine if there is a highlight link, and if so, assign it.
 	local link = (type(attributes) == 'string' and attributes)
 		or attributes.link
 
