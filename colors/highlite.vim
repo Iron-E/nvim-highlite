@@ -59,8 +59,6 @@ lua << EOF
 
 -- This is the name of your colorscheme which will be used as per |g:colors_name|.
 vim.g.colors_name = 'highlite'
--- This is the kind of colorscheme you are creating. Either 'light' or 'dark'
-vim.o.background = 'dark'
 
 --[[ Step 3: Colors
 	Next you will define all of the colors that you will use for the color scheme.
@@ -124,10 +122,11 @@ local purple_light = {'#af60af', 63,  'magenta'}
 
 ```lua
 	<highlight group name> = {
-		bg=<color>, -- The color used for background color, or use `NONE`, `FG` or `BG`
-		fg=<color>, -- The color used for foreground color, or use `NONE`, `FG` or `BG`
+		bg=<color>, -- The color for the background, `NONE`, `FG` or `BG`
+		fg=<color>, -- The color for the foreground, `NONE`, `FG` or `BG`
 		blend=<integer> -- The |highlight-blend| value, if one is desired.
-		-- Style can be 'bold', 'italic', and more. See |attr-list| for more information. It can also have a color, and/or multiple <cterm>s.
+		-- Style can be 'bold', 'italic', and more. See |attr-list| for more information.
+		-- It can also have a color, and/or multiple <cterm>s.
 		style=<cterm>|{<cterm> [, <cterm>] [color=<color>]})
 	}
 ```
@@ -137,8 +136,10 @@ local purple_light = {'#af60af', 63,  'magenta'}
 ```lua
 	<highlight group name> = '<highlight group name>'
 ```
+	____________________________________________________________________________
 
-	Here is an example to define `SpellBad` and then link some new group `SpellWorse` to it:
+	Here is an example to define `SpellBad` and then link some new group
+	`SpellWorse` to it:
 
 ```lua
 	SpellBad = { -- ← name of the highlight group
@@ -157,7 +158,7 @@ local purple_light = {'#af60af', 63,  'magenta'}
 
 ```lua
 	SpellBad = { -- ← name of the highlight group
-		bg='NONE', -- background color
+		bg=NONE, -- background color
 		fg=red, -- foureground color
 		style={ -- the style
 			'undercurl', -- undercurl (squiggly line)
@@ -166,20 +167,39 @@ local purple_light = {'#af60af', 63,  'magenta'}
 		}
 	}
 ```
+	____________________________________________________________________________
 
-	You can add any custom highlight group to the standard list below but you shouldn't
-	remove any if you want a working colorscheme. Most of them are described under
-	|highlight-default|, some from |group-name|, and others from common syntax groups.
-	Both help sections are good reads.
+	If you want to create a colorscheme that is responsive to the user's
+	'background' setting, you can specify special `light` and `dark` keys to
+	define how each group should be highlighted in each case.
+
+```lua
+	SpellBad = {
+		bg=NONE,
+		dark={fg=white},
+		light={fg=black},
+		style={'undercurl', color=red}
+	}
+```
+
+	Whenever the user changes their 'background' setting, the settings inside of
+	whichever key is relevant will be loaded.
+	____________________________________________________________________________
+
+	You can add any custom highlight group to the standard list below but you
+	shouldn't remove any if you want a working colorscheme. Most of them are
+	described under |highlight-default|, some from |group-name|, and others from
+	common syntax groups.  Both help sections are good reads.
 
 	NOTE: |Replace-mode| will probably be useful here.
 
-	NOTE: /As long as you do not remove any highlight groups or colors/, you can safely
-	      ignore any highlight groups that are `link`ed to others.
+	NOTE: /As long as you do not remove any highlight groups or colors/, you can
+	      safely ignore any highlight groups that are `link`ed to others.
+
 	      For example, programming languages almost exclusively link to the 1st
-	      and 2nd sections, so as long as you define everything there you will automatically
-	      be defining the rest of the highlights, which is one of the benefits of using
-	      this template.
+	      and 2nd sections, so as long as you define everything there you will
+	      automatically be defining the rest of the highlights, which is one of
+	      the benefits of using this template.
 ]]
 
 --[[ DO NOT EDIT `BG`, `FG`, or `NONE`.
