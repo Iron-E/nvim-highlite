@@ -23,7 +23,6 @@ if not using_hex_or_256 then vim.o.t_Co = 16 end
 local PALETTE_ANSI = 3
 local PALETTE_256  = 2
 local PALETTE_HEX  = 1
-local NONE = "NONE"
 
 -- Get the color value of a color variable, or "NONE" as a default.
 local function get(color, index)
@@ -32,27 +31,42 @@ local function get(color, index)
 	elseif type(color) == 'string' then
 		return color
 	else
-		return NONE
+		return "NONE"
+	end
+end
+
+-- Add the 'blend' parameter to some highlight command, if there is one.
+local function blend(command, attributes)
+	if attributes.blend then -- There is a value for the `highlight-blend` field.
+		command[#command + 1] = ' blend='..attributes.blend
 	end
 end
 
 --[[ If using hex and 256-bit colors, then populate the gui* and cterm* args.
 	If using 16-bit colors, just populate the cterm* args. ]]
-local colorize = using_hex_or_256 and function(command, attributes) command[#command + 1] =
-	' ctermbg='..get(attributes.bg, PALETTE_256)
-	..' ctermfg='..get(attributes.fg, PALETTE_256)
-	..' guibg='..get(attributes.bg, PALETTE_HEX)
-	..' guifg='..get(attributes.fg, PALETTE_HEX)
-end or function(command, attributes) command[#command + 1] =
-	' ctermbg='..get(attributes.bg, PALETTE_ANSI)
-	..' ctermfg='..get(attributes.fg, PALETTE_ANSI)
+local colorize = using_hex_or_256 and function(command, attributes)
+	command[#command + 1] =
+		' ctermbg='..get(attributes.bg, PALETTE_256)
+		..' ctermfg='..get(attributes.fg, PALETTE_256)
+		..' guibg='..get(attributes.bg, PALETTE_HEX)
+		..' guifg='..get(attributes.fg, PALETTE_HEX)
+	blend(command, attributes)
+end or function(command, attributes)
+	command[#command + 1] =
+		' ctermbg='..get(attributes.bg, PALETTE_ANSI)
+		..' ctermfg='..get(attributes.fg, PALETTE_ANSI)
+	blend(command, attributes)
 end
 
 -- This function appends `selected_attributes` to the end of `highlight_cmd`.
-local stylize = using_hex_or_256 and function(command, attributes)
-	command[#command + 1] = ' cterm='..attributes..' gui='..attributes
-end or function(command, attributes)
-	command[#command + 1] = ' cterm='..attributes
+local stylize = using_hex_or_256 and function(command, style, color)
+	command[#command + 1] = ' cterm='..style..' gui='..style
+
+	if color then -- There is an undercurl color.
+		command[#command + 1] = ' guisp='..get(color, PALETTE_HEX)
+	end
+end or function(command, style)
+	command[#command + 1] = ' cterm='..style
 end
 
 -- Generate a `:highlight` command from a group and some attributes.
@@ -68,18 +82,10 @@ local function highlight(highlight_group, attributes) -- {{{ †
 	else -- The `highlight_group` is uniquely defined.
 		colorize(highlight_cmd, attributes)
 
-		if attributes.blend then -- There is a value for the `highlight-blend` field.
-			highlight_cmd[#highlight_cmd + 1] = ' blend='..attributes.blend
-		end
-
-		local style = attributes.style or NONE
+		local style = attributes.style
 		if type(style) == 'table' then
 			-- Concat all of the entries together with a comma between before styling.
-			stylize(highlight_cmd, table.concat(style, ','))
-
-			if style.color then -- there won't is a color for undercurl.
-				highlight_cmd[#highlight_cmd + 1] = ' guisp='..get(style.color, PALETTE_HEX)
-			end
+			stylize(highlight_cmd, table.concat(style, ','), style.color)
 		else -- just style the single entry.
 			stylize(highlight_cmd, style)
 		end
