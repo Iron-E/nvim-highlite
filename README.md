@@ -69,3 +69,22 @@ This template's _design_ focuses on:
 This repository in itself is an example of how to use `nvim-highlite`. Aside from this, the following colorschemes are built using `nvim-highlite`:
 
 * (if you use this, open an issue and I'll add it here!)
+
+```lua
+--[[Keep in mind, the following example is meant to be used within the context of the `colors/highlite.vim` file.]]
+-- First, define some colors
+local red = {'#FF0000', 1, 'red'}
+local black = {'#000000', 0, 'black'}
+local white = {'#FFFFFF', 255, 'white'}
+
+-- Next define some highlight groups.
+local highlight_groups = {
+	-- Any field which can be set to "NONE" doesn't need to be set, it will be automatically assumed to be "NONE".
+	Identifier = {bg=red, fg=black, style='bold'},
+	-- If you want to have a colorscheme which is responsive to multiple background settings, you can do that too:
+	Function = {dark={bg=black}, light={bg=white}, fg=red}
+	--[[ Note that light/dark differentiation is completely optional. ]]
+}
+
+-- The rest is mostly handled by the template.
+```
