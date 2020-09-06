@@ -499,7 +499,7 @@ local highlight_groups = {
 	markdownH6          = {fg=purple_light, style='bold'},
 	mkdBold             = 'SpecialComment',
 	mkdCode             = 'Statement',
-	mkdCodeDelimiter    = 'Label',
+	mkdCodeDelimiter    = 'mkdBold',
 	mkdCodeStart        = 'mkdCodeDelimiter',
 	mkdCodeEnd          = 'mkdCodeStart',
 	mkdHeading          = 'Delimiter',
