@@ -86,7 +86,7 @@ local function highlight(highlight_group, attributes) -- {{{ †
 		if type(style) == 'table' then
 			-- Concat all of the entries together with a comma between before styling.
 			stylize(highlight_cmd, table.concat(style, ','), style.color)
-		else -- just style the single entry.
+		elseif style then -- just style the single entry.
 			stylize(highlight_cmd, style)
 		end
 	end
