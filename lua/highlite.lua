@@ -25,7 +25,7 @@ local PALETTE_256  = 2
 local PALETTE_HEX  = 1
 
 -- Get the color value of a color variable, or "NONE" as a default.
-local function get(color, index)
+local function get(color, index) -- {{{ †
 	if type(color) == 'table' and color[index] then
 		return color[index]
 	elseif type(color) == 'string' then
@@ -33,18 +33,18 @@ local function get(color, index)
 	else
 		return "NONE"
 	end
-end
+end --}}} ‡
 
 -- Add the 'blend' parameter to some highlight command, if there is one.
-local function blend(command, attributes)
+local function blend(command, attributes) -- {{{ †
 	if attributes.blend then -- There is a value for the `highlight-blend` field.
 		command[#command + 1] = ' blend='..attributes.blend
 	end
-end
+end --}}} ‡
 
 --[[ If using hex and 256-bit colors, then populate the gui* and cterm* args.
 	If using 16-bit colors, just populate the cterm* args. ]]
-local colorize = using_hex_or_256 and function(command, attributes)
+local colorize = using_hex_or_256 and function(command, attributes) -- {{{ †
 	command[#command + 1] =
 		' ctermbg='..get(attributes.bg, PALETTE_256)
 		..' ctermfg='..get(attributes.fg, PALETTE_256)
@@ -56,10 +56,10 @@ end or function(command, attributes)
 		' ctermbg='..get(attributes.bg, PALETTE_ANSI)
 		..' ctermfg='..get(attributes.fg, PALETTE_ANSI)
 	blend(command, attributes)
-end
+end --}}} ‡
 
 -- This function appends `selected_attributes` to the end of `highlight_cmd`.
-local stylize = using_hex_or_256 and function(command, style, color)
+local stylize = using_hex_or_256 and function(command, style, color) -- {{{ †
 	command[#command + 1] = ' cterm='..style..' gui='..style
 
 	if color then -- There is an undercurl color.
@@ -67,7 +67,7 @@ local stylize = using_hex_or_256 and function(command, style, color)
 	end
 end or function(command, style)
 	command[#command + 1] = ' cterm='..style
-end
+end --}}} ‡
 
 -- Generate a `:highlight` command from a group and some attributes.
 local function highlight(highlight_group, attributes) -- {{{ †
