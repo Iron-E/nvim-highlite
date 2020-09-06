@@ -23,6 +23,7 @@ if not using_hex_or_256 then vim.o.t_Co = 16 end
 local PALETTE_ANSI = 3
 local PALETTE_256  = 2
 local PALETTE_HEX  = 1
+local NONE = "NONE"
 
 -- Get the color value of a color variable, or "NONE" as a default.
 local function get(color, index) -- {{{ †
@@ -31,7 +32,7 @@ local function get(color, index) -- {{{ †
 	elseif type(color) == 'string' then
 		return color
 	else
-		return "NONE"
+		return NONE
 	end
 end --}}} ‡
 
@@ -82,11 +83,11 @@ local function highlight(highlight_group, attributes) -- {{{ †
 	else -- The `highlight_group` is uniquely defined.
 		colorize(highlight_cmd, attributes)
 
-		local style = attributes.style
+		local style = attributes.style or NONE
 		if type(style) == 'table' then
 			-- Concat all of the entries together with a comma between before styling.
 			stylize(highlight_cmd, table.concat(style, ','), style.color)
-		elseif style then -- just style the single entry.
+		else -- The style is just a single entry.
 			stylize(highlight_cmd, style)
 		end
 	end
