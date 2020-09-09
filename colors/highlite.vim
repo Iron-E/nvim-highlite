@@ -617,6 +617,9 @@ local highlight_groups = {
 	crontabMin  = 'Float',
 	crontabMnth = 'Structure',
 
+	--[[ 4.3.32. PlantUML ]]
+	plantumlColonLine = {},
+
 	--[[ 4.4. Plugins
 		Everything in this section is OPTIONAL. Feel free to remove everything
 		here if you don't want to define it, or add more if there's something
