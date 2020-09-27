@@ -605,7 +605,9 @@ local highlight_groups = {
 	xmlTagName = 'htmlTagName',
 
 	--[[ 4.3.29. SQL ]]
-	sqlKeyword = 'Keyword',
+	sqlParen     = 'Statement',
+	sqlSpecial   = 'Constant',
+	sqlStatement = 'Function',
 
 	--[[ 4.3.30. dos INI ]]
 	dosiniHeader = 'Title',
