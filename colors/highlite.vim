@@ -105,9 +105,9 @@ local green       = {'#77ff00', 72, 'green'}
 local green_light = {'#a0ff70', 72, 'green'}
 
 local blue     = {'#7090ff', 63, 'darkblue'}
-local cyan     = {'#00efff', 87, 'cyan'}
-local ice      = {'#80b5ff', 63, 'cyan'}
-local teal     = {'#6ac0c0', 38, 'cyan'}
+local cyan     = {'#33efff', 87, 'cyan'}
+local ice      = {'#49a0f0', 63, 'cyan'}
+local teal     = {'#00d0c0', 38, 'cyan'}
 local turqoise = {'#2bff99', 33, 'blue'}
 
 local magenta      = {'#d5508f', 126, 'magenta'}
@@ -605,9 +605,11 @@ local highlight_groups = {
 	xmlTagName = 'htmlTagName',
 
 	--[[ 4.3.29. SQL ]]
-	sqlParen     = 'Statement',
+	sqlKeyword   = 'Keyword',
+	sqlParen     = 'Delimiter',
 	sqlSpecial   = 'Constant',
-	sqlStatement = 'Function',
+	sqlStatement = 'Statement',
+	sqlParenFunc = 'Function',
 
 	--[[ 4.3.30. dos INI ]]
 	dosiniHeader = 'Title',
