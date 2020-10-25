@@ -624,6 +624,19 @@ local highlight_groups = {
 	--[[ 4.3.32. PlantUML ]]
 	plantumlColonLine = {},
 
+	--[[ 4.3.33. ungrammar ]]
+	ungramConditional = 'Conditional',
+	ungramDelimiter = 'Delimiter',
+	ungramLabel = 'Label',
+	ungramOperator = 'Operator',
+	ungramRepeat = 'Repeat',
+	ungramRule = 'Identifier',
+	ungramString = 'String',
+	ungramToken = 'Type',
+
+
+	--[[ 4.4.9. ungrammar ]]
+
 	--[[ 4.4. Plugins
 		Everything in this section is OPTIONAL. Feel free to remove everything
 		here if you don't want to define it, or add more if there's something
