@@ -28,7 +28,7 @@ This template's _design_ focuses on:
 
 1. Neovim 0.5+
 
-# Usage
+# Installation
 
 ## Creating Your Own
 
@@ -57,6 +57,8 @@ This template's _design_ focuses on:
 	" Use the colorscheme
 	colorscheme highlite
 	```
+
+# Usage
 
 ## Examples
 
@@ -87,7 +89,7 @@ local highlight_groups = {
 
 > Why am I receiving `E5108: Error executing lua [string ":lua"]:1: module '<colorscheme>' not found`?
 
-* Ensure your colorscheme's base folder is in Neovim's `rtp` before sourcing.
+Ensure your colorscheme's base folder is in Neovim's `rtp` before sourcing.
 
 > What syntax files should I use for `X` language?
 
@@ -139,3 +141,11 @@ You can either use [`nvim-treesitter`](https://github.com/nvim-treesitter/nvim-t
 | YAML       | [`stephpy/vim-yaml`](https://github.com/stephpy/vim-yaml)                                   |
 | YATS       | [`HerringtonDarkholme/yats`](https://github.com/HerringtonDarkholme/yats)                   |
 
+# Contribution
+
+This repository is looking for contributions! The following things are appreciated:
+
+* [ ] More default support for plugins, languages, etc.
+* [ ] Setup scripts for Windows.
+
+If you would like to contribute something, and you aren't sure how, open a ticket! I'd love to help you help me.
