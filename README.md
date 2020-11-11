@@ -58,12 +58,6 @@ This template's _design_ focuses on:
 	colorscheme highlite
 	```
 
-## FAQ
-
-> Why am I receiving `E5108: Error executing lua [string ":lua"]:1: module '<colorscheme>' not found`?
-
-* Ensure your colorscheme's base folder is in Neovim's `rtp` before sourcing.
-
 ## Examples
 
 This repository in itself is an example of how to use `nvim-highlite`. Aside from this, the following colorschemes are built using `nvim-highlite`:
@@ -88,3 +82,60 @@ local highlight_groups = {
 
 -- The rest is mostly handled by the template.
 ```
+
+## FAQ
+
+> Why am I receiving `E5108: Error executing lua [string ":lua"]:1: module '<colorscheme>' not found`?
+
+* Ensure your colorscheme's base folder is in Neovim's `rtp` before sourcing.
+
+> What syntax files should I use for `X` language?
+
+You can either use [`nvim-treesitter`](https://github.com/nvim-treesitter/nvim-treesitter), or one of the following:
+
+| Language   | Syntax Plugin                     |
+|:-----------|:----------------------------------|
+| ALGOL      | sterpe/vim-algol68                |
+| C++        | bfrg/vim-cpp-modern               |
+| Dart       | dart-lang/dart-vim-plugin         |
+| DTrace     | vim-scripts/dtrace-syntax-file    |
+| F#         | ionide/Ionide-vim                 |
+| Gas        | Shirk/vim-gas                     |
+| Git        | tpope/vim-git                     |
+| Go         | fatih/vim-go                      |
+| GraphViz   | liuchengxu/graphviz               |
+| HTML5      | othree/html5                      |
+| i3conf     | mboughaba/i3config                |
+| JSON       | elzr/vim-json                     |
+| Java       | uiiaoo/java-syntax                |
+| JavaScript | pangloss/vim-javascript           |
+| Julia      | JuliaEditorSupport/julia-vim      |
+| Kotlin     | udalov/kotlin-vim                 |
+| LESS       | groenewege/vim-less               |
+| LLVM       | rhysd/vim-llvm                    |
+| Lua        | tbastos/vim-lua                   |
+| Markdown   | plasticboy/vim-markdown           |
+| MIPS       | vim-scripts/mips                  |
+| Moonscript | leafo/moonscript-vim              |
+| PlantUML   | aklt/plantuml-syntax              |
+| Prettier   | prettier/vim-prettier             |
+| Python     | vim-python/python-syntax          |
+| Razor      | adamclerk/vim-razor               |
+| RST        | marshallward/vim-restructuredtext |
+| Ruby       | vim-ruby/vim-ruby                 |
+| SCSS       | cakebaker/scss-syntax             |
+| SQL        | shmup/vim-sql-syntax              |
+| Shell      | arzg/vim-sh                       |
+| Stylus     | wavded/vim-stylus                 |
+| SystemD    | wgwoods/vim-systemd-syntax        |
+| SystemTap  | nickhutchinson/vim-systemtap      |
+| TOML       | cespare/vim-toml                  |
+| TeX        | lervag/vimtex                     |
+| Ungrammar  | Iron-E/vim-ungrammar              |
+| VB.NET     | vim-scripts/vbnet                 |
+| Vim Logs   | MTDL9/vim-log-highlighting        |
+| Vimscript  | vim-jp/syntax-vim-ex              |
+| XML        | amadeus/vim-xml                   |
+| YAML       | stephpy/vim-yaml                  |
+| YATS       | HerringtonDarkholme/yats          |
+
