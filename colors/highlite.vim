@@ -342,21 +342,21 @@ local highlight_groups = {
 	Question   = {fg=orange_light, style='underline'},
 
 	--[[ 4.2.11. LSP ]]
-	LspDiagnosticsError = 'Error',
-	LspDiagnosticsErrorFloating = 'ErrorMsg',
-	LspDiagnosticsErrorSign = 'ErrorMsg',
+	LspDiagnosticsDefaultError = 'Error',
+	LspDiagnosticsFloatingError = 'ErrorMsg',
+	LspDiagnosticsSignError = 'ErrorMsg',
 
-	LspDiagnosticsWarning = 'Warning',
-	LspDiagnosticsWarningFloating = 'WarningMsg',
-	LspDiagnosticsWarningSign = 'WarningMsg',
+	LspDiagnosticsDefaultWarning = 'Warning',
+	LspDiagnosticsFloatingWarning = 'WarningMsg',
+	LspDiagnosticsSignWarning = 'WarningMsg',
 
-	LspDiagnosticsHint = 'Hint',
-	LspDiagnosticsHintFloating = 'HintMsg',
-	LspDiagnosticsHintSign = 'HintMsg',
+	LspDiagnosticsDefaultHint = 'Hint',
+	LspDiagnosticsFloatingHint = 'HintMsg',
+	LspDiagnosticsSignHint = 'HintMsg',
 
-	LspDiagnosticsInformation = 'Info',
-	LspDiagnosticsInformationFloating = 'InfoMsg',
-	LspDiagnosticsInformationSign = 'InfoMsg',
+	LspDiagnosticsDefaultInformation = 'Info',
+	LspDiagnosticsFloatingInformation = 'InfoMsg',
+	LspDiagnosticsSignInformation = 'InfoMsg',
 
 	LspDiagnosticsUnderline = {style={'undercurl', color=white}},
 	LspDiagnosticsUnderlineError = 'CocErrorHighlight',
