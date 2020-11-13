@@ -122,12 +122,18 @@ local purple_light = {'#af60af', 63,  'magenta'}
 
 ```lua
 	<highlight group name> = {
-		bg=<color>, -- The color for the background, `NONE`, `FG` or `BG`
-		fg=<color>, -- The color for the foreground, `NONE`, `FG` or `BG`
-		blend=<integer> -- The |highlight-blend| value, if one is desired.
+		-- The color for the background, `NONE`, `FG` or `BG`
+		bg = <color>,
+
+		-- The color for the foreground, `NONE`, `FG` or `BG`
+		fg = <color>
+
+		-- The |highlight-blend| value, if one is desired.
+		[, blend = <integer>]
+
 		-- Style can be 'bold', 'italic', and more. See |attr-list| for more information.
 		-- It can also have a color, and/or multiple <cterm>s.
-		style=<cterm>|{<cterm> [, <cterm>] [color=<color>]})
+		[, style = <cterm>|{<cterm> (, <cterm>) [color=<color>]} ]
 	}
 ```
 

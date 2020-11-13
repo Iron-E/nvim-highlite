@@ -1,0 +1,125 @@
+*highlite.txt*        Plugin for maintaining colorschemes
+*highlite*
+
+Author: Iron-E – https://github.com/Iron-E & https://gitlab.com/Iron_E
+Web: https://github.com/Iron-E/nvim-highlite
+
+|highlite| is a plugin for creating and maintaining colorschemes. It can
+be configured by cloning the repository and following the README, or
+individually used to comprehensively highlight groups with its functions.
+
+==============================================================================
+0. Table of Contents                                               *highlite-toc*
+
+1. Requirements ............ |highlite-requirements|
+2. Usage ................... |highlite-usage|
+
+==============================================================================
+1. Requirements                                          *highlite-requirements*
+
+* Neovim 0.5+
+
+==============================================================================
+2. Usage                                                        *highlite-usage*
+
+`highlite`.highlight({group}, {attributes})                 *highlite-highlight()*
+
+	Highlight some {group} according to its {attributes}.
+
+	Note: this method is intended to be used instead of |:highlight|.
+
+	Parameters: ~
+		{group}       A `string` which is the |highlight-group| to |:highlight|.
+		{attributes}  A |lua| `table` which follows this format: >
+		{
+			-- The color for the background; or `NONE`, `FG` or `BG`
+			bg = <color>,
+
+			-- The color for the foreground; or `NONE`, `FG` or `BG`
+			fg = <color>
+
+			-- The |highlight-blend| value, if one is desired.
+			[, blend = <integer>]
+
+			-- Style can be from |attr-list|.
+			-- It can also have a color, and/or multiple <cterm>s.
+			[, style = <cterm>|{<cterm> (, <cterm>) [color=<color>]} ]
+		}
+<
+	Return: ~
+		* Nothing.
+
+	Example: ~
+>
+		local highlite = require('highlite')
+
+		local yellow = {'#f0df33', 220, 'yellow'}
+
+		-- Highlight a new group
+		highlite.highlight('Todo', {fg=yellow, style={'bold', 'underline'}})
+		-- Link a grou
+		highlite.highlight('Identifier', 'Todo')
+<
+
+	See also: ~
+		|group-names|  Additional semantic highlighting groups.
+
+`highlite`:highlight_terminal({terminal_ansi_colors})
+
+	Override the |terminal| colors with a new table of {terminal_ansi_colors}.
+
+	Parameters: ~
+		{terminal_ansi_colors}  The colors to use in the |terminal|.
+		                        They are defined according to this
+		                        format: >
+		{
+			[1]  = {'#<hex>', bit_16, '<bit_8>'}, -- overrides 'black'
+			[2]  = {'#<hex>', bit_16, '<bit_8>'}, -- overrides 'darkred'
+			[3]  = {'#<hex>', bit_16, '<bit_8>'}, -- overrides 'darkgreen'
+			[4]  = {'#<hex>', bit_16, '<bit_8>'}, -- overrides 'darkyellow'
+			[5]  = {'#<hex>', bit_16, '<bit_8>'}, -- overrides 'darkblue'
+			[6]  = {'#<hex>', bit_16, '<bit_8>'}, -- overrides 'darkmagenta'
+			[7]  = {'#<hex>', bit_16, '<bit_8>'}, -- overrides 'darkcyan'
+			[8]  = {'#<hex>', bit_16, '<bit_8>'}, -- overrides 'gray'
+			[9]  = {'#<hex>', bit_16, '<bit_8>'}, -- overrides 'darkgray'
+			[10] = {'#<hex>', bit_16, '<bit_8>'}, -- overrides 'red'
+			[11] = {'#<hex>', bit_16, '<bit_8>'}, -- overrides 'green'
+			[12] = {'#<hex>', bit_16, '<bit_8>'}, -- overrides 'yellow'
+			[13] = {'#<hex>', bit_16, '<bit_8>'}, -- overrides 'blue'
+			[14] = {'#<hex>', bit_16, '<bit_8>'}, -- overrides 'magenta'
+			[15] = {'#<hex>', bit_16, 'bit_8'},   -- overrides 'cyan'
+			[16] = {'#<hex>', bit_16, '<bit_8>'}, -- overrides 'white'
+		}
+<
+	Return: ~
+		* Nothing.
+
+	Example: ~
+>
+		local highlite = require('highlite')
+
+		highlite.highlight_terminal({
+			[1]  = {'#202020' , 0   , 'black'},
+			[2]  = {'#a80000' , 124 , 'darkred'},
+			[3]  = {'#50de60' , 83  , 'darkgreen'},
+			[4]  = {'#ff8900' , 208 , 'darkyellow'},
+			[5]  = {'#7090ff' , 63  , 'darkblue'},
+			[6]  = {'#bb0099' , 126 , 'darkmagenta'},
+			[7]  = {'#00d0c0' , 38  , 'cyan'},
+			[8]  = {'#808080' , 244 , 'gray'},
+			[9]  = {'#353535' , 236 , 'darkgrey'},
+			[10] = {'#ee4a59' , 196 , 'red'},
+			[11] = {'#77ff00' , 72  , 'green'},
+			[12] = {'#f0df33' , 220 , 'yellow'},
+			[13] = {'#2bff99' , 33  , 'blue'},
+			[14] = {'#cf55f0' , 129 , 'magenta'},
+			[15] = {'#33efff' , 87  , 'cyan'},
+			[16] = {'#c0c0c0' , 251 , 'gray'},
+		})
+<
+
+	See also: ~
+		|terminal-configuration|  Information about how the groups are set.
+
+==============================================================================
+ vim:tw=78:ts=4:ft=help:norl:
