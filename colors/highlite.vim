@@ -290,10 +290,10 @@ local highlight_groups = {
 	StatusLineTermNC = 'StatusLineNC',
 
 	--[[ 4.2.2. Separators]]
-	VertSplit   = {fg=gray_darker},
+	VertSplit   = {fg=white},
 	TabLine     = {bg=gray_darker, fg=FG},
-	TabLineFill = {fg=FG},
-	TabLineSel  = {bg=gray_darker, fg=FG, style='inverse'},
+	TabLineFill = 'NonText',
+	TabLineSel  = {bg=BG, fg=FG},
 	Title       = {style='bold'},
 
 	--[[ 4.2.3. Conditional Line Highlighting]]
@@ -322,7 +322,7 @@ local highlight_groups = {
 	DiffAdd    = {fg=green_dark, style='inverse'},
 	DiffChange = {fg=yellow,     style='inverse'},
 	DiffDelete = {fg=red,        style='inverse'},
-	DiffText   = {style='inverse'},
+	DiffText   = {fg=FG},
 
 	--[[ 4.2.7. Searching]]
 	IncSearch  = {style='inverse'},
@@ -689,6 +689,25 @@ local highlight_groups = {
 	TSStringRegex  = 'SpecialChar',
 	TSURI = 'Tag',
 	TSVariableBuiltin = 'Identifier',
+
+	--[[ 4.4.9. barbar.nvim ]]
+   BufferCurrent       = 'TabLineSel',
+   BufferCurrentMod    = {bg=black, fg=tan, style='bold'},
+   BufferCurrentSign   = 'HintMsg',
+   BufferCurrentTarget = 'BufferCurrentSign',
+
+   BufferInactive       = 'TabLine',
+	BufferInactiveMod    = {bg=gray_darker, fg=white, style='italic'},
+   BufferInactiveSign   = {bg=gray_darker, fg=gray_darker},
+   BufferInactiveTarget = 'BufferInactiveSign',
+
+   BufferTabpages      = {bg=FG, fg=gray_dark, style='bold'},
+   BufferTabpageSpacer = 'TabLineFill',
+
+   BufferVisible       = 'TabLine',
+   BufferVisibleMod    = 'BufferInactiveMod',
+   BufferVisibleSign   = 'BufferVisible',
+   BufferVisibleTarget = 'BufferVisibleSign',
 }
 
 --[[ Step 5: Terminal Colors
