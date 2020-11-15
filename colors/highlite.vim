@@ -707,7 +707,7 @@ local highlight_groups = {
 	BufferVisible       = 'TabLine',
 	BufferVisibleMod    = {bg=gray_darker, fg=white, style='italic'},
 	BufferVisibleSign   = 'BufferVisible',
-	BufferVisibleTarget = {bg=gray_darker, fg=teal, style='bold'},
+	BufferVisibleTarget = {bg=gray_darker, fg=white, style='bold'},
 }
 
 --[[ Step 5: Terminal Colors
