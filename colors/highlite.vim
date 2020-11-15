@@ -691,23 +691,23 @@ local highlight_groups = {
 	TSVariableBuiltin = 'Identifier',
 
 	--[[ 4.4.9. barbar.nvim ]]
-   BufferCurrent       = 'TabLineSel',
-   BufferCurrentMod    = {bg=black, fg=tan, style='bold'},
-   BufferCurrentSign   = 'HintMsg',
-   BufferCurrentTarget = 'BufferCurrentSign',
+	BufferCurrent       = 'TabLineSel',
+	BufferCurrentMod    = {bg=black, fg=tan, style='bold'},
+	BufferCurrentSign   = 'HintMsg',
+	BufferCurrentTarget = 'BufferCurrentSign',
 
-   BufferInactive       = 'TabLine',
-	BufferInactiveMod    = {bg=gray_darker, fg=white, style='italic'},
-   BufferInactiveSign   = {bg=gray_darker, fg=gray_darker},
-   BufferInactiveTarget = 'BufferInactiveSign',
+	BufferInactive       = 'BufferVisible',
+	BufferInactiveMod    = 'BufferVisibleMod',
+	BufferInactiveSign   = {bg=gray_darker, fg=gray_darker},
+	BufferInactiveTarget = 'BufferVisibleTarget',
 
-   BufferTabpages      = {bg=FG, fg=gray_dark, style='bold'},
-   BufferTabpageSpacer = 'TabLineFill',
+	BufferTabpages      = {bg=FG, fg=gray_dark, style='bold'},
+	BufferTabpageSpacer = 'TabLineFill',
 
-   BufferVisible       = 'TabLine',
-   BufferVisibleMod    = 'BufferInactiveMod',
-   BufferVisibleSign   = 'BufferVisible',
-   BufferVisibleTarget = 'BufferVisibleSign',
+	BufferVisible       = 'TabLine',
+	BufferVisibleMod    = {bg=gray_darker, fg=white, style='italic'},
+	BufferVisibleSign   = 'BufferVisible',
+	BufferVisibleTarget = {bg=gray_darker, fg=teal, style='bold'},
 }
 
 --[[ Step 5: Terminal Colors
