@@ -32,7 +32,7 @@ This template's _design_ focuses on:
 
 ## Creating Your Own
 
-1. This repository should be forked, or cloned with `git clone https://github.com/Iron-E/nvim-highlite`.
+1. Fork this repository, or clone it with `git clone https://github.com/Iron-E/nvim-highlite`.
 2. Follow the instructions in [`colors/highlite.vim`](colors/highlite.vim).
 	* If you are on a Unix system, use the [setup script](setup.sh) like so:
 	```sh
@@ -51,8 +51,8 @@ This template's _design_ focuses on:
 	```
 2. Specify this colorscheme as your default colorscheme in the `init.vim`:
 	```viml
-	" Enable 24-bit color output. Only do this if your environment supports it.
-	" This plugin works 100% fine with 8-bit, 16-bit, and 24-bit colors.
+	" Enable 24-bit color output. Only do this IF your environment supports it.
+	" This plugin is fully compatible with 8-bit, 16-bit, and 24-bit colors.
 	set termguicolors
 	" Use the colorscheme
 	colorscheme highlite
@@ -66,8 +66,38 @@ This repository in itself is an example of how to use `nvim-highlite`. Aside fro
 
 * (if you use this, open an issue and I'll add it here!)
 
+### As Dependency
+
+Below is an example of how to use `nvim-highlite` as a dependency.
+
+* See `:h highlite-usage` for more.
+
 ```lua
---[[Keep in mind, the following example is meant to be used within the context of the `colors/highlite.vim` file.]]
+-- Import nvim-highlite
+local highlite = require('highlite')
+
+-- First, define some colors
+local red = {'#FF0000', 1, 'red'}
+local black = {'#000000', 0, 'black'}
+local white = {'#FFFFFF', 255, 'white'}
+
+-- Highlight 'Identifier'
+highlite.highlight('Identifier', {bg=red, fg=black, style='bold'})
+
+-- Highlight 'Function' conditionally according to background color.
+highlite.highlight('Function', {bg=black, fg=red, light={bg=white}})
+
+-- Link 'Example' to 'Identifier'
+highlite.highlight('Example', 'Identifier')
+```
+
+### As Template
+
+Below is an example of how to use `nvim-highlite` as a template.
+
+* See [`highlite.vim`](colors/highlite.vim) for more.
+
+```lua
 -- First, define some colors
 local red = {'#FF0000', 1, 'red'}
 local black = {'#000000', 0, 'black'}
@@ -77,8 +107,8 @@ local white = {'#FFFFFF', 255, 'white'}
 local highlight_groups = {
 	-- Any field which can be set to "NONE" doesn't need to be set, it will be automatically assumed to be "NONE".
 	Identifier = {bg=red, fg=black, style='bold'},
-	-- If you want to have a colorscheme which is responsive to multiple background settings, you can do that too:
-	Function = {dark={bg=black}, light={bg=white}, fg=red}
+	-- If your colorscheme should respond to multiple background settings, you can do that too:
+	Function = {bg=black, fg=red, light={bg=white}}
 	--[[ Note that light/dark differentiation is completely optional. ]]
 }
 
