@@ -702,7 +702,6 @@ local highlight_groups = {
 	BufferInactiveTarget = 'BufferVisibleTarget',
 
 	BufferTabpages      = {bg=FG, fg=gray_dark, style='bold'},
-	BufferTabpageSpacer = 'TabLineFill',
 
 	BufferVisible       = 'TabLine',
 	BufferVisibleMod    = {bg=gray_darker, fg=white, style='italic'},
