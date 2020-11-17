@@ -633,6 +633,20 @@ local highlight_groups = {
 	--[[ 4.3.33. YAML ]]
 	yamlKey = 'Label',
 
+	--[[ 4.3.34. Git ]]
+	gitrebaseBreak  = 'Keyword',
+	gitrebaseCommit = 'Tag',
+	gitrebaseDrop = 'Exception',
+	gitrebaseEdit = 'Define',
+	gitrebaseExec = 'PreProc',
+	gitrebaseFixup = 'gitrebaseSquash',
+	gitrebaseMerge = 'PreProc',
+	gitrebasePick = 'Include',
+	gitrebaseReset = 'gitrebaseLabel',
+	gitrebaseReword = 'gitrebasePick',
+	gitrebaseSquash = 'Macro',
+	gitrebaseSummary = 'Normal',
+
 	--[[ 4.4. Plugins
 		Everything in this section is OPTIONAL. Feel free to remove everything
 		here if you don't want to define it, or add more if there's something
