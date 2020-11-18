@@ -292,7 +292,7 @@ local highlight_groups = {
 	--[[ 4.2.2. Separators]]
 	VertSplit   = {fg=white},
 	TabLine     = {bg=gray_darker, fg=FG},
-	TabLineFill = 'NonText',
+	TabLineFill = {bg=black, fg=gray_darker},
 	TabLineSel  = {bg=BG, fg=FG},
 	Title       = {style='bold'},
 
@@ -715,7 +715,8 @@ local highlight_groups = {
 	BufferInactiveSign   = {bg=gray_darker, fg=gray_darker},
 	BufferInactiveTarget = 'BufferVisibleTarget',
 
-	BufferTabpages      = {bg=FG, fg=gray_dark, style='bold'},
+	BufferTabpages    = {bg=FG, fg=gray_dark, style='bold'},
+	BufferTabpageFill = 'TabLineFill',
 
 	BufferVisible       = 'TabLine',
 	BufferVisibleMod    = {bg=gray_darker, fg=white, style='italic'},
