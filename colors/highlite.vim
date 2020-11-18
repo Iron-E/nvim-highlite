@@ -600,8 +600,11 @@ local highlight_groups = {
 	vimHiGui       = 'vimHiCterm',
 	vimHiGuiFgBg   = 'vimHiGui',
 	vimHiKeyList   = 'Operator',
-	vimOption      = 'Define',
+	vimOption      = 'Keyword',
+	vimScriptDelim = 'Ignore',
+	vimSet         = 'String',
 	vimSetEqual    = 'Operator',
+	vimSetSep      = 'Delimiter',
 
 	--[[ 4.3.28. XML ]]
 	xmlAttrib  = 'htmlArg',
