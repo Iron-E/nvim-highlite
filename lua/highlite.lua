@@ -26,8 +26,8 @@ local _TYPE_STRING = 'string'
 local _TYPE_TABLE  = 'table'
 
 -- Determine which set of colors to use.
-local _USING_HEX_OR_256 = tonumber(vim.o.t_Co) >= 256
-	or vim.o.termguicolors
+local _USE_HEX = vim.o.termguicolors
+local _USE_256 = tonumber(vim.o.t_Co) >= 256
 	or string.find(vim.env.TERM, '256')
 
 --[[
@@ -56,85 +56,24 @@ end --}}} ‡
 
 --[[ If using hex and 256-bit colors, then populate the gui* and cterm* args.
 	If using 16-bit colors, just populate the cterm* args. ]]
-local colorize = _USING_HEX_OR_256 and function(command, attributes) -- {{{ †
-	command[#command + 1] =
-		' ctermbg='..get(attributes.bg, _PALETTE_256)
-		..' ctermfg='..get(attributes.fg, _PALETTE_256)
-		..' guibg='..get(attributes.bg, _PALETTE_HEX)
-		..' guifg='..get(attributes.fg, _PALETTE_HEX)
-	blend(command, attributes)
+local colorize = _USE_HEX and function(command, attributes) -- {{{ †
+	command[#command+1]=' guibg='..get(attributes.bg, _PALETTE_HEX)..' guifg='..get(attributes.fg, _PALETTE_HEX)
+end or _USE_256 and function(command, attributes)
+	command[#command+1]=' ctermbg='..get(attributes.bg, _PALETTE_256)..' ctermfg='..get(attributes.fg, _PALETTE_256)
 end or function(command, attributes)
-	command[#command + 1] =
-		' ctermbg='..get(attributes.bg, _PALETTE_ANSI)
-		..' ctermfg='..get(attributes.fg, _PALETTE_ANSI)
-	blend(command, attributes)
+	command[#command+1]=' ctermbg='..get(attributes.bg, _PALETTE_ANSI)..' ctermfg='..get(attributes.fg, _PALETTE_ANSI)
 end --}}} ‡
 
--- Detect attribute links and link them
-local _HIGHLITE_NVIM_API_MAP = {
-	bg = 'background',
-	fg = 'foreground',
-	blend = 'blend',
-	style = {
-		'special',
-		'reverse',
-		'italic',
-		'bold',
-		'strikethrough',
-		'underline',
-		'undercurl',
-	},
-}
-
--- link the colors of a highlight group.
-local function link_color_attribute(unlinked_attributes, unlinked_attribute, attribute_from_group_to_link)
-	unlinked_attributes[unlinked_attribute] = (attribute_from_group_to_link and vim.o.termguicolors)
-		and string.format('#%06x', attribute_from_group_to_link)
-		or attribute_from_group_to_link
-		or _NONE
-end
-
--- link the style of a highlight group.
-local function link_style_attributes(unlinked_attributes, unlinked_attribute, attributes_to_link, group_to_link)
-	unlinked_attributes[unlinked_attribute] = {}
-
-	for _, attribute_to_link in ipairs(attributes_to_link) do
-		if group_to_link[attribute_to_link] then
-			unlinked_attributes[unlinked_attribute][#unlinked_attributes[unlinked_attribute] + 1] = attribute_to_link
-		end
-	end
-end
-
--- link attributes in a highlight group.
-local function link_attributes(unlinked_attributes)
-	for unlinked_attribute, unlinked_value in pairs(unlinked_attributes) do
-		if type(unlinked_value) == _TYPE_STRING then
-
-			local attributes_to_link = _HIGHLITE_NVIM_API_MAP[unlinked_attribute]
-			local group_to_link = api.nvim_get_hl_by_name(unlinked_value, vim.o.termguicolors) or {}
-			local link_type = type(attributes_to_link)
-
-			if link_type == _TYPE_STRING then
-				link_color_attribute(unlinked_attributes, unlinked_attribute, group_to_link[attributes_to_link])
-			elseif link_type == _TYPE_TABLE then
-				link_style_attributes(unlinked_attributes, unlinked_attribute, attributes_to_link, group_to_link)
-			else -- it is a number
-				unlinked_attributes[unlinked_attribute] = attributes_to_link
-			end
-		end
-	end
-end
-
 -- This function appends `selected_attributes` to the end of `highlight_cmd`.
-local stylize = _USING_HEX_OR_256 and function(command, style, color) -- {{{ †
-	command[#command + 1] = ' cterm='..style..' gui='..style
+local stylize = _USE_HEX and function(command, style, color)
+	command[#command+1]=' gui='..style
 
 	if color then -- There is an undercurl color.
 		command[#command + 1] = ' guisp='..get(color, _PALETTE_HEX)
 	end
 end or function(command, style)
 	command[#command + 1] = ' cterm='..style
-end --}}} ‡
+end
 
 -- Load specific &bg instructions
 local function use_background_with(attributes)
@@ -150,29 +89,53 @@ end
 
 local highlite = {}
 
+function highlite.group(group_name)
+	local no_errors, group_definition = pcall(api.nvim_get_hl_by_name, group_name, vim.o.termguicolors)
+
+	if not no_errors then group_definition = {} end
+
+	local fmt = '#%06x'
+	local style = {}
+
+	if group_definition.bold          then style[#style+1] = 'bold'          end
+	if group_definition.italic        then style[#style+1] = 'italic'        end
+	if group_definition.reverse       then style[#style+1] = 'reverse'       end
+	if group_definition.strikethrough then style[#style+1] = 'strikethrough' end
+	if group_definition.undercurl     then style[#style+1] = 'undercurl'     end
+	if group_definition.underline     then style[#style+1] = 'underline'     end
+	if group_definition.special       then style.color     =
+		string.format(fmt, group_definition.special)
+	end
+
+	return {
+		['fg'] = group_definition.foreground and string.format(fmt, group_definition.foreground) or _NONE,
+		['bg'] = group_definition.background and string.format(fmt, group_definition.background) or _NONE,
+		['blend'] = group_definition.blend,
+		['style'] = style or _NONE
+	}
+end
+
 -- Generate a `:highlight` command from a group and some attributes.
 function highlite.highlight(highlight_group, attributes) -- {{{ †
 	-- The base highlight command
 	local highlight_cmd = {'hi! ', highlight_group}
 
-	-- Take care of special instructions for certain background colors.
-	if attributes[vim.o.background] then
-		attributes = use_background_with(attributes)
-	end
-
-	-- Determine if there is a highlight link, and if so, assign it.
-	local link = (type(attributes) == _TYPE_STRING) and attributes
-
-	if link then -- `highlight_group` is a link to another group.
+	if type(attributes) == _TYPE_STRING then -- `highlight_group` is a link to another group.
 		highlight_cmd[3] = highlight_cmd[2]
 		highlight_cmd[2] = 'link '
 		highlight_cmd[4] = ' '
-		highlight_cmd[5] = link
+		highlight_cmd[5] = attributes
 	else -- The `highlight_group` is uniquely defined.
-		link_attributes(attributes)
+		-- Take care of special instructions for certain background colors.
+		if attributes[vim.o.background] then
+			attributes = use_background_with(attributes)
+		end
+
 		colorize(highlight_cmd, attributes)
+		blend(highlight_cmd, attributes)
 
 		local style = attributes.style or _NONE
+
 		if type(style) == _TYPE_TABLE then
 			-- Concat all of the entries together with a comma between before styling.
 			stylize(highlight_cmd, table.concat(style, ','), style.color)
@@ -192,20 +155,31 @@ end
 
 return setmetatable(highlite, {
 	['__call'] = function(self, normal, highlights, terminal_ansi_colors)
+		-- save the colors_name before syntax reset
+		local color_name = vim.g.colors_name
+
 		-- Clear the highlighting.
 		cmd('hi clear')
 
 		-- If the syntax has been enabled, reset it.
 		if fn.exists('syntax_on') then cmd('syntax reset') end
 
+		-- replace the colors_name
+		vim.g.colors_name = color_name
+		color_name = nil
+
 		-- If we aren't using hex nor 256 colorsets.
-		if not _USING_HEX_OR_256 then vim.o.t_Co = 16 end
+		if not (_USE_HEX or _USE_256) then vim.o.t_Co = '16' end
 
 		-- Highlight the baseline.
 		self.highlight('Normal', normal)
 
 		-- Highlight everything else.
 		for highlight_group, attributes in pairs(highlights) do
+			if type(attributes) == 'function' then
+				attributes = attributes(highlights)
+			end
+
 			self.highlight(highlight_group, attributes)
 		end
 
