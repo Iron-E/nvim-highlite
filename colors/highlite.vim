@@ -196,6 +196,27 @@ local purple_light = {'#af60af', 63,  'magenta'}
 	shouldn't remove any if you want a working colorscheme. Most of them are
 	described under |highlight-default|, some from |group-name|, and others from
 	common syntax groups.  Both help sections are good reads.
+	____________________________________________________________________________
+
+	If you want to inherit a specific attribute of another highlight group, you
+	can do the following:
+
+```lua
+	SpellBad = function(self)
+		local inherited_style = self.SpellRare.style
+		inherited_style.color = red
+
+		return {
+			bg=NONE,
+			fg=NONE,
+			style=inherited_style
+		}
+	end
+```
+
+	The function will be executed by |highlite| and transformed into the
+	expected result.
+	____________________________________________________________________________
 
 	NOTE: |Replace-mode| will probably be useful here.
 
@@ -208,12 +229,9 @@ local purple_light = {'#af60af', 63,  'magenta'}
 	      the benefits of using this template.
 ]]
 
---[[ DO NOT EDIT `BG`, `FG`, or `NONE`.
-	Feel free to uncomment `BG` and `NONE`. They are not used by default so they are commented out.
-]]
--- local BG   = 'bg'
-local FG   = 'fg'
--- local NONE = 'NONE'
+--[[ DO NOT EDIT `BG` NOR `FG`. ]]
+local BG = 'bg'
+local FG = 'fg'
 
 --[[ These are the ones you should edit. ]]
 -- This is the only highlight that must be defined separately.
@@ -279,13 +297,13 @@ local highlight_groups = {
 	helpHyperTextJump = 'Underlined',
 	helpSpecial       = 'Function',
 	Hint              = {bg=magenta,    fg=black, style='bold'},
-	Info              = {bg=pink_light, fg=black, style='bold'},
-	Warning           = {bg=orange,     fg=black, style='bold'},
+	Info              = function(self) return {bg=pink_light, fg=self.Hint.fg, style=self.Hint.style} end,
+	Warning           = function(self) return {bg=orange,     fg=self.Hint.fg, style=self.Hint.style} end,
 
 	--[[ 4.2... Editor UI  ]]
 	--[[ 4.2.1. Status Line]]
 	StatusLine       = {bg=gray_darker, fg=green_light},
-	StatusLineNC     = {bg=gray_darker, fg=gray},
+	StatusLineNC     = function(self) return {bg=self.StatusLine.bg, fg=gray} end,
 	StatusLineTerm   = 'StatusLine',
 	StatusLineTermNC = 'StatusLineNC',
 
@@ -297,9 +315,9 @@ local highlight_groups = {
 	Title       = {style='bold'},
 
 	--[[ 4.2.3. Conditional Line Highlighting]]
-	--Conceal={}
+	Conceal         = 'NonText',
 	CursorLine      = {bg=gray_dark},
-	CursorLineNr    = {bg=gray_dark, fg=pink},
+	CursorLineNr    = function(self) return {bg=self.CursorLine.bg, fg=pink} end,
 	debugBreakpoint = 'ErrorMsg',
 	debugPC         = 'ColorColumn',
 	LineNr          = {fg=gray},
@@ -312,7 +330,7 @@ local highlight_groups = {
 	PmenuSbar  = {bg=black},
 	PmenuSel   = {fg=FG},
 	PmenuThumb = {bg=white},
-	WildMenu   = {},
+	WildMenu   = 'PmenuSel',
 
 	--[[ 4.2.5. Folds]]
 	FoldColumn = {bg=gray_darker,             style='bold'},
@@ -320,8 +338,8 @@ local highlight_groups = {
 
 	--[[ 4.2.6. Diffs]]
 	DiffAdd    = {fg=green_dark, style='inverse'},
-	DiffChange = {fg=yellow,     style='inverse'},
-	DiffDelete = {fg=red,        style='inverse'},
+	DiffChange = {fg=yellow, style='inverse'},
+	DiffDelete = {fg=red, style='inverse'},
 	DiffText   = {fg=FG},
 
 	--[[ 4.2.7. Searching]]
@@ -350,21 +368,20 @@ local highlight_groups = {
 	--[[ 4.2.11. LSP ]]
 	LspDiagnosticsDefaultError = 'Error',
 	LspDiagnosticsFloatingError = 'ErrorMsg',
-	LspDiagnosticsSignError = 'ErrorMsg',
+	LspDiagnosticsSignError = 'LspDiagnosticsFloatingError',
 
 	LspDiagnosticsDefaultWarning = 'Warning',
 	LspDiagnosticsFloatingWarning = 'WarningMsg',
-	LspDiagnosticsSignWarning = 'WarningMsg',
+	LspDiagnosticsSignWarning = 'LspDiagnosticsFloatingWarning',
 
 	LspDiagnosticsDefaultHint = 'Hint',
 	LspDiagnosticsFloatingHint = 'HintMsg',
-	LspDiagnosticsSignHint = 'HintMsg',
+	LspDiagnosticsSignHint = 'LspDiagnosticsFloatingHint',
 
 	LspDiagnosticsDefaultInformation = 'Info',
 	LspDiagnosticsFloatingInformation = 'InfoMsg',
-	LspDiagnosticsSignInformation = 'InfoMsg',
+	LspDiagnosticsSignInformation = 'LspDiagnosticsFloatingInformation',
 
-	LspDiagnosticsUnderline = {style={'undercurl', color=white}},
 	LspDiagnosticsUnderlineError = 'CocErrorHighlight',
 	LspDiagnosticsUnderlineHint  = 'CocHintHighlight',
 	LspDiagnosticsUnderlineInfo  = 'CocInfoHighlight',
@@ -660,13 +677,13 @@ local highlight_groups = {
 	ALEWarningSign = 'WarningMsg',
 
 	--[[ 4.4.2. coc.nvim ]]
-	CocErrorHighlight   = {style={'undercurl', color='red'}},
-	CocHintHighlight    = {style={'undercurl', color='magenta'}},
-	CocInfoHighlight    = {style={'undercurl', color='pink_light'}},
+	CocErrorHighlight = {style={'undercurl', color='red'}},
+	CocHintHighlight  = {style={'undercurl', color='magenta'}},
+	CocInfoHighlight  = {style={'undercurl', color='pink_light'}},
 	CocWarningHighlight = {style={'undercurl', color='orange'}},
-	CocErrorSign   = 'ALEErrorSign',
-	CocHintSign    = 'HintMsg',
-	CocInfoSign    = 'InfoMsg',
+	CocErrorSign = 'ALEErrorSign',
+	CocHintSign  = 'HintMsg',
+	CocInfoSign  = 'InfoMsg',
 	CocWarningSign = 'ALEWarningSign',
 
 	--[[ 4.4.2. vim-jumpmotion / vim-easymotion ]]
@@ -686,7 +703,7 @@ local highlight_groups = {
 
 	--[[ 4.4.5. vim-indent-guides ]]
 	IndentGuidesOdd  = {bg=gray_darker},
-	IndentGuidesEven = {bg=gray_dark},
+	IndentGuidesEven = {bg=gray},
 
 	--[[ 4.4.7. NERDTree ]]
 	NERDTreeCWD = 'Label',
@@ -718,13 +735,16 @@ local highlight_groups = {
 	BufferInactiveSign   = {bg=gray_darker, fg=gray_darker},
 	BufferInactiveTarget = 'BufferVisibleTarget',
 
-	BufferTabpages    = {bg=FG, fg=gray_dark, style='bold'},
+	BufferTabpages    = {bg=FG, fg=BG, style='bold'},
 	BufferTabpageFill = 'TabLineFill',
 
 	BufferVisible       = 'TabLine',
 	BufferVisibleMod    = {bg=gray_darker, fg=white, style='italic'},
 	BufferVisibleSign   = 'BufferVisible',
-	BufferVisibleTarget = {bg=gray_darker, fg=white, style='bold'},
+	BufferVisibleTarget = function(self)
+		local parent = self.BufferVisibleMod
+		return {bg=parent.fg, fg=parent.bg, style='bold'}
+	end,
 }
 
 --[[ Step 5: Terminal Colors
@@ -842,8 +862,7 @@ local terminal_ansi_colors = {
 		is correctly set up if they want to enjoy the best possible experience.
 ]]
 
--- Change 'highlite' to the name of your colorscheme as defined in step 1.
-require('highlite')(
+require(vim.g.colors_name)(
 	highlight_group_normal,
 	highlight_groups,
 	terminal_ansi_colors
