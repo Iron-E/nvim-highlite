@@ -9,7 +9,7 @@ be configured by cloning the repository and following the README, or
 individually used to comprehensively highlight groups with its functions.
 
 ==============================================================================
-0. Table of Contents                                               *highlite-toc*
+0. Table of Contents                                              *highlite-toc*
 
 1. Requirements ............ |highlite-requirements|
 2. Usage ................... |highlite-usage|
@@ -17,11 +17,40 @@ individually used to comprehensively highlight groups with its functions.
 ==============================================================================
 1. Requirements                                          *highlite-requirements*
 
-* Neovim 0.5+
+- Neovim 0.5+
 
 ==============================================================================
 2. Usage                                                        *highlite-usage*
 
+                                                              *highlite.group()*
+`highlite`.group({group_name})                                  *highlite-group()*
+
+	Convert a pre-existing |highlight-group| into a format that |highlite|
+	recognizes.
+
+	Note: the |highlight-group| must have been either:
+		- |:highlight|ed.
+		- |highlite-highlight|ed.
+
+	Parameters: ~
+		{group_name}  A `string` which is the |highlight-group| to convert.
+
+	Return: ~
+		- A `table` which can be used as the {attributes} parameter for
+		  |highlite.highlight()|.
+
+	Example: ~
+>
+	local highlite = require('highlite')
+
+	-- get the 'Error' highlight group
+	local hl_error = highlite.group('Error')
+
+	-- Define 'ErrorMsg' as foreground = background of 'Error'
+	highlite.highlight('ErrorMsg', {fg=hl_error.bg, bg=BG})
+<
+
+                                                          *highlite.highlight()*
 `highlite`.highlight({group}, {attributes})                 *highlite-highlight()*
 
 	Highlight some {group} according to its {attributes}.
@@ -47,7 +76,7 @@ individually used to comprehensively highlight groups with its functions.
 		}
 <
 	Return: ~
-		* Nothing.
+		- Nothing.
 
 	Example: ~
 >
@@ -64,6 +93,8 @@ individually used to comprehensively highlight groups with its functions.
 	See also: ~
 		|group-names|  Additional semantic highlighting groups.
 
+                                                 *highlite:highlight_terminal()*
+                                                 *highlite-highlight_terminal()*
 `highlite`:highlight_terminal({terminal_ansi_colors})
 
 	Override the |terminal| colors with a new table of {terminal_ansi_colors}.
@@ -92,7 +123,7 @@ individually used to comprehensively highlight groups with its functions.
 		}
 <
 	Return: ~
-		* Nothing.
+		- Nothing.
 
 	Example: ~
 >
