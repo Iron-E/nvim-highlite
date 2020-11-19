@@ -7,7 +7,9 @@
 --]]
 
 local vim = vim
-local cmd = vim.api.nvim_command
+local api = vim.api
+local cmd = api.nvim_command
+local fn  = vim.fn
 
 --[[
 	/*
@@ -26,7 +28,6 @@ local _TYPE_TABLE  = 'table'
 -- Determine which set of colors to use.
 local _USING_HEX_OR_256 = tonumber(vim.o.t_Co) >= 256
 	or vim.o.termguicolors
-	or vim.fn.has('gui_running')
 	or string.find(vim.env.TERM, '256')
 
 --[[
@@ -70,9 +71,57 @@ end or function(command, attributes)
 end --}}} ‡
 
 -- Detect attribute links and link them
-local function link_attributes(attributes)
-	for attribute, val in pairs(attributes) do
-		if type(val) == _TYPE_STRING then print() end
+local _HIGHLITE_NVIM_API_MAP = {
+	bg = 'background',
+	fg = 'foreground',
+	blend = 'blend',
+	style = {
+		'special',
+		'reverse',
+		'italic',
+		'bold',
+		'strikethrough',
+		'underline',
+		'undercurl',
+	},
+}
+
+-- link the colors of a highlight group.
+local function link_color_attribute(unlinked_attributes, unlinked_attribute, attribute_from_group_to_link)
+	unlinked_attributes[unlinked_attribute] = (attribute_from_group_to_link and vim.o.termguicolors)
+		and string.format('#%06x', attribute_from_group_to_link)
+		or attribute_from_group_to_link
+		or _NONE
+end
+
+-- link the style of a highlight group.
+local function link_style_attributes(unlinked_attributes, unlinked_attribute, attributes_to_link, group_to_link)
+	unlinked_attributes[unlinked_attribute] = {}
+
+	for _, attribute_to_link in ipairs(attributes_to_link) do
+		if group_to_link[attribute_to_link] then
+			unlinked_attributes[unlinked_attribute][#unlinked_attributes[unlinked_attribute] + 1] = attribute_to_link
+		end
+	end
+end
+
+-- link attributes in a highlight group.
+local function link_attributes(unlinked_attributes)
+	for unlinked_attribute, unlinked_value in pairs(unlinked_attributes) do
+		if type(unlinked_value) == _TYPE_STRING then
+
+			local attributes_to_link = _HIGHLITE_NVIM_API_MAP[unlinked_attribute]
+			local group_to_link = api.nvim_get_hl_by_name(unlinked_value, vim.o.termguicolors) or {}
+			local link_type = type(attributes_to_link)
+
+			if link_type == _TYPE_STRING then
+				link_color_attribute(unlinked_attributes, unlinked_attribute, group_to_link[attributes_to_link])
+			elseif link_type == _TYPE_TABLE then
+				link_style_attributes(unlinked_attributes, unlinked_attribute, attributes_to_link, group_to_link)
+			else -- it is a number
+				unlinked_attributes[unlinked_attribute] = attributes_to_link
+			end
+		end
 	end
 end
 
@@ -112,12 +161,13 @@ function highlite.highlight(highlight_group, attributes) -- {{{ †
 	end
 
 	-- Determine if there is a highlight link, and if so, assign it.
-	local link = (type(attributes) == _TYPE_STRING) and attributes or attributes.link
+	local link = (type(attributes) == _TYPE_STRING) and attributes
 
 	if link then -- `highlight_group` is a link to another group.
-		highlight_cmd[3] = highlight_cmd[2]..' '
+		highlight_cmd[3] = highlight_cmd[2]
 		highlight_cmd[2] = 'link '
-		highlight_cmd[4] = link
+		highlight_cmd[4] = ' '
+		highlight_cmd[5] = link
 	else -- The `highlight_group` is uniquely defined.
 		link_attributes(attributes)
 		colorize(highlight_cmd, attributes)
@@ -146,7 +196,7 @@ return setmetatable(highlite, {
 		cmd('hi clear')
 
 		-- If the syntax has been enabled, reset it.
-		if vim.fn.exists('syntax_on') then cmd('syntax reset') end
+		if fn.exists('syntax_on') then cmd('syntax reset') end
 
 		-- If we aren't using hex nor 256 colorsets.
 		if not _USING_HEX_OR_256 then vim.o.t_Co = 16 end
