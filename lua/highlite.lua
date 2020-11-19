@@ -43,6 +43,14 @@ local function blend(command, attributes) -- {{{ †
 	end
 end --}}} ‡
 
+-- filter a highlight group's style information
+local function filter_group_style(value)
+	return value ~= 'background'
+		and value ~= 'blend'
+		and value ~= 'foreground'
+		and value ~= 'special'
+end
+
 -- Get the color value of a color variable, or "NONE" as a default.
 local function get(color, index) -- {{{ †
 	if type(color) == _TYPE_TABLE and color[index] then
@@ -94,17 +102,13 @@ function highlite.group(group_name)
 
 	if not no_errors then group_definition = {} end
 
+	-- the string.fmt expression to convert RGB to HEX
 	local fmt = '#%06x'
-	local style = {}
 
-	if group_definition.bold          then style[#style+1] = 'bold'          end
-	if group_definition.italic        then style[#style+1] = 'italic'        end
-	if group_definition.reverse       then style[#style+1] = 'reverse'       end
-	if group_definition.strikethrough then style[#style+1] = 'strikethrough' end
-	if group_definition.undercurl     then style[#style+1] = 'undercurl'     end
-	if group_definition.underline     then style[#style+1] = 'underline'     end
-	if group_definition.special       then style.color     =
-		string.format(fmt, group_definition.special)
+	-- the style of the highlight group
+	local style = vim.tbl_filter(filter_group_style, vim.tbl_keys(group_definition))
+	if group_definition.special then
+		style.color = string.format(fmt, group_definition.special)
 	end
 
 	return {
