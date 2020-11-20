@@ -129,7 +129,7 @@ individually used to comprehensively highlight groups with its functions.
 >
 		local highlite = require('highlite')
 
-		highlite.highlight_terminal({
+		highlite:highlight_terminal({
 			[1]  = {'#202020' , 0   , 'black'},
 			[2]  = {'#a80000' , 124 , 'darkred'},
 			[3]  = {'#50de60' , 83  , 'darkgreen'},
