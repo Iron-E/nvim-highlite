@@ -89,6 +89,9 @@ highlite.highlight('Function', {bg=black, fg=red, light={bg=white}})
 
 -- Link 'Example' to 'Identifier'
 highlite.highlight('Example', 'Identifier')
+
+-- You can also reference specific attributes of another highlight group.
+highlite.highlight('AnotherExample', {bg=highlite.group'SpellBad'.bg, fg=white})
 ```
 
 ### As Template
@@ -108,8 +111,11 @@ local highlight_groups = {
 	-- Any field which can be set to "NONE" doesn't need to be set, it will be automatically assumed to be "NONE".
 	Identifier = {bg=red, fg=black, style='bold'},
 	-- If your colorscheme should respond to multiple background settings, you can do that too:
-	Function = {bg=black, fg=red, light={bg=white}}
+	Function = {bg=black, fg=red, light={bg=white}},
 	--[[ Note that light/dark differentiation is completely optional. ]]
+
+	-- You can also reference specific attributes of another highlight group.
+	SomethingElse = function(self) return {fg=self.Identifier.fg, bg=self.Function.bg} end,
 }
 
 -- The rest is mostly handled by the template.
