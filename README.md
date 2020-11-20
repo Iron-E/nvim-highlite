@@ -123,7 +123,7 @@ Ensure your colorscheme's base folder is in Neovim's `rtp` before sourcing.
 
 > What syntax files should I use for `X` language?
 
-You can either use [`nvim-treesitter`](https://github.com/nvim-treesitter/nvim-treesitter), or one of the following:
+You can either use [`nvim-treesitter`](https://github.com/nvim-treesitter/nvim-treesitter), [`nvim-polyglot`](https://github.com/sheerun/vim-polyglot), or one of the following:
 
 | Language   | Syntax Plugin                                                                             |
 |:-----------|:------------------------------------------------------------------------------------------|
@@ -166,7 +166,6 @@ You can either use [`nvim-treesitter`](https://github.com/nvim-treesitter/nvim-t
 | Ungrammar  | [Iron-E/vim-ungrammar](https://github.com/Iron-E/vim-ungrammar)                           |
 | VB.NET     | [vim-scripts/vbnet](https://github.com/vim-scripts/vbnet)                                 |
 | Vim Logs   | [MTDL9/vim-log-highlighting](https://github.com/MTDL9/vim-log-highlighting)               |
-| Vimscript  | [vim-jp/syntax-vim-ex](https://github.com/vim-jp/syntax-vim-ex)                           |
 | XML        | [amadeus/vim-xml](https://github.com/amadeus/vim-xml)                                     |
 | YAML       | [stephpy/vim-yaml](https://github.com/stephpy/vim-yaml)                                   |
 | YATS       | [HerringtonDarkholme/yats](https://github.com/HerringtonDarkholme/yats)                   |
