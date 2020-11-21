@@ -745,6 +745,9 @@ local highlight_groups = {
 		local parent = self.BufferVisibleMod
 		return {bg=parent.fg, fg=parent.bg, style='bold'}
 	end,
+
+	--[[ 4.4.10. vim-sandwhich ]]
+	OperatorSandwichChange = 'DiffText',
 }
 
 --[[ Step 5: Terminal Colors
