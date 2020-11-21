@@ -337,10 +337,10 @@ local highlight_groups = {
 	Folded     = {bg=purple_light,  fg=black, style='italic'},
 
 	--[[ 4.2.6. Diffs]]
-	DiffAdd    = {fg=green_dark, style='inverse'},
-	DiffChange = {fg=yellow, style='inverse'},
-	DiffDelete = {fg=red, style='inverse'},
-	DiffText   = {fg=FG},
+	DiffAdd    = {fg=black, bg=green_dark},
+	DiffChange = {},
+	DiffDelete = function(self) return {fg=self.DiffAdd.fg, bg=red} end,
+	DiffText   = function(self) return {fg=self.DiffAdd.fg, bg=yellow} end,
 
 	--[[ 4.2.7. Searching]]
 	IncSearch  = {style='inverse'},
