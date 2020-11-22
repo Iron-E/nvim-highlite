@@ -732,7 +732,7 @@ local highlight_groups = {
 
 	BufferInactive       = 'BufferVisible',
 	BufferInactiveMod    = 'BufferVisibleMod',
-	BufferInactiveSign   = {fg=gray_darker, bg=gray_darker},
+	BufferInactiveSign   = 'BufferVisibleSign',
 	BufferInactiveTarget = 'BufferVisibleTarget',
 
 	BufferTabpages    = {fg=BG, bg=FG, style='bold'},
