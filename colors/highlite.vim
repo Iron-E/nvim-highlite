@@ -235,7 +235,7 @@ local FG = 'fg'
 
 --[[ These are the ones you should edit. ]]
 -- This is the only highlight that must be defined separately.
-local highlight_group_normal = {bg=black, fg=gray_light}
+local highlight_group_normal = {fg=gray_light, bg=black}
 
 -- This is where the rest of your highlights should go.
 local highlight_groups = {
@@ -292,32 +292,32 @@ local highlight_groups = {
 	--[[ 4.1.7. Help Syntax]]
 	Underlined        = {fg=turqoise, style='underline'},
 	Ignore            = {fg=gray},
-	Error             = {bg=red_dark, fg=white, style='bold'},
+	Error             = {fg=white, bg=red_dark, style='bold'},
 	Todo              = {fg=yellow,   style={'bold', 'underline'}},
 	helpHyperTextJump = 'Underlined',
 	helpSpecial       = 'Function',
-	Hint              = {bg=magenta,    fg=black, style='bold'},
-	Info              = function(self) return {bg=pink_light, fg=self.Hint.fg, style=self.Hint.style} end,
-	Warning           = function(self) return {bg=orange,     fg=self.Hint.fg, style=self.Hint.style} end,
+	Hint              = {fg=black,    bg=magenta, style='bold'},
+	Info              = function(self) return {fg=self.Hint.fg, bg=pink_light, style=self.Hint.style} end,
+	Warning           = function(self) return {fg=self.Hint.fg, bg=orange, style=self.Hint.style} end,
 
 	--[[ 4.2... Editor UI  ]]
 	--[[ 4.2.1. Status Line]]
-	StatusLine       = {bg=gray_darker, fg=green_light},
-	StatusLineNC     = function(self) return {bg=self.StatusLine.bg, fg=gray} end,
+	StatusLine       = {fg=green_light, bg=gray_darker},
+	StatusLineNC     = function(self) return {fg=gray, bg=self.StatusLine.bg} end,
 	StatusLineTerm   = 'StatusLine',
 	StatusLineTermNC = 'StatusLineNC',
 
 	--[[ 4.2.2. Separators]]
 	VertSplit   = {fg=white},
-	TabLine     = {bg=gray_darker, fg=FG},
-	TabLineFill = {bg=black, fg=gray_darker},
-	TabLineSel  = {bg=BG, fg=FG},
+	TabLine     = {fg=FG, bg=gray_darker},
+	TabLineFill = {fg=gray_darker, bg=black},
+	TabLineSel  = {fg=FG, bg=BG},
 	Title       = {style='bold'},
 
 	--[[ 4.2.3. Conditional Line Highlighting]]
 	Conceal         = 'NonText',
 	CursorLine      = {bg=gray_dark},
-	CursorLineNr    = function(self) return {bg=self.CursorLine.bg, fg=pink} end,
+	CursorLineNr    = function(self) return {fg=pink, bg=self.CursorLine.bg} end,
 	debugBreakpoint = 'ErrorMsg',
 	debugPC         = 'ColorColumn',
 	LineNr          = {fg=gray},
@@ -326,15 +326,15 @@ local highlight_groups = {
 	VisualNOS       = {bg=gray_darker},
 
 	--[[ 4.2.4. Popup Menu]]
-	Pmenu      = {bg=gray_dark, fg=FG},
+	Pmenu      = {fg=FG, bg=gray_dark},
 	PmenuSbar  = {bg=black},
 	PmenuSel   = {fg=FG},
 	PmenuThumb = {bg=white},
 	WildMenu   = 'PmenuSel',
 
 	--[[ 4.2.5. Folds]]
-	FoldColumn = {bg=gray_darker,             style='bold'},
-	Folded     = {bg=purple_light,  fg=black, style='italic'},
+	FoldColumn = {bg=gray_darker, style='bold'},
+	Folded     = {fg=black,  bg=purple_light, style='italic'},
 
 	--[[ 4.2.6. Diffs]]
 	DiffAdd    = {fg=black, bg=green_dark},
@@ -726,24 +726,24 @@ local highlight_groups = {
 
 	--[[ 4.4.9. barbar.nvim ]]
 	BufferCurrent       = 'TabLineSel',
-	BufferCurrentMod    = {bg=black, fg=tan, style='bold'},
+	BufferCurrentMod    = {fg=tan, bg=black, style='bold'},
 	BufferCurrentSign   = 'HintMsg',
 	BufferCurrentTarget = 'BufferCurrentSign',
 
 	BufferInactive       = 'BufferVisible',
 	BufferInactiveMod    = 'BufferVisibleMod',
-	BufferInactiveSign   = {bg=gray_darker, fg=gray_darker},
+	BufferInactiveSign   = {fg=gray_darker, bg=gray_darker},
 	BufferInactiveTarget = 'BufferVisibleTarget',
 
-	BufferTabpages    = {bg=FG, fg=BG, style='bold'},
+	BufferTabpages    = {fg=BG, bg=FG, style='bold'},
 	BufferTabpageFill = 'TabLineFill',
 
 	BufferVisible       = 'TabLine',
-	BufferVisibleMod    = {bg=gray_darker, fg=white, style='italic'},
+	BufferVisibleMod    = {fg=white, bg=gray_darker, style='italic'},
 	BufferVisibleSign   = 'BufferVisible',
 	BufferVisibleTarget = function(self)
 		local parent = self.BufferVisibleMod
-		return {bg=parent.fg, fg=parent.bg, style='bold'}
+		return {fg=parent.fg, bg=parent.bg, style='bold'}
 	end,
 
 	--[[ 4.4.10. vim-sandwhich ]]
