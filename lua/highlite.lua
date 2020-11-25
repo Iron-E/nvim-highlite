@@ -159,6 +159,19 @@ end
 
 return setmetatable(highlite, {
 	['__call'] = function(self, normal, highlights, terminal_ansi_colors)
+		-- function to resolve function highlight groups being defined by function calls.
+		local function resolve(tbl, key)
+			local value = tbl[key]
+			if type(value) == 'function' then
+				-- lazily cache the result; next time, if it isn't a function this step will be skipped
+				tbl[key] = value(setmetatable({}, {
+					['__index'] = function(_, inner_key) return resolve(tbl, inner_key) end
+				}))
+			end
+			return tbl[key]
+		end
+
+
 		-- save the colors_name before syntax reset
 		local color_name = vim.g.colors_name
 
@@ -179,12 +192,8 @@ return setmetatable(highlite, {
 		self.highlight('Normal', normal)
 
 		-- Highlight everything else.
-		for highlight_group, attributes in pairs(highlights) do
-			if type(attributes) == 'function' then
-				attributes = attributes(highlights)
-			end
-
-			self.highlight(highlight_group, attributes)
+		for highlight_group, _ in pairs(highlights) do
+			self.highlight(highlight_group, resolve(highlights, highlight_group))
 		end
 
 		-- Set the terminal highlight colors.
