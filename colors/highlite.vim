@@ -549,9 +549,6 @@ local highlight_groups = {
 	mkdItalic           = 'mkdBold',
 	mkdListItem         = 'Special',
 	mkdRule             = 'Underlined',
-	texMathMatcher      = 'Number',
-	texMathZoneX        = 'Number',
-	texMathZoneY        = 'Number',
 
 	--[[ 4.3.20. Python ]]
 	pythonBrackets        = 'Delimiter',
@@ -666,6 +663,12 @@ local highlight_groups = {
 	gitrebaseReword = 'gitrebasePick',
 	gitrebaseSquash = 'Macro',
 	gitrebaseSummary = 'Normal',
+
+	--[[ 4.3.35. Vimtex ]]
+	texMathGroup   = 'Number',
+	texMathSub     = 'Number',
+	texMathRegionX = 'Number',
+	texMathRegionY = 'Number',
 
 	--[[ 4.4. Plugins
 		Everything in this section is OPTIONAL. Feel free to remove everything
