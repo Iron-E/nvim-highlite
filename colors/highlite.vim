@@ -665,10 +665,11 @@ local highlight_groups = {
 	gitrebaseSummary = 'Normal',
 
 	--[[ 4.3.35. Vimtex ]]
-	texMathGroup   = 'Number',
-	texMathSub     = 'Number',
-	texMathRegionX = 'Number',
-	texMathRegionY = 'Number',
+	texMathRegion   = 'Number',
+	texMathSub      = 'Number',
+	texMathSuper    = 'Number',
+	texMathRegionX  = 'Number',
+	texMathRegionXX = 'Number',
 
 	--[[ 4.4. Plugins
 		Everything in this section is OPTIONAL. Feel free to remove everything
@@ -729,11 +730,13 @@ local highlight_groups = {
 
 	--[[ 4.4.9. barbar.nvim ]]
 	BufferCurrent       = 'TabLineSel',
+	BufferCurrentIndex  = function(self) return {fg=self.InfoMsg.fg, bg=self.BufferCurrent.bg} end,
 	BufferCurrentMod    = {fg=tan, bg=black, style='bold'},
 	BufferCurrentSign   = 'HintMsg',
 	BufferCurrentTarget = 'BufferCurrentSign',
 
 	BufferInactive       = 'BufferVisible',
+	BufferInactiveIndex  = function(self) return {fg=self.InfoMsg.fg, bg=self.BufferInactive.bg} end,
 	BufferInactiveMod    = 'BufferVisibleMod',
 	BufferInactiveSign   = 'BufferVisibleSign',
 	BufferInactiveTarget = 'BufferVisibleTarget',
@@ -742,6 +745,7 @@ local highlight_groups = {
 	BufferTabpageFill = 'TabLineFill',
 
 	BufferVisible       = 'TabLine',
+	BufferVisibleIndex  = function(self) return {fg=self.InfoMsg.fg, bg=self.BufferVisible.bg} end,
 	BufferVisibleMod    = {fg=white, bg=gray_darker, style='italic'},
 	BufferVisibleSign   = 'BufferVisible',
 	BufferVisibleTarget = function(self)
