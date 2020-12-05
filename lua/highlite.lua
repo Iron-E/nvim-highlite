@@ -85,8 +85,10 @@ end
 
 -- Load specific &bg instructions
 local function use_background_with(attributes)
-	attributes.__index = attributes
-	return setmetatable(attributes[vim.o.background], attributes)
+	return setmetatable(
+		attributes[vim.o.background],
+		{['__index'] = attributes}
+	)
 end
 
 --[[
