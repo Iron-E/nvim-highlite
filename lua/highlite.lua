@@ -8,7 +8,7 @@
 
 local vim = vim
 local api = vim.api
-local cmd = api.nvim_command
+local exe = api.nvim_command
 local fn  = vim.fn
 
 --[[
@@ -27,7 +27,7 @@ local _TYPE_TABLE  = 'table'
 
 -- Determine which set of colors to use.
 local _USE_HEX = vim.o.termguicolors
-local _USE_256 = tonumber(vim.o.t_Co) >= 256
+local _USE_256 = tonumber(vim.o.t_Co) > 255
 	or string.find(vim.env.TERM, '256')
 
 --[[
@@ -39,7 +39,7 @@ local _USE_256 = tonumber(vim.o.t_Co) >= 256
 -- Add the 'blend' parameter to some highlight command, if there is one.
 local function blend(command, attributes) -- {{{ †
 	if attributes.blend then -- There is a value for the `highlight-blend` field.
-		command[#command + 1] = ' blend='..attributes.blend
+		command[#command+1]=' blend='..attributes.blend
 	end
 end --}}} ‡
 
@@ -77,10 +77,10 @@ local stylize = _USE_HEX and function(command, style, color)
 	command[#command+1]=' gui='..style
 
 	if color then -- There is an undercurl color.
-		command[#command + 1] = ' guisp='..get(color, _PALETTE_HEX)
+		command[#command+1]=' guisp='..get(color, _PALETTE_HEX)
 	end
 end or function(command, style)
-	command[#command + 1] = ' cterm='..style
+	command[#command+1]=' cterm='..style
 end
 
 -- Load specific &bg instructions
@@ -148,7 +148,7 @@ function highlite.highlight(highlight_group, attributes) -- {{{ †
 		end
 	end
 
-	cmd(table.concat(highlight_cmd))
+	exe(table.concat(highlight_cmd))
 end --}}} ‡
 
 function highlite:highlight_terminal(terminal_ansi_colors)
@@ -176,10 +176,10 @@ return setmetatable(highlite, {
 		local color_name = vim.g.colors_name
 
 		-- Clear the highlighting.
-		cmd('hi clear')
+		exe 'hi clear'
 
 		-- If the syntax has been enabled, reset it.
-		if fn.exists('syntax_on') then cmd('syntax reset') end
+		if fn.exists 'syntax_on' then exe 'syntax reset' end
 
 		-- replace the colors_name
 		vim.g.colors_name = color_name
