@@ -153,9 +153,9 @@ function highlite.highlight(highlight_group, attributes) -- {{{ †
 end --}}} ‡
 
 function highlite:highlight_terminal(terminal_ansi_colors)
-	if self.using_hex_or_256 then for index, color in ipairs(terminal_ansi_colors) do
-		vim.g['terminal_color_'..index] = vim.o.termguicolors and color[_PALETTE_HEX] or color[_PALETTE_256]
-	end end
+	for index, color in ipairs(terminal_ansi_colors) do
+		vim.g['terminal_color_'..index] = vim.o.termguicolors and color[_PALETTE_HEX] or color[_PALETTE_256] or get(color, _PALETTE_ANSI)
+	end
 end
 
 return setmetatable(highlite, {
