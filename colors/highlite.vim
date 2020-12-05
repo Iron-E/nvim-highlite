@@ -684,7 +684,7 @@ local highlight_groups = {
 	coqRequire  = 'Include',
 	coqTermPunctuation = 'Delimiter',
 	coqVernacCmd = 'Statement',
-	coqVernacPunctuation = 'Delimiter',
+	coqVernacPunctuation = 'coqTermPunctuation',
 
 	--[[ 4.4. Plugins
 		Everything in this section is OPTIONAL. Feel free to remove everything
