@@ -83,6 +83,8 @@ end or function(command, style)
 	command[#command+1]=' cterm='..style
 end
 
+local function tohex(rgb) return string.format('#%06x', rgb) end
+
 -- Load specific &bg instructions
 local function use_background_with(attributes)
 	return setmetatable(
@@ -104,18 +106,15 @@ function highlite.group(group_name)
 
 	if not no_errors then group_definition = {} end
 
-	-- the string.fmt expression to convert RGB to HEX
-	local fmt = '#%06x'
-
 	-- the style of the highlight group
 	local style = vim.tbl_filter(filter_group_style, vim.tbl_keys(group_definition))
 	if group_definition.special then
-		style.color = string.format(fmt, group_definition.special)
+		style.color = tohex(group_definition.special)
 	end
 
 	return {
-		['fg'] = group_definition.foreground and string.format(fmt, group_definition.foreground) or _NONE,
-		['bg'] = group_definition.background and string.format(fmt, group_definition.background) or _NONE,
+		['fg'] = group_definition.foreground and tohex(group_definition.foreground) or _NONE,
+		['bg'] = group_definition.background and tohex(group_definition.background) or _NONE,
 		['blend'] = group_definition.blend,
 		['style'] = style or _NONE
 	}
