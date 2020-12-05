@@ -671,6 +671,21 @@ local highlight_groups = {
 	texMathRegionX  = 'Number',
 	texMathRegionXX = 'Number',
 
+	--[[ 4.3.36. Coq ]]
+	coqConstructor   = 'Constant',
+	coqDefBinderType = 'coqDefType',
+	coqDefContents1  = 'coqConstructor',
+	coqDefType  = 'Typedef',
+	coqIndBinderTerm  = 'coqDefBinderType',
+	coqIndConstructor = 'Delimiter',
+	coqIndTerm = 'Type',
+	coqKwd = 'Keyword',
+	coqKwdParen = 'Function',
+	coqRequire  = 'Include',
+	coqTermPunctuation = 'Delimiter',
+	coqVernacCmd = 'Statement',
+	coqVernacPunctuation = 'Delimiter',
+
 	--[[ 4.4. Plugins
 		Everything in this section is OPTIONAL. Feel free to remove everything
 		here if you don't want to define it, or add more if there's something

@@ -135,6 +135,7 @@ You can either use [`nvim-treesitter`](https://github.com/nvim-treesitter/nvim-t
 |:-----------|:------------------------------------------------------------------------------------------|
 | ALGOL      | [sterpe/vim-algol68](https://github.com/sterpe/vim-algol68)                               |
 | C++        | [bfrg/vim-cpp-modern](https://github.com/bfrg/vim-cpp-modern)                             |
+| Coq        | [whonore/Coqtail](https://github.com/whonore/Coqtail)                                     |
 | Dart       | [dart-lang/dart-vim-plugin](https://github.com/dart-lang/dart-vim-plugin)                 |
 | DTrace     | [vim-scripts/dtrace-syntax-file](https://github.com/vim-scripts/dtrace-syntax-file)       |
 | F#         | [ionide/Ionide-vim](https://github.com/ionide/Ionide-vim)                                 |
