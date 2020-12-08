@@ -603,7 +603,7 @@ local highlight_groups = {
 	--[[ 4.3.26. TOML ]]
 	tomlComment = 'Comment',
 	tomlKey     = 'Label',
-	tomlTable   = 'StorageClass',
+	tomlTable   = 'Structure',
 
 	--[[ 4.3.27. VimScript ]]
 	helpSpecial    = 'Special',
