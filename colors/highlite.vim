@@ -505,6 +505,7 @@ local highlight_groups = {
 
 	--[[ 4.3.11. JSON ]]
 	jsonBraces = 'luaBraces',
+	jsonEscape = 'SpecialChar',
 	jsonKeywordMatch = 'Operator',
 	jsonNull   = 'Constant',
 	jsonQuote  = 'Delimiter',
