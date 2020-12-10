@@ -145,9 +145,9 @@ You can either use [`nvim-treesitter`](https://github.com/nvim-treesitter/nvim-t
 | GraphViz   | [liuchengxu/graphviz](https://github.com/liuchengxu/graphviz)                             |
 | HTML5      | [othree/html5](https://github.com/othree/html5)                                           |
 | i3conf     | [mboughaba/i3config](https://github.com/mboughaba/i3config)                               |
-| JSON       | [elzr/vim-json](https://github.com/elzr/vim-json)                                         |
-| Java       | [uiiaoo/java-syntax](https://github.com/uiiaoo/java-syntax)                               |
+| Java       | [Iron-E/java-syntax](https://github.com/Iron-E/java-syntax)                               |
 | JavaScript | [pangloss/vim-javascript](https://github.com/pangloss/vim-javascript)                     |
+| JSON       | [elzr/vim-json](https://github.com/elzr/vim-json)                                         |
 | Julia      | [JuliaEditorSupport/julia-vim](https://github.com/JuliaEditorSupport/julia-vim)           |
 | Kotlin     | [udalov/kotlin-vim](https://github.com/udalov/kotlin-vim)                                 |
 | LESS       | [groenewege/vim-less](https://github.com/groenewege/vim-less)                             |
@@ -162,14 +162,15 @@ You can either use [`nvim-treesitter`](https://github.com/nvim-treesitter/nvim-t
 | Razor      | [adamclerk/vim-razor](https://github.com/adamclerk/vim-razor)                             |
 | RST        | [marshallward/vim-restructuredtext](https://github.com/marshallward/vim-restructuredtext) |
 | Ruby       | [vim-ruby/vim-ruby](https://github.com/vim-ruby/vim-ruby)                                 |
+| Rust       | [Iron-E/rust.vim](https://github.com/Iron-E/rust.vim)                                     |
 | SCSS       | [cakebaker/scss-syntax](https://github.com/cakebaker/scss-syntax)                         |
-| SQL        | [shmup/vim-sql-syntax](https://github.com/shmup/vim-sql-syntax)                           |
 | Shell      | [arzg/vim-sh](https://github.com/arzg/vim-sh)                                             |
+| SQL        | [shmup/vim-sql-syntax](https://github.com/shmup/vim-sql-syntax)                           |
 | Stylus     | [wavded/vim-stylus](https://github.com/wavded/vim-stylus)                                 |
 | SystemD    | [wgwoods/vim-systemd-syntax](https://github.com/wgwoods/vim-systemd-syntax)               |
 | SystemTap  | [nickhutchinson/vim-systemtap](https://github.com/nickhutchinson/vim-systemtap)           |
-| TOML       | [cespare/vim-toml](https://github.com/cespare/vim-toml)                                   |
 | TeX        | [lervag/vimtex](https://github.com/lervag/vimtex)                                         |
+| TOML       | [cespare/vim-toml](https://github.com/cespare/vim-toml)                                   |
 | Ungrammar  | [Iron-E/vim-ungrammar](https://github.com/Iron-E/vim-ungrammar)                           |
 | VB.NET     | [vim-scripts/vbnet](https://github.com/vim-scripts/vbnet)                                 |
 | Vim Logs   | [MTDL9/vim-log-highlighting](https://github.com/MTDL9/vim-log-highlighting)               |
