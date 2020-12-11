@@ -103,12 +103,12 @@ local yellow = {'#f0df33', 220, 'yellow'}
 local green_dark  = {'#50de60', 83, 'darkgreen'}
 local green       = {'#77ff00', 72, 'green'}
 local green_light = {'#a0ff70', 72, 'green'}
+local turqoise    = {'#2bff99', 33, 'green'}
 
-local blue     = {'#7090ff', 63, 'darkblue'}
-local cyan     = {'#33efff', 87, 'cyan'}
-local ice      = {'#49a0f0', 63, 'cyan'}
-local teal     = {'#00d0c0', 38, 'cyan'}
-local turqoise = {'#2bff99', 33, 'blue'}
+local blue = {'#7090ff', 63, 'blue'}
+local cyan = {'#33f0ff', 87, 'darkblue'}
+local ice  = {'#49a0f0', 63, 'cyan'}
+local teal = {'#00a5f0', 38, 'cyan'}
 
 local magenta      = {'#d5508f', 126, 'magenta'}
 local magenta_dark = {'#bb0099', 126, 'darkmagenta'}
@@ -588,7 +588,7 @@ local highlight_groups = {
 	rustNoise      = 'Delimiter',
 	rustScopeDecl  = 'Delimiter',
 	rustStructure  = 'Structure',
-	rustTrait      = 'Typedef',
+	rustTrait      = 'rustIdentifier',
 
 	--[[ 4.3.23. Scala ]]
 	scalaKeyword        = 'Keyword',
@@ -670,7 +670,8 @@ local highlight_groups = {
 	gitrebaseReset = 'gitrebaseLabel',
 	gitrebaseReword = 'gitrebasePick',
 	gitrebaseSquash = 'Macro',
-	gitrebaseSummary = 'Normal',
+	gitrebaseSummary = 'Title',
+	gitcommitSummary = 'Title',
 
 	--[[ 4.3.35. Vimtex ]]
 	texMathRegion   = 'Number',
