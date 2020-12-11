@@ -589,7 +589,6 @@ local highlight_groups = {
 	rustRepeat     = 'Repeat',
 	rustScopeDecl  = 'Delimiter',
 	rustStructure  = 'Structure',
-	rustTrait      = 'rustIdentifier',
 
 	--[[ 4.3.23. Scala ]]
 	scalaKeyword        = 'Keyword',
