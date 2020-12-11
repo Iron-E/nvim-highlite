@@ -105,10 +105,10 @@ local green       = {'#77ff00', 72, 'green'}
 local green_light = {'#a0ff70', 72, 'green'}
 local turqoise    = {'#2bff99', 33, 'green'}
 
-local blue = {'#7090ff', 63, 'blue'}
-local cyan = {'#33f0ff', 87, 'darkblue'}
-local ice  = {'#49a0f0', 63, 'cyan'}
-local teal = {'#00a5f0', 38, 'cyan'}
+local blue = {'#7799dd', 63, 'blue'}
+local cyan = {'#33f0c0', 87, 'cyan'}
+local ice  = {'#95c5ff', 63, 'cyan'}
+local teal = {'#60afff', 38, 'darkblue'}
 
 local magenta      = {'#d5508f', 126, 'magenta'}
 local magenta_dark = {'#bb0099', 126, 'darkmagenta'}
@@ -586,6 +586,7 @@ local highlight_groups = {
 	rustKeyword    = 'Keyword',
 	rustModPath    = 'Include',
 	rustNoise      = 'Delimiter',
+	rustRepeat     = 'Repeat',
 	rustScopeDecl  = 'Delimiter',
 	rustStructure  = 'Structure',
 	rustTrait      = 'rustIdentifier',
