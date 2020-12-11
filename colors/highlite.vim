@@ -659,6 +659,8 @@ local highlight_groups = {
 	yamlKey = 'Label',
 
 	--[[ 4.3.34. Git ]]
+	gitcommitOverFlow = 'Error',
+	gitcommitSummary  = 'Title',
 	gitrebaseBreak  = 'Keyword',
 	gitrebaseCommit = 'Tag',
 	gitrebaseDrop = 'Exception',
@@ -666,12 +668,11 @@ local highlight_groups = {
 	gitrebaseExec = 'PreProc',
 	gitrebaseFixup = 'gitrebaseSquash',
 	gitrebaseMerge = 'PreProc',
-	gitrebasePick = 'Include',
+	gitrebasePick  = 'Include',
 	gitrebaseReset = 'gitrebaseLabel',
-	gitrebaseReword = 'gitrebasePick',
-	gitrebaseSquash = 'Macro',
+	gitrebaseReword  = 'gitrebasePick',
+	gitrebaseSquash  = 'Macro',
 	gitrebaseSummary = 'Title',
-	gitcommitSummary = 'Title',
 
 	--[[ 4.3.35. Vimtex ]]
 	texMathRegion   = 'Number',
