@@ -623,6 +623,7 @@ local highlight_groups = {
 	vimHiGui       = 'vimHiCterm',
 	vimHiGuiFgBg   = 'vimHiGui',
 	vimHiKeyList   = 'Operator',
+	vimIsCommand   = 'Keyword',
 	vimOption      = 'Keyword',
 	vimScriptDelim = 'Ignore',
 	vimSet         = 'String',
