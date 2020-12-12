@@ -100,13 +100,13 @@ local orange_light = {'#f0af00', 214, 'yellow'}
 
 local yellow = {'#f0df33', 220, 'yellow'}
 
-local green_dark  = {'#50de60', 83, 'darkgreen'}
-local green       = {'#77ff00', 72, 'green'}
-local green_light = {'#a0ff70', 72, 'green'}
+local green_dark  = {'#70d533', 83, 'darkgreen'}
+local green       = {'#22ff22', 72, 'green'}
+local green_light = {'#99ff99', 72, 'green'}
 local turqoise    = {'#2bff99', 33, 'green'}
 
 local blue = {'#7799dd', 63, 'blue'}
-local cyan = {'#33f0c0', 87, 'cyan'}
+local cyan = {'#33dbc3', 87, 'cyan'}
 local ice  = {'#95c5ff', 63, 'cyan'}
 local teal = {'#60afff', 38, 'darkblue'}
 
@@ -247,7 +247,7 @@ local highlight_groups = {
 
 	--[[ 4.1.1. Literals]]
 	Constant  = {fg=orange_light},
-	String    = {fg=green},
+	String    = {fg=green_dark},
 	Character = {fg=red_light},
 	Number    = {fg=pink_light},
 	Boolean   = {fg=yellow},
@@ -262,7 +262,7 @@ local highlight_groups = {
 	Conditional = {fg=ice,      style='italic'},
 	Repeat      = {fg=turqoise, style='bold'},
 	Label       = {fg=pink,     style='italic'},
-	Operator    = {fg=green_dark},
+	Operator    = {fg=green},
 	Keyword     = {fg=teal},
 	Exception   = {fg=red_light, style='bold'},
 	Noise       = 'Delimiter',
