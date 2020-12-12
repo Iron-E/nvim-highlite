@@ -616,6 +616,7 @@ local highlight_groups = {
 	--[[ 4.3.27. VimScript ]]
 	helpSpecial    = 'Special',
 	vimCmdSep      = 'Delimiter',
+	vimFunction    = 'Function',
 	vimFgBgAttrib  = 'Constant',
 	vimHiCterm     = 'Label',
 	vimHiCtermFgBg = 'vimHiCterm',
