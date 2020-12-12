@@ -262,7 +262,7 @@ local highlight_groups = {
 	Conditional = {fg=ice,      style='italic'},
 	Repeat      = {fg=turqoise, style='bold'},
 	Label       = {fg=pink,     style='italic'},
-	Operator    = {fg=green},
+	Operator    = {fg=green,    style='bold'},
 	Keyword     = {fg=teal},
 	Exception   = {fg=red_light, style='bold'},
 	Noise       = 'Delimiter',
