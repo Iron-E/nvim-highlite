@@ -586,6 +586,7 @@ local highlight_groups = {
 	rustKeyword    = 'Keyword',
 	rustModPath    = 'Include',
 	rustNoise      = 'Delimiter',
+	rustPanic      = 'Exception',
 	rustRepeat     = 'Repeat',
 	rustScopeDecl  = 'Delimiter',
 	rustStructure  = 'Structure',
