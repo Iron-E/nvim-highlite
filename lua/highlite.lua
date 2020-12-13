@@ -161,14 +161,18 @@ end
 return setmetatable(highlite, {
 	['__call'] = function(self, normal, highlights, terminal_ansi_colors)
 		-- function to resolve function highlight groups being defined by function calls.
-		local function resolve(tbl, key)
+		local function resolve(tbl, key, resolve_links)
 			local value = tbl[key]
-			if type(value) == 'function' then
+			local value_type = type(value)
+			if value_type == 'function' then
 				-- lazily cache the result; next time, if it isn't a function this step will be skipped
 				tbl[key] = value(setmetatable({}, {
-					['__index'] = function(_, inner_key) return resolve(tbl, inner_key) end
+					['__index'] = function(_, inner_key) return resolve(tbl, inner_key, true) end
 				}))
+			elseif value_type == _TYPE_STRING and not string.find(value, '^#') and resolve_links then
+				return resolve(tbl, tbl[key], resolve_links)
 			end
+
 			return tbl[key]
 		end
 
@@ -194,7 +198,7 @@ return setmetatable(highlite, {
 
 		-- Highlight everything else.
 		for highlight_group, _ in pairs(highlights) do
-			self.highlight(highlight_group, resolve(highlights, highlight_group))
+			self.highlight(highlight_group, resolve(highlights, highlight_group, false))
 		end
 
 		-- Set the terminal highlight colors.
