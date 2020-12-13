@@ -665,6 +665,8 @@ local highlight_groups = {
 	--[[ 4.3.34. Git ]]
 	gitcommitOverFlow = 'Error',
 	gitcommitSummary  = 'Title',
+	gitconfigAssignment = 'String',
+	gitconfigNone     = 'Oprator',
 	gitrebaseBreak  = 'Keyword',
 	gitrebaseCommit = 'Tag',
 	gitrebaseDrop = 'Exception',
