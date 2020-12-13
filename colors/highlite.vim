@@ -260,7 +260,7 @@ local highlight_groups = {
 	--[[ 4.1.3. Syntax]]
 	Statement   = {fg=ice},
 	Conditional = {fg=ice,      style='italic'},
-	Repeat      = {fg=turqoise, style='bold'},
+	Repeat      = {fg=turqoise, style='italic'},
 	Label       = {fg=pink,     style='italic'},
 	Operator    = {fg=green,    style='bold'},
 	Keyword     = {fg=teal},
