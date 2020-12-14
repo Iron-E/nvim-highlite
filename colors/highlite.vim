@@ -524,6 +524,7 @@ local highlight_groups = {
 	luaFuncName     = 'Function',
 	luaFuncParens   = 'Delimiter',
 	luaFuncTable    = 'Structure',
+	luaIn           = 'luaRepeat',
 	luaLocal        = 'Type',
 	luaNoise        = 'Operator',
 	luaParens       = 'Delimiter',
