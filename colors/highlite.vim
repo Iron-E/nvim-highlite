@@ -293,12 +293,10 @@ local highlight_groups = {
 	--[[ 4.1.7. Help Syntax]]
 	Underlined = {fg=turqoise, style='underline'},
 	Ignore = {fg=gray},
-	Error  = {fg=white, bg=red_dark, style='bold'},
-	Todo   = {fg=yellow, style={'bold', 'underline'}},
-	helpHyperTextJump = 'Underlined',
-	helpSpecial = 'Function',
-	Hint    = {fg=black, bg=magenta, style='bold'},
-	Info    = function(self) return {fg=self.Hint.fg, bg=pink_light, style=self.Hint.style} end,
+	Error = {fg=white, bg=red_dark, style='bold'},
+	Todo = {fg=yellow, style={'bold', 'underline'}},
+	Hint = {fg=black, bg=magenta, style='bold'},
+	Info = function(self) return {fg=self.Hint.fg, bg=pink_light, style=self.Hint.style} end,
 	Warning = function(self) return {fg=self.Hint.fg, bg=orange, style=self.Hint.style} end,
 
 	--[[ 4.2... Editor UI  ]]
@@ -550,9 +548,9 @@ local highlight_groups = {
 	mkdCodeEnd = 'mkdCodeStart',
 	mkdHeading = 'Delimiter',
 	mkdItalic  = 'mkdBold',
-	mkdLineBreak = NONE,
+	mkdLineBreak = 'NonText',
 	mkdListItem  = 'Special',
-	mkdRule = 'Underlined',
+	mkdRule = function(self) return {fg=self.Ignore.fg, style={'underline', color=self.Delimiter.fg}} end,
 
 	--[[ 4.3.20. Python ]]
 	pythonBrackets    = 'Delimiter',
@@ -618,10 +616,6 @@ local highlight_groups = {
 	tomlTable = 'Structure',
 
 	--[[ 4.3.27. VimScript ]]
-	helpSpecial  = 'Special',
-	helpHeader   = 'Label',
-	helpHeadline = 'Title',
-	helpSectionDelim = 'Delimiter',
 	vimCmdSep     = 'Delimiter',
 	vimFunction   = 'Function',
 	vimFgBgAttrib = 'Constant',
@@ -711,6 +705,14 @@ local highlight_groups = {
 	coqTermPunctuation = 'Delimiter',
 	coqVernacCmd = 'Statement',
 	coqVernacPunctuation = 'coqTermPunctuation',
+
+	--[[ 4.3.37 Help ]]
+	helpSpecial  = 'Special',
+	helpHeader   = 'Label',
+	helpHeadline = 'Title',
+	helpSectionDelim = 'Delimiter',
+	helpHyperTextJump = 'Underlined',
+	helpSpecial = 'Function',
 
 	--[[ 4.4. Plugins
 		Everything in this section is OPTIONAL. Feel free to remove everything
