@@ -232,6 +232,7 @@ local purple_light = {'#af60af', 63,  'magenta'}
 --[[ DO NOT EDIT `BG` NOR `FG`. ]]
 local BG = 'bg'
 local FG = 'fg'
+local NONE = {}
 
 --[[ These are the ones you should edit. ]]
 -- This is the only highlight that must be defined separately.
@@ -338,7 +339,7 @@ local highlight_groups = {
 
 	--[[ 4.2.6. Diffs]]
 	DiffAdd    = {fg=black, bg=green_dark},
-	DiffChange = {},
+	DiffChange = NONE,
 	DiffDelete = function(self) return {fg=self.DiffAdd.fg, bg=red} end,
 	DiffText   = function(self) return {fg=self.DiffAdd.fg, bg=yellow} end,
 
@@ -355,7 +356,7 @@ local highlight_groups = {
 
 	--[[ 4.2.9. Conditional Column Highlighting]]
 	ColorColumn = {style='inverse'},
-	SignColumn  = {},
+	SignColumn  = NONE,
 
 	--[[ 4.2.10. Messages]]
 	ErrorMsg   = {fg=red,          style='bold'},
@@ -463,7 +464,7 @@ local highlight_groups = {
 	goFormatSpecifier       = 'Character',
 	goFunction              = 'Function',
 	goFunctionCall          = 'goFunction',
-	goFunctionReturn        = {},
+	goFunctionReturn        = NONE,
 	goMethodCall            = 'goFunctionCall',
 	goParamType             = 'goReceiverType',
 	goPointerOperator       = 'SpecialChar',
@@ -549,6 +550,7 @@ local highlight_groups = {
 	mkdCodeEnd          = 'mkdCodeStart',
 	mkdHeading          = 'Delimiter',
 	mkdItalic           = 'mkdBold',
+	mkdLineBreak        = NONE,
 	mkdListItem         = 'Special',
 	mkdRule             = 'Underlined',
 
@@ -661,7 +663,7 @@ local highlight_groups = {
 	crontabMnth = 'Structure',
 
 	--[[ 4.3.32. PlantUML ]]
-	plantumlColonLine = {},
+	plantumlColonLine = NONE,
 
 	--[[ 4.3.33. YAML ]]
 	yamlKey = 'Label',
