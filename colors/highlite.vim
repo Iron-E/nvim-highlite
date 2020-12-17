@@ -543,7 +543,7 @@ local highlight_groups = {
 	markdownH4 = {fg=green_dark, style='bold'},
 	markdownH5 = {fg=cyan, style='bold'},
 	markdownH6 = {fg=purple_light, style='bold'},
-	mkdBold = 'SpecialComment',
+	mkdBold = 'Ignore',
 	mkdCode = 'Keyword',
 	mkdCodeDelimiter = 'mkdBold',
 	mkdCodeStart = 'mkdCodeDelimiter',
