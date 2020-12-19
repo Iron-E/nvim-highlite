@@ -707,12 +707,11 @@ local highlight_groups = {
 	coqVernacPunctuation = 'coqTermPunctuation',
 
 	--[[ 4.3.37 Help ]]
-	helpSpecial  = 'Special',
-	helpHeader   = 'Label',
+	helpHeader = 'Label',
+	helpOption = 'Keyword',
 	helpHeadline = 'Title',
 	helpSectionDelim = 'Delimiter',
 	helpHyperTextJump = 'Underlined',
-	helpSpecial = 'Function',
 
 	--[[ 4.4. Plugins
 		Everything in this section is OPTIONAL. Feel free to remove everything
