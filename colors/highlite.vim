@@ -580,6 +580,7 @@ local highlight_groups = {
 
 	--[[ 4.3.22. Rust ]]
 	rustConstraint = 'Operator',
+	rustDynKeyword = 'rustStorage',
 	rustFieldName = 'Label',
 	rustFieldSep  = 'Delimiter',
 	rustGeneric   = 'Delimiter',
