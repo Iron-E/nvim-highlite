@@ -668,6 +668,7 @@ local highlight_groups = {
 	gitcommitOverFlow = 'Error',
 	gitcommitSelectedFile = 'Directory',
 	gitcommitSummary  = 'Title',
+	gitcommitUntrackedFile = 'gitcommitSelectedFile',
 	gitconfigAssignment = 'String',
 	gitconfigEscape = 'SpecialChar',
 	gitconfigNone  = 'Operator',
