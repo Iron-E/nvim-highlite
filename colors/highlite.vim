@@ -803,6 +803,9 @@ local highlight_groups = {
 
 	--[[ 4.4.10. vim-sandwhich ]]
 	OperatorSandwichChange = 'DiffText',
+
+	--[[ 4.4.11. Fern ]]
+	FernBranchText = 'Directory',
 }
 
 --[[ Step 5: Terminal Colors
