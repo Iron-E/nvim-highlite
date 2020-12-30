@@ -666,6 +666,7 @@ local highlight_groups = {
 
 	--[[ 4.3.34. Git ]]
 	gitcommitHeader = 'SpecialComment',
+	gitcommitDiscardedFile = 'gitcommitSelectedFile',
 	gitcommitOverFlow = 'Error',
 	gitcommitSelectedFile = 'Directory',
 	gitcommitSummary  = 'Title',
