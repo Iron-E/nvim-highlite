@@ -664,7 +664,9 @@ local highlight_groups = {
 	yamlKey = 'Label',
 
 	--[[ 4.3.34. Git ]]
+	gitcommitHeader = 'SpecialComment',
 	gitcommitOverFlow = 'Error',
+	gitcommitSelectedFile = 'Directory',
 	gitcommitSummary  = 'Title',
 	gitconfigAssignment = 'String',
 	gitconfigEscape = 'SpecialChar',
