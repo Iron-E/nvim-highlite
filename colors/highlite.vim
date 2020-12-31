@@ -613,6 +613,8 @@ local highlight_groups = {
 
 	--[[ 4.3.26. TOML ]]
 	tomlComment = 'Comment',
+	tomlDate  = 'Special',
+	tomlFloat = 'Float',
 	tomlKey   = 'Label',
 	tomlTable = 'Structure',
 
