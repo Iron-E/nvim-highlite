@@ -123,13 +123,35 @@ local highlight_groups = {
 
 ## FAQ
 
+> How can I override the highlighting of one specific highlight group in my `init.vim`?
+
+When using this plugin, it is important to know that you can't just run `:hi` on a highlight group and expect that its changes will be retained. You must attach them to the `ColorScheme` `autocmd` event, as shown below:
+
+```vim
+packadd nvim-highlite
+set termguicolors "optional
+
+" WRONG! Don't do this.
+hi! Error guifg=#000000 guibg=#FFFFFF
+
+" Do this instead.
+augroup Highlite
+	" You can also use `highlite.highlight()` instead of `:hi!`
+	autocmd ColorScheme highlite hi! Error guifg=#000000 guibg=#FFFFFF
+augroup end
+
+colorscheme highlite
+```
+
+Of course, substitute `highlite` with the name of your colorscheme.
+
 > Why am I receiving `E5108: Error executing lua [string ":lua"]:1: module '<colorscheme>' not found`?
 
 Ensure your colorscheme's base folder is in Neovim's `rtp` before sourcing.
 
 > What syntax files should I use for `X` language?
 
-You can either use [`nvim-treesitter`](https://github.com/nvim-treesitter/nvim-treesitter), [`nvim-polyglot`](https://github.com/sheerun/vim-polyglot), or one of the following:
+You can either use [`nvim-treesitter`](https://github.com/nvim-treesitter/nvim-treesitter), [`nvim-polyglot`](https://github.com/sheerun/vim-polyglot), or some of the following:
 
 | Language   | Syntax Plugin                                                                             |
 |:-----------|:------------------------------------------------------------------------------------------|

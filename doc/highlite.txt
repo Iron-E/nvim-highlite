@@ -9,18 +9,19 @@ be configured by cloning the repository and following the README, or
 individually used to comprehensively highlight groups with its functions.
 
 ==============================================================================
-0. Table of Contents                                              *highlite-toc*
+TABLE OF CONTENTS                                                 *highlite-toc*
 
 1. Requirements ............ |highlite-requirements|
 2. Usage ................... |highlite-usage|
+3. FAQ ..................... |highlite-faq|
 
 ==============================================================================
-1. Requirements                                          *highlite-requirements*
+REQUIREMENTS                                          *highlite-requirements*
 
 - Neovim 0.5+
 
 ==============================================================================
-2. Usage                                                        *highlite-usage*
+USAGE                                                           *highlite-usage*
 
                                                               *highlite.group()*
 `highlite`.group({group_name})                                  *highlite-group()*
@@ -153,4 +154,33 @@ individually used to comprehensively highlight groups with its functions.
 		|terminal-configuration|  Information about how the groups are set.
 
 ==============================================================================
+FAQ                                                             *highlite-faq*
+
+E5108: Error executing lua [string ":lua"]:1: module '<colorscheme>' not found ~
+
+Ensure your colorscheme's base folder is in Neovim's `rtp` before sourcing.
+
+Override the highlighting of one specific highlight group in my init.vim? ~
+
+When using this plugin, it is important to know that you cannot just run `:hi`
+on a highlight group and expect that its changes will be retained. You must
+attach them to the |ColorScheme| |autocmd-event|, as shown below: >
+	packadd nvim-highlite
+	set termguicolors "optional
+
+	" WRONG! Don't do this.
+	hi! Error guifg=#000000 guibg=#FFFFFF
+
+	" Do this instead.
+	augroup Highlite
+		" You can also use `highlite.highlight()` instead of `:hi!`
+		autocmd ColorScheme highlite hi! Error guifg=#000000 guibg=#FFFFFF
+	augroup end
+
+	colorscheme highlite
+<
+
+Of course, substitute "highlight" with the name of your colorscheme.
+
+===============================================================================
  vim:tw=78:ts=4:ft=help:norl:
