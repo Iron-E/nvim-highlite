@@ -671,6 +671,8 @@ local highlight_groups = {
 	yamlKey = 'Label',
 
 	--[[ 4.3.34. Git ]]
+	diffAdded = 'DiffAdd',
+	diffRemoved = 'DiffDelete',
 	gitcommitHeader = 'SpecialComment',
 	gitcommitDiscardedFile = 'gitcommitSelectedFile',
 	gitcommitOverFlow = 'Error',
