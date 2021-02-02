@@ -579,19 +579,20 @@ local highlight_groups = {
 	rubyInterpolationDelimiter = 'Delimiter',
 
 	--[[ 4.3.22. Rust ]]
+	rustAssert = 'Debug',
 	rustConstraint = 'Operator',
 	rustDynKeyword = 'rustStorage',
-	rustFieldName = 'Label',
-	rustFieldSep  = 'Delimiter',
 	rustGeneric   = 'Delimiter',
 	rustIdentifier = 'Identifier',
 	rustKeyword = 'Keyword',
+	rustLifetime = 'Label',
 	rustModPath = 'Include',
 	rustNoise  = 'Delimiter',
 	rustPanic  = 'Exception',
 	rustRepeat = 'Repeat',
 	rustScopeDecl = 'Delimiter',
 	rustStructure = 'Structure',
+	rustUnused = 'Special',
 
 	--[[ 4.3.23. Scala ]]
 	scalaKeyword = 'Keyword',
