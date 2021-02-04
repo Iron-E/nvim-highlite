@@ -583,6 +583,7 @@ local highlight_groups = {
 	rustConstraint = 'Operator',
 	rustDynKeyword = 'rustStorage',
 	rustGeneric   = 'Delimiter',
+	rustEscape = 'SpecialChar',
 	rustIdentifier = 'Identifier',
 	rustKeyword = 'Keyword',
 	rustLifetime = 'Label',
