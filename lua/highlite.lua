@@ -178,9 +178,6 @@ return setmetatable(highlite, {['__call'] = function(self, normal, highlights, t
 	-- save the colors_name before syntax reset
 	local color_name = vim.g.colors_name
 
-	-- Clear the highlighting.
-	exe 'hi clear'
-
 	-- If the syntax has been enabled, reset it.
 	if fn.exists 'syntax_on' then exe 'syntax reset' end
 
