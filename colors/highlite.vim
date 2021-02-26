@@ -456,13 +456,18 @@ local highlight_groups = {
 	cssTagName         = 'Structure',
 	cssUnitDecorators  = 'Type',
 	scssAmpersand      = 'Special',
-	scssAttribute      = 'Label',
+	scssAttribute      = 'Noise',
 	scssBoolean        = 'Boolean',
 	scssDefault        = 'Keyword',
-	scssElse           = 'PreCondit',
+	scssElse           = 'scssIf',
+	scssMixinName      = function(self)
+		local super = self.cssClassName
+		return {bg=super.bg, fg=super.fg, style='Italic'}
+	end,
 	scssIf             = 'PreCondit',
 	scssInclude        = 'Include',
-	scssSelectorChar   = 'Operator',
+	scssSelectorChar   = 'Delimiter',
+	scssDefinition     = 'PreProc',
 	scssSelectorName   = 'Identifier',
 	scssVariable       = 'Define',
 	scssVariableAssignment = 'Operator',
@@ -813,8 +818,8 @@ local highlight_groups = {
 	BufferVisibleMod    = {fg=white, bg=gray_darker, style='italic'},
 	BufferVisibleSign   = 'BufferVisible',
 	BufferVisibleTarget = function(self)
-		local parent = self.BufferVisibleMod
-		return {fg=parent.fg, bg=parent.bg, style='bold'}
+		local super = self.BufferVisibleMod
+		return {fg=super.fg, bg=super.bg, style='bold'}
 	end,
 
 	--[[ 4.4.10. vim-sandwhich ]]
