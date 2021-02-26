@@ -436,6 +436,7 @@ local highlight_groups = {
 	razorDelimiter = 'PreProc',
 	razorhtmlValueDelimiter = 'Delimiter',
 	razorImplicitExpression = 'Include',
+	razorLine = 'String',
 
 	--[[ 4.3.4. CSS ]]
 	cssAtRule          = 'PreCondit',
