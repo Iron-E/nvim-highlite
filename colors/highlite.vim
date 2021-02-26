@@ -431,6 +431,7 @@ local highlight_groups = {
 	--[[ 4.3.4. CSS ]]
 	cssAtRule = 'PreCondit',
 	cssAttr = 'Keyword',
+	cssAttrComma = 'Noise',
 	cssAttrRegion = 'Keyword',
 	cssBraces = 'Delimiter',
 	cssClassName = 'Structure',
