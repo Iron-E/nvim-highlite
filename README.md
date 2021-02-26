@@ -181,7 +181,7 @@ You can either use [`nvim-treesitter`](https://github.com/nvim-treesitter/nvim-t
 | PlantUML   | [aklt/plantuml-syntax](https://github.com/aklt/plantuml-syntax)                           |
 | Prettier   | [prettier/vim-prettier](https://github.com/prettier/vim-prettier)                         |
 | Python     | [vim-python/python-syntax](https://github.com/vim-python/python-syntax)                   |
-| Razor      | [adamclerk/vim-razor](https://github.com/adamclerk/vim-razor)                             |
+| Razor      | [jlcrochet/vim-razor](https://github.com/jlcrochet/vim-razor)                             |
 | RST        | [marshallward/vim-restructuredtext](https://github.com/marshallward/vim-restructuredtext) |
 | Ruby       | [vim-ruby/vim-ruby](https://github.com/vim-ruby/vim-ruby)                                 |
 | Rust       | [Iron-E/rust.vim](https://github.com/Iron-E/rust.vim)                                     |
