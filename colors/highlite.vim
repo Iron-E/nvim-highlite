@@ -578,23 +578,6 @@ local highlight_groups = {
 	rubyDefine = 'Define',
 	rubyInterpolationDelimiter = 'Delimiter',
 
-	--[[ 4.3.22. Rust ]]
-	rustAssert = 'Debug',
-	rustConstraint = 'Operator',
-	rustDynKeyword = 'rustStorage',
-	rustGeneric   = 'Delimiter',
-	rustEscape = 'SpecialChar',
-	rustIdentifier = 'Identifier',
-	rustKeyword = 'Keyword',
-	rustLifetime = 'Label',
-	rustModPath = 'Include',
-	rustNoise  = 'Delimiter',
-	rustPanic  = 'Exception',
-	rustRepeat = 'Repeat',
-	rustScopeDecl = 'Delimiter',
-	rustStructure = 'Structure',
-	rustUnused = 'Special',
-
 	--[[ 4.3.23. Scala ]]
 	scalaKeyword = 'Keyword',
 	scalaNameDefinition = 'Identifier',
@@ -818,6 +801,14 @@ local highlight_groups = {
 
 	--[[ 4.4.11. Fern ]]
 	FernBranchText = 'Directory',
+
+	--[[ 4.4.12. LSPSaga ]]
+	DefinitionCount = 'Number',
+	DefinitionIcon = 'Special',
+	ReferencesCount = 'Number',
+	ReferencesIcon = 'DefinitionIcon',
+	TargetFileName = 'Directory',
+	TargetWord = 'Title',
 }
 
 --[[ Step 5: Terminal Colors
