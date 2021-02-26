@@ -427,6 +427,15 @@ local highlight_groups = {
 	csUnspecifiedStatement = 'Statement',
 	csXmlTag = 'Define',
 	csXmlTagName = 'Define',
+	razorhtmlTag = 'htmlTag',
+	razorhtmlAttributeOperator = 'Operator',
+	razorEventAttribute = 'PreCondit',
+	razorhtmlAttribute = 'htmlArg',
+	razorCode = 'Define',
+	razorcsStringDelimiter = 'razorhtmlValueDelimiter',
+	razorDelimiter = 'PreProc',
+	razorhtmlValueDelimiter = 'Delimiter',
+	razorImplicitExpression = 'Include',
 
 	--[[ 4.3.4. CSS ]]
 	cssAtRule          = 'PreCondit',
