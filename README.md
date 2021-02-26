@@ -151,7 +151,7 @@ Ensure your colorscheme's base folder is in Neovim's `rtp` before sourcing.
 
 > What syntax files should I use for `X` language?
 
-You can either use [`nvim-treesitter`](https://github.com/nvim-treesitter/nvim-treesitter), [`nvim-polyglot`](https://github.com/sheerun/vim-polyglot), or some of the following:
+You can either use [`nvim-treesitter`](https://github.com/nvim-treesitter/nvim-treesitter), [`vim-polyglot`](https://github.com/sheerun/vim-polyglot), or some of the following:
 
 | Language   | Syntax Plugin                                                                             |
 |:-----------|:------------------------------------------------------------------------------------------|
