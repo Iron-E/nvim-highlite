@@ -664,6 +664,7 @@ local highlight_groups = {
 
 	--[[ 4.3.30. dos INI ]]
 	dosiniHeader = 'Title',
+	dosiniLabel  = 'Label',
 
 	--[[ 4.3.31. Crontab ]]
 	crontabDay  = 'StorageClass',
