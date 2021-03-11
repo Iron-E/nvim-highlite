@@ -560,7 +560,7 @@ local highlight_groups = {
 	luaLocal  = 'Type',
 	luaNoise  = 'Delimiter',
 	luaParens = 'Delimiter',
-	luaSpecialTable = 'StorageClass',
+	luaSpecialTable = 'Structure',
 	luaSpecialValue = 'Function',
 
 	--[[ 4.3.12. Make ]]
