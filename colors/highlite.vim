@@ -562,6 +562,10 @@ local highlight_groups = {
 	luaParens = 'Delimiter',
 	luaSpecialTable = 'Structure',
 	luaSpecialValue = 'Function',
+	luaStringLongTag = function(self)
+		local delimiter = self.Delimiter
+		return {bg=delimiter.bg, fg=delimiter.fg, style='italic'}
+	end,
 
 	--[[ 4.3.12. Make ]]
 	makeCommands   = 'Statment',
