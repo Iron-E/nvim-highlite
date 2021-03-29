@@ -432,6 +432,7 @@ local highlight_groups = {
 	razorcsRHSMemberAccessOperator = 'Noise',
 	razorcsStringDelimiter = 'razorhtmlValueDelimiter',
 	razorcsTypeNullable = 'Special',
+	razorcsUnaryOperatorKeyword = 'Operator',
 	razorDelimiter = 'Delimiter',
 	razorEventAttribute = 'PreCondit',
 	razorFor  = 'razorIf',
