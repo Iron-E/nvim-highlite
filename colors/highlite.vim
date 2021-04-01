@@ -764,10 +764,10 @@ local highlight_groups = {
 	ALEWarningSign = 'WarningMsg',
 
 	--[[ 4.4.2. coc.nvim ]]
-	CocErrorHighlight = {style={'undercurl', color='red'}},
-	CocHintHighlight  = {style={'undercurl', color='magenta'}},
-	CocInfoHighlight  = {style={'undercurl', color='pink_light'}},
-	CocWarningHighlight = {style={'undercurl', color='orange'}},
+	CocErrorHighlight = {style={'undercurl', color=red}},
+	CocHintHighlight  = {style={'undercurl', color=magenta}},
+	CocInfoHighlight  = {style={'undercurl', color=pink_light}},
+	CocWarningHighlight = {style={'undercurl', color=orange}},
 	CocErrorSign = 'ALEErrorSign',
 	CocHintSign  = 'HintMsg',
 	CocInfoSign  = 'InfoMsg',
