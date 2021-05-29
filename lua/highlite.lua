@@ -10,6 +10,7 @@ local vim = vim
 local api = vim.api
 local exe = api.nvim_command
 local fn  = vim.fn
+local go = vim.go
 
 --[[
 	/*
@@ -26,8 +27,8 @@ local _TYPE_STRING = 'string'
 local _TYPE_TABLE  = 'table'
 
 -- Determine which set of colors to use.
-local _USE_HEX = vim.o.termguicolors
-local _USE_256 = tonumber(vim.o.t_Co) > 255
+local _USE_HEX = go.termguicolors
+local _USE_256 = tonumber(go.t_Co) > 255
 	or string.find(vim.env.TERM, '256')
 
 --[[
@@ -88,7 +89,7 @@ local function tohex(rgb) return string.format('#%06x', rgb) end
 -- Load specific &bg instructions
 local function use_background_with(attributes)
 	return setmetatable(
-		attributes[vim.o.background],
+		attributes[go.background],
 		{['__index'] = attributes}
 	)
 end
@@ -102,7 +103,7 @@ end
 local highlite = {}
 
 function highlite.group(group_name)
-	local no_errors, group_definition = pcall(api.nvim_get_hl_by_name, group_name, vim.o.termguicolors)
+	local no_errors, group_definition = pcall(api.nvim_get_hl_by_name, group_name, go.termguicolors)
 
 	if not no_errors then group_definition = {} end
 
@@ -132,7 +133,7 @@ function highlite.highlight(highlight_group, attributes) -- {{{ †
 		highlight_cmd[5] = attributes
 	else -- The `highlight_group` is uniquely defined.
 		-- Take care of special instructions for certain background colors.
-		if attributes[vim.o.background] then
+		if attributes[go.background] then
 			attributes = use_background_with(attributes)
 		end
 
@@ -154,7 +155,7 @@ end --}}} ‡
 
 function highlite:highlight_terminal(terminal_ansi_colors)
 	for index, color in ipairs(terminal_ansi_colors) do vim.g['terminal_color_'..(index-1)] =
-		vim.o.termguicolors and color[_PALETTE_HEX] or color[_PALETTE_256] or get(color, _PALETTE_ANSI)
+		go.termguicolors and color[_PALETTE_HEX] or color[_PALETTE_256] or get(color, _PALETTE_ANSI)
 	end
 end
 
@@ -186,7 +187,7 @@ return setmetatable(highlite, {['__call'] = function(self, normal, highlights, t
 	color_name = nil
 
 	-- If we aren't using hex nor 256 colorsets.
-	if not (_USE_HEX or _USE_256) then vim.o.t_Co = '16' end
+	if not (_USE_HEX or _USE_256) then go.t_Co = '16' end
 
 	-- Highlight the baseline.
 	self.highlight('Normal', normal)
