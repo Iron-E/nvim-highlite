@@ -18,17 +18,15 @@ local go = vim.go
 	 */
 --]]
 
+-- Determine which set of colors to use.
+local _USE_256 = tonumber(go.t_Co) > 255 or string.find(vim.env.TERM, '256')
+
 -- These are constants for the indexes in the colors that were defined before.
 local _NONE = 'NONE'
-local _PALETTE_256  = 2
-local _PALETTE_ANSI = 3
+local _PALETTE_CTERM = _USE_256 and 2 or 3
 local _PALETTE_HEX  = 1
 local _TYPE_STRING = 'string'
 local _TYPE_TABLE  = 'table'
-
--- Determine which set of colors to use.
-local _USE_256 = tonumber(go.t_Co) > 255
-	or string.find(vim.env.TERM, '256')
 
 --[[
 	/*
@@ -58,9 +56,8 @@ end --}}} ‡
 --[[ If using hex and 256-bit colors, then populate the gui* and cterm* args.
 	If using 16-bit colors, just populate the cterm* args. ]]
 local function colorize(command, attributes) -- {{{ †
-	local cterm_palette = _USE_256 and _PALETTE_256 or _PALETTE_ANSI
 	command[#command+1]=' guibg='..get(attributes.bg, _PALETTE_HEX)..' guifg='..get(attributes.fg, _PALETTE_HEX)
-		..' ctermbg='..get(attributes.bg, cterm_palette)..' ctermfg='..get(attributes.fg, cterm_palette)
+		..' ctermbg='..get(attributes.bg, _PALETTE_CTERM)..' ctermfg='..get(attributes.fg, _PALETTE_CTERM)
 
 	-- Add the `blend` parameter if it is present
 	if attributes.blend then -- There is a value for the `highlight-blend` field.
@@ -147,7 +144,7 @@ end --}}} ‡
 
 function highlite:highlight_terminal(terminal_ansi_colors)
 	for index, color in ipairs(terminal_ansi_colors) do vim.g['terminal_color_'..(index-1)] =
-		go.termguicolors and color[_PALETTE_HEX] or color[_PALETTE_256] or get(color, _PALETTE_ANSI)
+		go.termguicolors and color[_PALETTE_HEX] or color[_PALETTE_CTERM]
 	end
 end
 
