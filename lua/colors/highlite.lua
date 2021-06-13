@@ -1,4 +1,3 @@
-lua << EOF
 -- This file should be edited by the user. Read the instructions of each section and then edit them as desired.
 
 --[[ Highlite, a Neovim colorscheme template.
@@ -974,5 +973,3 @@ require(vim.g.colors_name)(
 
 -- Thanks to Romain Lafourcade (https://github.com/romainl) for the original template (romainl/vim-rnb).
 -- vim: ft=lua
-
-EOF
