@@ -357,8 +357,8 @@ local highlight_groups = {
 
 	--[[ 4.2.10. Messages]]
 	ErrorMsg = {fg=red, style='bold'},
-	HintMsg  = {fg=magenta, style='bold'},
-	InfoMsg  = {fg=pink_light, style='bold'},
+	HintMsg  = {fg=magenta, style='italic'},
+	InfoMsg  = {fg=pink_light, style='italic'},
 	ModeMsg  = {fg=yellow},
 	WarningMsg = {fg=orange, style='bold'},
 	Question   = {fg=orange_light, style='underline'},
