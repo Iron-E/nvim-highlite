@@ -848,6 +848,10 @@ local highlight_groups = {
 	ReferencesIcon = 'DefinitionIcon',
 	TargetFileName = 'Directory',
 	TargetWord = 'Title',
+
+	--[[ 4.4.13. indent-blankline.nvim ]]
+	IndentBlanklineChar = function(self) return vim.tbl_extend('force', self.Whitespace, {style='nocombine'}) end,
+	IndentBlanklineSpaceChar = 'IndentBlanklineChar',
 }
 
 --[[ Step 5: Terminal Colors
