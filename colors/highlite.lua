@@ -315,7 +315,7 @@ local highlight_groups = {
 	--[[ 4.2.3. Conditional Line Highlighting]]
 	Conceal = 'NonText',
 	CursorLine   = {bg=gray_dark},
-	CursorLineNr = function(self) return {fg=pink, bg=self.CursorLine.bg} end,
+	CursorLineNr = function(self) return {fg=pink, bg=self.LineNr.bg} end,
 	debugBreakpoint = 'ErrorMsg',
 	debugPC = 'ColorColumn',
 	LineNr  = {fg=gray},
@@ -852,6 +852,9 @@ local highlight_groups = {
 	--[[ 4.4.13. indent-blankline.nvim ]]
 	IndentBlanklineChar = function(self) return vim.tbl_extend('force', self.Whitespace, {style='nocombine'}) end,
 	IndentBlanklineSpaceChar = 'IndentBlanklineChar',
+
+	--[[ 4.4.14. trouble.nvim ]]
+	TroubleCount = function(self) return vim.tbl_extend('force', self.Number, {style='underline'}) end,
 }
 
 --[[ Step 5: Terminal Colors
