@@ -843,10 +843,10 @@ local highlight_groups = {
 
 	--[[ 4.4.12. LSPSaga ]]
 	DefinitionCount = 'Number',
-	DefinitionIcon = 'Special',
+	DefinitionIcon  = 'Special',
 	ReferencesCount = 'Number',
-	ReferencesIcon = 'DefinitionIcon',
-	TargetFileName = 'Directory',
+	ReferencesIcon  = 'DefinitionIcon',
+	TargetFileName  = 'Directory',
 	TargetWord = 'Title',
 
 	--[[ 4.4.13. indent-blankline.nvim ]]
@@ -855,6 +855,28 @@ local highlight_groups = {
 
 	--[[ 4.4.14. trouble.nvim ]]
 	TroubleCount = function(self) return vim.tbl_extend('force', self.Number, {style='underline'}) end,
+
+	--[[ 4.4.14. todo-comments.nvim ]]
+	TodoFgFIX = function(self) return {fg=self.ErrorMsg.fg} end,
+	TodoFgHACK = function(self) return {fg=self.Todo.fg} end,
+	TodoFgNOTE = 'HintMsg',
+	TodoFgPERF = 'InfoMsg',
+	TodoFgTODO = function(self) return {fg=cyan, style={'italic', 'nocombine'}} end,
+	TodoFgWARN = function(self) return {fg=self.WarningMsg.fg} end,
+
+	TodoBgFIX  = 'Error',
+	TodoBgHACK = function(self) return {fg=black, bg=self.Todo.fg, style={'bold', 'italic'}} end,
+	TodoBgNOTE = 'Hint',
+	TodoBgPERF = 'Info',
+	TodoBgTODO = function(self) return {fg=black, bg=cyan, style={'bold', 'italic', 'nocombine'}} end,
+	TodoBgWARN = 'Warning',
+
+	TodoSignFIX  = 'TodoFgFIX',
+	TodoSignHACK = 'TodoFgHACK',
+	TodoSignNOTE = 'TodoFgNOTE',
+	TodoSignPERF = 'TodoFgPERF',
+	TodoSignTODO = 'TodoFgTODO',
+	TodoSignWARN = 'TodoFgWARN',
 }
 
 --[[ Step 5: Terminal Colors
