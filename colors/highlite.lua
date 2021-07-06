@@ -877,6 +877,11 @@ local highlight_groups = {
 	TodoSignPERF = 'TodoFgPERF',
 	TodoSignTODO = 'TodoFgTODO',
 	TodoSignWARN = 'TodoFgWARN',
+
+	--[[ 4.4.15. gitsigns.nvim ]]
+	GitSignsAdd = 'GitGutterAdd',
+	GitSignsChange = 'GitGutterChange',
+	GitSignsDelete = 'GitGutterDelete',
 }
 
 --[[ Step 5: Terminal Colors
