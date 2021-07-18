@@ -753,6 +753,12 @@ local highlight_groups = {
 	helpSectionDelim = 'Delimiter',
 	helpHyperTextJump = 'Underlined',
 
+	--[[ 4.3.38 Man ]]
+	-- manBold = function(self) return vim.tbl_extend('force', self.mkdCode, {style='nocombine'}) end,
+	manOptionDesc = 'Special',
+	manReference = 'Tag',
+	manUnderline = 'Label',
+
 	--[[ 4.4. Plugins
 		Everything in this section is OPTIONAL. Feel free to remove everything
 		here if you don't want to define it, or add more if there's something
