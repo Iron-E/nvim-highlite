@@ -580,6 +580,7 @@ local highlight_groups = {
 	markdownH5 = {fg=cyan, style='bold'},
 	markdownH6 = {fg=purple_light, style='bold'},
 	mkdBold = 'Ignore',
+	mkdBoldItalic = 'mkdBold',
 	mkdCode = 'Keyword',
 	mkdCodeDelimiter = 'mkdBold',
 	mkdCodeStart = 'mkdCodeDelimiter',
