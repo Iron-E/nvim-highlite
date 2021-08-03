@@ -165,7 +165,7 @@ function highlite:highlight_terminal(terminal_colors)
 	end
 end
 
-return setmetatable(highlite, {['__call'] = function(self, normal, highlights, terminal_ansi_colors)
+return setmetatable(highlite, {['__call'] = function(self, normal, highlights, terminal_colors)
 	-- function to resolve function highlight groups being defined by function calls.
 	local function resolve(tbl, key, resolve_links)
 		local value = tbl[key]
@@ -204,5 +204,5 @@ return setmetatable(highlite, {['__call'] = function(self, normal, highlights, t
 	end
 
 	-- Set the terminal highlight colors.
-	self:highlight_terminal(terminal_ansi_colors)
+	self:highlight_terminal(terminal_colors)
 end})

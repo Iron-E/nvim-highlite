@@ -932,7 +932,7 @@ local highlight_groups = {
 	this will inevitably cause usability issues so… be careful.
 ]]
 
-local terminal_ansi_colors = {
+local terminal_colors = {
 	[1]  = black,
 	[2]  = red_dark,
 	[3]  = green_dark,
@@ -1014,7 +1014,7 @@ local terminal_ansi_colors = {
 require(vim.g.colors_name)(
 	highlight_group_normal,
 	highlight_groups,
-	terminal_ansi_colors
+	terminal_colors
 )
 
 -- Thanks to Romain Lafourcade (https://github.com/romainl) for the original template (romainl/vim-rnb).
