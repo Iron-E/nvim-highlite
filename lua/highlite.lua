@@ -1,10 +1,10 @@
 --[[ NOTHING INSIDE THIS FILE NEEDS TO BE EDITED BY THE USER. ]]
 
---[[
-	/*
-	 * IMPORTS
-	 */
---]]
+--- A Neovim plugin to create more straightforward syntax for Lua `:map`ping and `:unmap`ping.
+--- @module nvim-cartographer
+--- @alias highlite table
+
+--[[/* IMPORTS */]]
 
 local vim = vim
 local api = vim.api
@@ -12,37 +12,41 @@ local exe = api.nvim_command
 local fn  = vim.fn
 local go = vim.go
 
---[[
-	/*
-	 * VARS
-	 */
---]]
+--[[/* VARS */]]
 
--- Determine which set of colors to use.
+--- Which set of colors to use.
 local _USE_256 = tonumber(go.t_Co) > 255 or string.find(vim.env.TERM, '256')
 
--- These are constants for the indexes in the colors that were defined before.
+--- Indicating nothing for a highlight field.
 local _NONE = 'NONE'
+
+--- Which index to use for `cterm` highlights.
 local _PALETTE_CTERM = _USE_256 and 2 or 3
+
+--- Which index to use for `gui` highlights.
 local _PALETTE_HEX  = 1
+
+--- The `string` type.
 local _TYPE_STRING = 'string'
+
+--- The `table` type.
 local _TYPE_TABLE  = 'table'
 
---[[
-	/*
-	 * HELPER FUNCTIONS
-	 */
---]]
+--[[/* HELPER FUNCTIONS */]]
 
--- filter a highlight group's style information
-local function filter_group_style(value)
-	return value ~= 'background'
-		and value ~= 'blend'
-		and value ~= 'foreground'
-		and value ~= 'special'
+--- Filter out information not pertaining to styles
+--- @param key string the field from `nvim_get_hl_by_name`
+--- @return boolean should_not_filter `true` if the field should not be filtered
+local function filter_group_style(key)
+	return key ~= 'background'
+		and key ~= 'blend'
+		and key ~= 'foreground'
+		and key ~= 'special'
 end
 
--- Get the color value of a color variable, or "NONE" as a default.
+--- @param color string|table the color name or definition
+--- @param index number
+--- @return number|string color_value a hex, 16-bit, or ANSI color. "NONE" by default
 local function get(color, index) -- {{{ †
 	if type(color) == _TYPE_TABLE and color[index] then
 		return color[index]
@@ -53,8 +57,9 @@ local function get(color, index) -- {{{ †
 	end
 end --}}} ‡
 
---[[ If using hex and 256-bit colors, then populate the gui* and cterm* args.
-	If using 16-bit colors, just populate the cterm* args. ]]
+--- Take a `command` and add color-specifying components to it.
+--- @param command table the in-progress `:highlight` command
+--- @param attributes table the definition of the highlight group
 local function colorize(command, attributes) -- {{{ †
 	command[#command+1]=' guibg='..get(attributes.bg, _PALETTE_HEX)..' guifg='..get(attributes.fg, _PALETTE_HEX)
 		..' ctermbg='..get(attributes.bg, _PALETTE_CTERM)..' ctermfg='..get(attributes.fg, _PALETTE_CTERM)
@@ -65,7 +70,11 @@ local function colorize(command, attributes) -- {{{ †
 	end
 end --}}} ‡
 
--- This function appends `selected_attributes` to the end of `highlight_cmd`.
+--- This function appends `selected_attributes` to the end of `highlight_cmd`.
+--- @param command table the in-progress `:highlight` command
+--- @param style string the `gui`/`cterm` arguments to apply
+--- @param color string|table a `guisp` argument; same arg as `get`
+--- @see get
 local function stylize(command, style, color)
 	command[#command+1]=' gui='..style..' cterm='..style
 
@@ -74,9 +83,13 @@ local function stylize(command, style, color)
 	end
 end
 
+--- @param rgb string some string of RGB colors.
+--- @return string hex
 local function tohex(rgb) return string.format('#%06x', rgb) end
 
--- Load specific &bg instructions
+--- Create a metatable which prioritizes entries in the `&bg` index of `attributes`
+--- @param attributes table the definition of the highlight group
+--- @return table
 local function use_background_with(attributes)
 	return setmetatable(
 		attributes[go.background],
@@ -84,14 +97,12 @@ local function use_background_with(attributes)
 	)
 end
 
---[[
-	/*
-	 * MODULE
-	 */
---]]
+--[[/* MODULE */]]
 
 local highlite = {}
 
+--- @param group_name string
+--- @return table attributes a nvim-highlite compliant table describing `group_name`
 function highlite.group(group_name)
 	local no_errors, group_definition = pcall(api.nvim_get_hl_by_name, group_name, go.termguicolors)
 
@@ -112,6 +123,10 @@ function highlite.group(group_name)
 end
 
 -- Generate a `:highlight` command from a group and some attributes.
+
+--- Generate and execute `:highlight` command from a group and some attributes.
+--- @param highlight_group string the `{group-name}` argument for `:highlight`
+--- @param attributes table the definition of the highlight group
 function highlite.highlight(highlight_group, attributes) -- {{{ †
 	-- The base highlight command
 	local highlight_cmd = {'hi! ', highlight_group}
@@ -142,8 +157,10 @@ function highlite.highlight(highlight_group, attributes) -- {{{ †
 	exe(table.concat(highlight_cmd))
 end --}}} ‡
 
-function highlite:highlight_terminal(terminal_ansi_colors)
-	for index, color in ipairs(terminal_ansi_colors) do vim.g['terminal_color_'..(index-1)] =
+--- Set `g:terminal_color_`s based on `terminal_colors`.
+--- @param terminal_colors table a list 1..16 of colors to use in the terminal
+function highlite:highlight_terminal(terminal_colors)
+	for index, color in ipairs(terminal_colors) do vim.g['terminal_color_'..(index-1)] =
 		go.termguicolors and color[_PALETTE_HEX] or color[_PALETTE_CTERM]
 	end
 end
