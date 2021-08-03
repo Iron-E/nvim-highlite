@@ -873,14 +873,14 @@ local highlight_groups = {
 	TodoFgHACK = function(self) return {fg=self.Todo.fg} end,
 	TodoFgNOTE = 'HintMsg',
 	TodoFgPERF = 'InfoMsg',
-	TodoFgTODO = function(self) return {fg=cyan, style='italic'} end,
+	TodoFgTODO = function(_) return {fg=cyan, style='italic'} end,
 	TodoFgWARN = function(self) return {fg=self.WarningMsg.fg} end,
 
 	TodoBgFIX = function(self) return {fg=black, bg=self.ErrorMsg.fg, style={'bold', 'italic', 'nocombine'}} end,
 	TodoBgHACK = function(self) return {fg=black, bg=self.Todo.fg, style={'bold', 'italic', 'nocombine'}} end,
 	TodoBgNOTE = function(self) return {fg=black, bg=self.Hint.bg, style={'bold', 'italic', 'nocombine'}} end,
 	TodoBgPERF = function(self) return {fg=black, bg=self.Info.bg, style={'bold', 'italic', 'nocombine'}} end,
-	TodoBgTODO = function(self) return {fg=black, bg=cyan, style={'bold', 'italic', 'nocombine'}} end,
+	TodoBgTODO = function(_) return {fg=black, bg=cyan, style={'bold', 'italic', 'nocombine'}} end,
 	TodoBgWARN = function(self) return {fg=black, bg=self.Warning.bg, style={'bold', 'italic', 'nocombine'}} end,
 
 	TodoSignFIX  = 'TodoFgFIX',
