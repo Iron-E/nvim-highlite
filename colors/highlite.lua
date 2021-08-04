@@ -894,6 +894,9 @@ local highlight_groups = {
 	GitSignsAdd = 'GitGutterAdd',
 	GitSignsChange = 'GitGutterChange',
 	GitSignsDelete = 'GitGutterDelete',
+
+	--[[ 4.4.16. nvim-compe ]]
+	CompeDocumentationBorder = 'FloatBorder',
 }
 
 --[[ Step 5: Terminal Colors
