@@ -42,6 +42,8 @@ This template's _design_ focuses on:
 	Where `<colorscheme>` is the name of your desired colorscheme.
 	* If you are on Windows, rename the files manually.
 
+Whenever you want to update from then on, you can run the [update script](update.sh). This will load the latest upstream changes to the core highlighting library.
+
 ## Just The Defaults
 
 1. Install a plugin manager such as [`vim-plug`](https://github.com/junegunn/vim-plug) and use it to "plug" this repository.
