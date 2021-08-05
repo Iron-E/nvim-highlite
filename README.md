@@ -74,7 +74,7 @@ Whenever you want to update from then on, you can run the [update script](update
 	```
 	Or using `init.lua`:
 	```lua
-	vim.opt.termguicolors = true              --  Set color mode
+	vim.opt.termguicolors = true
 	vim.api.nvim_command 'colorscheme highlite'
 	```
 
