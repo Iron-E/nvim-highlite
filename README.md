@@ -1,8 +1,10 @@
-# Default Settings Preview
+# nvim-highlite
+
+## Default Settings Preview
 
 ![lua preview](https://user-images.githubusercontent.com/36409591/128422684-f51354e9-e895-493e-8e7d-db7bb08eb735.png "Lua Preview")
 
-# Introduction
+## Introduction
 
 `nvim-highlite` is a colorscheme template repository for Neovim 0.5+.
 
@@ -24,13 +26,11 @@ This template's _design_ focuses on:
 	* Changes made to the highlighting algorithm won't affect how you write your colorscheme.
 	* New highlight group attributes which are unaccounted for in older versions will simply be ignored without errors due to Lua's `table`s.
 
-# Prerequisites
+## Installation
 
-1. Neovim 0.5+
+The only prerequisite is Neovim 0.5+
 
-# Installation
-
-## Creating Your Own
+### Creating Your Own
 
 1. Fork this repository, or clone it with `git clone https://github.com/Iron-E/nvim-highlite`.
 2. Follow the instructions in [`colors/highlite.vim`](colors/highlite.vim).
@@ -44,25 +44,41 @@ This template's _design_ focuses on:
 
 Whenever you want to update from then on, you can run the [update script](update.sh). This will load the latest upstream changes to the core highlighting library.
 
-## Just The Defaults
+### Just The Defaults
 
-1. Install a plugin manager such as [`vim-plug`](https://github.com/junegunn/vim-plug) and use it to "plug" this repository.
-	```viml
-	" vim-plug example
-	Plug "Iron-E/nvim-highlite"
+1. Install a plugin manager such as [`packer.nvim`](https://github.com/wbthomason/packer.nvim):
+	```lua
+	-- packer.nvim example
+	local fn = vim.fn
+
+	local install_path = fn.stdpath('data')..'/site/pack/packer/opt/packer.nvim'
+
+	if not vim.loop.fs_stat(fn.glob(install_path)) then
+		os.execute('git clone https://github.com/wbthomason/packer.nvim '..install_path)
+	end
+
+	vim.api.nvim_command 'packadd packer.nvim'
+
+	return require('packer').startup {function(use)
+		use {'wbthomason/packer.nvim', opt=true}
+		use 'Iron-E/nvim-highlite'
+	end}
 	```
 2. Specify this colorscheme as your default colorscheme in the `init.vim`:
-	```viml
+	```vim
 	" Enable 24-bit color output. Only do this IF your environment supports it.
 	" This plugin is fully compatible with 8-bit, 16-bit, and 24-bit colors.
 	set termguicolors
 	" Use the colorscheme
 	colorscheme highlite
 	```
+	Or using `init.lua`:
+	```lua
+	vim.opt.termguicolors = true              --  Set color mode
+	vim.api.nvim_command 'colorscheme highlite'
+	```
 
-# Usage
-
-## Examples
+## Usage
 
 This repository in itself is an example of how to use `nvim-highlite`. Aside from this, the following colorschemes are built using `nvim-highlite`:
 
@@ -202,7 +218,7 @@ You can either use [`nvim-treesitter`](https://github.com/nvim-treesitter/nvim-t
 | YAML       | [stephpy/vim-yaml](https://github.com/stephpy/vim-yaml)                                   |
 | YATS       | [HerringtonDarkholme/yats](https://github.com/HerringtonDarkholme/yats)                   |
 
-# Contribution
+## Contribution
 
 This repository is looking for contributions! The following things are appreciated:
 
