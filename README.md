@@ -1,6 +1,6 @@
 # Default Settings Preview
 
-![lua preview](./media/preview.png "Lua Preview")
+![lua preview](https://user-images.githubusercontent.com/36409591/128422684-f51354e9-e895-493e-8e7d-db7bb08eb735.png "Lua Preview")
 
 # Introduction
 
