@@ -897,6 +897,14 @@ local highlight_groups = {
 
 	--[[ 4.4.16. nvim-compe ]]
 	CompeDocumentationBorder = 'FloatBorder',
+
+	--[[ 4.4.16. packer.nvim ]]
+	packerFail = 'ErrorMsg',
+	packerHash = 'Number',
+	packerPackageNotLoaded = 'Ignore',
+	packerStatusFail = 'Statement',
+	packerStatusSuccess = 'packerStatusFail',
+	packerSuccess = function(self) return {fg=green, style=self.packerFail.style} end,
 }
 
 --[[ Step 5: Terminal Colors
