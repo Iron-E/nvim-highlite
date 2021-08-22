@@ -167,7 +167,11 @@ function highlite:highlight_terminal(terminal_colors)
 end
 
 return setmetatable(highlite, {__call = function(self, normal, highlights, terminal_colors)
-	-- function to resolve function highlight groups being defined by function calls.
+	--- resolve highlight groups being defined by function calls.
+	--- @param tbl table the current table being indexed.
+	--- @param key string the key to resolve the value for.
+	--- @param resolve_links boolean whether to translate highlight links into full values
+	--- @returns the value at `tbl[key]`, when highlight links and embedded functions have been accounted for.
 	local function resolve(tbl, key, resolve_links)
 		local value = tbl[key]
 		local value_type = type(value)
