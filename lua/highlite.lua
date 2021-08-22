@@ -114,7 +114,8 @@ function highlite.group(group_name)
 		style.color = tohex(group_definition.special)
 	end
 
-	return {
+	return
+	{
 		['fg'] = group_definition.foreground and tohex(group_definition.foreground) or _NONE,
 		['bg'] = group_definition.background and tohex(group_definition.background) or _NONE,
 		['blend'] = group_definition.blend,
@@ -171,7 +172,8 @@ return setmetatable(highlite, {['__call'] = function(self, normal, highlights, t
 		local value = tbl[key]
 		local value_type = type(value)
 		if value_type == 'function' then -- call and cache the result; next time, if it isn't a function this step will be skipped
-			tbl[key] = value(setmetatable({}, {
+			tbl[key] = value(setmetatable({},
+			{
 				['__index'] = function(_, inner_key) return resolve(tbl, inner_key, true) end
 			}))
 		elseif resolve_links and value_type == _TYPE_STRING and not string.find(value, '^#') then
