@@ -93,7 +93,7 @@ local function tohex(rgb) return string.format('#%06x', rgb) end
 local function use_background_with(attributes)
 	return setmetatable(
 		attributes[go.background],
-		{['__index'] = attributes}
+		{__index = attributes}
 	)
 end
 
@@ -116,10 +116,10 @@ function highlite.group(group_name)
 
 	return
 	{
-		['fg'] = group_definition.foreground and tohex(group_definition.foreground) or _NONE,
-		['bg'] = group_definition.background and tohex(group_definition.background) or _NONE,
-		['blend'] = group_definition.blend,
-		['style'] = style or _NONE
+		fg = group_definition.foreground and tohex(group_definition.foreground) or _NONE,
+		bg = group_definition.background and tohex(group_definition.background) or _NONE,
+		blend = group_definition.blend,
+		style = style or _NONE
 	}
 end
 
@@ -166,7 +166,7 @@ function highlite:highlight_terminal(terminal_colors)
 	end
 end
 
-return setmetatable(highlite, {['__call'] = function(self, normal, highlights, terminal_colors)
+return setmetatable(highlite, {__call = function(self, normal, highlights, terminal_colors)
 	-- function to resolve function highlight groups being defined by function calls.
 	local function resolve(tbl, key, resolve_links)
 		local value = tbl[key]
@@ -174,7 +174,7 @@ return setmetatable(highlite, {['__call'] = function(self, normal, highlights, t
 		if value_type == 'function' then -- call and cache the result; next time, if it isn't a function this step will be skipped
 			tbl[key] = value(setmetatable({},
 			{
-				['__index'] = function(_, inner_key) return resolve(tbl, inner_key, true) end
+				__index = function(_, inner_key) return resolve(tbl, inner_key, true) end
 			}))
 		elseif resolve_links and value_type == _TYPE_STRING and not string.find(value, '^#') then
 			return resolve(tbl, value, resolve_links)
