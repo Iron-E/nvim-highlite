@@ -4,18 +4,10 @@
 --- @module nvim-cartographer
 --- @alias highlite table
 
---[[/* IMPORTS */]]
-
-local vim = vim
-local api = vim.api
-local exe = api.nvim_command
-local fn  = vim.fn
-local go = vim.go
-
 --[[/* VARS */]]
 
 --- Which set of colors to use.
-local _USE_256 = tonumber(go.t_Co) > 255 or string.find(vim.env.TERM, '256')
+local _USE_256 = tonumber(vim.go.t_Co) > 255 or string.find(vim.env.TERM, '256')
 
 --- Indicating nothing for a highlight field.
 local _NONE = 'NONE'
@@ -92,7 +84,7 @@ local function tohex(rgb) return string.format('#%06x', rgb) end
 --- @return table
 local function use_background_with(attributes)
 	return setmetatable(
-		attributes[go.background],
+		attributes[vim.go.background],
 		{__index = attributes}
 	)
 end
@@ -104,7 +96,7 @@ local highlite = {}
 --- @param group_name string
 --- @return table attributes a nvim-highlite compliant table describing `group_name`
 function highlite.group(group_name)
-	local no_errors, group_definition = pcall(api.nvim_get_hl_by_name, group_name, go.termguicolors)
+	local no_errors, group_definition = pcall(vim.api.nvim_get_hl_by_name, group_name, vim.go.termguicolors)
 
 	if not no_errors then group_definition = {} end
 
@@ -139,7 +131,7 @@ function highlite.highlight(highlight_group, attributes) -- {{{ †
 		highlight_cmd[5] = attributes
 	else -- The `highlight_group` is uniquely defined.
 		-- Take care of special instructions for certain background colors.
-		if attributes[go.background] then
+		if attributes[vim.go.background] then
 			attributes = use_background_with(attributes)
 		end
 
@@ -155,14 +147,14 @@ function highlite.highlight(highlight_group, attributes) -- {{{ †
 		end
 	end
 
-	exe(table.concat(highlight_cmd))
+	vim.api.nvim_command(table.concat(highlight_cmd))
 end --}}} ‡
 
 --- Set `g:terminal_color_`s based on `terminal_colors`.
 --- @param terminal_colors table a list 1..16 of colors to use in the terminal
 function highlite:highlight_terminal(terminal_colors)
 	for index, color in ipairs(terminal_colors) do vim.g['terminal_color_'..(index-1)] =
-		go.termguicolors and color[_PALETTE_HEX] or color[_PALETTE_CTERM]
+		vim.go.termguicolors and color[_PALETTE_HEX] or color[_PALETTE_CTERM]
 	end
 end
 
@@ -191,14 +183,14 @@ return setmetatable(highlite, {__call = function(self, normal, highlights, termi
 	local color_name = vim.g.colors_name
 
 	-- If the syntax has been enabled, reset it.
-	if fn.exists 'syntax_on' then exe 'syntax reset' end
+	if vim.fn.exists 'syntax_on' then vim.api.nvim_command 'syntax reset' end
 
 	-- replace the colors_name
 	vim.g.colors_name = color_name
 	color_name = nil
 
 	-- If we aren't using hex nor 256 colorsets.
-	if not (go.termguicolors or _USE_256) then go.t_Co = '16' end
+	if not (vim.go.termguicolors or _USE_256) then vim.go.t_Co = '16' end
 
 	-- Highlight the baseline.
 	self.highlight('Normal', normal)
