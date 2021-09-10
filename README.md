@@ -82,8 +82,11 @@ Whenever you want to update from then on, you can run the [update script](update
 
 This repository in itself is an example of how to use `nvim-highlite`. Aside from this, the following colorschemes are built using `nvim-highlite`:
 
-* [One-nvim](https://github.com/Th3Whit3Wolf/one-nvim)
-* [Nord-lite](https://github.com/NarutoXY/nvim-highlite)
+* [nord-lite](https://github.com/NarutoXY/nvim-highlite)
+* [nvim-deus](https://github.com/tandy1229/nvim-deus)
+* [nvim-deus](https://github.com/theniceboy/nvim-deus)
+* [nvim-soluarized](https://github.com/Iron-E/nvim-soluarized)
+* [one-nvim](https://github.com/Th3Whit3Wolf/one-nvim)
 * (if you use this, open an issue and I'll add it here!)
 
 ### As Dependency
