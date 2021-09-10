@@ -49,11 +49,9 @@ Whenever you want to update from then on, you can run the [update script](update
 1. Install a plugin manager such as [`packer.nvim`](https://github.com/wbthomason/packer.nvim):
 	```lua
 	-- packer.nvim example
-	local fn = vim.fn
+	local install_path = vim.fn.stdpath('data')..'/site/pack/packer/opt/packer.nvim'
 
-	local install_path = fn.stdpath('data')..'/site/pack/packer/opt/packer.nvim'
-
-	if not vim.loop.fs_stat(fn.glob(install_path)) then
+	if not vim.loop.fs_stat(vim.fn.glob(install_path)) then
 		os.execute('git clone https://github.com/wbthomason/packer.nvim '..install_path)
 	end
 
