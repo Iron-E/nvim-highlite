@@ -44,25 +44,25 @@ local function get(color, index) -- {{{ †
 		return color[index]
 	elseif type(color) == _TYPE_STRING then
 		return color
-	else
-		return _NONE
 	end
+
+	return _NONE
 end --}}} ‡
 
 --- Take a `command` and add color-specifying components to it.
 --- @param command table the in-progress `:highlight` command
---- @param attributes table the definition of the highlight group
-local function colorize(command, attributes) -- {{{ †
-	command[#command+1]=' guibg='..get(attributes.bg, _PALETTE_HEX)..' guifg='..get(attributes.fg, _PALETTE_HEX)
-		..' ctermbg='..get(attributes.bg, _PALETTE_CTERM)..' ctermfg='..get(attributes.fg, _PALETTE_CTERM)
+--- @param definition table the definition of the highlight group
+local function colorize(command, definition) -- {{{ †
+	command[#command+1]=' guibg='..get(definition.bg, _PALETTE_HEX)..' guifg='..get(definition.fg, _PALETTE_HEX)
+		..' ctermbg='..get(definition.bg, _PALETTE_CTERM)..' ctermfg='..get(definition.fg, _PALETTE_CTERM)
 
 	-- Add the `blend` parameter if it is present
-	if attributes.blend then -- There is a value for the `highlight-blend` field.
-		command[#command+1]=' blend='..attributes.blend
+	if definition.blend then -- There is a value for the `highlight-blend` field.
+		command[#command+1]=' blend='..definition.blend
 	end
 end --}}} ‡
 
---- This function appends `selected_attributes` to the end of `highlight_cmd`.
+--- This function appends `selected_definition` to the end of `highlight_cmd`.
 --- @param command table the in-progress `:highlight` command
 --- @param style string the `gui`/`cterm` arguments to apply
 --- @param color string|table a `guisp` argument; same arg as `get`
@@ -79,14 +79,11 @@ end
 --- @return string hex
 local function tohex(rgb) return string.format('#%06x', rgb) end
 
---- Create a metatable which prioritizes entries in the `&bg` index of `attributes`
---- @param attributes table the definition of the highlight group
+--- Create a metatable which prioritizes entries in the `&bg` index of `definition`
+--- @param definition table the definition of the highlight group
 --- @return table
-local function use_background_with(attributes)
-	return setmetatable(
-		attributes[vim.go.background],
-		{__index = attributes}
-	)
+local function use_background_with(definition)
+	return setmetatable(definition[vim.go.background], {__index = definition})
 end
 
 --[[/* MODULE */]]
@@ -94,7 +91,7 @@ end
 local highlite = {}
 
 --- @param group_name string
---- @return table attributes a nvim-highlite compliant table describing `group_name`
+--- @return table definition a nvim-highlite compliant table describing `group_name`
 function highlite.group(group_name)
 	local no_errors, group_definition = pcall(vim.api.nvim_get_hl_by_name, group_name, vim.go.termguicolors)
 
@@ -115,36 +112,34 @@ function highlite.group(group_name)
 	}
 end
 
--- Generate a `:highlight` command from a group and some attributes.
+-- Generate a `:highlight` command from a group and some definition.
 
---- Generate and execute `:highlight` command from a group and some attributes.
+--- Generate and execute `:highlight` command from a group and some definition.
 --- @param highlight_group string the `{group-name}` argument for `:highlight`
---- @param attributes table the definition of the highlight group
-function highlite.highlight(highlight_group, attributes) -- {{{ †
+--- @param definition string|table a link or an attribute map
+function highlite.highlight(highlight_group, definition) -- {{{ †
+	if type(definition) == _TYPE_STRING then -- `highlight_group` is a link to another group.
+		vim.api.nvim_command('hi! link '..highlight_group..' '..definition)
+		return
+	end
+
 	-- The base highlight command
 	local highlight_cmd = {'hi! ', highlight_group}
 
-	if type(attributes) == _TYPE_STRING then -- `highlight_group` is a link to another group.
-		highlight_cmd[3] = highlight_cmd[2]
-		highlight_cmd[2] = 'link '
-		highlight_cmd[4] = ' '
-		highlight_cmd[5] = attributes
-	else -- The `highlight_group` is uniquely defined.
-		-- Take care of special instructions for certain background colors.
-		if attributes[vim.go.background] then
-			attributes = use_background_with(attributes)
-		end
+	-- Take care of special instructions for certain background colors.
+	if definition[vim.go.background] then
+		definition = use_background_with(definition)
+	end
 
-		colorize(highlight_cmd, attributes)
+	colorize(highlight_cmd, definition)
 
-		local style = attributes.style or _NONE
+	local style = definition.style or _NONE
 
-		if type(style) == _TYPE_TABLE then
-			-- Concat all of the entries together with a comma between before styling.
-			stylize(highlight_cmd, table.concat(style, ','), style.color)
-		else -- The style is just a single entry.
-			stylize(highlight_cmd, style)
-		end
+	if type(style) == _TYPE_TABLE then
+		-- Concat all of the entries together with a comma between before styling.
+		stylize(highlight_cmd, table.concat(style, ','), style.color)
+	else -- The style is just a single entry.
+		stylize(highlight_cmd, style)
 	end
 
 	vim.api.nvim_command(table.concat(highlight_cmd))
@@ -167,6 +162,7 @@ return setmetatable(highlite, {__call = function(self, normal, highlights, termi
 	local function resolve(tbl, key, resolve_links)
 		local value = tbl[key]
 		local value_type = type(value)
+
 		if value_type == 'function' then -- call and cache the result; next time, if it isn't a function this step will be skipped
 			tbl[key] = value(setmetatable({},
 			{
