@@ -81,40 +81,40 @@ vim.g.colors_name = 'highlite'
 	NOTE: |Replace-mode| will probably be useful here.
 ]]
 
-local black       = {'#202020', 0,   'black'}
+local black       = {'#202020', 235, 'black'}
 local gray        = {'#808080', 244, 'gray'}
 local gray_dark   = {'#353535', 236, 'darkgrey'}
-local gray_darker = {'#505050', 244, 'gray'}
-local gray_light  = {'#c0c0c0', 251, 'gray'}
-local white       = {'#ffffff', 15,  'white'}
+local gray_darker = {'#505050', 239, 'gray'}
+local gray_light  = {'#c0c0c0', 250, 'gray'}
+local white       = {'#ffffff', 231, 'white'}
 
-local tan = {'#f4c069', 180, 'darkyellow'}
+local tan = {'#f4c069', 221, 'yellow'}
 
-local red       = {'#ee4a59', 196, 'red'}
+local red       = {'#ee4a59', 203, 'red'}
 local red_dark  = {'#a80000', 124, 'darkred'}
-local red_light = {'#ff4090', 203, 'red'}
+local red_light = {'#ff4090', 205, 'red'}
 
 local orange       = {'#ff8900', 208, 'darkyellow'}
-local orange_light = {'#f0af00', 214, 'yellow'}
+local orange_light = {'#f0af00', 214, 'darkyellow'}
 
-local yellow = {'#f0df33', 220, 'yellow'}
+local yellow = {'#f0df33', 227, 'yellow'}
 
-local green_dark  = {'#70d533', 83, 'darkgreen'}
-local green       = {'#22ff22', 72, 'green'}
-local green_light = {'#99ff99', 72, 'green'}
-local turqoise    = {'#2bff99', 33, 'green'}
+local green_dark  = {'#70d533', 113, 'darkgreen'}
+local green       = {'#22ff22', 46,  'green'}
+local green_light = {'#99ff99', 120, 'green'}
+local turqoise    = {'#2bff99', 48,  'green'}
 
-local blue = {'#7766ff', 63, 'blue'}
-local cyan = {'#33dbc3', 87, 'cyan'}
-local ice  = {'#95c5ff', 63, 'cyan'}
-local teal = {'#60afff', 38, 'darkblue'}
+local blue = {'#7766ff', 63,  'darkblue'}
+local cyan = {'#33dbc3', 80,  'cyan'}
+local ice  = {'#95c5ff', 111, 'cyan'}
+local teal = {'#60afff', 75,  'blue'}
 
-local magenta      = {'#d5508f', 126, 'magenta'}
+local magenta      = {'#d5508f', 168, 'magenta'}
 local magenta_dark = {'#bb0099', 126, 'darkmagenta'}
-local pink         = {'#ffa6ff', 162, 'magenta'}
-local pink_light   = {'#ffb7b7', 38,  'white'}
-local purple       = {'#cf55f0', 129, 'magenta'}
-local purple_light = {'#af60af', 63,  'magenta'}
+local pink         = {'#ffa6ff', 219, 'magenta'}
+local pink_light   = {'#ffb7b7', 217, 'white'}
+local purple       = {'#cf55f0', 171, 'magenta'}
+local purple_light = {'#af60af', 133, 'darkmagenta'}
 
 --[[ Step 4: highlights
 	You can define highlight groups like this:
