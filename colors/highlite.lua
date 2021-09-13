@@ -75,8 +75,12 @@ vim.g.colors_name = 'highlite'
 	}
 ```
 
+	NOTE: See https://gist.github.com/gagbo/7943c9a71cab22b641d2904a6d59ec3a
+	      for a program that can generate 16-bit colors from a Hex code.
+
 	If your colors are defined correctly, the resulting colorscheme is guaranteed
-	to work in GVim (Windows/Linux), MacVim (MacOS), and any properly set up terminal emulator.
+	to work in GVim (Windows/Linux), MacVim (MacOS), and any properly set up terminal
+	emulator.
 
 	NOTE: |Replace-mode| will probably be useful here.
 ]]
