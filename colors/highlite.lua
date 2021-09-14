@@ -899,8 +899,8 @@ local highlight_groups = {
 	GitSignsChange = 'GitGutterChange',
 	GitSignsDelete = 'GitGutterDelete',
 
-	--[[ 4.4.16. nvim-compe ]]
-	CompeDocumentationBorder = 'FloatBorder',
+	--[[ 4.4.16. nvim-cmp ]]
+	CmpDocumentationBorder = 'FloatBorder',
 
 	--[[ 4.4.16. packer.nvim ]]
 	packerFail = 'ErrorMsg',
