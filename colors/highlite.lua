@@ -367,27 +367,48 @@ local highlight_groups = {
 	WarningMsg = {fg=orange, style='bold'},
 	Question   = {fg=orange_light, style='underline'},
 
-	--[[ 4.2.11. LSP ]]
-	LspDiagnosticsDefaultError = 'Error',
-	LspDiagnosticsFloatingError = 'ErrorMsg',
-	LspDiagnosticsSignError = 'LspDiagnosticsFloatingError',
+	--[[ 4.2.11. LSP / Diagnostics ]]
+	DiagnosticError = 'Error',
+	DiagnosticFloatingError = 'ErrorMsg',
+	DiagnosticSignError = 'DiagnosticFloatingError',
 
-	LspDiagnosticsDefaultWarning = 'Warning',
-	LspDiagnosticsFloatingWarning = 'WarningMsg',
-	LspDiagnosticsSignWarning = 'LspDiagnosticsFloatingWarning',
+	DiagnosticWarn = 'Warning',
+	DiagnosticFloatingWarn = 'WarningMsg',
+	DiagnosticSignWarn = 'DiagnosticFloatingWarn',
 
-	LspDiagnosticsDefaultHint = 'Hint',
-	LspDiagnosticsFloatingHint = 'HintMsg',
-	LspDiagnosticsSignHint = 'LspDiagnosticsFloatingHint',
+	DiagnosticHint = 'Hint',
+	DiagnosticFloatingHint = 'HintMsg',
+	DiagnosticSignHint = 'DiagnosticFloatingHint',
 
-	LspDiagnosticsDefaultInformation = 'Info',
-	LspDiagnosticsFloatingInformation = 'InfoMsg',
-	LspDiagnosticsSignInformation = 'LspDiagnosticsFloatingInformation',
+	DiagnosticInfo = 'Info',
+	DiagnosticFloatingInfo = 'InfoMsg',
+	DiagnosticSignInfo = 'DiagnosticFloatingInfo',
 
-	LspDiagnosticsUnderlineError = 'CocErrorHighlight',
-	LspDiagnosticsUnderlineHint  = 'CocHintHighlight',
-	LspDiagnosticsUnderlineInfo  = 'CocInfoHighlight',
-	LspDiagnosticsUnderlineWarning = 'CocWarningHighlight',
+	DiagnosticUnderlineError = {style={'undercurl', color=red}},
+	DiagnosticUnderlineHint  = {style={'undercurl', color=magenta}},
+	DiagnosticUnderlineInfo  = {style={'undercurl', color=pink_light}},
+	DiagnosticUnderlineWarn = {style={'undercurl', color=orange}},
+
+	LspDiagnosticsDefaultError = 'DiagnosticError',
+	LspDiagnosticsFloatingError = 'DiagnosticFloatingError',
+	LspDiagnosticsSignError = 'DiagnosticSignError',
+
+	LspDiagnosticsDefaultWarning = 'DiagnosticWarn',
+	LspDiagnosticsFloatingWarning = 'DiagnosticFloatingWarn',
+	LspDiagnosticsSignWarning = 'DiagnosticSignWarn',
+
+	LspDiagnosticsDefaultHint = 'DiagnosticHint',
+	LspDiagnosticsFloatingHint = 'DiagnosticFloatingHint',
+	LspDiagnosticsSignHint = 'DiagnosticSignHint',
+
+	LspDiagnosticsDefaultInformation = 'DiagnosticInfo',
+	LspDiagnosticsFloatingInformation = 'DiagnosticFloatingInfo',
+	LspDiagnosticsSignInformation = 'DiagnosticSignInfo',
+
+	LspDiagnosticsUnderlineError = 'DiagnosticUnderlineError',
+	LspDiagnosticsUnderlineHint  = 'DiagnosticUnderlineHint',
+	LspDiagnosticsUnderlineInfo  = 'DiagnosticUnderlineInfo',
+	LspDiagnosticsUnderlineWarning = 'DiagnosticUnderlineWarn',
 
 	--[[ 4.2.12. Cursor ]]
 	Cursor   = {style='inverse'},
