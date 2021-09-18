@@ -813,7 +813,7 @@ local highlight_groups = {
 	EasyMotion = 'IncSearch',
 	JumpMotion = 'EasyMotion',
 
-	--[[ 4.4.4. vim-gitgutter / vim-signify ]]
+	--[[ 4.4.4. vim-gitgutter / vim-signify / gitsigns.nvim ]]
 	GitGutterAdd    = {fg = green},
 	GitGutterChange = {fg = yellow},
 	GitGutterDelete = {fg = red},
@@ -823,6 +823,10 @@ local highlight_groups = {
 	SignifySignChange = 'GitGutterChange',
 	SignifySignDelete = 'GitGutterDelete',
 	SignifySignChangeDelete = 'GitGutterChangeDelete',
+
+	GitSignsAdd = 'GitGutterAdd',
+	GitSignsChange = 'GitGutterChange',
+	GitSignsDelete = 'GitGutterDelete',
 
 	--[[ 4.4.5. vim-indent-guides ]]
 	IndentGuidesOdd  = {bg=gray_darker},
@@ -893,7 +897,7 @@ local highlight_groups = {
 	--[[ 4.4.14. trouble.nvim ]]
 	TroubleCount = function(self) return vim.tbl_extend('force', self.Number, {style='underline'}) end,
 
-	--[[ 4.4.14. todo-comments.nvim ]]
+	--[[ 4.4.15. todo-comments.nvim ]]
 	TodoFgFIX = function(self) return {fg=self.ErrorMsg.fg} end,
 	TodoFgHACK = function(self) return {fg=self.Todo.fg} end,
 	TodoFgNOTE = 'HintMsg',
@@ -915,15 +919,10 @@ local highlight_groups = {
 	TodoSignTODO = 'TodoFgTODO',
 	TodoSignWARN = 'TodoFgWARN',
 
-	--[[ 4.4.15. gitsigns.nvim ]]
-	GitSignsAdd = 'GitGutterAdd',
-	GitSignsChange = 'GitGutterChange',
-	GitSignsDelete = 'GitGutterDelete',
-
 	--[[ 4.4.16. nvim-cmp ]]
 	CmpDocumentationBorder = 'FloatBorder',
 
-	--[[ 4.4.16. packer.nvim ]]
+	--[[ 4.4.17. packer.nvim ]]
 	packerFail = 'ErrorMsg',
 	packerHash = 'Number',
 	packerPackageNotLoaded = 'Ignore',
