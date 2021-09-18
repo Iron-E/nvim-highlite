@@ -10,7 +10,7 @@
 
 This template's _defaults_ focus on:
 
-1. Compatability with [semantic highlighting](https://medium.com/@evnbr/coding-in-color-3a6db2743a1e).
+1. Compatibility with [semantic highlighting](https://medium.com/@evnbr/coding-in-color-3a6db2743a1e).
 	* I was using colorschemes that often did not provide enough highlight groups to provide distinction between tokens.
 2. Visibility in any range of blue-light.
 	* I use `redshift` often, and many colorschemes did not allow for me to see when I had lower color temperatures.
