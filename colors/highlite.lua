@@ -796,18 +796,18 @@ local highlight_groups = {
 		missing.
 	]]
 	--[[ 4.4.1. ALE ]]
-	ALEErrorSign   = 'ErrorMsg',
-	ALEWarningSign = 'WarningMsg',
+	ALEErrorSign   = 'DiagnosticSignError',
+	ALEWarningSign = 'DiagnosticSignWarn',
 
 	--[[ 4.4.2. coc.nvim ]]
-	CocErrorHighlight = {style={'undercurl', color=red}},
-	CocHintHighlight  = {style={'undercurl', color=magenta}},
-	CocInfoHighlight  = {style={'undercurl', color=pink_light}},
-	CocWarningHighlight = {style={'undercurl', color=orange}},
-	CocErrorSign = 'ALEErrorSign',
-	CocHintSign  = 'HintMsg',
-	CocInfoSign  = 'InfoMsg',
-	CocWarningSign = 'ALEWarningSign',
+	CocErrorHighlight = 'DiagnosticUnderlineError',
+	CocErrorSign = 'DiagnosticSignError',
+	CocHintHighlight  = 'DiagnosticUnderlineHint  ',
+	CocHintSign  = 'DiagnosticSignHint',
+	CocInfoHighlight  = 'DiagnosticUnderlineInfo',
+	CocInfoSign  = 'DiagnosticSignInfo',
+	CocWarningHighlight = 'DiagnosticUnderlineWarn',
+	CocWarningSign = 'DiagnosticSignWarn',
 
 	--[[ 4.4.2. vim-jumpmotion / vim-easymotion ]]
 	EasyMotion = 'IncSearch',
