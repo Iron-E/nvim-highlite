@@ -929,6 +929,15 @@ local highlight_groups = {
 	packerStatusFail = 'Statement',
 	packerStatusSuccess = 'packerStatusFail',
 	packerSuccess = function(self) return {fg=green, style=self.packerFail.style} end,
+
+	--[[ 4.4.18. nvim-tree ]]
+	NvimTreeGitDeleted = function(self) return {fg=self.DiffDelete.bg, bg=NONE} end,
+	NvimTreeGitDirty = {fg=orange, bg=NONE},
+	NvimTreeGitIgnored = 'Ignore',
+	NvimTreeGitMerge = 'NvimTreeGitRenamed',
+	NvimTreeGitNew = function(self) return {fg=self.DiffAdd.bg, bg=NONE} end,
+	NvimTreeGitRenamed = function(self) return {fg=self.DiffChange.bg, bg=NONE} end,
+	NvimTreeGitStaged = {fg=cyan, bg=NONE},
 }
 
 --[[ Step 5: Terminal Colors
