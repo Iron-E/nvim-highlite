@@ -239,7 +239,7 @@ local NONE = {}
 
 --[[ These are the ones you should edit. ]]
 -- This is the only highlight that must be defined separately.
-local highlight_group_normal = {fg=gray_light, bg=black}
+local highlight_group_normal = {fg=gray_light, bg=NONE}
 
 -- This is where the rest of your highlights should go.
 local highlight_groups = {
@@ -313,7 +313,7 @@ local highlight_groups = {
 	VertSplit = {fg=white},
 	TabLine = {fg=FG, bg=gray_darker},
 	TabLineFill = {fg=gray_darker, bg=black},
-	TabLineSel = {fg=FG, bg=BG},
+	TabLineSel = {fg=FG, bg=highlight_group_normal.bg},
 	Title = {style='bold'},
 
 	--[[ 4.2.3. Conditional Line Highlighting]]
@@ -864,7 +864,7 @@ local highlight_groups = {
 	BufferInactiveSign   = 'BufferVisibleSign',
 	BufferInactiveTarget = 'BufferVisibleTarget',
 
-	BufferTabpages    = {fg=BG, bg=FG, style='bold'},
+	BufferTabpages    = {fg=highlight_group_normal.bg, bg=FG, style='bold'},
 	BufferTabpageFill = 'TabLineFill',
 
 	BufferVisible       = 'TabLine',
@@ -921,6 +921,11 @@ local highlight_groups = {
 
 	--[[ 4.4.16. nvim-cmp ]]
 	CmpDocumentationBorder = 'FloatBorder',
+	CmpItemAbbrDefault = 'Comment',
+	CmpItemAbbrMatchDefault = {fg=highlight_group_normal.fg, style={'bold', 'nocombine'}},
+	CmpItemAbbrMatchFuzzyDefault = {fg=highlight_group_normal.fg, style='nocombine'},
+	CmpItemKindDefault = 'Type',
+	CmpItemMenuDefault = 'NormalFloat',
 
 	--[[ 4.4.17. packer.nvim ]]
 	packerFail = 'ErrorMsg',
