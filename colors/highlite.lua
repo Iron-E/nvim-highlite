@@ -921,9 +921,9 @@ local highlight_groups = {
 
 	--[[ 4.4.16. nvim-cmp ]]
 	CmpDocumentationBorder = 'FloatBorder',
-	CmpItemAbbrDefault = 'Comment',
-	CmpItemAbbrMatchDefault = {fg=highlight_group_normal.fg, style={'bold', 'nocombine'}},
-	CmpItemAbbrMatchFuzzyDefault = {fg=highlight_group_normal.fg, style='nocombine'},
+	CmpItemAbbrDefault = 'Normal',
+	CmpItemAbbrMatchDefault = 'Underlined',
+	CmpItemAbbrMatchFuzzyDefault = {style={'nocombine', 'underline'}},
 	CmpItemKindDefault = 'Type',
 	CmpItemMenuDefault = 'NormalFloat',
 
