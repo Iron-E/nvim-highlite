@@ -927,6 +927,7 @@ local highlight_groups = {
 	CmpItemAbbrMatchFuzzyDefault = {style={'nocombine', 'underline'}},
 	CmpItemKindDefault = 'Type',
 	CmpItemMenuDefault = 'NormalFloat',
+	CmpItemMenuThumb = {fg=white, style='bold'},
 
 	--[[ 4.4.17. packer.nvim ]]
 	packerFail = 'ErrorMsg',
