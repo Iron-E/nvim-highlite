@@ -310,11 +310,12 @@ local highlight_groups = {
 	StatusLineTermNC = 'StatusLineNC',
 
 	--[[ 4.2.2. Separators]]
-	VertSplit = {fg=white},
+	FloatBorder = {fg=gray},
 	TabLine = {fg=FG, bg=gray_darker},
 	TabLineFill = {fg=gray_darker, bg=black},
 	TabLineSel = {fg=FG, bg=highlight_group_normal.bg},
 	Title = {style='bold'},
+	VertSplit = {fg=white},
 
 	--[[ 4.2.3. Conditional Line Highlighting]]
 	Conceal = 'NonText',
