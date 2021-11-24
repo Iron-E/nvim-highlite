@@ -791,8 +791,14 @@ local highlight_groups = {
 	manReference = 'Tag',
 	manUnderline = 'Label',
 
-	--[[ 4.3.38 Rust ]]
+	--[[ 4.3.39 Rust ]]
 	rustIdentifier = 'Identifier',
+
+	--[[ 4.3.40 XXD ]]
+	xxdAddress = 'Label',
+	xxdAscii = 'Character',
+	xxdDot = 'Ignore',
+	xxdSep = 'Delimiter',
 
 	--[[ 4.4. Plugins
 		Everything in this section is OPTIONAL. Feel free to remove everything
