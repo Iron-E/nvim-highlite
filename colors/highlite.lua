@@ -240,7 +240,6 @@ local NONE = {}
 --[[ These are the ones you should edit. ]]
 -- This is the only highlight that must be defined separately.
 local highlight_group_normal = {fg=gray_light, bg=NONE}
-
 -- This is where the rest of your highlights should go.
 local highlight_groups = {
 	--[[ 4.1. Text Analysis ]]
@@ -538,7 +537,7 @@ local highlight_groups = {
 
 	--[[ 4.3.8. HTML ]]
 	htmlArg    = 'Label',
-	htmlBold   = {fg=gray_light, style='bold'},
+	htmlBold   = {fg=highlight_group_normal.fg, style='bold'},
 	htmlTitle  = 'htmlBold',
 	htmlEndTag = 'htmlTag',
 	htmlH1 = 'markdownH1',
