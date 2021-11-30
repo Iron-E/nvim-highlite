@@ -873,7 +873,7 @@ local highlight_groups = {
 	BufferInactiveSign   = 'BufferVisibleSign',
 	BufferInactiveTarget = 'BufferVisibleTarget',
 
-	BufferTabpages    = {fg=highlight_group_normal.bg, bg=FG, style='bold'},
+	BufferTabpages    = {fg=highlight_group_normal.bg, style={'bold', 'reverse'}},
 	BufferTabpageFill = 'TabLineFill',
 
 	BufferVisible       = 'TabLine',
