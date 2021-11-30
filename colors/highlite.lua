@@ -310,9 +310,9 @@ local highlight_groups = {
 
 	--[[ 4.2.2. Separators]]
 	FloatBorder = {fg=gray},
-	TabLine = {fg=FG, bg=gray_darker},
-	TabLineFill = {fg=gray_darker, bg=black},
-	TabLineSel = {fg=FG, bg=highlight_group_normal.bg},
+	TabLine = function(self) return {fg=FG, bg=self.StatusLine.bg} end,
+	TabLineFill = function(self) return {fg=self.TabLine.bg, bg=black} end,
+	TabLineSel = function(self) return {fg=self.TabLine.fg, bg=highlight_group_normal.bg} end,
 	Title = {style='bold'},
 	VertSplit = {fg=white},
 
@@ -323,7 +323,7 @@ local highlight_groups = {
 	debugBreakpoint = 'ErrorMsg',
 	debugPC = 'ColorColumn',
 	LineNr  = {fg=gray},
-	QuickFixLine = {bg=gray_darker},
+	QuickFixLine = function(self) return {bg=self.StatusLine.bg} end,
 	Visual    = {style='inverse'},
 	VisualNOS = {bg=gray_darker},
 
@@ -878,7 +878,7 @@ local highlight_groups = {
 
 	BufferVisible       = 'TabLine',
 	BufferVisibleIndex  = function(self) return {fg=self.InfoMsg.fg, bg=self.BufferVisible.bg} end,
-	BufferVisibleMod    = {fg=white, bg=gray_darker, style='italic'},
+	BufferVisibleMod    = function(self) return {fg=white, bg=self.BufferVisible.bg, style='italic'} end,
 	BufferVisibleSign   = 'BufferVisible',
 	BufferVisibleTarget = function(self)
 		local super = self.BufferVisibleMod
