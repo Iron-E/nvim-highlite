@@ -298,8 +298,8 @@ local highlight_groups = {
 	Error = {fg=white, bg=red_dark, style='bold'},
 	Todo = {fg=yellow, style={'bold', 'underline'}},
 	Hint = {fg=black, bg=magenta, style='bold'},
-	Info = function(self) return {fg=self.Hint.fg, bg=pink_light, style=self.Hint.style} end,
-	Warning = function(self) return {fg=self.Hint.fg, bg=orange, style=self.Hint.style} end,
+	Info = {fg=black, bg=pink_light, style='bold'},
+	Warning = {fg=black, bg=orange, style='bold'},
 
 	--[[ 4.2... Editor UI  ]]
 	--[[ 4.2.1. Status Line]]
