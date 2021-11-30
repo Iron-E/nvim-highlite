@@ -296,7 +296,7 @@ local highlight_groups = {
 	Underlined = {fg=turqoise, style='underline'},
 	Ignore = {fg=gray},
 	Error = {fg=white, bg=red_dark, style='bold'},
-	Todo = {fg=yellow, style={'bold', 'underline'}},
+	Todo = {fg=black, bg=yellow, style='bold'},
 	Hint = {fg=black, bg=magenta, style='bold'},
 	Info = {fg=black, bg=pink_light, style='bold'},
 	Warning = {fg=black, bg=orange, style='bold'},
@@ -908,14 +908,14 @@ local highlight_groups = {
 
 	--[[ 4.4.15. todo-comments.nvim ]]
 	TodoFgFIX = function(self) return {fg=self.ErrorMsg.fg} end,
-	TodoFgHACK = function(self) return {fg=self.Todo.fg} end,
+	TodoFgHACK = function(self) return {fg=self.Todo.bg} end,
 	TodoFgNOTE = 'HintMsg',
 	TodoFgPERF = 'InfoMsg',
 	TodoFgTODO = {fg=cyan, style='italic'},
 	TodoFgWARN = function(self) return {fg=self.WarningMsg.fg} end,
 
 	TodoBgFIX = function(self) return {fg=black, bg=self.ErrorMsg.fg, style={'bold', 'italic', 'nocombine'}} end,
-	TodoBgHACK = function(self) return {fg=black, bg=self.Todo.fg, style={'bold', 'italic', 'nocombine'}} end,
+	TodoBgHACK = function(self) return {fg=black, bg=self.Todo.bg, style={'bold', 'italic', 'nocombine'}} end,
 	TodoBgNOTE = function(self) return {fg=black, bg=self.Hint.bg, style={'bold', 'italic', 'nocombine'}} end,
 	TodoBgPERF = function(self) return {fg=black, bg=self.Info.bg, style={'bold', 'italic', 'nocombine'}} end,
 	TodoBgTODO = {fg=black, bg=cyan, style={'bold', 'italic', 'nocombine'}},
