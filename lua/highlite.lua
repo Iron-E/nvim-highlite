@@ -31,17 +31,7 @@ local _TYPE_STRING = 'string'
 --- The `table` type.
 local _TYPE_TABLE  = 'table'
 
---[[/* HELPER FUNCTIONS */]]
-
---- Filter out information not pertaining to styles
---- @param key string the field from `nvim_get_hl_by_name`
---- @return boolean should_not_filter `true` if the field should not be filtered
-local function filter_group_style(key)
-	return key ~= 'background'
-		and key ~= 'blend'
-		and key ~= 'foreground'
-		and key ~= 'special'
-end
+--[[/* Helper Functions */]]
 
 --- @param color string|table the color name or definition
 --- @param index number
@@ -87,34 +77,40 @@ end
 local function tohex(rgb) return string.format('#%06x', rgb) end
 
 --- Create a metatable which prioritizes entries in the `&bg` index of `definition`
---- @param definition table the definition of the highlight group
+--- @param definition Highlite.Definition the definition of the highlight group
 --- @return table
 local function use_background_with(definition)
 	return setmetatable(definition[vim.go.background], {__index = definition})
 end
 
---[[/* MODULE */]]
+--[[/* Module */]]
 
+--- A Neovim plugin to create more straightforward syntax for Lua `:map`ping and `:unmap`ping.
+--- @class Highlite
 local highlite = {}
 
---- @param group_name string
---- @return table definition a nvim-highlite compliant table describing `group_name`
-function highlite.group(group_name)
-	local no_errors, group_definition = pcall(vim.api.nvim_get_hl_by_name, group_name, vim.go.termguicolors)
+--- @param name string the name of the highlight group
+--- @return Highlite.Definition definition an nvim-highlite compliant table describing the highlight group `name`
+function highlite.group(name)
+	local no_errors, definition = pcall(vim.api.nvim_get_hl_by_name, name, vim.go.termguicolors)
 
-	if not no_errors then group_definition = {} end
+	if not no_errors then definition = {} end
 
 	-- the style of the highlight group
-	local style = vim.tbl_filter(filter_group_style, vim.tbl_keys(group_definition))
-	if group_definition.special then
-		style.color = tohex(group_definition.special)
+	local style = {}
+	for k, v in pairs(definition) do
+		if k == 'special' then
+			style.color = tohex(v)
+		elseif k ~= 'background' and k ~= 'blend' and k ~= 'foreground' then
+			style[#style+1] = k
+		end
 	end
 
 	return
 	{
-		fg = group_definition.foreground and tohex(group_definition.foreground) or _NONE,
-		bg = group_definition.background and tohex(group_definition.background) or _NONE,
-		blend = group_definition.blend,
+		fg = definition.foreground and tohex(definition.foreground) or _NONE,
+		bg = definition.background and tohex(definition.background) or _NONE,
+		blend = definition.blend,
 		style = style or _NONE
 	}
 end
