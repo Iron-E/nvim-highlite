@@ -1,10 +1,17 @@
 --[[ NOTHING INSIDE THIS FILE NEEDS TO BE EDITED BY THE USER. ]]
 
---- A Neovim plugin to create more straightforward syntax for Lua `:map`ping and `:unmap`ping.
---- @module nvim-cartographer
---- @alias highlite table
+--- @class Highlite.Definition
+--- @field bg string|table the background color
+--- @field blend number the transparency value
+--- @field dark Highlite.Definition special highlight definition for when `&bg` is 'dark'
+--- @field fg string|table the foreground color
+--- @field light Highlite.Definition special highlight definition for when `&bg` is 'light'
+--- @field style Highlite.Style special appearance alterations
 
---[[/* VARS */]]
+--- @class Highlite.Style
+--- @field color string|table color of underline or undercurl
+
+--[[/* Vars */]]
 
 --- Which set of colors to use.
 local _USE_256 = tonumber(vim.go.t_Co) > 255 or string.find(vim.env.TERM, '256')
@@ -51,7 +58,7 @@ end --}}} ‡
 
 --- Take a `command` and add color-specifying components to it.
 --- @param command table the in-progress `:highlight` command
---- @param definition table the definition of the highlight group
+--- @param definition Highlite.Definition the definition of the highlight group
 local function colorize(command, definition) -- {{{ †
 	command[#command+1]=' guibg='..get(definition.bg, _PALETTE_HEX)..' guifg='..get(definition.fg, _PALETTE_HEX)
 		..' ctermbg='..get(definition.bg, _PALETTE_CTERM)..' ctermfg='..get(definition.fg, _PALETTE_CTERM)
@@ -115,16 +122,16 @@ end
 -- Generate a `:highlight` command from a group and some definition.
 
 --- Generate and execute `:highlight` command from a group and some definition.
---- @param highlight_group string the `{group-name}` argument for `:highlight`
---- @param definition string|table a link or an attribute map
-function highlite.highlight(highlight_group, definition) -- {{{ †
+--- @param group_name string the `{group-name}` argument for `:highlight`
+--- @param definition Highlite.Definition|string a link or an attribute map
+function highlite.highlight(group_name, definition) -- {{{ †
 	if type(definition) == _TYPE_STRING then -- `highlight_group` is a link to another group.
-		vim.api.nvim_command('hi! link '..highlight_group..' '..definition)
+		vim.api.nvim_command('hi! link '..group_name..' '..definition)
 		return
 	end
 
 	-- The base highlight command
-	local highlight_cmd = {'hi! ', highlight_group}
+	local highlight_cmd = {'hi! ', group_name}
 
 	-- Take care of special instructions for certain background colors.
 	if definition[vim.go.background] then
@@ -192,8 +199,8 @@ return setmetatable(highlite, {__call = function(self, normal, highlights, termi
 	self.highlight('Normal', normal)
 
 	-- Highlight everything else.
-	for highlight_group, _ in pairs(highlights) do
-		self.highlight(highlight_group, resolve(highlights, highlight_group, false))
+	for group_name, _ in pairs(highlights) do
+		self.highlight(group_name, resolve(highlights, group_name, false))
 	end
 
 	-- Set the terminal highlight colors.
