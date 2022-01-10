@@ -959,7 +959,7 @@ local highlight_groups = {
 	CmpItemKindUnitDefault = 'CmpItemKindStructDefault',
 	CmpItemKindValueDefault = 'CmpItemKindConstantDefault',
 	CmpItemKindVariableDefault = 'Identifier',
-	CmpWindowScrollThumb = {fg=white, style='bold'},
+	CmpScrollThumb = function(self) return {fg=self.Pmenu.bg, style='bold'} end,
 
 	--[[ 4.4.17. packer.nvim ]]
 	packerFail = 'ErrorMsg',
