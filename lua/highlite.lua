@@ -109,13 +109,14 @@ function highlite.highlight(group_name, definition) -- {{{ †
 
 		local style = definition.style
 		if type(style) == _TYPE_TABLE then
-			for _, option in ipairs(style) do
-				highlight[option] = true
-			end
+			for _, option in ipairs(style) do highlight[option] = true end
 			highlight.special = get(style.color, _PALETTE_HEX)
 		elseif style then
 			highlight[style] = true
 		end
+
+		highlight.reverse = highlight.inverse
+		highlight.inverse = nil
 	end
 
 	vim.api.nvim_set_hl(0, group_name, highlight)
