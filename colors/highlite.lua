@@ -811,7 +811,7 @@ local highlight_groups = {
 	--[[ 4.4.2. coc.nvim ]]
 	CocErrorHighlight = 'DiagnosticUnderlineError',
 	CocErrorSign = 'DiagnosticSignError',
-	CocHintHighlight  = 'DiagnosticUnderlineHint  ',
+	CocHintHighlight  = 'DiagnosticUnderlineHint',
 	CocHintSign  = 'DiagnosticSignHint',
 	CocInfoHighlight  = 'DiagnosticUnderlineInfo',
 	CocInfoSign  = 'DiagnosticSignInfo',
