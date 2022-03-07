@@ -929,15 +929,16 @@ local highlight_groups = {
 	TodoSignWARN = 'TodoFgWARN',
 
 	--[[ 4.4.16. nvim-cmp ]]
-	CmpDocumentationBorder = 'FloatBorder',
+	CmpBorderedWindow_CursorLine = 'PmenuSel',
+	CmpBorderedWindow_Normal = 'NormalFloat',
 	CmpItemAbbrDefault = 'Ignore',
 	CmpItemAbbrMatchDefault = 'Underlined',
 	CmpItemAbbrMatchFuzzyDefault = {fg=highlight_group_normal.fg, style={'nocombine', 'underline'}},
-	CmpItemKindDefault = 'Type',
 	CmpItemKindClassDefault = 'CmpItemKindStructDefault',
 	CmpItemKindColorDefault = 'Label',
 	CmpItemKindConstantDefault = 'Constant',
 	CmpItemKindConstructorDefault = 'CmpItemKindMethodDefault',
+	CmpItemKindDefault = 'Type',
 	CmpItemKindEnumDefault = 'CmpItemKindStructDefault',
 	CmpItemKindEnumMemberDefault = 'CmpItemKindConstantDefault',
 	CmpItemKindEventDefault = 'Repeat',
@@ -959,6 +960,7 @@ local highlight_groups = {
 	CmpItemKindUnitDefault = 'CmpItemKindStructDefault',
 	CmpItemKindValueDefault = 'CmpItemKindConstantDefault',
 	CmpItemKindVariableDefault = 'Identifier',
+	CmpScrollBar = 'PmenuSbar',
 	CmpScrollThumb = function(self) return {fg=self.Pmenu.bg, style='bold'} end,
 
 	--[[ 4.4.17. packer.nvim ]]
