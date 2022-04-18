@@ -66,12 +66,12 @@ vim.g.colors_name = 'highlite'
 
 ```lua
 	<color name> = { -- Give each color a distinctive name.
-		'#<hex color code>', -- Hexadecimal color used in GVim/MacVim or 'NONE'.
-		<16-bit color code>, -- Integer 0–255 used by terminals supporting 256 colors or 'NONE'.
+		'#<hex color code>', -- Hexadecimal color used in GVim/MacVim
+		<16-bit color code>, -- Integer 0–255 used by terminals supporting 256 colors
 		'<ANSI color name>'  -- color name used by less capable color terminals, can be 'darkred',
 		                       'red', 'darkgreen', 'green', 'darkyellow', 'yellow', 'darkblue',
 		                       'blue', 'darkmagenta', 'magenta', 'black', 'darkgrey', 'grey',
-		                       'white', or 'NONE'
+		                       'white'
 	}
 ```
 
@@ -125,10 +125,10 @@ local purple_light = {'#af60af', 133, 'darkmagenta'}
 
 ```lua
 	<highlight group name> = {
-		-- The color for the background, `NONE`, `FG` or `BG`
+		-- The color for the background, or `nil`
 		bg = <color>,
 
-		-- The color for the foreground, `NONE`, `FG` or `BG`
+		-- The color for the foreground, or `nil`
 		fg = <color>
 
 		-- The |highlight-blend| value, if one is desired.
@@ -152,7 +152,7 @@ local purple_light = {'#af60af', 133, 'darkmagenta'}
 
 ```lua
 	SpellBad = { -- ← name of the highlight group
-		bg=NONE, -- background color
+		bg=nil, -- background color
 		fg=red, -- foureground color
 		style={ -- the style
 			'undercurl', -- undercurl (squiggly line)
@@ -167,7 +167,7 @@ local purple_light = {'#af60af', 133, 'darkmagenta'}
 
 ```lua
 	SpellBad = { -- ← name of the highlight group
-		bg=NONE, -- background color
+		bg=nil, -- background color
 		fg=red, -- foureground color
 		style={ -- the style
 			'undercurl', -- undercurl (squiggly line)
@@ -184,7 +184,7 @@ local purple_light = {'#af60af', 133, 'darkmagenta'}
 
 ```lua
 	SpellBad = {
-		bg=NONE,
+		bg=nil,
 		dark={fg=white},
 		light={fg=black},
 		style={'undercurl', color=red}
@@ -210,8 +210,8 @@ local purple_light = {'#af60af', 133, 'darkmagenta'}
 		inherited_style.color = red
 
 		return {
-			bg=NONE,
-			fg=NONE,
+			bg=nil,
+			fg=nil,
 			style=inherited_style
 		}
 	end
@@ -232,14 +232,10 @@ local purple_light = {'#af60af', 133, 'darkmagenta'}
 	      the benefits of using this template.
 ]]
 
---[[ DO NOT EDIT `BG` NOR `FG`. ]]
-local BG = 'bg'
-local FG = 'fg'
-local NONE = {}
-
 --[[ These are the ones you should edit. ]]
 -- This is the only highlight that must be defined separately.
-local highlight_group_normal = {fg=gray_light, bg=NONE}
+local highlight_group_normal = {fg=gray_light}
+
 -- This is where the rest of your highlights should go.
 local highlight_groups = {
 	--[[ 4.1. Text Analysis ]]
@@ -257,7 +253,7 @@ local highlight_groups = {
 	Float   = 'Number',
 
 	--[[ 4.1.2. Identifiers]]
-	Identifier = {fg=FG},
+	Identifier = {fg=highlight_group_normal.fg},
 	Function = {fg=purple},
 
 	--[[ 4.1.3. Syntax]]
@@ -310,7 +306,7 @@ local highlight_groups = {
 
 	--[[ 4.2.2. Separators]]
 	FloatBorder = {fg=gray},
-	TabLine = function(self) return {fg=FG, bg=self.StatusLine.bg} end,
+	TabLine = function(self) return {fg=highlight_group_normal.fg, bg=self.StatusLine.bg} end,
 	TabLineFill = function(self) return {fg=self.TabLine.bg, bg=black} end,
 	TabLineSel = function(self) return {fg=self.TabLine.fg, bg=highlight_group_normal.bg} end,
 	Title = {style='bold'},
@@ -328,7 +324,7 @@ local highlight_groups = {
 	VisualNOS = {bg=gray_darker},
 
 	--[[ 4.2.4. Popup Menu]]
-	Pmenu = {fg=FG, bg=gray_dark},
+	Pmenu = {fg=highlight_group_normal.fg, bg=gray_dark},
 	PmenuSbar = {bg=gray_darker},
 	PmenuSel  = {fg=black, bg=gray_light},
 	PmenuThumb = {bg=white},
@@ -340,7 +336,7 @@ local highlight_groups = {
 
 	--[[ 4.2.6. Diffs]]
 	DiffAdd    = {fg=black, bg=green_dark},
-	DiffChange = NONE,
+	DiffChange = {},
 	DiffDelete = function(self) return {fg=self.DiffAdd.fg, bg=red} end,
 	DiffText   = function(self) return {fg=self.DiffAdd.fg, bg=yellow} end,
 
@@ -357,7 +353,7 @@ local highlight_groups = {
 
 	--[[ 4.2.9. Conditional Column Highlighting]]
 	ColorColumn = {style='inverse'},
-	SignColumn  = NONE,
+	SignColumn  = {},
 
 	--[[ 4.2.10. Messages]]
 	ErrorMsg = {fg=red, style='bold'},
@@ -521,7 +517,7 @@ local highlight_groups = {
 	goFormatSpecifier = 'Character',
 	goFunction = 'Function',
 	goFunctionCall   = 'goFunction',
-	goFunctionReturn = NONE,
+	goFunctionReturn = {},
 	goMethodCall = 'goFunctionCall',
 	goParamType  = 'goReceiverType',
 	goPointerOperator = 'SpecialChar',
@@ -717,7 +713,7 @@ local highlight_groups = {
 
 	--[[ 4.3.32. PlantUML ]]
 	plantumlArrowLR   = 'Statement',
-	plantumlColonLine = NONE,
+	plantumlColonLine = {},
 	plantumlMindmap   = 'Label',
 	plantumlMindmap2  = 'Label',
 
@@ -958,8 +954,6 @@ local highlight_groups = {
 	CmpItemKindUnitDefault = 'CmpItemKindStructDefault',
 	CmpItemKindValueDefault = 'CmpItemKindConstantDefault',
 	CmpItemKindVariableDefault = 'Identifier',
-	CmpScrollBar = 'PmenuSbar',
-	CmpScrollThumb = function(self) return {fg=self.Pmenu.bg, style='bold'} end,
 
 	--[[ 4.4.17. packer.nvim ]]
 	packerFail = 'ErrorMsg',
@@ -970,13 +964,13 @@ local highlight_groups = {
 	packerSuccess = function(self) return {fg=green, style=self.packerFail.style} end,
 
 	--[[ 4.4.18. nvim-tree ]]
-	NvimTreeGitDeleted = function(self) return {fg=self.DiffDelete.bg, bg=NONE} end,
-	NvimTreeGitDirty = {fg=orange, bg=NONE},
+	NvimTreeGitDeleted = function(self) return {fg=self.DiffDelete.bg} end,
+	NvimTreeGitDirty = {fg=orange},
 	NvimTreeGitIgnored = 'Ignore',
 	NvimTreeGitMerge = 'NvimTreeGitRenamed',
-	NvimTreeGitNew = function(self) return {fg=self.DiffAdd.bg, bg=NONE} end,
-	NvimTreeGitRenamed = function(self) return {fg=self.DiffChange.bg, bg=NONE} end,
-	NvimTreeGitStaged = {fg=cyan, bg=NONE},
+	NvimTreeGitNew = function(self) return {fg=self.DiffAdd.bg} end,
+	NvimTreeGitRenamed = function(self) return {fg=self.DiffChange.bg} end,
+	NvimTreeGitStaged = {fg=cyan},
 }
 
 --[[ Step 5: Terminal Colors
