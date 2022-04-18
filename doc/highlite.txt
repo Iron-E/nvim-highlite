@@ -18,7 +18,7 @@ TABLE OF CONTENTS                                                 *highlite-toc*
 ==============================================================================
 REQUIREMENTS                                          *highlite-requirements*
 
-- Neovim 0.5+
+- Neovim 0.7+
 
 ==============================================================================
 USAGE                                                           *highlite-usage*
@@ -62,10 +62,10 @@ USAGE                                                           *highlite-usage*
 		{group}       A `string` which is the |highlight-group| to |:highlight|.
 		{attributes}  A |lua| `table` which follows this format: >
 		{
-			-- The color for the background; or `NONE`, `FG` or `BG`
+			-- The color for the background; or `nil`
 			bg = <color>,
 
-			-- The color for the foreground; or `NONE`, `FG` or `BG`
+			-- The color for the foreground; or `nil`
 			fg = <color>
 
 			-- The |highlight-blend| value, if one is desired.

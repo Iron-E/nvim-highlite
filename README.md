@@ -28,7 +28,7 @@ This template's _design_ focuses on:
 
 ## Installation
 
-The only prerequisite is Neovim 0.5+
+The only prerequisite is Neovim 0.7+
 
 ### Creating Your Own
 
