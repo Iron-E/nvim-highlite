@@ -929,8 +929,6 @@ local highlight_groups = {
 	TodoSignWARN = 'TodoFgWARN',
 
 	--[[ 4.4.16. nvim-cmp ]]
-	CmpBorderedWindow_CursorLine = 'PmenuSel',
-	CmpBorderedWindow_Normal = 'NormalFloat',
 	CmpItemAbbrDefault = 'Ignore',
 	CmpItemAbbrMatchDefault = 'Underlined',
 	CmpItemAbbrMatchFuzzyDefault = {fg=highlight_group_normal.fg, style={'nocombine', 'underline'}},
