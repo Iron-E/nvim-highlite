@@ -604,7 +604,7 @@ local highlight_groups = {
 	markdownH6 = {fg=purple_light, style='bold'},
 	markdownLinkDelimiter = 'Delimiter',
 	markdownLinkTextDelimiter = 'markdownLinkDelimiter',
-	markdownUrl = 'Underlined',
+	markdownUrl = 'mkdURL',
 	mkdBold = 'Ignore',
 	mkdBoldItalic = 'mkdBold',
 	mkdCode = 'Keyword',
