@@ -616,6 +616,7 @@ local highlight_groups = {
 	mkdLineBreak = 'NonText',
 	mkdListItem  = 'Special',
 	mkdRule = function(self) return {fg=self.Ignore.fg, style={'underline', color=self.Delimiter.fg}} end,
+	mkdURL = 'Underlined',
 
 	--[[ 4.3.20. Python ]]
 	pythonBrackets    = 'Delimiter',
