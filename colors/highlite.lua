@@ -791,7 +791,11 @@ local highlight_groups = {
 	manUnderline = 'Label',
 
 	--[[ 4.3.39 Rust ]]
+	rustAssert = 'Debug',
+	rustCharacterDelimiter = 'rustNoise',
 	rustIdentifier = 'Identifier',
+	rustStaticLifetime = 'rustStatic',
+	rustStringDelimiter = 'rustNoise',
 
 	--[[ 4.3.40 XXD ]]
 	xxdAddress = 'Label',
