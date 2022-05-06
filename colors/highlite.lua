@@ -794,7 +794,7 @@ local highlight_groups = {
 	rustAssert = 'Debug',
 	rustCharacterDelimiter = 'rustNoise',
 	rustIdentifier = 'Identifier',
-	rustStaticLifetime = 'rustStatic',
+	rustStaticLifetime = 'rustStorage',
 	rustStringDelimiter = 'rustNoise',
 
 	--[[ 4.3.40 XXD ]]
