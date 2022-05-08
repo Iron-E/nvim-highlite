@@ -856,13 +856,12 @@ local highlight_groups = {
 	NERDTreeLinkTarget = 'Tag',
 
 	--[[ 4.4.8. nvim-treesitter ]]
-	TSConstBuiltin = 'Constant',
-	TSConstructor  = 'Typedef',
-	TSFuncBuiltin  = 'Function',
-	TSStringEscape = 'Character',
-	TSStringRegex  = 'SpecialChar',
-	TSURI = 'Tag',
-	TSVariableBuiltin = 'Identifier',
+	TSConstBuiltin = 'TSConstant',
+	TSConstructor = 'TSFunction',
+	TSDanger = 'ErrorMsg',
+	TSFuncBuiltin = 'TSFunction',
+	TSTag = 'Tag',
+	TSWarning = 'WarningMsg',
 
 	--[[ 4.4.9. barbar.nvim ]]
 	BufferCurrent       = 'TabLineSel',
