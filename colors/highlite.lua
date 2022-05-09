@@ -979,8 +979,11 @@ local highlight_groups = {
 	NvimTreeGitRenamed = function(self) return {fg=self.DiffChange.bg} end,
 	NvimTreeGitStaged = {fg=cyan},
 
-	--[[ 4.4.18. symbols-outline.nvim ]]
+	--[[ 4.4.19. symbols-outline.nvim ]]
 	FocusedSymbol = {},
+
+	--[[ 4.4.20. mini.nvim ]]
+	MiniJump = 'MiniJump2dSpot',
 }
 
 --[[ Step 5: Terminal Colors
