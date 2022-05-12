@@ -213,12 +213,12 @@ You can either use [`nvim-treesitter`](https://github.com/nvim-treesitter/nvim-t
 | SystemD    | [wgwoods/vim-systemd-syntax](https://github.com/wgwoods/vim-systemd-syntax)               |
 | SystemTap  | [nickhutchinson/vim-systemtap](https://github.com/nickhutchinson/vim-systemtap)           |
 | TeX        | [lervag/vimtex](https://github.com/lervag/vimtex)                                         |
-| TOML       | [cespare/vim-toml](https://github.com/cespare/vim-toml)                                   |
+| TOML       | [Iron-E/vim-toml](https://github.com/Iron-E/vim-toml/tree/feature/delimiter-highlighting) |
 | Ungrammar  | [Iron-E/vim-ungrammar](https://github.com/Iron-E/vim-ungrammar)                           |
 | VB.NET     | [vim-scripts/vbnet](https://github.com/vim-scripts/vbnet)                                 |
 | Vim Logs   | [MTDL9/vim-log-highlighting](https://github.com/MTDL9/vim-log-highlighting)               |
 | XML        | [amadeus/vim-xml](https://github.com/amadeus/vim-xml)                                     |
-| YAML       | [stephpy/vim-yaml](https://github.com/stephpy/vim-yaml)                                   |
+| YAML       | [Iron-E/vim-yaml](https://github.com/Iron-E/vim-yaml/tree/patch-1)                        |
 | YATS       | [HerringtonDarkholme/yats](https://github.com/HerringtonDarkholme/yats)                   |
 
 ## Contribution
