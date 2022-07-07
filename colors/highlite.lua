@@ -722,6 +722,7 @@ local highlight_groups = {
 	plantumlMindmap2  = 'Label',
 
 	--[[ 4.3.33. YAML ]]
+	yamlInline = 'Delimiter',
 	yamlKey = 'Label',
 
 	--[[ 4.3.34. Git ]]
