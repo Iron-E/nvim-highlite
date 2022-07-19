@@ -58,7 +58,7 @@ Whenever you want to update from then on, you can run the [update script](update
 	vim.api.nvim_command 'packadd packer.nvim'
 
 	return require('packer').startup {function(use)
-		use {'wbthomason/packer.nvim', opt=true}
+		use {'wbthomason/packer.nvim', opt = true}
 		use 'Iron-E/nvim-highlite'
 	end}
 	```
@@ -103,16 +103,16 @@ local black = {'#000000', 0, 'black'}
 local white = {'#FFFFFF', 255, 'white'}
 
 -- Highlight 'Identifier'
-highlite.highlight('Identifier', {bg=red, fg=black, style='bold'})
+highlite.highlight('Identifier', {bg = red, fg = black, style = 'bold'})
 
 -- Highlight 'Function' conditionally according to background color.
-highlite.highlight('Function', {bg=black, fg=red, light={bg=white}})
+highlite.highlight('Function', {bg = black, fg = red, light = {bg = white}})
 
 -- Link 'Example' to 'Identifier'
 highlite.highlight('Example', 'Identifier')
 
 -- You can also reference specific attributes of another highlight group.
-highlite.highlight('AnotherExample', {bg=highlite.group'SpellBad'.bg, fg=white})
+highlite.highlight('AnotherExample', {bg = highlite.group'SpellBad'.bg, fg = white})
 ```
 
 ### As Template
@@ -130,13 +130,13 @@ local white = {'#FFFFFF', 255, 'white'}
 -- Next define some highlight groups.
 local highlight_groups = {
 	-- Any field which can be set to "NONE" doesn't need to be set, it will be automatically assumed to be "NONE".
-	Identifier = {bg=red, fg=black, style='bold'},
+	Identifier = {bg = red, fg = black, style = 'bold'},
 	-- If your colorscheme should respond to multiple background settings, you can do that too:
-	Function = {bg=black, fg=red, light={bg=white}},
+	Function = {bg = black, fg = red, light = {bg = white}},
 	--[[ Note that light/dark differentiation is completely optional. ]]
 
 	-- You can also reference specific attributes of another highlight group.
-	SomethingElse = function(self) return {fg=self.Identifier.fg, bg=self.Function.bg} end,
+	SomethingElse = function(self) return {fg = self.Identifier.fg, bg = self.Function.bg} end,
 }
 
 -- The rest is mostly handled by the template.
