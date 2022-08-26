@@ -982,6 +982,7 @@ local highlight_groups = {
 
 	--[[ 4.4.19. symbols-outline.nvim ]]
 	FocusedSymbol = {},
+	SymbolsOutlineConnector = 'Delimiter',
 
 	--[[ 4.4.20. mini.nvim ]]
 	MiniJump = 'MiniJump2dSpot',
