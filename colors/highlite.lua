@@ -866,24 +866,36 @@ local highlight_groups = {
 
 	--[[ 4.4.9. barbar.nvim ]]
 	BufferCurrent       = 'TabLineSel',
+	BufferCurrentERROR  = function(self) return {fg = self.InfoMsg.fg, bg = self.BufferCurrent.bg} end,
+	BufferCurrentHINT   = function(self) return {fg = self.HintMsg.fg, bg = self.BufferCurrent.bg} end,
 	BufferCurrentIndex  = function(self) return {fg = self.InfoMsg.fg, bg = self.BufferCurrent.bg} end,
+	BufferCurrentINFO   = function(self) return {fg = self.InfoMsg.fg, bg = self.BufferCurrent.bg} end,
 	BufferCurrentMod    = {fg = tan, bg = black, style = 'bold'},
 	BufferCurrentSign   = 'HintMsg',
 	BufferCurrentTarget = 'BufferCurrentSign',
+	BufferCurrentWARN   = function(self) return {fg = self.WarningMsg.fg, bg = self.BufferCurrent.bg} end,
 
 	BufferInactive       = 'BufferVisible',
+	BufferInactiveERROR  = function(self) return {fg = self.InfoMsg.fg, bg = self.BufferInactive.bg} end,
+	BufferInactiveHINT   = function(self) return {fg = self.HintMsg.fg, bg = self.BufferInactive.bg} end,
 	BufferInactiveIndex  = function(self) return {fg = self.InfoMsg.fg, bg = self.BufferInactive.bg} end,
+	BufferInactiveINFO   = function(self) return {fg = self.InfoMsg.fg, bg = self.BufferInactive.bg} end,
 	BufferInactiveMod    = 'BufferVisibleMod',
 	BufferInactiveSign   = 'BufferVisibleSign',
 	BufferInactiveTarget = 'BufferVisibleTarget',
+	BufferInactiveWARN   = function(self) return {fg = self.WarningMsg.fg, bg = self.BufferInactive.bg} end,
 
 	BufferTabpages    = {style = 'bold'},
 	BufferTabpageFill = 'TabLineFill',
 
 	BufferVisible       = 'TabLine',
+	BufferVisibleERROR  = function(self) return {fg = self.InfoMsg.fg, bg = self.BufferVisible.bg} end,
+	BufferVisibleHINT   = function(self) return {fg = self.HintMsg.fg, bg = self.BufferVisible.bg} end,
 	BufferVisibleIndex  = function(self) return {fg = self.InfoMsg.fg, bg = self.BufferVisible.bg} end,
+	BufferVisibleINFO   = function(self) return {fg = self.InfoMsg.fg, bg = self.BufferVisible.bg} end,
 	BufferVisibleMod    = function(self) return {fg = white, bg = self.BufferVisible.bg, style = 'italic'} end,
 	BufferVisibleSign   = 'BufferVisible',
+	BufferVisibleWARN   = function(self) return {fg = self.WarningMsg.fg, bg = self.BufferVisible.bg} end,
 	BufferVisibleTarget = function(self)
 		local super = self.BufferVisibleMod
 		return {fg = super.fg, bg = super.bg, style = 'bold'}
