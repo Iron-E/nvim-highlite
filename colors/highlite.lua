@@ -865,6 +865,16 @@ local highlight_groups = {
 	TSWarning = 'WarningMsg',
 
 	--[[ 4.4.9. barbar.nvim ]]
+	BufferAlternate       = function(self) return {fg = self.BufferVisible.fg, bg = gray_dark} end,
+	BufferAlternateERROR  = function(self) return {fg = self.ErrorMsg.fg, bg = gray_dark} end,
+	BufferAlternateHINT   = function(self) return {fg = self.HintMsg.fg, bg = gray_dark} end,
+	BufferAlternateIndex  = function(self) return {fg = self.Number.fg, bg = gray_dark} end,
+	BufferAlternateINFO   = function(self) return {fg = self.InfoMsg.fg, bg = gray_dark} end,
+	BufferAlternateMod    = function(self) return {fg = self.BufferVisibleMod.fg, bg = gray_dark, style = 'bold'} end,
+	BufferAlternateSign   = {fg = teal, bg = gray_dark},
+	BufferAlternateTarget = function(self) return {fg = self.BufferVisible.fg, bg = gray_dark, style = 'italic'} end,
+	BufferAlternateWARN   = function(self) return {fg = self.WarningMsg.fg, bg = gray_dark} end,
+
 	BufferCurrent       = 'TabLineSel',
 	BufferCurrentERROR  = function(self) return {fg = self.ErrorMsg.fg, bg = self.BufferCurrent.bg} end,
 	BufferCurrentHINT   = function(self) return {fg = self.HintMsg.fg, bg = self.BufferCurrent.bg} end,
@@ -894,12 +904,9 @@ local highlight_groups = {
 	BufferVisibleIndex  = function(self) return {fg = self.Number.fg, bg = self.BufferVisible.bg} end,
 	BufferVisibleINFO   = function(self) return {fg = self.InfoMsg.fg, bg = self.BufferVisible.bg} end,
 	BufferVisibleMod    = function(self) return {fg = white, bg = self.BufferVisible.bg, style = 'italic'} end,
-	BufferVisibleSign   = 'BufferVisible',
+	BufferVisibleSign   = function(self) return {fg = self.BufferVisibleMod.fg, bg = self.BufferVisibleMod.bg, style = 'bold'} end,
+	BufferVisibleTarget = 'BufferVisibleSign',
 	BufferVisibleWARN   = function(self) return {fg = self.WarningMsg.fg, bg = self.BufferVisible.bg} end,
-	BufferVisibleTarget = function(self)
-		local super = self.BufferVisibleMod
-		return {fg = super.fg, bg = super.bg, style = 'bold'}
-	end,
 
 	--[[ 4.4.10. vim-sandwhich ]]
 	OperatorSandwichChange = 'DiffText',
