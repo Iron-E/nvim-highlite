@@ -857,12 +857,12 @@ local highlight_groups = {
 	NERDTreeLinkTarget = 'Tag',
 
 	--[[ 4.4.8. nvim-treesitter ]]
-	TSConstBuiltin = 'TSConstant',
-	TSConstructor = 'TSFunction',
-	TSDanger = 'ErrorMsg',
-	TSFuncBuiltin = 'TSFunction',
-	TSTag = 'Tag',
-	TSWarning = 'WarningMsg',
+	['@constant.builtin'] = '@constant',
+	['@constructor'] = '@function',
+	['@text.danger'] = 'ErrorMsg',
+	['@function.builtin'] = '@function',
+	['@tag'] = 'Tag',
+	['@text.warning'] = 'WarningMsg',
 
 	--[[ 4.4.9. barbar.nvim ]]
 	BufferAlternate       = function(self) return {fg = self.BufferVisible.fg, bg = gray_dark} end,
