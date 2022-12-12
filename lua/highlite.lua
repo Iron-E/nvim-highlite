@@ -1,12 +1,12 @@
 --[[ NOTHING INSIDE THIS FILE NEEDS TO BE EDITED BY THE USER. ]]
 
 --- @class Highlite.Definition
---- @field bg string|table the background color
---- @field blend number the transparency value
---- @field dark Highlite.Definition special highlight definition for when `&bg` is 'dark'
---- @field fg string|table the foreground color
---- @field light Highlite.Definition special highlight definition for when `&bg` is 'light'
---- @field style Highlite.Style special appearance alterations
+--- @field bg? string|table the background color
+--- @field blend? number the transparency value
+--- @field dark? Highlite.Definition special highlight definition for when `&bg` is 'dark'
+--- @field fg? string|table the foreground color
+--- @field light? Highlite.Definition special highlight definition for when `&bg` is 'light'
+--- @field style? Highlite.Style special appearance alterations
 
 --- @class Highlite.Style
 --- @field color string|table color of underline or undercurl
@@ -23,18 +23,18 @@ local _PALETTE_CTERM = _USE_256 and 2 or 3
 local _PALETTE_HEX  = 1
 
 --- The `string` type.
-local _TYPE_STRING = 'string'
+local _TYPE_STRING = type ''
 
 --- The `table` type.
-local _TYPE_TABLE  = 'table'
+local _TYPE_TABLE  = type {}
 
 --[[/* Helper Functions */]]
 
---- @param color string|table the color name or definition
+--- @param color? string|table the color name or definition
 --- @param index number
---- @return number|string color_value a hex, 16-bit, or ANSI color. "NONE" by default
+--- @return nil|number|string color_value a hex, 16-bit, or ANSI color. "NONE" by default
 local function get(color, index) -- {{{ †
-	if type(color) == _TYPE_TABLE and color[index] then
+	if color and color[index] then
 		return color[index]
 	elseif type(color) == _TYPE_STRING then
 		return color
@@ -96,6 +96,7 @@ function highlite.highlight(group_name, definition) -- {{{ †
 	else
 		-- Take care of special instructions for certain background colors.
 		if definition[vim.go.background] then
+			--- @diagnostic disable-next-line: param-type-mismatch (`str.dark` and `str.light` are `nil`)
 			definition = use_background_with(definition)
 		end
 
