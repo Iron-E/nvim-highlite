@@ -858,10 +858,15 @@ local highlight_groups = {
 
 	--[[ 4.4.8. nvim-treesitter ]]
 	['@constant.builtin'] = '@constant',
+	['@constant.macro'] = '@define',
 	['@constructor'] = '@function',
-	['@text.danger'] = 'ErrorMsg',
 	['@function.builtin'] = '@function',
+	['@function.macro'] = '@macro',
+	['@namespace'] = 'Directory',
+	['@string.escape'] = '@string.special',
 	['@tag'] = 'Tag',
+	['@text.danger'] = 'ErrorMsg',
+	['@text.uri'] = '@test.underlined',
 	['@text.warning'] = 'WarningMsg',
 
 	--[[ 4.4.9. barbar.nvim ]]
