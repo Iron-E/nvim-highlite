@@ -877,7 +877,7 @@ local highlight_groups = {
 	BufferAlternateINFO   = function(self) return {fg = self.InfoMsg.fg, bg = gray_dark} end,
 	BufferAlternateMod    = function(self) return {fg = self.BufferVisibleMod.fg, bg = gray_dark, style = 'bold'} end,
 	BufferAlternateSign   = {fg = teal, bg = gray_dark},
-	BufferAlternateTarget = function(self) return {fg = self.BufferVisible.fg, bg = gray_dark, style = 'italic'} end,
+	BufferAlternateTarget = function(self) return {fg = self.BufferAlternateSign.fg, bg = gray_dark, style = 'italic'} end,
 	BufferAlternateWARN   = function(self) return {fg = self.WarningMsg.fg, bg = gray_dark} end,
 
 	BufferCurrent       = 'TabLineSel',
