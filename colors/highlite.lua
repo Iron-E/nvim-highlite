@@ -489,10 +489,7 @@ local highlight_groups = {
 	scssBoolean        = 'Boolean',
 	scssDefault        = 'Keyword',
 	scssElse           = 'scssIf',
-	scssMixinName      = function(self)
-		local super = self.cssClassName
-		return {bg = super.bg, fg = super.fg, style = 'italic'}
-	end,
+	scssMixinName      = function(self) return {bg = self.cssClassName.bg, fg = self.cssClassName.fg, style = 'italic'} end,
 	scssIf             = 'PreCondit',
 	scssInclude        = 'Include',
 	scssSelectorChar   = 'Delimiter',
@@ -929,7 +926,9 @@ local highlight_groups = {
 
 	--[[ 4.4.13. indent-blankline.nvim ]]
 	IndentBlanklineChar = function(self) return vim.tbl_extend('force', self.Whitespace, {style = 'nocombine'}) end,
+	IndentBlanklineCharAlt = function(self) return vim.tbl_extend('force', self.Whitespace, {style = 'nocombine'}) end,
 	IndentBlanklineSpaceChar = 'IndentBlanklineChar',
+	IndentBlanklineSpaceCharAlt = 'IndentBlanklineCharAlt',
 
 	--[[ 4.4.14. trouble.nvim ]]
 	TroubleCount = function(self) return vim.tbl_extend('force', self.Number, {style = 'underline'}) end,
