@@ -37,6 +37,7 @@ local function get(color, index) -- {{{ †
 	if color and color[index] then
 		return color[index]
 	elseif type(color) == _TYPE_STRING then
+		--- @diagnostic disable-next-line:return-type-mismatch (we test for `color == string`, which is a subtype of `(number|string)?`
 		return color
 	end
 end --}}} ‡
@@ -110,7 +111,9 @@ function highlite.highlight(group_name, definition) -- {{{ †
 
 		local style = definition.style
 		if type(style) == _TYPE_TABLE then
+			--- @diagnostic disable-next-line:param-type-mismatch (we check `type(style) == 'table'` right above this)
 			for _, option in ipairs(style) do highlight[option] = true end
+			--- @diagnostic disable-next-line:need-check-nil (we check `type(style) == 'table'` right above this)
 			highlight.special = get(style.color, _PALETTE_HEX)
 		elseif style then
 			highlight[style] = true
@@ -138,16 +141,16 @@ return setmetatable(highlite, {__call = function(self, normal, highlights, termi
 	--- @param resolve_links boolean whether to translate highlight links into full values
 	--- @returns the value at `tbl[key]`, when highlight links and embedded functions have been accounted for.
 	local function resolve(tbl, key, resolve_links)
-		local value = tbl[key]
-		local value_type = type(value)
+		local original_value = tbl[key]
+		local original_value_type = type(original_value)
 
-		if value_type == 'function' then -- call and cache the result; next time, if it isn't a function this step will be skipped
-			tbl[key] = value(setmetatable({},
+		if original_value_type == 'function' then -- call and cache the result; next time, if it isn't a function this step will be skipped
+			tbl[key] = original_value(setmetatable({},
 			{
 				__index = function(_, inner_key) return resolve(tbl, inner_key, true) end
 			}))
-		elseif resolve_links and value_type == _TYPE_STRING and not string.find(value, '^#') then
-			return resolve(tbl, value, resolve_links)
+		elseif resolve_links and original_value_type == _TYPE_STRING and not string.find(original_value, '^#') then
+			return resolve(tbl, original_value, resolve_links)
 		end
 
 		return tbl[key]
