@@ -926,9 +926,7 @@ local highlight_groups = {
 
 	--[[ 4.4.13. indent-blankline.nvim ]]
 	IndentBlanklineChar = function(self) return vim.tbl_extend('force', self.Whitespace, {style = 'nocombine'}) end,
-	IndentBlanklineCharAlt = function(self) return vim.tbl_extend('force', self.Whitespace, {style = 'nocombine'}) end,
 	IndentBlanklineSpaceChar = 'IndentBlanklineChar',
-	IndentBlanklineSpaceCharAlt = 'IndentBlanklineCharAlt',
 
 	--[[ 4.4.14. trouble.nvim ]]
 	TroubleCount = function(self) return vim.tbl_extend('force', self.Number, {style = 'underline'}) end,
