@@ -289,6 +289,8 @@ local highlight_groups = {
 	Debug = 'WarningMsg',
 
 	--[[ 4.1.7. Help Syntax]]
+	Bold = {style = 'bold'},
+	Italic = {style = 'italic'},
 	Underlined = {fg = turqoise, style = 'underline'},
 	Ignore = {fg = gray},
 	Error = {fg = white, bg = red_dark, style = 'bold'},
@@ -530,7 +532,7 @@ local highlight_groups = {
 
 	--[[ 4.3.8. HTML ]]
 	htmlArg    = 'Label',
-	htmlBold   = {fg = highlight_group_normal.fg, style = 'bold'},
+	htmlBold   = 'Bold',
 	htmlTitle  = 'htmlBold',
 	htmlEndTag = 'htmlTag',
 	htmlH1 = 'markdownH1',
@@ -539,7 +541,7 @@ local highlight_groups = {
 	htmlH4 = 'markdownH4',
 	htmlH5 = 'markdownH5',
 	htmlH6 = 'markdownH6',
-	htmlItalic  = {style = 'italic'},
+	htmlItalic  = 'Italic',
 	htmlSpecialTagName = 'Keyword',
 	htmlTag  = 'Special',
 	htmlTagN = 'Typedef',
@@ -1007,6 +1009,23 @@ local highlight_groups = {
 
 	--[[ 4.4.20. mini.nvim ]]
 	MiniJump = 'MiniJump2dSpot',
+
+	--[[ 4.4.21. lazy.nvim ]]
+	LazyCommit = 'Number',
+	LazyCommitType = 'Title',
+	LazyCommitIssue = 'LazyUrl',
+	LazyH1 = 'markdownH1',
+	LazyH2 = 'markdownH2',
+	LazyReasonEvent = 'Repeat',
+	LazyReasonFt = 'Conditional',
+	LazyReasonImport = 'Include',
+	LazyReasonKeys = 'Character',
+	LazyReasonPlugin = 'Label',
+	LazyReasonRuntime = 'Function',
+	LazyReasonSource = 'LazyReasonStart',
+	LazyReasonStart = 'Constant',
+	LazySpecial = 'Special',
+	LazyUrl = 'Underlined',
 }
 
 --[[ Step 5: Terminal Colors
