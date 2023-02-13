@@ -1013,6 +1013,8 @@ local highlight_groups = {
 	--[[ 4.4.21. lazy.nvim ]]
 	LazyCommit = 'Number',
 	LazyCommitType = 'Title',
+	LazyButton = 'TabLine',
+	LazyButtonActive = function(self) return vim.tbl_extend('force', self.TabLineSel, {bg = black}) end,
 	LazyCommitIssue = 'LazyUrl',
 	LazyH1 = 'markdownH1',
 	LazyH2 = 'markdownH2',
