@@ -1012,22 +1012,23 @@ local highlight_groups = {
 
 	--[[ 4.4.21. lazy.nvim ]]
 	LazyButton = 'TabLine',
-	LazyButtonActive = function(self) return vim.tbl_extend('force', self.TabLineSel, {bg = black}) end,
+	LazyButtonActive = 'TabLineSel',
 	LazyCommit = 'Number',
 	LazyCommitIssue = 'LazyUrl',
-	LazyCommitType = 'Title',
+	LazyCommitType = 'Type',
 	LazyDir = 'Directory',
 	LazyH1 = 'markdownH1',
 	LazyH2 = 'markdownH2',
+	LazyProp = '@field',
 	LazyReasonEvent = 'Repeat',
 	LazyReasonFt = 'Conditional',
 	LazyReasonImport = 'Function',
-	LazyReasonKeys = 'Character',
+	LazyReasonKeys = 'String',
 	LazyReasonPlugin = 'Label',
-	LazyReasonRuntime = 'Statement',
 	LazyReasonSource = 'Include',
 	LazyReasonStart = 'Constant',
 	LazySpecial = 'Special',
+	LazyTaskOutput = 'Statement',
 	LazyUrl = 'Underlined',
 }
 
