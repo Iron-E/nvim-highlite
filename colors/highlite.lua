@@ -1011,11 +1011,12 @@ local highlight_groups = {
 	MiniJump = 'MiniJump2dSpot',
 
 	--[[ 4.4.21. lazy.nvim ]]
-	LazyCommit = 'Number',
-	LazyCommitType = 'Title',
 	LazyButton = 'TabLine',
 	LazyButtonActive = function(self) return vim.tbl_extend('force', self.TabLineSel, {bg = black}) end,
+	LazyCommit = 'Number',
 	LazyCommitIssue = 'LazyUrl',
+	LazyCommitType = 'Title',
+	LazyDir = 'Directory',
 	LazyH1 = 'markdownH1',
 	LazyH2 = 'markdownH2',
 	LazyReasonEvent = 'Repeat',
