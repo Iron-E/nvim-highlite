@@ -11,20 +11,20 @@
 This template's _defaults_ focus on:
 
 1. Compatibility with [semantic highlighting](https://medium.com/@evnbr/coding-in-color-3a6db2743a1e).
-	* I was using colorschemes that often did not provide enough highlight groups to provide distinction between tokens.
+  * I was using colorschemes that often did not provide enough highlight groups to provide distinction between tokens.
 2. Visibility in any range of blue-light.
-	* I use `redshift` often, and many colorschemes did not allow for me to see when I had lower color temperatures.
+  * I use `redshift` often, and many colorschemes did not allow for me to see when I had lower color temperatures.
 
 This template's _design_ focuses on:
 
 1. Ease of use and rapid development.
-	* New features may simply be integrated with current configurations, rather than rewritten over them.
-	* Merging with the upstream repository is simplified by GitHub, allowing you to select what new defaults to add.
-	* It provides a large supply of defaults for plugins and programming languages.
-		* Define a smaller set of "categorical" highlights (see Neovim's `group-name` help page) and many more will `link` automatically.
+  * New features may simply be integrated with current configurations, rather than rewritten over them.
+  * Merging with the upstream repository is simplified by GitHub, allowing you to select what new defaults to add.
+  * It provides a large supply of defaults for plugins and programming languages.
+    * Define a smaller set of "categorical" highlights (see Neovim's `group-name` help page) and many more will `link` automatically.
 2. Inversion of Control
-	* Changes made to the highlighting algorithm won't affect how you write your colorscheme.
-	* New highlight group attributes which are unaccounted for in older versions will simply be ignored without errors due to Lua's `table`s.
+  * Changes made to the highlighting algorithm won't affect how you write your colorscheme.
+  * New highlight group attributes which are unaccounted for in older versions will simply be ignored without errors due to Lua's `table`s.
 
 ## Installation
 
@@ -34,47 +34,77 @@ The only prerequisite is Neovim 0.7+
 
 1. Fork this repository, or clone it with `git clone https://github.com/Iron-E/nvim-highlite`.
 2. Follow the instructions in [`colors/highlite.vim`](colors/highlite.vim).
-	* If you are on a Unix system, use the [setup script](setup.sh) like so:
-	```sh
-	chmod +x ./setup.sh
-	./setup.sh highlite <colorscheme>
-	```
-	Where `<colorscheme>` is the name of your desired colorscheme.
-	* If you are on Windows, rename the files manually.
+  * If you are on a Unix system, use the [setup script](setup.sh) like so:
+  ```sh
+  chmod +x ./setup.sh
+  ./setup.sh highlite <colorscheme>
+  ```
+  Where `<colorscheme>` is the name of your desired colorscheme.
+  * If you are on Windows, rename the files manually.
 
 Whenever you want to update from then on, you can run the [update script](update.sh). This will load the latest upstream changes to the core highlighting library.
 
 ### Just The Defaults
 
+#### lazy.nvim
+
+I recommend using [lazy.nvim](https://github.com/folke/lazy.nvim):
+
+```lua
+local install_path = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
+if not vim.loop.fs_stat(install_path) then
+  vim.fn.system {
+    'git', 'clone', '--filter=blob:none',
+    'https://github.com/folke/lazy.nvim.git', '--branch=stable',
+    install_path
+  }
+end
+
+vim.opt.rtp:prepend(install_path)
+require('lazy').setup {
+  {'folke/lazy.nvim', tag = 'stable'},
+  {'Iron-E/nvim-highlite',
+    config = function()
+      vim.opt.termguicolors = true -- optional
+      vim.api.nvim_command 'colorscheme highlite'
+    end,
+    lazy = false,
+    priority = 1000
+  },
+}
+```
+
+#### Others
+
 1. Install a plugin manager such as [`packer.nvim`](https://github.com/wbthomason/packer.nvim):
-	```lua
-	-- packer.nvim example
-	local install_path = vim.fn.stdpath('data')..'/site/pack/packer/opt/packer.nvim'
+  ```lua
+  -- packer.nvim example
+  local install_path = vim.fn.stdpath('data')..'/site/pack/packer/opt/packer.nvim'
 
-	if not vim.loop.fs_stat(vim.fn.glob(install_path)) then
-		os.execute('git clone https://github.com/wbthomason/packer.nvim '..install_path)
-	end
+  if not vim.loop.fs_stat(vim.fn.glob(install_path)) then
+    vim.fn.system {'git', 'clone', 'https://github.com/wbthomason/packer.nvim', install_path}
+  end
 
-	vim.api.nvim_command 'packadd packer.nvim'
+  vim.api.nvim_command 'packadd packer.nvim'
 
-	return require('packer').startup {function(use)
-		use {'wbthomason/packer.nvim', opt = true}
-		use 'Iron-E/nvim-highlite'
-	end}
-	```
+  return require('packer').startup {function(use)
+    use {'wbthomason/packer.nvim', opt = true}
+    use 'Iron-E/nvim-highlite'
+  end}
+  ```
 2. Specify this colorscheme as your default colorscheme in the `init.vim`:
-	```vim
-	" Enable 24-bit color output. Only do this IF your environment supports it.
-	" This plugin is fully compatible with 8-bit, 16-bit, and 24-bit colors.
-	set termguicolors
-	" Use the colorscheme
-	colorscheme highlite
-	```
-	Or using `init.lua`:
-	```lua
-	vim.opt.termguicolors = true
-	vim.api.nvim_command 'colorscheme highlite'
-	```
+  ```vim
+  " Enable 24-bit color output. Only do this IF your environment supports it.
+  " This plugin is fully compatible with 8-bit, 16-bit, and 24-bit colors.
+  set termguicolors
+  " Use the colorscheme
+  colorscheme highlite
+  ```
+  Or using `init.lua`:
+  ```lua
+  vim.opt.termguicolors = true
+  vim.api.nvim_command 'colorscheme highlite'
+  ```
 
 ## Usage
 
@@ -129,14 +159,14 @@ local white = {'#FFFFFF', 255, 'white'}
 
 -- Next define some highlight groups.
 local highlight_groups = {
-	-- Any field which can be set to "NONE" doesn't need to be set, it will be automatically assumed to be "NONE".
-	Identifier = {bg = red, fg = black, style = 'bold'},
-	-- If your colorscheme should respond to multiple background settings, you can do that too:
-	Function = {bg = black, fg = red, light = {bg = white}},
-	--[[ Note that light/dark differentiation is completely optional. ]]
+  -- Any field which can be set to "NONE" doesn't need to be set, it will be automatically assumed to be "NONE".
+  Identifier = {bg = red, fg = black, style = 'bold'},
+  -- If your colorscheme should respond to multiple background settings, you can do that too:
+  Function = {bg = black, fg = red, light = {bg = white}},
+  --[[ Note that light/dark differentiation is completely optional. ]]
 
-	-- You can also reference specific attributes of another highlight group.
-	SomethingElse = function(self) return {fg = self.Identifier.fg, bg = self.Function.bg} end,
+  -- You can also reference specific attributes of another highlight group.
+  SomethingElse = function(self) return {fg = self.Identifier.fg, bg = self.Function.bg} end,
 }
 
 -- The rest is mostly handled by the template.
@@ -157,8 +187,8 @@ hi! Error guifg=#000000 guibg=#FFFFFF
 
 " Do this instead.
 augroup Highlite
-	" You can also use `highlite.highlight()` instead of `:hi!`
-	autocmd ColorScheme highlite hi! Error guifg=#000000 guibg=#FFFFFF
+  " You can also use `highlite.highlight()` instead of `:hi!`
+  autocmd ColorScheme highlite hi! Error guifg=#000000 guibg=#FFFFFF
 augroup end
 
 colorscheme highlite
