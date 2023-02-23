@@ -865,7 +865,7 @@ local highlight_groups = {
 	['@string.escape'] = '@string.special',
 	['@tag'] = 'Tag',
 	['@text.danger'] = 'ErrorMsg',
-	['@text.uri'] = '@test.underlined',
+	['@text.uri'] = 'Underlined',
 	['@text.warning'] = 'WarningMsg',
 
 	--[[ 4.4.9. barbar.nvim ]]
