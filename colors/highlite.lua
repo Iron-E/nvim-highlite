@@ -785,10 +785,12 @@ local highlight_groups = {
 	helpHyperTextJump = 'Underlined',
 
 	--[[ 4.3.38 Man ]]
-	-- manBold = function(self) return vim.tbl_extend('force', self.mkdCode, {style = 'nocombine'}) end,
+	manHeader = 'markdownH1',
 	manOptionDesc = 'Special',
-	manReference = 'Tag',
-	manUnderline = 'Label',
+	manReference = '@text.uri',
+	manSectionHeading = 'markdownH2',
+	manSubHeading = 'markdownH3',
+	manUnderline = '@text.literal',
 
 	--[[ 4.3.39 Rust ]]
 	rustAssert = 'Debug',
@@ -865,6 +867,7 @@ local highlight_groups = {
 	['@string.escape'] = '@string.special',
 	['@tag'] = 'Tag',
 	['@text.danger'] = 'ErrorMsg',
+	['@text.literal'] = 'mkdCode',
 	['@text.uri'] = 'Underlined',
 	['@text.warning'] = 'WarningMsg',
 
