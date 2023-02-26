@@ -6,7 +6,7 @@ rm "colors/$1.lua"
 sed "s/$1/$2/g" "doc/$1.txt" > "doc/$2.txt"
 rm "doc/$1.txt"
 
-mv "lua/$1.lua" "lua/$2.lua"
+mv "lua/$1" "lua/$2"
 
 sed "s/$1/$2/g" "README.md" > "README_2.md"
 mv "README_2.md" "README.md"
