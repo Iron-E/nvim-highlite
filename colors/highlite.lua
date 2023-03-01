@@ -778,11 +778,15 @@ local highlight_groups = {
 	coqVernacPunctuation = 'coqTermPunctuation',
 
 	--[[ 4.3.37 Help ]]
-	helpHeader = 'Label',
-	helpOption = 'Keyword',
-	helpHeadline = 'Title',
-	helpSectionDelim = 'Delimiter',
-	helpHyperTextJump = 'Underlined',
+	helpCommand = {link = 'Statement'},
+	helpHeader = {link = 'Label', ft = 'help'},
+	helpHeadline = {link = 'Title', ft = 'help'},
+	helpHyperTextJump = {link = 'Tag', ft = 'help'},
+	helpHyperTextEntry = {link = 'Tag', ft = 'help'},
+	helpExample = {link = 'Statement'},
+	helpNote = {link = 'DiagnosticHint', ft = 'help'},
+	helpOption = {link = 'Keyword', ft = 'help'},
+	helpSectionDelim = {link = 'Delimiter', ft = 'help'},
 
 	--[[ 4.3.38 Man ]]
 	manHeader = 'markdownH1',
