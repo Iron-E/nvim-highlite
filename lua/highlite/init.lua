@@ -3,7 +3,7 @@
 --[[/* Vars */]]
 
 --- Which set of colors to use.
-local USE_256 = tonumber(vim.api.nvim_get_option 't_Co') > 255 or vim.env.TERM:find '256'
+local USE_256 = tonumber(vim.api.nvim_get_option 't_Co') > 255 or vim.loop.os_getenv('TERM'):find '256'
 
 --- Which index to use for `cterm` highlights.
 local PALETTE_CTERM = USE_256 and 2 or 3
