@@ -304,6 +304,11 @@ colorscheme.highlight_all {
 	SpecialComment = {fg = gray, bold = true, nocombine = true},
 	SpecialKey = {link = 'Character'},
 
+	-- LSP
+	['@lsp.type.keyword.lua'] = {link = 'SpecialComment'},
+	['@lsp.typemod.variable.defaultLibrary.lua'] = {link = '@lsp.type.class.lua'},
+	['@lsp.type.string.lua'] = {link = 'String'},
+
 	-- treesitter
 	['@constant.builtin'] = {link = '@constant'},
 	['@constant.macro'] = {link = '@define'},
@@ -649,6 +654,7 @@ colorscheme.highlight_all {
 	luaBrackets = {link = 'Delimiter'},
 	luaBuiltin = {link = 'Keyword'},
 	luaComma = {link = 'Delimiter'},
+	luaDocTag = {link = 'SpecialComment'},
 	luaFuncArgName = {link = 'Identifier'},
 	luaFuncCall = {link = 'Function'},
 	luaFuncId = {link = 'luaNoise'},
@@ -656,9 +662,10 @@ colorscheme.highlight_all {
 	luaFuncName = {link = 'Function'},
 	luaFuncParens = {link = 'Delimiter'},
 	luaFuncTable = {link = 'Structure'},
+	luaFunction = {link = 'Keyword'},
 	luaGotoLabel = {link = 'luaLabel'},
 	luaIn = {link = 'luaRepeat'},
-	luaLocal = {link = 'Type'},
+	luaLocal = {link = 'Keyword'},
 	luaNoise = {link = 'Delimiter'},
 	luaParens = {link = 'Delimiter'},
 	luaSpecialTable = {link = 'Structure'},
