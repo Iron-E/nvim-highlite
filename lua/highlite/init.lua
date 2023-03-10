@@ -106,7 +106,7 @@ function highlite.highlight_all(groups)
 end
 
 --- Set `g:terminal_color_`s based on `terminal_colors`.
---- @param terminal_colors table a list 1..16 of colors to use in the terminal
+--- @param terminal_colors highlite.color.definition[] a list 1..16 of colors to use in the terminal
 function highlite.highlight_terminal(terminal_colors)
 	for index, color in ipairs(terminal_colors) do
 		vim.api.nvim_set_var('terminal_color_' .. (index - 1), color[
