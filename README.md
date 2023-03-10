@@ -70,6 +70,7 @@ require('lazy').setup {
     end,
     lazy = false,
     priority = 1000
+    version = '^3.0.0',
   },
 }
 ```
@@ -89,7 +90,7 @@ require('lazy').setup {
 
   return require('packer').startup {function(use)
     use {'wbthomason/packer.nvim', opt = true}
-    use 'Iron-E/nvim-highlite'
+    use {'Iron-E/nvim-highlite', branch = 'master-v3'}
   end}
   ```
 2. Specify this colorscheme as your default colorscheme in the `init.vim`:
