@@ -408,6 +408,15 @@ local highlight_groups = {
 	LspDiagnosticsUnderlineInfo  = 'DiagnosticUnderlineInfo',
 	LspDiagnosticsUnderlineWarning = 'DiagnosticUnderlineWarn',
 
+	['@lsp.mod.constant'] = {link = 'Constant'},
+	['@lsp.type.boolean'] = {link = 'Boolean'},
+	['@lsp.type.character'] = {link = 'Character'},
+	['@lsp.type.float'] = {link = 'Float'},
+	['@lsp.type.interface'] = {link = 'Type'},
+	['@lsp.type.namespace'] = {link = 'Directory'},
+	['@lsp.type.number'] = {link = 'Number'},
+	['@lsp.type.string'] = {link = 'String'},
+
 	--[[ 4.2.12. Cursor ]]
 	Cursor   = {style = 'inverse'},
 	CursorIM = 'Cursor',
@@ -566,6 +575,9 @@ local highlight_groups = {
 	jsonStringSQError = 'Exception',
 
 	--[[ 4.3.12. Lua ]]
+	['@lsp.type.keyword.lua'] = {link = 'SpecialComment'},
+	['@lsp.type.string.lua'] = {link = 'String'},
+	['@lsp.typemod.variable.defaultLibrary.lua'] = {link = '@lsp.type.class.lua'},
 	luaBraces   = 'Structure',
 	luaBrackets = 'Delimiter',
 	luaBuiltin  = 'Keyword',
@@ -797,6 +809,23 @@ local highlight_groups = {
 	manUnderline = '@text.literal',
 
 	--[[ 4.3.39 Rust ]]
+	['@lsp.mod.callable.rust'] = {link = 'Function'},
+	['@lsp.type.builtinType.rust'] = {link = 'Type'},
+	['@lsp.type.character.rust'] = {},
+	['@lsp.type.decorator.rust'] = {link = 'PreProc'},
+	['@lsp.type.derive.rust'] = {link = 'Macro'},
+	['@lsp.type.enumMember.rust'] = {},
+	['@lsp.type.macro.rust'] = {},
+	['@lsp.type.selfKeyword.rust'] = {link = 'Keyword'},
+	['@lsp.type.selfTypeKeyword.rust'] = {link = 'Typedef'},
+	['@lsp.type.string.rust'] = {},
+	['@lsp.type.typeAlias.rust'] = {link = 'Typedef'},
+	['@lsp.typemod.character.injected.rust'] = {link = '@lsp.type.character'},
+	['@lsp.typemod.deriveHelper.attribute.rust'] = {link = '@lsp.type.decorator.rust'},
+	['@lsp.typemod.keyword.injected.rust'] = {link = 'Keyword'},
+	['@lsp.typemod.macro.injected.rust'] = {link = 'Macro'},
+	['@lsp.typemod.operator.injected.rust'] = {link = 'Operator'},
+	['@lsp.typemod.string.injected.rust'] = {link = '@lsp.type.string'},
 	rustAssert = 'Debug',
 	rustCharacterDelimiter = 'rustNoise',
 	rustIdentifier = 'Identifier',
