@@ -811,15 +811,15 @@ colorscheme.highlight_all {
 	scssAttribute = {link = 'Noise'},
 	scssBoolean = {link = 'Boolean'},
 	scssDefault = {link = 'Keyword'},
+	scssDefinition = {link = 'PreProc'},
 	scssElse = {link = 'scssIf'},
+	scssIf = {link = 'PreCondit'},
+	scssInclude = {link = 'Include'},
 	scssMixinName = function(self)
 		local definition = self.cssClassName
 		return {bg = definition.bg, fg = definition.fg, italic = true}
 	end,
-	scssIf = {link = 'PreCondit'},
-	scssInclude = {link = 'Include'},
 	scssSelectorChar = {link = 'Delimiter'},
-	scssDefinition = {link = 'PreProc'},
 	scssSelectorName = {link = 'Identifier'},
 	scssVariable = {link = 'Define'},
 	scssVariableAssignment = {link = 'Operator'},
