@@ -673,6 +673,7 @@ colorscheme.highlight_all {
 	luaParens = {link = 'Delimiter'},
 	luaSpecialTable = {link = 'Structure'},
 	luaSpecialValue = {link = 'Function'},
+	luaStatement = {link = 'Keyword'},
 	luaStringLongTag = function(self)
 		local delimiter = self.Delimiter
 		return {bg = delimiter.bg, fg = delimiter.fg, italic = true}
