@@ -306,12 +306,14 @@ colorscheme.highlight_all {
 
 	-- LSP
 	['@lsp.mod.constant'] = {link = '@constant'},
+	['@lsp.mod.readonly'] = {link = '@lsp.mod.constant'},
 	['@lsp.type.boolean'] = {link = '@boolean'},
 	['@lsp.type.character'] = {link = '@character'},
 	['@lsp.type.float'] = {link = '@float'},
 	['@lsp.type.interface'] = {link = '@lsp.type.type'},
 	['@lsp.type.namespace'] = {link = '@namespace'},
 	['@lsp.type.number'] = {link = '@number'},
+	['@lsp.type.operator'] = {link = '@operator'},
 	['@lsp.type.string'] = {link = '@string'},
 
 	-- treesitter
@@ -548,7 +550,7 @@ colorscheme.highlight_all {
 	goFunction = {link = 'Function'},
 	goFunctionCall = {link = 'goFunction'},
 	goFunctionReturn = {},
-	goImport = {link = 'goStatement'},
+	goImport = {link = 'Include'},
 	goMethodCall = {link = 'goFunctionCall'},
 	goPackage = {link = 'goStatement'},
 	goParamType = {link = 'goReceiverType'},
@@ -743,6 +745,7 @@ colorscheme.highlight_all {
 	['@lsp.type.derive.rust'] = {link = '@macro'},
 	['@lsp.type.enumMember.rust'] = {},
 	['@lsp.type.macro.rust'] = {},
+	['@lsp.type.operator.rust'] = {},
 	['@lsp.type.selfKeyword.rust'] = {link = '@keyword'},
 	['@lsp.type.selfTypeKeyword.rust'] = {link = '@lsp.type.typeAlias.rust'},
 	['@lsp.type.string.rust'] = {},
