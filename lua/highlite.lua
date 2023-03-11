@@ -145,15 +145,17 @@ return setmetatable(highlite, {__call = function(self, normal, highlights, termi
 		local original_value_type = type(original_value)
 
 		if original_value_type == 'function' then -- call and cache the result; next time, if it isn't a function this step will be skipped
-			tbl[key] = original_value(setmetatable({},
-			{
-				__index = function(_, inner_key) return resolve(tbl, inner_key, true) end
-			}))
-		elseif resolve_links and original_value_type == _TYPE_STRING and not string.find(original_value, '^#') then
-			return resolve(tbl, original_value, resolve_links)
-		end
+			local resolved = original_value(setmetatable({}, {__index = function(_, inner_key)
+				return resolve(tbl, inner_key, true)
+			end}))
 
-		return tbl[key]
+			tbl[key] = resolved
+			return resolved
+		elseif resolve_links and original_value_type == _TYPE_STRING then
+			return resolve(tbl, original_value, resolve_links)
+		else
+			return original_value
+		end
 	end
 
 	-- save the colors_name before syntax reset
