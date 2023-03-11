@@ -155,10 +155,11 @@ You can define highlight groups like this:
 }
 ```
 
-You can also link one highlight group to another:
+You can also link one highlight group to another, using whatever style you prefer:
 
 ```lua
-<highlight group name> = '<highlight group name>'
+<highlight group name> = '<highlight group name>' -- highlite style
+<highlight group name> = {link = '<highlight group name>'} -- nvim API style
 ```
 ____________________________________________________________________________
 

@@ -134,16 +134,17 @@ local black = {'#000000', 0, 'black'}
 local white = {'#FFFFFF', 255, 'white'}
 
 -- Highlight 'Identifier'
-highlite.highlight('Identifier', {bg = red, fg = black, style = 'bold'})
+highlite.highlight('Identifier', {bg = red, fg = black, bold = true})
 
 -- Highlight 'Function' conditionally according to background color.
 highlite.highlight('Function', {bg = black, fg = red, light = {bg = white}})
 
 -- Link 'Example' to 'Identifier'
 highlite.highlight('Example', 'Identifier')
+highlite.highlight('Example2', {link = 'Identifier'})
 
 -- You can also reference specific attributes of another highlight group.
-highlite.highlight('AnotherExample', {bg = highlite.group'SpellBad'.bg, fg = white})
+highlite.highlight('AnotherExample', {bg = highlite.group('SpellBad').bg, fg = white})
 ```
 
 ### As Template
@@ -160,14 +161,18 @@ local white = {'#FFFFFF', 255, 'white'}
 
 -- Next define some highlight groups.
 local highlight_groups = {
-  -- Any field which can be set to "NONE" doesn't need to be set, it will be automatically assumed to be "NONE".
-  Identifier = {bg = red, fg = black, style = 'bold'},
+  -- Any field which can be set to "NONE" doesn't need to be set
+  Identifier = {bg = red, fg = black, bold = true},
+
   -- If your colorscheme should respond to multiple background settings, you can do that too:
   Function = {bg = black, fg = red, light = {bg = white}},
-  --[[ Note that light/dark differentiation is completely optional. ]]
 
-  -- You can also reference specific attributes of another highlight group.
-  SomethingElse = function(self) return {fg = self.Identifier.fg, bg = self.Function.bg} end,
+  -- Both of these set a link
+  Field = 'Identifier',
+  Method = {link = 'Function'},
+
+  -- You can also reference specific attributes of another highlight group, even if it is a link.
+  SomethingElse = function(self) return {fg = self.Field.fg, bg = self.Method.bg} end,
 }
 
 -- The rest is mostly handled by the template.
@@ -183,16 +188,36 @@ When using this plugin, it is important to know that you can't just run `:hi` on
 packadd nvim-highlite
 set termguicolors "optional
 
-" WRONG! Don't do this.
+" WARN: don't do this!
 hi! Error guifg=#000000 guibg=#FFFFFF
 
-" Do this instead.
+" NOTE: do this instead
 augroup Highlite
   " You can also use `highlite.highlight()` instead of `:hi!`
   autocmd ColorScheme highlite hi! Error guifg=#000000 guibg=#FFFFFF
 augroup end
 
 colorscheme highlite
+```
+
+```lua
+vim.api.nvim_command 'packadd nvim-highlite'
+vim.api.nvim_set_option('termguicolors', true)
+
+-- WARN: don't do this!
+vim.api.nvim_set_hl(0, 'Error', {fg = '#000000', bg = '#FFFFFF'})
+
+-- NOTE: do this instead
+vim.api.nvim_create_autocmd('ColorScheme', {
+  callback = function()
+    vim.api.nvim_set_hl(0, 'Error', {fg = '#000000', bg = '#FFFFFF'})
+    -- other groups
+  end,
+  group = vim.api.nvim_create_augroup('config', {clear = true}),
+  pattern = 'highlite',
+})
+
+vim.api.nvim_command 'colorscheme highlite'
 ```
 
 Of course, substitute `highlite` with the name of your colorscheme.

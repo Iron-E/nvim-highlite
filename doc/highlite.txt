@@ -23,22 +23,20 @@ REQUIREMENTS                                          *highlite-requirements*
 ==============================================================================
 USAGE                                                           *highlite-usage*
 
-                                                              *highlite.group()*
-`highlite`.group({group_name})                                  *highlite-group()*
+`highlite`.group({group_name})                                  *highlite.group()*
 
 	Convert a pre-existing |highlight-group| into a format that |highlite|
 	recognizes.
 
-	Note: the |highlight-group| must have been either:
+	Note: the |highlight-group| must have been either,
 		- |:highlight|ed.
-		- |highlite-highlight|ed.
+		- |highlite.highlight()|ed.
 
 	Parameters: ~
 		{group_name}  A `string` which is the |highlight-group| to convert.
 
 	Return: ~
-		- A `table` which can be used as the {attributes} parameter for
-		  |highlite.highlight()|.
+		- The {definition} parameter for |highlite.highlight()|.
 
 	Example: ~
 >
@@ -51,52 +49,138 @@ USAGE                                                           *highlite-usage*
 	highlite.highlight('ErrorMsg', {fg=hl_error.bg, bg=BG})
 <
 
-                                                          *highlite.highlight()*
-`highlite`.highlight({group}, {attributes})                 *highlite-highlight()*
+`highlite`.highlight({group}, {definition})                 *highlite.highlight()*
 
-	Highlight some {group} according to its {attributes}.
+	Highlight some {group} according to its {definition}.
 
-	Note: this method is intended to be used instead of |:highlight|.
+	Note: can be used instead of |nvim_set_hl|.
 
 	Parameters: ~
 		{group}       A `string` which is the |highlight-group| to |:highlight|.
-		{attributes}  A |lua| `table` which follows this format: >
+		{definition}  A |lua| `table` which follows this format: >
 		{
-			-- The color for the background; or `nil`
+			-- The color for the background, or `nil`
 			bg = <color>,
 
-			-- The color for the foreground; or `nil`
+			-- The color for the foreground, or `nil`
 			fg = <color>
+
+			-- The |guisp| value, if one is desired.
+			[, sp = <color>]
 
 			-- The |highlight-blend| value, if one is desired.
 			[, blend = <integer>]
 
-			-- Style can be from |attr-list|.
-			-- It can also have a color, and/or multiple <cterm>s.
-			[, style = <cterm>|{<cterm> (, <cterm>) [color=<color>]} ]
+			-- Bold, italic, and more. See |attr-list| for more information.
+			[, bold = true|false]
+			[, default = true|false]
+			[, italic = true|false]
+			[, nocombine = true|false]
+			[, reverse = true|false]
+			[, standout = true|false]
+			[, strikethrough = true|false]
+			[, undercurl = true|false]
+			[, underdashed = true|false]
+			[, underdotted = true|false]
+			[, underdouble = true|false]
+			[, underline = true|false]
 		}
+<		              Can also be a :|highlight-link|: >
+		'GroupName' -- highlite style
+		{link = 'GroupName'} -- Nvim API style
 <
+
 	Return: ~
-		- Nothing.
+		- `nil`
 
 	Example: ~
 >
+		-- Import nvim-highlite
 		local highlite = require('highlite')
 
-		local yellow = {'#f0df33', 220, 'yellow'}
+		-- First, define some colors
+		local red = {'#FF0000', 1, 'red'}
+		local black = {'#000000', 0, 'black'}
+		local white = {'#FFFFFF', 255, 'white'}
 
-		-- Highlight a new group
-		highlite.highlight('Todo', {fg=yellow, style={'bold', 'underline'}})
-		-- Link a grou
-		highlite.highlight('Identifier', 'Todo')
+		-- Highlight 'Identifier'
+		highlite.highlight('Identifier', {
+			bg = red,
+			fg = black,
+			bold = true,
+		})
+
+		-- Highlight 'Function' conditionally according to background color.
+		highlite.highlight('Function', {
+			bg = black,
+			fg = red,
+			light = {bg = white},
+		})
+
+		-- Link 'Example' to 'Identifier' (both calls are equivalent)
+		highlite.highlight('Example', 'Identifier')
+		highlite.highlight('Example', {link = 'Identifier'})
+
+		-- reference specific attributes of another highlight group.
+		highlite.highlight('AnotherExample', {
+			bg = highlite.group('SpellBad').bg,
+			fg = white,
+		})
 <
 
 	See also: ~
-		|group-names|  Additional semantic highlighting groups.
+		|highlight-groups|  Vim builtin highlight groups.
+		|group-names|  Vim semantic highlighting groups.
+		|treesitter-highlight-groups|  Treesitter semantic highlighting groups.
+		|lsp-semantic-highlight|  LSP semantic highlighting groups.
 
-                                                 *highlite:highlight_terminal()*
+                                                      *highlite.highlight_all()*
+`highlite`.highlight_all({groups})
+
+	Process all of the {groups}, and then |highlite.highlight()| them.
+
+	Parameters: ~
+		{groups}  A |lua| `table` keyed on the group name, with the value set to
+		          the {definition} (see |highlite.highlight()|) of the group.
+
+					 A key's value can also be a `function` which accepts one
+					 parameter, which can be used to access other groups'
+					 {definition}s (see the example).
+
+	Return: ~
+		- `nil`
+
+	Example: ~
+>
+		local red = {'#FF0000', 1, 'red'}
+		local black = {'#000000', 0, 'black'}
+		local white = {'#FFFFFF', 255, 'white'}
+
+		require('highlite').highlight_all {
+			-- Any field which can be set to "NONE" doesn't need to be set
+			Identifier = {fg = black, bold = true},
+
+			-- If your colorscheme should respond to multiple background
+			-- settings, you can do that too:
+			Function = {bg = black, fg = red, light = {bg = white}},
+
+			-- Both of these set a link
+			Field = 'Identifier',
+			Method = {link = 'Function'},
+
+			-- You can also reference specific attributes of another highlight
+			-- group, even if it is a link.
+			SomethingElse = function(self)
+				return {fg = self.Field.fg, bg = self.Method.bg}
+			end,
+		}
+<
+
+	See also: ~
+		|highlite.highlight()|  For how the {definition} should be formed
+
                                                  *highlite-highlight_terminal()*
-`highlite`:highlight_terminal({terminal_ansi_colors})
+`highlite`.highlight_terminal({terminal_ansi_colors})
 
 	Override the |terminal| colors with a new table of {terminal_ansi_colors}.
 
@@ -124,13 +208,11 @@ USAGE                                                           *highlite-usage*
 		}
 <
 	Return: ~
-		- Nothing.
+		- `nil`
 
 	Example: ~
 >
-		local highlite = require('highlite')
-
-		highlite:highlight_terminal({
+		require('highlite'):highlight_terminal {
 			[1]  = {'#202020' , 0   , 'black'},
 			[2]  = {'#a80000' , 124 , 'darkred'},
 			[3]  = {'#50de60' , 83  , 'darkgreen'},
@@ -147,7 +229,7 @@ USAGE                                                           *highlite-usage*
 			[14] = {'#cf55f0' , 129 , 'magenta'},
 			[15] = {'#33efff' , 87  , 'cyan'},
 			[16] = {'#c0c0c0' , 251 , 'gray'},
-		})
+		}
 <
 
 	See also: ~
@@ -180,7 +262,27 @@ attach them to the |ColorScheme| |autocmd-event|, as shown below: >
 	colorscheme highlite
 <
 
-Of course, substitute "highlight" with the name of your colorscheme.
+Or, in lua: >
+	vim.api.nvim_command 'packadd nvim-highlite'
+	vim.api.nvim_set_option('termguicolors', true)
+
+	-- WARN: don't do this!
+	vim.api.nvim_set_hl(0, 'Error', {fg = '#000000', bg = '#FFFFFF'})
+
+	-- NOTE: do this instead
+	vim.api.nvim_create_autocmd('ColorScheme', {
+	  callback = function()
+		 vim.api.nvim_set_hl(0, 'Error', {fg = '#000000', bg = '#FFFFFF'})
+		 -- other groups
+	  end,
+	  group = vim.api.nvim_create_augroup('config', {clear = true}),
+	  pattern = 'highlite',
+	})
+
+	vim.api.nvim_command 'colorscheme highlite'
+<
+
+Of course, substitute `highlite` with the name of your colorscheme.
 
 ===============================================================================
- vim:tw=78:ts=4:ft=help:norl:
+ vim:tw=78:noexpandtab:ft=help:norl:
