@@ -59,7 +59,7 @@ function highlite.group(name)
 
 	for input, output in pairs {background = 'bg', foreground = 'fg', special = 'sp'} do
 		if definition[input] then
-			definition[output] = string.format('#%06x', definition[input])
+			definition[output] = '#' .. bit.tohex(definition[input], 6)
 			definition[input] = nil
 		end
 	end
