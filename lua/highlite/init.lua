@@ -19,20 +19,28 @@ local PALETTE_HEX = 1
 --- @param resolve_links boolean iff `true`, further `resolve` `highlight.group.link`s to their original `highlite.group.new`s
 --- @return highlite.group.definition # the value at `tbl[key]`, when highlight links and embedded functions have been accounted for.
 local function resolve(groups, key, resolve_links) -- {{{
-	local original_group = groups[key]
+	local original_group = rawget(groups, key)
+	local original_group_type = type(original_group)
 
-	if type(original_group) == 'function' then
-		-- PERF: the result of the function call is assigned to its associated index.
-		--       next time it is accessed, there will be no need to call the function again.
-		groups[key] = original_group(setmetatable({}, {
-			__index = function(_, inner_key) return resolve(groups, inner_key, true) end
-		}))
-	elseif resolve_links and original_group.link then
-		return resolve(groups, original_group.link, resolve_links)
+	if original_group_type == 'function' then
+		local resolved = original_group(setmetatable({}, {__index = function(_, inner_key)
+			return resolve(groups, inner_key, true)
+		end}))
+
+		-- PERF: assign the result of the function call to its associated index so that
+		--       the function will not need to be called again on subsequent accesses.
+		rawset(groups, key, resolved)
+
+		return resolved
+	elseif resolve_links then
+		if original_group_type == 'string'  then
+			return resolve(groups, original_group, resolve_links)
+		elseif original_group.link then
+			return resolve(groups, original_group.link, resolve_links)
+		end
 	end
 
-	--- @diagnostic disable-next-line:return-type-mismatch the `fun(self: highlight.groups)` was already called
-	return groups[key]
+	return original_group
 end -- }}}
 
 --[[/* Module */]]
@@ -64,11 +72,9 @@ end
 --- @param definition highlite.group.definition a link or an attribute map
 function highlite.highlight(name, definition) -- {{{
 	local highlight = {} --- @type highlite.group.nvim_api
-
-	if definition.link then -- `highlight_group` is a link to another group.
-		highlight.link = definition.link
-	else
-		--- @diagnostic disable-next-line:param-type-mismatch we *just* checked that it is a table
+	if type(definition) == 'string' then -- `definition` is a shorthand link; most common
+		highlight.link = definition
+	elseif not definition.link then -- `definition` is a new group; second-most common
 		for k, v in pairs(definition) do
 			highlight[k] = v
 		end
@@ -77,10 +83,10 @@ function highlite.highlight(name, definition) -- {{{
 		highlight.dark = nil
 		highlight.light = nil
 
-		--- @type highlite.group.definition
-		local bg_definition = definition[vim.api.nvim_get_option 'background']
-		if bg_definition then
-			for k, v in pairs(bg_definition) do
+		local background = vim.api.nvim_get_option 'background' --- @type 'light'|'dark'
+		local background_definition = definition[background]
+		if background_definition then
+			for k, v in pairs(background_definition) do
 				highlight[k] = v
 			end
 		end
@@ -91,6 +97,8 @@ function highlite.highlight(name, definition) -- {{{
 		highlight.bg = highlight.bg and highlight.bg[PALETTE_HEX]
 		highlight.fg = highlight.fg and highlight.fg[PALETTE_HEX]
 		highlight.sp = highlight.sp and highlight.sp[PALETTE_HEX]
+	else -- Nvim API-style highlight link; least common
+		highlight.link = definition.link
 	end
 
 	vim.api.nvim_set_hl(0, name, highlight)
