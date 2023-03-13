@@ -317,19 +317,8 @@ colorscheme.highlight_all {
 	['@lsp.type.operator'] = '@operator',
 	['@lsp.type.string'] = '@string',
 
-	-- treesitter
-	['@constant.builtin'] = '@constant',
-	['@constant.macro'] = '@define',
-	['@constructor'] = '@function',
-	['@function.builtin'] = '@function',
-	['@function.macro'] = '@macro',
+	-- Treesitter
 	['@namespace'] = 'Directory',
-	['@string.escape'] = '@string.special',
-	['@tag'] = 'Tag',
-	['@text.danger'] = 'ErrorMsg',
-	['@text.literal'] = 'mkdCode',
-	['@text.uri'] = 'Underlined',
-	['@text.warning'] = 'WarningMsg',
 
 	--[[ Editor UI ]]
 
