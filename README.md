@@ -69,7 +69,8 @@ require('lazy').setup {
       vim.api.nvim_command 'colorscheme highlite'
     end,
     lazy = false,
-    priority = 1000
+    priority = 1000,
+    version = '^2.0',
   },
 }
 ```
