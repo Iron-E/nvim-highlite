@@ -697,6 +697,7 @@ colorscheme.highlight_all {
 	-- Markdown
 	markdownCode = 'mkdCode',
 	markdownCodeDelimiter = 'mkdCodeDelimiter',
+	markdownEscape = 'SpecialChar',
 	markdownH1 = {fg = red, bold = true},
 	markdownH2 = {fg = orange, bold = true},
 	markdownH3 = {fg = yellow, bold = true},
