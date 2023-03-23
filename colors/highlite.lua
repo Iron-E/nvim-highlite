@@ -917,7 +917,7 @@ colorscheme.highlight_all {
 	BufferCurrentIndex = function(self) return {fg = self.Number.fg, bg = self.BufferCurrent.bg} end,
 	BufferCurrentINFO = function(self) return {fg = self.DiagnosticFloatingInfo.fg, bg = self.BufferCurrent.bg} end,
 	BufferCurrentMod = {fg = tan, bg = black, bold = true},
-	BufferCurrentSign = 'DiagnosticFloatingHint',
+	BufferCurrentSign = function(self) return {fg = self.DiagnosticFloatingHint.fg, bg = self.BufferCurrent.bg, bold = true} end,
 	BufferCurrentTarget = 'BufferCurrentSign',
 	BufferCurrentWARN = function(self) return {fg = self.WarningMsg.fg, bg = self.BufferCurrent.bg} end,
 
