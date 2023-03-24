@@ -331,8 +331,8 @@ colorscheme.highlight_all {
 
 	-- Tabline
 	TabLine = function(self) return {fg = self.Normal.fg, bg = self.StatusLine.bg} end,
-	TabLineFill = function(self) return {fg = self.TabLine.bg, bg = black} end,
-	TabLineSel = function(self) return {fg = self.TabLine.fg, bg = self.Normal.bg} end,
+	TabLineFill = {fg = black, bg = black},
+	TabLineSel = function(self) return {fg = self.TabLine.fg, bg = gray_dark} end,
 
 	-- Line Highlighting
 	CursorLine = {bg = gray_dark},
