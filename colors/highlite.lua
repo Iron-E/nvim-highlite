@@ -902,13 +902,13 @@ colorscheme.highlight_all {
 	ALEWarningSign = 'DiagnosticSignWarn',
 
 	-- barbar.nvim
-	BufferAlternate = function(self) return {fg = self.BufferVisible.fg, bg = gray_dark} end,
+	BufferAlternate = function(self) return {fg = self.BufferVisible.fg, bg = self.TabLine.bg} end,
 	BufferAlternateERROR = function(self) return {fg = self.ErrorMsg.fg, bg = gray_dark} end,
 	BufferAlternateHINT = function(self) return {fg = self.DiagnosticFloatingHint.fg, bg = gray_dark} end,
 	BufferAlternateIndex = function(self) return {fg = self.Number.fg, bg = gray_dark} end,
 	BufferAlternateINFO = function(self) return {fg = self.DiagnosticFloatingInfo.fg, bg = gray_dark} end,
 	BufferAlternateMod = function(self) return {fg = self.BufferVisibleMod.fg, bg = gray_dark, bold = true} end,
-	BufferAlternateSign = {fg = teal, bg = gray_dark},
+	BufferAlternateSign = function(self) return {fg = self.DiagnosticFloatingHint.fg, bg = self.BufferAlternate.bg} end,
 	BufferAlternateTarget = function(self) return {fg = self.BufferAlternateSign.fg, bg = gray_dark, italic = true} end,
 	BufferAlternateWARN = function(self) return {fg = self.WarningMsg.fg, bg = gray_dark} end,
 
@@ -918,7 +918,7 @@ colorscheme.highlight_all {
 	BufferCurrentIndex = function(self) return {fg = self.Number.fg, bg = self.BufferCurrent.bg} end,
 	BufferCurrentINFO = function(self) return {fg = self.DiagnosticFloatingInfo.fg, bg = self.BufferCurrent.bg} end,
 	BufferCurrentMod = {fg = tan, bg = black, bold = true},
-	BufferCurrentSign = function(self) return {fg = self.DiagnosticFloatingHint.fg, bg = self.BufferCurrent.bg, bold = true} end,
+	BufferCurrentSign = function(self) return {fg = teal, bg = self.BufferCurrent.bg} end,
 	BufferCurrentTarget = 'BufferCurrentSign',
 	BufferCurrentWARN = function(self) return {fg = self.WarningMsg.fg, bg = self.BufferCurrent.bg} end,
 
