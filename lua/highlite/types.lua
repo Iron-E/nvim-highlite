@@ -36,7 +36,7 @@
 --- @alias highlite.group.definition highlite.group.link|highlite.group.new a link to an existing group or a new group
 
 --- @class highlite.groups
---- @field [string] highlite.group.definition|fun(self: self): highlite.group.new a collection of highlight group definitions
+--- @field [string] highlite.group.definition|fun(self: {[string]: highlite.group.new}): highlite.group.new a collection of highlight group definitions
 
 --- @class highlite.group.nvim_api a highlight group as expected by the `nvim_set_hl` function
 --- @field bg? string
