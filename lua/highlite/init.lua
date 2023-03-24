@@ -50,18 +50,29 @@ end -- }}}
 local highlite = {}
 
 --- @param name string the name of the highlight group
---- @return highlite.group.definition definition an nvim-highlite compliant table describing the highlight group `name`
+--- @return highlite.group.new definition an nvim-highlite compliant table describing the highlight group `name`
 function highlite.group(name)
-	local ok, definition = pcall(vim.api.nvim_get_hl_by_name, name, vim.api.nvim_get_option 'termguicolors')
+	local ok, definition = pcall(vim.api.nvim_get_hl_by_name, name, true)
+	local _, cterm = pcall(vim.api.nvim_get_hl_by_name, name, false)
 	if not ok then
 		return {}
 	end
 
 	for input, output in pairs {background = 'bg', foreground = 'fg', special = 'sp'} do
-		if definition[input] then
-			definition[output] = '#' .. bit.tohex(definition[input], 6)
+		local definition_input = definition[input]
+		if definition_input then
+			definition[output] =
+			{
+				[PALETTE_CTERM] = cterm[input],
+				[PALETTE_HEX] = '#' .. bit.tohex(definition_input, 6),
+			}
+
 			definition[input] = nil
 		end
+	end
+
+	for input, output in pairs {background = 'ctermbg', foreground = 'ctermfg'} do
+		definition[output] = cterm[input]
 	end
 
 	return definition
