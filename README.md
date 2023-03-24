@@ -51,26 +51,22 @@ Whenever you want to update from then on, you can run the [update script](update
 I recommend using [lazy.nvim](https://github.com/folke/lazy.nvim):
 
 ```lua
-local install_path = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
-if not vim.loop.fs_stat(install_path) then
-  vim.fn.system {
-    'git', 'clone', '--filter=blob:none',
-    'https://github.com/folke/lazy.nvim.git', '--branch=stable',
-    install_path
-  }
-end
-
-vim.opt.rtp:prepend(install_path)
 require('lazy').setup {
-  {'folke/lazy.nvim', tag = 'stable'},
   {'Iron-E/nvim-highlite',
+    init = function() -- NOTE: optional; override highlights
+      vim.api.nvim_create_autocmd('ColorScheme', {
+        callback = function() vim.api.nvim_set_hl(…) end,
+        group = vim.api.nvim_create_augroup('config', {clear = false}),
+        pattern = 'highlite',
+      })
+    end,
     config = function()
-      vim.opt.termguicolors = true -- optional
+      vim.opt.termguicolors = true -- NOTE: optional; enable truecolor support
       vim.api.nvim_command 'colorscheme highlite'
     end,
     lazy = false,
     priority = 1000,
-    version = '^3.0.0',
+    version = '^3.0.0', -- NOTE: optional; only update when a new version releases
   },
 }
 ```
