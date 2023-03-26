@@ -54,11 +54,15 @@ highlite.group = vim.api.nvim_get_hl and
 	--- @param link boolean if `true`, return highlight links instead of the true definition
 	--- @return highlite.group.new definition an nvim-highlite compliant table describing the highlight group `name`
 	function(name, link)
-		local definition = vim.api.nvim_get_hl(0, {link = link or false, name = name})
+		link = link or false
 
-		for gui, cterm in pairs {bg = 'ctermbg', fg = 'ctermfg', sp = vim.NIL} do
-			definition[gui] = {[PALETTE_CTERM] = definition[cterm], [PALETTE_HEX] = definition[gui]}
-			definition[cterm] = nil
+		local definition = vim.api.nvim_get_hl(0, {link = link, name = name})
+
+		if not link then
+			for gui, cterm in pairs {bg = 'ctermbg', fg = 'ctermfg', sp = vim.NIL} do
+				definition[gui] = {[PALETTE_CTERM] = definition[cterm], [PALETTE_HEX] = definition[gui]}
+				definition[cterm] = nil
+			end
 		end
 
 		return definition
