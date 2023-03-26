@@ -49,34 +49,40 @@ end -- }}}
 --- @class highlite
 local highlite = {}
 
---- @param name string the name of the highlight group
---- @return highlite.group.new definition an nvim-highlite compliant table describing the highlight group `name`
-function highlite.group(name)
-	local ok, definition = pcall(vim.api.nvim_get_hl_by_name, name, true)
-	local _, cterm = pcall(vim.api.nvim_get_hl_by_name, name, false)
-	if not ok then
-		return {}
-	end
+highlite.group = vim.api.nvim_get_hl and
+	--- @param name string the name of the highlight group
+	--- @param link boolean if `true`, return highlight links instead of the true definition
+	--- @return highlite.group.new definition an nvim-highlite compliant table describing the highlight group `name`
+	function(name, link)
+		local definition = vim.api.nvim_get_hl(0, {link = link or false, name = name})
 
-	for input, output in pairs {background = 'bg', foreground = 'fg', special = 'sp'} do
-		local definition_input = definition[input]
-		if definition_input then
-			definition[output] =
-			{
-				[PALETTE_CTERM] = cterm[input],
-				[PALETTE_HEX] = '#' .. bit.tohex(definition_input, 6),
-			}
-
-			definition[input] = nil
+		for gui, cterm in pairs {bg = 'ctermbg', fg = 'ctermfg', sp = vim.NIL} do
+			definition[gui] = {[PALETTE_CTERM] = definition[cterm], [PALETTE_HEX] = definition[gui]}
+			definition[cterm] = nil
 		end
-	end
 
-	for input, output in pairs {background = 'ctermbg', foreground = 'ctermfg'} do
-		definition[output] = cterm[input]
-	end
+		return definition
+	end or
+	--- @param name string the name of the highlight group
+	--- @return highlite.group.new definition an nvim-highlite compliant table describing the highlight group `name`
+	function(name)
+		local ok, definition = pcall(vim.api.nvim_get_hl_by_name, name, true)
+		local _, cterm = pcall(vim.api.nvim_get_hl_by_name, name, false)
 
-	return definition
-end
+		if not ok then
+			return {}
+		end
+
+		for input, output in pairs {background = 'bg', foreground = 'fg', special = 'sp'} do
+			local definition_input = definition[input]
+			if definition_input then
+				definition[output] = {[PALETTE_CTERM] = cterm[input], [PALETTE_HEX] = definition_input}
+				definition[input] = nil
+			end
+		end
+
+		return definition
+	end
 
 --- `nvim_set_hl` using the `name` and `definition`
 --- @param name string the name of the highlight group
