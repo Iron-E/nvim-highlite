@@ -417,7 +417,7 @@ colorscheme.highlight_all {
 
 	-- Misc
 	Directory = {fg = ice, bold = true},
-	VertSplit = {fg = white},
+	WinSeparator = {fg = white},
 
 	--[[ Programming Languages
 		Everything in this section is OPTIONAL. Feel free to remove everything
