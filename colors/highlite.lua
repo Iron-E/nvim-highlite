@@ -316,7 +316,7 @@ colorscheme.highlight_all {
 	['@lsp.type.number'] = '@number',
 	['@lsp.type.operator'] = '@operator',
 	['@lsp.type.string'] = '@string',
-	['@lsp.typemod.type.readonly'] = 'Type',
+	['@lsp.typemod.type.readonly'] = '@lsp.type.type',
 
 	-- Treesitter
 	['@namespace'] = 'Directory',
