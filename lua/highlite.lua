@@ -42,10 +42,6 @@ local function get(color, index) -- {{{ †
 	end
 end --}}} ‡
 
---- @param rgb string some string of RGB colors.
---- @return string hex
-local function tohex(rgb) return string.format('#%06x', rgb) end
-
 --- Create a metatable which prioritizes entries in the `&bg` index of `definition`
 --- @param definition Highlite.Definition the definition of the highlight group
 --- @return table
@@ -59,31 +55,44 @@ end
 --- @class Highlite
 local highlite = {}
 
---- @param name string the name of the highlight group
---- @return Highlite.Definition definition an nvim-highlite compliant table describing the highlight group `name`
-function highlite.group(name)
-	local no_errors, definition = pcall(vim.api.nvim_get_hl_by_name, name, vim.go.termguicolors)
+highlite.group = vim.api.nvim_get_hl and
+	--- @param name string the name of the highlight group
+	--- @param link boolean if `true`, return highlight links instead of the true definition
+	--- @return Highlite.Definition # an nvim-highlite compliant table describing the highlight group `name`
+	function(name, link)
+		link = link or false
 
-	if not no_errors then definition = {} end
+		local definition = vim.api.nvim_get_hl(0, {link = link, name = name})
 
-	-- the style of the highlight group
-	local style = {}
-	for k, v in pairs(definition) do
-		if k == 'special' then
-			style.color = tohex(v)
-		elseif k ~= 'background' and k ~= 'blend' and k ~= 'foreground' then
-			style[#style+1] = k
+		if not link then
+			for gui, cterm in pairs {bg = 'ctermbg', fg = 'ctermfg', sp = vim.NIL} do
+				definition[gui] = {[_PALETTE_CTERM] = definition[cterm], [_PALETTE_HEX] = definition[gui]}
+				definition[cterm] = nil
+			end
 		end
-	end
 
-	return
-	{
-		fg = definition.foreground and tohex(definition.foreground),
-		bg = definition.background and tohex(definition.background),
-		blend = definition.blend,
-		style = style,
-	}
-end
+		return definition
+	end or
+	--- @param name string the name of the highlight group
+	--- @return Highlite.Definition definition an nvim-highlite compliant table describing the highlight group `name`
+	function(name)
+		local ok, definition = pcall(vim.api.nvim_get_hl_by_name, name, true)
+		local _, cterm = pcall(vim.api.nvim_get_hl_by_name, name, false)
+
+		if not ok then
+			return {}
+		end
+
+		for input, output in pairs {background = 'bg', foreground = 'fg', special = 'sp'} do
+			local definition_input = definition[input]
+			if definition_input then
+				definition[output] = {[_PALETTE_CTERM] = cterm[input], [_PALETTE_HEX] = definition_input}
+				definition[input] = nil
+			end
+		end
+
+		return definition
+	end
 
 -- Generate a `:highlight` command from a group and some definition.
 
@@ -158,15 +167,16 @@ return setmetatable(highlite, {__call = function(self, normal, highlights, termi
 		end
 	end
 
-	-- save the colors_name before syntax reset
-	local color_name = vim.g.colors_name
+	do
+		-- save the colors_name before syntax reset
+		local color_name = vim.g.colors_name
 
-	-- If the syntax has been enabled, reset it.
-	if vim.fn.exists 'syntax_on' then vim.api.nvim_command 'syntax reset' end
+		-- If the syntax has been enabled, reset it.
+		if vim.fn.exists 'syntax_on' then vim.api.nvim_command 'syntax reset' end
 
-	-- replace the colors_name
-	vim.g.colors_name = color_name
-	color_name = nil
+		-- replace the colors_name
+		vim.g.colors_name = color_name
+	end
 
 	-- If we aren't using hex nor 256 colorsets.
 	if not (vim.go.termguicolors or _USE_256) then vim.go.t_Co = '16' end

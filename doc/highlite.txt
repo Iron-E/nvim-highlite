@@ -24,29 +24,28 @@ REQUIREMENTS                                          *highlite-requirements*
 USAGE                                                           *highlite-usage*
 
                                                               *highlite.group()*
-`highlite`.group({group_name})                                  *highlite-group()*
+`highlite`.group({group_name} [, {link}])                       *highlite.group()*
 
 	Convert a pre-existing |highlight-group| into a format that |highlite|
 	recognizes.
 
-	Note: the |highlight-group| must have been either:
+	Note: the |highlight-group| must have been either,
 		- |:highlight|ed.
-		- |highlite-highlight|ed.
+		- |highlite.highlight()|ed.
 
 	Parameters: ~
 		{group_name}  A `string` which is the |highlight-group| to convert.
+		{link}        A `boolean`, if `true`, show |:highlight-link|s rather
+		              than the full definition. Requires Neovim 0.9
 
 	Return: ~
-		- A `table` which can be used as the {attributes} parameter for
-		  |highlite.highlight()|.
+		- The {definition} parameter for |highlite.highlight()|.
 
 	Example: ~
 >
 	local highlite = require('highlite')
-
 	-- get the 'Error' highlight group
 	local hl_error = highlite.group('Error')
-
 	-- Define 'ErrorMsg' as foreground = background of 'Error'
 	highlite.highlight('ErrorMsg', {fg=hl_error.bg, bg=BG})
 <
