@@ -6,7 +6,7 @@
 
 ## Introduction
 
-`nvim-highlite` is a colorscheme template repository for Neovim 0.5+.
+`nvim-highlite` is a colorscheme template repository with great defaults.
 
 This template's _defaults_ focus on:
 
@@ -28,7 +28,7 @@ This template's _design_ focuses on:
 
 ## Installation
 
-The only prerequisite is Neovim 0.7+
+* Neovim 0.7+
 
 ### Creating Your Own
 
