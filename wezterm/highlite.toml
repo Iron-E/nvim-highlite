@@ -1,0 +1,59 @@
+[metadata]
+name = 'highlite'
+origin_url = 'https://github.com/Iron-E/nvim-highlite'
+
+[colors]
+background = '#202020'
+foreground = '#c0c0c0'
+
+cursor_bg = '#ffffff'
+cursor_fg = '#202020'
+cursor_border = '#ffffff'
+
+selection_bg = '#c0c0c0'
+selection_fg = '#202020'
+
+scrollbar_thumb = '#ffffff'
+
+split = '#ffffff'
+
+ansi = ['#202020', '#a80000', '#70d533', '#ff8900', '#7766ff', '#bb0099', '#60afff', '#808080']
+brights = ['#353535', '#ee4a59', '#22ff22', '#f0df33', '#2bff99', '#cf55f0', '#33dbc3', '#c0c0c0']
+
+compose_cursor = '#f4c069'
+
+copy_mode_active_highlight_bg = {Color = '#f0af00'}
+copy_mode_active_highlight_fg = {Color = '#202020'}
+copy_mode_inactive_highlight_bg = {Color = '#202020'}
+copy_mode_inactive_highlight_fg = {Color = '#95c5ff'}
+
+quick_select_label_bg = {Color = '#202020'}
+quick_select_label_fg = {Color = '#ffa6ff'}
+quick_select_match_bg = {Color = '#202020'}
+quick_select_match_fg = {Color = '#22ff22'}
+
+[colors.tab_bar]
+background = '#202020'
+
+[colors.tab_bar.active_tab]
+bg_color = '#353535'
+fg_color = '#c0c0c0'
+underline = 'Single'
+
+[colors.tab_bar.inactive_tab]
+bg_color = '#505050'
+fg_color = '#c0c0c0'
+
+[colors.tab_bar.inactive_tab_hover]
+bg_color = '#505050'
+fg_color = '#c0c0c0'
+underline = 'Single'
+
+[colors.tab_bar.new_tab]
+bg_color = '#808080'
+fg_color = '#202020'
+
+[colors.tab_bar.new_tab_hover]
+bg_color = '#a0a0a0'
+fg_color = '#202020'
+intensity = 'Bold'
