@@ -875,6 +875,11 @@ colorscheme.highlight_all {
 	vimSetSep = 'Delimiter',
 	vimUserFunc = 'vimFunction',
 
+	-- xDefaults
+	xdefaultsLabel = 'Label',
+	xdefaultsPunct = 'Delimiter',
+	xdefaultsValue = 'String',
+
 	-- XML
 	xmlAttrib = 'htmlArg',
 	xmlEndTag = 'xmlTag',
