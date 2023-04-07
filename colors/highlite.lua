@@ -319,6 +319,7 @@ colorscheme.highlight_all {
 	['@lsp.typemod.type.readonly'] = '@lsp.type.type',
 
 	-- Treesitter
+	['@structure'] = 'Structure',
 	['@namespace'] = 'Directory',
 
 	--[[ Editor UI ]]
