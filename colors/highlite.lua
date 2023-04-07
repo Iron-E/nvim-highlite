@@ -950,6 +950,7 @@ local highlight_groups = {
 	NERDTreeLinkTarget = 'Tag',
 
 	--[[ 4.4.8. nvim-treesitter ]]
+	['@structure'] = 'Structure', -- BUG: missing from Nvim >=0.9
 	['@namespace'] = 'Directory',
 
 	--[[ 4.4.9. barbar.nvim ]]
