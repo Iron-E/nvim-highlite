@@ -366,6 +366,8 @@ local highlight_groups = {
 	Question   = {fg = orange_light, style = 'underline'},
 
 	--[[ 4.2.11. LSP / Diagnostics ]]
+	DiagnosticDeprecated = {strikethrough = true},
+
 	DiagnosticError = 'Error',
 	DiagnosticFloatingError = 'ErrorMsg',
 	DiagnosticSignError = 'DiagnosticFloatingError',
@@ -378,6 +380,11 @@ local highlight_groups = {
 	DiagnosticFloatingHint = 'HintMsg',
 	DiagnosticSignHint = 'DiagnosticFloatingHint',
 
+	DiagnosticOk = {fg = black, bg = green, style = 'bold'},
+	DiagnosticFloatingOk = {fg = green, style = 'italic'},
+	DiagnosticSignOk = 'DiagnosticFloatingOk',
+	DiagnosticUnderlineOk = {style = {'undercurl', color = green}},
+
 	DiagnosticInfo = 'Info',
 	DiagnosticFloatingInfo = 'InfoMsg',
 	DiagnosticSignInfo = 'DiagnosticFloatingInfo',
@@ -386,6 +393,8 @@ local highlight_groups = {
 	DiagnosticUnderlineHint  = {style = {'undercurl', color = magenta}},
 	DiagnosticUnderlineInfo  = {style = {'undercurl', color = pink_light}},
 	DiagnosticUnderlineWarn = {style = {'undercurl', color = orange}},
+
+	DiagnosticUnnecessary = function(self) return {style = {'underdotted', color = self.Ignore.fg}} end,
 
 	LspDiagnosticsDefaultError = 'DiagnosticError',
 	LspDiagnosticsFloatingError = 'DiagnosticFloatingError',
