@@ -390,26 +390,34 @@ colorscheme.highlight_all {
 	debugBreakpoint = 'ErrorMsg',
 	debugPC = 'ColorColumn',
 
+	DiagnosticDeprecated = {strikethrough = true},
+
 	DiagnosticError = 'Error',
 	DiagnosticFloatingError = 'ErrorMsg',
 	DiagnosticSignError = 'DiagnosticFloatingError',
-
-	DiagnosticWarn = {fg = black, bg = orange, bold = true},
-	DiagnosticFloatingWarn = 'WarningMsg',
-	DiagnosticSignWarn = 'DiagnosticFloatingWarn',
+	DiagnosticUnderlineError = {sp = red, undercurl = true},
 
 	DiagnosticHint = {fg = black, bg = magenta, bold = true},
 	DiagnosticFloatingHint = {fg = magenta, italic = true},
 	DiagnosticSignHint = 'DiagnosticFloatingHint',
+	DiagnosticUnderlineHint = {sp = magenta, undercurl = true},
 
 	DiagnosticInfo = {fg = black, bg = pink_light, bold = true},
 	DiagnosticFloatingInfo = {fg = pink_light, italic = true},
 	DiagnosticSignInfo = 'DiagnosticFloatingInfo',
-
-	DiagnosticUnderlineError = {sp = red, undercurl = true},
-	DiagnosticUnderlineHint = {sp = magenta, undercurl = true},
 	DiagnosticUnderlineInfo = {sp = pink_light, undercurl = true},
+
+	DiagnosticOk = {fg = black, bg = green, bold = true},
+	DiagnosticFloatingOk = {fg = green, italic = true},
+	DiagnosticSignOk = 'DiagnosticFloatingOk',
+	DiagnosticUnderlineOk = {sp = green, undercurl = true},
+
+	DiagnosticWarn = {fg = black, bg = orange, bold = true},
+	DiagnosticFloatingWarn = 'WarningMsg',
+	DiagnosticSignWarn = 'DiagnosticFloatingWarn',
 	DiagnosticUnderlineWarn = {sp = orange, undercurl = true},
+
+	DiagnosticUnnecessary = function(self) return {sp = self.Ignore.fg, underdotted = true} end,
 
 	-- Cursor
 	Cursor = {reverse = true},
@@ -1080,12 +1088,12 @@ colorscheme.highlight_all {
 	SymbolsOutlineConnector = 'Delimiter',
 
 	-- todo-comments.nvim
-	TodoFgFIX = function(self) return {fg = self.ErrorMsg.fg} end,
+	TodoFgFIX = function(self) return {fg = self.DiagnosticFloatingError.fg} end,
 	TodoFgHACK = {fg = yellow},
-	TodoFgNOTE = 'DiagnosticFloatingHint',
-	TodoFgPERF = 'DiagnosticFloatingInfo',
-	TodoFgTODO = function(self) return {fg = self.Todo.bg, italic = true} end,
-	TodoFgWARN = function(self) return {fg = self.WarningMsg.fg} end,
+	TodoFgNOTE = function(self) return {fg = self.DiagnosticFloatingInfo.fg} end,
+	TodoFgPERF = function(self) return {fg = self.DiagnosticFloatingHint.fg} end,
+	TodoFgTODO = function(self) return {fg = self.Todo.bg} end,
+	TodoFgWARN = function(self) return {fg = self.DiagnosticFloatingWarn.fg} end,
 
 	TodoBgFIX = function(self) return {fg = black, bg = self.TodoFgFIX.fg, bold = true, italic = true, nocombine = true} end,
 	TodoBgHACK = function(self) return {fg = black, bg = self.TodoFgHACK.fg, bold = true, italic = true, nocombine = true} end,
