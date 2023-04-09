@@ -897,6 +897,11 @@ local highlight_groups = {
 	i3ConfigWindowCommandSpecial = 'htmlTag',
 	i3ConfigWorkspaceKeyword = 'Keyword',
 
+	--[[ 4.3.42 xDefaults ]]
+	xdefaultsLabel = 'Label',
+	xdefaultsPunct = 'Delimiter',
+	xdefaultsValue = 'String',
+
 	--[[ 4.4. Plugins
 		Everything in this section is OPTIONAL. Feel free to remove everything
 		here if you don't want to define it, or add more if there's something
