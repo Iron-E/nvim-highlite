@@ -1,147 +1,112 @@
---[[ NOTHING INSIDE THIS FILE NEEDS TO BE EDITED BY THE USER. ]]
+local Table = require 'highlite.table' --- @type highlite.Table
 
---[[/* Vars */]]
+--- @class highlite.config
+--- @field generate highlite.groups.from_palette.opts options for highlight group generation
+--- @field terminal_palette boolean if `false`, skip setting the terminal colors.
+local DEFAULT_CONFIG =
+{
+	generate = {plugins = true, syntax = true},
+	terminal_palette = true,
+}
 
---- Which set of colors to use.
-local USE_256 = tonumber(vim.api.nvim_get_option 't_Co') > 255 or vim.loop.os_getenv('TERM'):find '256'
-
---- Which index to use for `cterm` highlights.
-local PALETTE_CTERM = USE_256 and 2 or 3
-
---- Which index to use for `gui` highlights.
-local PALETTE_HEX = 1
-
---[[/* Helper Functions */]]
-
---- resolve highlight groups being defined by function calls.
---- @param groups highlite.groups the current table being indexed.
---- @param key string the key to resolve the value for.
---- @param resolve_links boolean iff `true`, further `resolve` `highlight.group.link`s to their original `highlite.group.new`s
---- @return highlite.group.definition # the value at `tbl[key]`, when highlight links and embedded functions have been accounted for.
-local function resolve(groups, key, resolve_links) -- {{{
-	local original_group = rawget(groups, key)
-	local original_group_type = type(original_group)
-
-	if original_group_type == 'function' then
-		local resolved = original_group(setmetatable({}, {__index = function(_, inner_key)
-			return resolve(groups, inner_key, true)
-		end}))
-
-		-- PERF: assign the result of the function call to its associated index so that
-		--       the function will not need to be called again on subsequent accesses.
-		rawset(groups, key, resolved)
-
-		return resolved
-	elseif resolve_links then
-		if original_group_type == 'string'  then
-			return resolve(groups, original_group, resolve_links)
-		elseif original_group.link then
-			return resolve(groups, original_group.link, resolve_links)
-		end
-	end
-
-	return original_group
-end -- }}}
-
---[[/* Module */]]
+--- @type highlite.config
+local config = DEFAULT_CONFIG
 
 --- A Neovim plugin to create more straightforward syntax for Lua `:map`ping and `:unmap`ping.
---- @class highlite
-local highlite = {}
+--- @class Highlite
+local Highlite = {}
 
-highlite.group = vim.api.nvim_get_hl and
-	--- @param name string the name of the highlight group
-	--- @param link boolean if `true`, return highlight links instead of the true definition
-	--- @return highlite.group.new definition an nvim-highlite compliant table describing the highlight group `name`
-	function(name, link)
-		link = link or false
-
-		local definition = vim.api.nvim_get_hl(0, {link = link, name = name})
-
-		if not link then
-			for gui, cterm in pairs {bg = 'ctermbg', fg = 'ctermfg', sp = vim.NIL} do
-				definition[gui] = {[PALETTE_CTERM] = definition[cterm], [PALETTE_HEX] = definition[gui]}
-				definition[cterm] = nil
-			end
-		end
-
-		return definition
-	end or
-	--- @param name string the name of the highlight group
-	--- @return highlite.group.new definition an nvim-highlite compliant table describing the highlight group `name`
-	function(name)
-		local ok, definition = pcall(vim.api.nvim_get_hl_by_name, name, true)
-		local _, cterm = pcall(vim.api.nvim_get_hl_by_name, name, false)
-
-		if not ok then
-			return {}
-		end
-
-		for input, output in pairs {background = 'bg', foreground = 'fg', special = 'sp'} do
-			local definition_input = definition[input]
-			if definition_input then
-				definition[output] = {[PALETTE_CTERM] = cterm[input], [PALETTE_HEX] = definition_input}
-				definition[input] = nil
-			end
-		end
-
-		return definition
+--- @param scheme_name string the name of the colorscheme
+--- @param groups highlite.groups the highlight groups used in the colorscheme
+--- @param terminal_palette? highlite.color.palette.terminal the color palette of the terminal
+function Highlite.generate(scheme_name, groups, terminal_palette)
+	if Table.is_empty(terminal_palette) then
+		terminal_palette = {}
 	end
 
---- `nvim_set_hl` using the `name` and `definition`
---- @param name string the name of the highlight group
---- @param definition highlite.group.definition a link or an attribute map
-function highlite.highlight(name, definition) -- {{{
-	local highlight = {} --- @type highlite.group.nvim_api
-	if type(definition) == 'string' then -- `definition` is a shorthand link; most common
-		highlight.link = definition
-	elseif not definition.link then -- `definition` is a new group; second-most common
-		for k, v in pairs(definition) do
-			highlight[k] = v
+	--- @cast terminal_palette -nil
+
+	vim.api.nvim_command 'highlight clear'
+	for name, definition in pairs(groups) do
+		if type(definition) == 'string' then -- `definition` is a link
+			definition = {link = definition}
 		end
 
-		-- These fields don't exist in `nvim_set_hl`, so clear them
-		highlight.dark = nil
-		highlight.light = nil
-
-		local background = vim.api.nvim_get_option 'background' --- @type 'light'|'dark'
-		local background_definition = definition[background]
-		if background_definition then
-			for k, v in pairs(background_definition) do
-				highlight[k] = v
-			end
-		end
-
-		highlight.ctermbg = highlight.bg and highlight.bg[PALETTE_CTERM]
-		highlight.ctermfg = highlight.fg and highlight.fg[PALETTE_CTERM]
-
-		highlight.bg = highlight.bg and highlight.bg[PALETTE_HEX]
-		highlight.fg = highlight.fg and highlight.fg[PALETTE_HEX]
-		highlight.sp = highlight.sp and highlight.sp[PALETTE_HEX]
-	else -- Nvim API-style highlight link; least common
-		highlight.link = definition.link
+		vim.api.nvim_set_hl(0, name, definition)
 	end
 
-	vim.api.nvim_set_hl(0, name, highlight)
-end --}}}
+	vim.g.terminal_color_0 = terminal_palette[1]
+	vim.g.terminal_color_1 = terminal_palette[2]
+	vim.g.terminal_color_2 = terminal_palette[3]
+	vim.g.terminal_color_3 = terminal_palette[4]
+	vim.g.terminal_color_4 = terminal_palette[5]
+	vim.g.terminal_color_5 = terminal_palette[6]
+	vim.g.terminal_color_6 = terminal_palette[7]
+	vim.g.terminal_color_7 = terminal_palette[8]
+	vim.g.terminal_color_8 = terminal_palette[9]
+	vim.g.terminal_color_9 = terminal_palette[10]
+	vim.g.terminal_color_10 = terminal_palette[11]
+	vim.g.terminal_color_11 = terminal_palette[12]
+	vim.g.terminal_color_12 = terminal_palette[13]
+	vim.g.terminal_color_13 = terminal_palette[14]
+	vim.g.terminal_color_14 = terminal_palette[15]
+	vim.g.terminal_color_15 = terminal_palette[16]
 
---- `highlite.highlight` all of the `groups`
---- @param groups highlite.groups
---- @see highlite.highlight
-function highlite.highlight_all(groups)
-	for name, _ in pairs(groups) do
-		highlite.highlight(name, resolve(groups, name, false))
-	end
+	vim.api.nvim_set_var('colors_name', scheme_name)
 end
 
---- Set `g:terminal_color_`s based on `terminal_colors`.
---- @param terminal_colors highlite.color.definition[] a list 1..16 of colors to use in the terminal
-function highlite.highlight_terminal(terminal_colors)
-	for index, color in ipairs(terminal_colors) do
-		vim.api.nvim_set_var('terminal_color_' .. (index - 1), color[
-			vim.api.nvim_get_option 'termguicolors' and PALETTE_HEX or PALETTE_CTERM
-		])
-	end
+--- @param palette highlite.color.palette
+--- @param name highlite.groups.shortname
+--- @return highlite.groups.FromPalette
+function Highlite.groups(name, palette)
+	return require('highlite.groups.' .. name)(palette, config.generate)
 end
 
-return highlite
+--- @param name highlite.color.palette.shortname
+--- @return highlite.color.palette, nil|highlite.color.palette.terminal
+function Highlite.palette(name)
+	return require('highlite.color.palette.' .. name)(
+		vim.api.nvim_get_option 'background',
+		config.terminal_palette
+	)
+end
+
+--- Set the global options for generating groups.
+--- @param opts? table
+function Highlite.setup(opts)
+	if Table.is_empty(opts) then
+		opts = DEFAULT_CONFIG
+	else
+		--- @cast opts -nil
+
+		if Table.is_empty(opts.generate) then
+			opts.generate = DEFAULT_CONFIG.generate
+		else
+			local generate = opts.generate
+
+			if generate.plugins == nil then
+				generate.plugins = DEFAULT_CONFIG.generate.plugins
+			elseif type(generate.plugins) == 'table' then
+				if generate.plugins.nvim == nil then
+					generate.plugins.nvim = DEFAULT_CONFIG.generate.plugins.nvim
+				end
+
+				if generate.plugins.vim == nil then
+					generate.plugins.vim = DEFAULT_CONFIG.generate.plugins.vim
+				end
+			end
+
+			if generate.syntax == nil then
+				generate.syntax = DEFAULT_CONFIG.generate.syntax
+			end
+		end
+
+		if opts.terminal_palette == nil then
+			opts.terminal_palette = DEFAULT_CONFIG.terminal_palette
+		end
+	end
+
+	config = opts
+end
+
+return Highlite

@@ -22,15 +22,10 @@ brights = ['#353535', '#ee4a59', '#22ff22', '#f0df33', '#2bff99', '#cf55f0', '#3
 
 compose_cursor = '#f4c069'
 
-copy_mode_active_highlight_bg = {Color = '#f0af00'}
-copy_mode_active_highlight_fg = {Color = '#202020'}
-copy_mode_inactive_highlight_bg = {Color = '#202020'}
-copy_mode_inactive_highlight_fg = {Color = '#95c5ff'}
-
 quick_select_label_bg = {Color = '#202020'}
 quick_select_label_fg = {Color = '#ffa6ff'}
 quick_select_match_bg = {Color = '#202020'}
-quick_select_match_fg = {Color = '#22ff22'}
+quick_select_match_fg = {Color = '#808080'}
 
 [colors.tab_bar]
 background = '#202020'

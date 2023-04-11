@@ -281,3 +281,8 @@ This repository is looking for contributions! The following things are appreciat
 * [ ] Setup scripts for Windows.
 
 If you would like to contribute something, and you aren't sure how, open a ticket! I'd love to help you help me.
+
+## Additional Licenses
+
+* `nvim-highlite` is licensed under GPLv3.
+* `colortrans.py` is licensed under MIT.

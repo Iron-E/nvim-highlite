@@ -1,0 +1,39 @@
+--- @meta
+
+--- @alias highlite.color.palette.get (fun(bg?: highlite.bg): highlite.color.palette)|(fun(bg?: highlite.bg, get_terminal: true): highlite.color.palette, highlite.color.palette.terminal)
+
+--- @alias highlite.color.palette.shortname 'ayu'|'everforest'|'gruvbox-material'|'gruvbox'|'highlite'|'iceberg'|'molokai'|'papercolor'|'seoul256-light'|'seoul256'|'solarized8-flat'|'solarized8-high'|'solarized8-low'|'solarized8'|'sonokai'
+
+--- 1. black
+--- 2. dark red
+--- 3. dark green
+--- 4. dark yellow (orange)
+--- 5. blue
+--- 6. dark magenta
+--- 7. dark cyan
+--- 8. gray ("dark white")
+--- 9. dark gray ("light black")
+--- 10. red
+--- 11. green
+--- 12. yellow
+--- 13. light blue
+--- 14. magenta
+--- 15. cyan
+--- 16. white
+--- @class highlite.color.palette.terminal
+--- @field [1] highlite.color
+--- @field [2] highlite.color
+--- @field [3] highlite.color
+--- @field [4] highlite.color
+--- @field [5] highlite.color
+--- @field [6] highlite.color
+--- @field [7] highlite.color
+--- @field [8] highlite.color
+--- @field [9] highlite.color
+--- @field [10] highlite.color
+--- @field [11] highlite.color
+--- @field [12] highlite.color
+--- @field [13] highlite.color
+--- @field [14] highlite.color
+--- @field [15] highlite.color
+--- @field [16] highlite.color
