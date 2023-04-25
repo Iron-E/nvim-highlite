@@ -2,194 +2,230 @@
 local function get(bg, get_terminal)
 	local palette, terminal_palette
 	if bg ~= 'light' then
-		local black       = 0x202020
-		local gray        = 0x808080
-		local gray_dark   = 0x505050
-		local gray_darker = 0x353535
-		local gray_light  = 0xC0C0C0
-		local white       = 0xFFFFFF
-
-		local red       = 0xEE4A59
-		local red_dark  = 0xA80000
-		local red_light = 0xFF4090
-
-		local orange       = 0xFF8900
-		local orange_light = 0xF0AF00
-
-		local tan = 0xF4C069
-		local yellow = 0xF0DF33
-
-		local green_dark  = 0x70D533
-		local green       = 0x22FF22
-		local green_light = 0x99FF99
-		local turqoise    = 0x2BFF99
-
-		local blue = 0x7766FF
-		local cyan = 0x33DBC3
-		local ice  = 0x95C5FF
-		local navy = 0x264F60
-		local teal = 0x60AFFF
-
-		local magenta_light = 0xD5508F
-		local magenta       = 0xDF50B0
-		local pink          = 0xFFA6FF
-		local pink_light    = 0xFFB7B7
-		local purple        = 0xCF55F0
-		local purple_light  = 0xAF60AF
-
 		if get_terminal then
 			terminal_palette =
 			{
-				'#202020', '#A80000', '#70D533', '#FF8900', '#7766FF', '#DF50B0', '#60AFFF', '#C0C0C0',
-				'#353535', '#EE4A59', '#22FF22', '#F0DF33', '#2BFF99', '#CF55F0', '#33DBC3', '#FFFFFF',
+				[1] = "#202020",
+				[2] = "#A80000",
+				[3] = "#70D533",
+				[4] = "#FF8900",
+				[5] = "#7766FF",
+				[6] = "#DF50B0",
+				[7] = "#60AFFF",
+				[8] = "#C0C0C0",
+				[9] = "#353535",
+				[10] = "#EE4A59",
+				[11] = "#22FF22",
+				[12] = "#F0DF33",
+				[13] = "#2BFF99",
+				[14] = "#CF55F0",
+				[15] = "#33DBC3",
+				[16] = "#FFFFFF",
 			}
 		end
 
 		palette =
 		{
-			bg = black,
-			bg_contrast_high = gray_dark,
-			bg_contrast_low = gray_darker,
-
-			text = gray_light,
-			text_contrast_bg_high = white,
-			text_contrast_bg_low = gray,
-
-			boolean = yellow,
-			buffer_active = white,
-			buffer_alternate = magenta_light,
-			buffer_current = teal,
-			character = red_light,
-			conditional = ice,
-			constant = orange_light,
-			define = blue,
-			diff_add = green,
-			diff_change = yellow,
-			diff_delete = red,
-			error = red,
-			fold = purple_light,
-			func = purple,
-			hint = magenta_light,
-			identifier = gray_light,
-			include = green_light,
-			info = pink_light,
-			keyword = teal,
-			label = pink,
-			loop = turqoise,
-			message = orange_light,
-			namespace = ice,
-			number = pink_light,
-			ok = green,
-			operator = green,
-			preproc = tan,
-			search = green_light,
-			select = navy,
-			special = magenta,
-			statement = ice,
-			storage = orange_light,
-			string = green_dark,
-			structure = blue,
-			syntax_error = red_dark,
-			throw = red_light,
-			todo = cyan,
-			type = cyan,
-			uri = turqoise,
-			warning = orange,
+			annotation = 0xF4C069,
+			attribute = 0xF4C069,
+			bg = 0x202020,
+			bg_contrast_high = 0x505050,
+			bg_contrast_low = 0x353535,
+			boolean = 0xF0DF33,
+			buffer_active = 0xFFFFFF,
+			buffer_alternate = 0xD5508F,
+			buffer_current = 0x60AFFF,
+			character = 0xFF4090,
+			character_special = 0xDF50B0,
+			class = 0x7766FF,
+			comment = 0x808080,
+			comment_documentation = 0x808080,
+			conditional = 0x95C5FF,
+			constant = 0xF0AF00,
+			constant_builtin = 0xDF50B0,
+			constructor = 0xDF50B0,
+			decorator = 0xCF55F0,
+			define = 0x7766FF,
+			diff_add = 0x22FF22,
+			diff_change = 0xF0DF33,
+			diff_delete = 0xEE4A59,
+			enum = 0x7766FF,
+			error = 0xEE4A59,
+			event = 0x2BFF99,
+			field = 0xC0C0C0,
+			field_enum = 0xF0AF00,
+			float = 0xFFB7B7,
+			fold = 0xAF60AF,
+			func = 0xCF55F0,
+			func_builtin = 0xDF50B0,
+			hint = 0xD5508F,
+			identifier = 0xC0C0C0,
+			include = 0x99FF99,
+			info = 0xFFB7B7,
+			interface = 0x33DBC3,
+			keyword = 0x60AFFF,
+			keyword_coroutine = 0x60AFFF,
+			keyword_function = 0x60AFFF,
+			keyword_operator = 0x22FF22,
+			keyword_return = 0x60AFFF,
+			label = 0xFFA6FF,
+			loop = 0x2BFF99,
+			macro = 0x7766FF,
+			message = 0xF0AF00,
+			method = 0xCF55F0,
+			namespace = 0x95C5FF,
+			number = 0xFFB7B7,
+			ok = 0x22FF22,
+			operator = 0x22FF22,
+			parameter = 0xC0C0C0,
+			preproc = 0xF4C069,
+			preproc_conditional = 0xF4C069,
+			property = 0xC0C0C0,
+			punctuation = 0xFFFFFF,
+			punctuation_bracket = 0xFFFFFF,
+			punctuation_delimiter = 0xFFFFFF,
+			punctuation_special = 0xFF4090,
+			search = 0x99FF99,
+			select = 0x264F60,
+			special = 0xDF50B0,
+			statement = 0x95C5FF,
+			storage = 0xF0AF00,
+			string = 0x70D533,
+			string_escape = 0xFF4090,
+			string_regex = 0x70D533,
+			string_special = 0xFF4090,
+			structure = 0x7766FF,
+			syntax_error = 0xA80000,
+			tag = 0x7766FF,
+			tag_attribute = 0xC0C0C0,
+			tag_delimiter = 0xFFFFFF,
+			text = 0xC0C0C0,
+			text_contrast_bg_high = 0xFFFFFF,
+			text_contrast_bg_low = 0x808080,
+			text_literal = 0x95C5FF,
+			text_reference = 0xC0C0C0,
+			throw = 0xFF4090,
+			todo = 0x33DBC3,
+			type = 0x33DBC3,
+			type_builtin = 0x33DBC3,
+			type_parameter = 0x33DBC3,
+			uri = 0x2BFF99,
+			variable = 0xC0C0C0,
+			variable_builtin = 0x60AFFF,
+			warning = 0xFF8900,
 		}
 	else
-		local black       = 0x000000
-		local gray        = 0xA0A0A0
-		local gray_dark   = 0x6E6E6E
-		local gray_darker = 0x343434
-		local gray_light  = 0xBEBEBE
-		local white       = 0xD7D7D7
-
-		local red = 0xB7002F
-		local red_dark = 0x4A1318
-		local red_light = 0xAF005A
-
-		local brown = 0x6A4900
-		local orange = 0x964E00
-		local orange_dark = 0x855F00
-		local salmon = 0xF65F4E
-
-		local yellow = 0x706700
-
-		local green = 0x007743
-		local green_dark = 0x00510B
-		local green_desaturated = 0x347700
-		local green_saturated = 0x007A01
-
-		local blue = 0x005090
-		local blue_dark = 0x033362
-		local cyan = 0x007768
-		local ice = 0x84AFC2
-		local ultra_violet = 0x614AE2
-
-		local pink = 0xA4077C
-		local pink_light = 0xAD296D
-		local purple = 0x8E01AB
-		local purple_dark = 0x520055
-		local purple_light = 0x964896
-
 		if get_terminal then
 			terminal_palette =
 			{
-				'#000000', '#4A1318', '#00510B', '#964E00', '#033362', '#8E01AB', '#007768', '#BEBEBE',
-				'#343434', '#B7002F', '#007743', '#706700', '#005090', '#964896', '#84AFC2', '#D7D7D7',
+				[1] = "#000000",
+				[2] = "#4A1318",
+				[3] = "#00510B",
+				[4] = "#964E00",
+				[5] = "#033362",
+				[6] = "#8E01AB",
+				[7] = "#007768",
+				[8] = "#BEBEBE",
+				[9] = "#343434",
+				[10] = "#B7002F",
+				[11] = "#007743",
+				[12] = "#706700",
+				[13] = "#005090",
+				[14] = "#964896",
+				[15] = "#84AFC2",
+				[16] = "#D7D7D7",
 			}
 		end
 
 		palette =
 		{
-			bg = white,
-			bg_contrast_high = gray,
-			bg_contrast_low = gray_light,
-
-			text = gray_darker,
-			text_contrast_bg_high = black,
-			text_contrast_bg_low = gray_dark,
-
-			boolean = yellow,
-			buffer_active = black,
-			buffer_alternate = pink_light,
-			buffer_current = blue,
-			character = red_light,
-			conditional = blue_dark,
-			constant = orange_dark,
-			define = ultra_violet,
-			diff_add = green_saturated,
-			diff_change = yellow,
-			diff_delete = red,
-			error = red,
-			fold = purple_light,
-			func = purple,
-			hint = pink_light,
-			identifier = gray_darker,
-			include = green_dark,
-			info = red_dark,
-			keyword = blue,
-			label = purple_dark,
-			loop = green,
-			message = orange_dark,
-			namespace = blue_dark,
-			number = red_dark,
-			ok = green_saturated,
-			operator = green_saturated,
-			preproc = brown,
-			search = green_dark,
-			select = ice,
-			special = pink,
-			statement = blue_dark,
-			storage = orange_dark,
-			string = green_desaturated,
-			structure = ultra_violet,
-			syntax_error = salmon,
-			throw = red_light,
-			todo = cyan,
-			type = cyan,
-			uri = green,
-			warning = orange,
+			annotation = 0x6A4900,
+			attribute = 0x6A4900,
+			bg = 0xD7D7D7,
+			bg_contrast_high = 0xA0A0A0,
+			bg_contrast_low = 0xBEBEBE,
+			boolean = 0x706700,
+			buffer_active = 0x000000,
+			buffer_alternate = 0xAD296D,
+			buffer_current = 0x005090,
+			character = 0xAF005A,
+			character_special = 0xA4077C,
+			class = 0x614AE2,
+			comment = 0x6E6E6E,
+			comment_documentation = 0x6E6E6E,
+			conditional = 0x033362,
+			constant = 0x855F00,
+			constant_builtin = 0xA4077C,
+			constructor = 0xA4077C,
+			decorator = 0x8E01AB,
+			define = 0x614AE2,
+			diff_add = 0x007A01,
+			diff_change = 0x706700,
+			diff_delete = 0xB7002F,
+			enum = 0x614AE2,
+			error = 0xB7002F,
+			event = 0x007743,
+			field = 0x343434,
+			field_enum = 0x855F00,
+			float = 0x4A1318,
+			fold = 0x964896,
+			func = 0x8E01AB,
+			func_builtin = 0xA4077C,
+			hint = 0xAD296D,
+			identifier = 0x343434,
+			include = 0x00510B,
+			info = 0x4A1318,
+			interface = 0x007768,
+			keyword = 0x005090,
+			keyword_coroutine = 0x005090,
+			keyword_function = 0x005090,
+			keyword_operator = 0x007A01,
+			keyword_return = 0x005090,
+			label = 0x520055,
+			loop = 0x007743,
+			macro = 0x614AE2,
+			message = 0x855F00,
+			method = 0x8E01AB,
+			namespace = 0x033362,
+			number = 0x4A1318,
+			ok = 0x007A01,
+			operator = 0x007A01,
+			parameter = 0x343434,
+			preproc = 0x6A4900,
+			preproc_conditional = 0x6A4900,
+			property = 0x343434,
+			punctuation = 0x000000,
+			punctuation_bracket = 0x000000,
+			punctuation_delimiter = 0x000000,
+			punctuation_special = 0xAF005A,
+			search = 0x00510B,
+			select = 0x84AFC2,
+			special = 0xA4077C,
+			statement = 0x033362,
+			storage = 0x855F00,
+			string = 0x347700,
+			string_escape = 0xAF005A,
+			string_regex = 0x347700,
+			string_special = 0xAF005A,
+			structure = 0x614AE2,
+			syntax_error = 0xF65F4E,
+			tag = 0x614AE2,
+			tag_attribute = 0x343434,
+			tag_delimiter = 0x000000,
+			text = 0x343434,
+			text_contrast_bg_high = 0x000000,
+			text_contrast_bg_low = 0x6E6E6E,
+			text_literal = 0x033362,
+			text_reference = 0x343434,
+			throw = 0xAF005A,
+			todo = 0x007768,
+			type = 0x007768,
+			type_builtin = 0x007768,
+			type_parameter = 0x007768,
+			uri = 0x007743,
+			variable = 0x343434,
+			variable_builtin = 0x005090,
+			warning = 0x964E00,
 		}
 	end
 

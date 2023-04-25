@@ -60,20 +60,20 @@ local Table = require 'highlite.table' --- @type highlite.Table
 --- @field preproc highlite.color pre-processor commands (e.g. `#[derive]` in Rust)
 --- @field preproc_conditional highlite.color pre-processor conditionals (e.g. `#[cfg]` in Rust)
 --- @field property highlite.color a member of a class or structure which is transparently a function
---- @field punctuation highlite.color
---- @field punctuation_bracket highlite.color
---- @field punctuation_delimiter highlite.color
---- @field punctuation_special highlite.color
+--- @field punctuation highlite.color misc. delimiters
+--- @field punctuation_bracket highlite.color balanced punctuation, e.g. `[]`, `""`, `()`
+--- @field punctuation_delimiter highlite.color single punctuation, e.g. `,`, `;`
+--- @field punctuation_special highlite.color special punctuation, e.g. `{}` in a format string
 --- @field search highlite.color Doing `:/` or `:s/`
 --- @field select highlite.color selected text, e.g. in visual mode or selecting LSP completions
 --- @field special highlite.color unclassified special symbols in a language
 --- @field statement highlite.color programming language statements which do not fall into another category
 --- @field storage highlite.color pointer symbols (e.g. `&foo`)
---- @field string highlite.color
---- @field string_escape highlite.color escaped characters
+--- @field string highlite.color a misc. string
+--- @field string_escape highlite.color escaped characters in a string
 --- @field string_regex highlite.color regular expressions
 --- @field string_special highlite.color special strings (e.g. dates)
---- @field structure highlite.color
+--- @field structure highlite.color plain-old data
 --- @field syntax_error highlite.color non-diagnostic errors; sometimes shown in the actual highlighting of the code you write
 --- @field tag highlite.color XML/HTML tags
 --- @field tag_attribute highlite.color XML/HTML tag attributes
@@ -86,11 +86,11 @@ local Table = require 'highlite.table' --- @type highlite.Table
 --- @field throw highlite.color a keyword which triggers or receives errors (e.g. `throw MyError`)
 --- @field todo highlite.color `TODO` comments
 --- @field type highlite.color type names e.g. `int`, `String`
---- @field type_builtin highlite.color
---- @field type_parameter highlite.color
+--- @field type_builtin highlite.color a type from the standard library
+--- @field type_parameter highlite.color generic type
 --- @field uri highlite.color links (HTTP, tags, match paren, etc).
---- @field variable highlite.color
---- @field variable_builtin highlite.color
+--- @field variable highlite.color a variable
+--- @field variable_builtin highlite.color a variable from the language, e.g. `self`
 --- @field warning highlite.color diagnostic warnings
 
 --- A map of palette colors to an alternate color where they can be found
