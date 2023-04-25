@@ -1,288 +1,658 @@
 # nvim-highlite
 
-## Default Settings Preview
+## Feature Overview
 
-![lua preview](https://user-images.githubusercontent.com/36409591/128422684-f51354e9-e895-493e-8e7d-db7bb08eb735.png "Lua Preview")
+* Use any of the built-in colorschemes using `:colorscheme`.
+* Easily write your own colorscheme by only specifying a few colors.
+* Import from formats other applications use to one that can be used with `nvim-highlite`.
+* Export _any_ colorscheme (even from other repositories) to formats other applications use.
+
+<!-- panvimdoc-ignore-start -->
+
+## Built-in Colorschemes
+
+<details>
+  <summary>Click to expand</summary>
+
+  <details>
+    <summary><code>highlite</code> (the default)</summary>
+    <img alt="highlite colorscheme lua preview" src="https://user-images.githubusercontent.com/36409591/234727053-1928ec4a-f5f2-4d7e-8fff-4c5be981722b.png"/>
+  </details>
+
+  <details>
+    <summary><code>highlite-ayu</code> (based on <a href="https://github.com/ayu-theme/ayu-vim">ayu</a>)</summary>
+    <img alt="ayu colorscheme Lua preview" src="https://user-images.githubusercontent.com/36409591/234727814-9613547d-4c96-4fca-8cf8-cfebcd8d9bff.png"/>
+  </details>
+
+  <details>
+    <summary><code>highlite-everforest</code> (based on <a href="https://github.com/sainnhe/everforest">everforest</a>)</summary>
+    <img alt="everforest colorscheme Lua preview" src="https://user-images.githubusercontent.com/36409591/234728320-e53b5d64-5a03-464a-b307-f675e46cab04.png"/>
+  </details>
+
+  <details>
+    <summary><code>highlite-gruvbox</code> (based on <a href="https://github.com/morhetz/gruvbox">gruvbox</a>)</summary>
+    <img alt="gruvbox colorscheme Lua preview" src="https://user-images.githubusercontent.com/36409591/234729912-003f3dec-bd0a-4de3-bd3f-9db3a5f5ca88.png"/>
+  </details>
+
+  <details>
+    <summary><code>highlite-gruvbox-material</code> (based on <a href="https://github.com/sainnhe/gruvbox-material">gruvbox-material</a>)</summary>
+    <img alt="gruvbox-material colorscheme Lua preview" src="https://user-images.githubusercontent.com/36409591/234728429-d4eb5892-c4d0-45ec-9301-c0a322bc31f1.png"/>
+  </details>
+
+  <details>
+    <summary><code>highlite-iceberg</code> (based on <a href="https://github.com/cocopon/iceberg.vim">iceberg</a>)</summary>
+    <img alt="iceberg colorscheme Lua preview" src="https://user-images.githubusercontent.com/36409591/234730354-9de2b848-cf80-42c9-b402-07fe963480c1.png"/>
+  </details>
+
+  <details>
+    <summary><code>highlite-molokai</code> (based on <a href="https://github.com/tomasr/molokai">molokai</a>)</summary>
+    <img alt="molokai colorscheme Lua preview" src="https://user-images.githubusercontent.com/36409591/234731452-a22447e1-530f-4016-9f1f-eceeec6aaf47.png"/>
+  </details>
+
+  <details>
+    <summary><code>highlite-papercolor</code> (based on <a href="https://github.com/nlknguyen/papercolor-theme">papercolor</a>)</summary>
+    <img alt="papercolor colorscheme Lua preview" src="https://user-images.githubusercontent.com/36409591/234730471-0dcbaf2f-033e-4869-bf30-8777d8e21420.png"/>
+  </details>
+
+  <details>
+    <summary><code>highlite-seoul256</code> (and <code>light</code>; based on <a href="https://github.com/junegunn/seoul256.vim">seoul256</a>)</summary>
+    <img alt="seoul256 colorscheme Lua preview" src="https://user-images.githubusercontent.com/36409591/234756608-8088f64d-4ce0-41a5-8eff-3b6615e15fa6.png"/>
+  </details>
+
+  <details>
+    <summary><code>highlite-solarized8</code> (and <code>flat</code> and <code>high</code>; based on <a href="https://github.com/lifepillar/vim-solarized8">solarized8</a>)</summary>
+    <img alt="solarized8 colorscheme Lua preview" src="https://user-images.githubusercontent.com/36409591/234731873-d61ad8f0-a738-48f6-a6f8-dd7e8ab0ddf6.png"/>
+  </details>
+
+  <details>
+    <summary><code>highlite-sonokai</code> (based on <a href="https://github.com/sainnhe/sonokai">sonokai</a>)</summary>
+    <img alt="sonokai colorscheme Lua preview" src="https://user-images.githubusercontent.com/36409591/234730590-1767229b-db0d-4375-9e7e-16afd4f2cc0f.png"/>
+  </details>
+</details>
+
+<!-- panvimdoc-ignore-end -->
 
 ## Introduction
 
-`nvim-highlite` is a colorscheme template repository with great defaults.
+`nvim-highlite` is a colorscheme generator with great defaults.
 
-This template's _defaults_ focus on:
+The _defaults_ focuses on:
 
 1. Compatibility with [semantic highlighting](https://medium.com/@evnbr/coding-in-color-3a6db2743a1e).
-  * I was using colorschemes that often did not provide enough highlight groups to provide distinction between tokens.
+    * I was using colorschemes that often did not provide enough colors to provide distinction between tokens.
 2. Visibility in any range of blue-light.
-  * I use `redshift` often, and many colorschemes did not allow for me to see when I had lower color temperatures.
+    * I use `redshift` often, and many colorschemes did not allow for me to see when I had lower color temperatures.
 
-This template's _design_ focuses on:
+The _generator_ focuses on:
 
-1. Ease of use and rapid development.
-  * New features may simply be integrated with current configurations, rather than rewritten over them.
-  * Merging with the upstream repository is simplified by GitHub, allowing you to select what new defaults to add.
-  * It provides a large supply of defaults for plugins and programming languages.
-    * Define a smaller set of "categorical" highlights (see Neovim's `group-name` help page) and many more will `link` automatically.
-2. Inversion of Control
-  * Changes made to the highlighting algorithm won't affect how you write your colorscheme.
-  * New highlight group attributes which are unaccounted for in older versions will simply be ignored without errors due to Lua's `table`s.
+1. Rapid development.
+    * Many times, all you need to do is pass in your colors and the highlight groups will be generated for you.
+2. Utilities for working with highlight groups.
+    * Clone, extend, or merge groups in order to customize what the generator creates for you.
 
 ## Installation
 
-* Neovim 0.7+
+Requires the following:
 
-### Creating Your Own
+* Neovim 0.8+
 
-1. Fork this repository, or clone it with `git clone https://github.com/Iron-E/nvim-highlite`.
-2. Follow the instructions in [`colors/highlite.vim`](colors/highlite.vim).
-  * If you are on a Unix system, use the [setup script](setup.sh) like so:
-  ```sh
-  chmod +x ./setup.sh
-  ./setup.sh highlite <colorscheme>
-  ```
-  Where `<colorscheme>` is the name of your desired colorscheme.
-  * If you are on Windows, rename the files manually.
+> **Note**
+>
+> If you don't use `termguicolors`, see [How Can I Get This Plugin To Work _Without_ `termguicolors`?][no-guicolors]
 
-Whenever you want to update from then on, you can run the [update script](update.sh). This will load the latest upstream changes to the core highlighting library.
+### lazy.nvim
 
-### Just The Defaults
-
-#### lazy.nvim
-
-I recommend using [lazy.nvim](https://github.com/folke/lazy.nvim):
+I recommend using [lazy.nvim][lazy]:
 
 ```lua
 require('lazy').setup {
   {'Iron-E/nvim-highlite',
-    init = function() -- NOTE: optional; override highlights
-      vim.api.nvim_create_autocmd('ColorScheme', {
-        callback = function() vim.api.nvim_set_hl(…) end,
-        group = vim.api.nvim_create_augroup('config', {clear = false}),
-        pattern = 'highlite',
-      })
-    end,
-    config = function()
-      vim.opt.termguicolors = true -- NOTE: optional; enable truecolor support
+    config = function(_, opts)
+      -- OPTIONAL: setup the plugin. See "Configuration" for information
+      require('highlite').setup {generator = {plugins = {vim = false}, syntax = false}}
+
+      -- or one of the alternate colorschemes (see the "Built-in Colorschemes" section)
       vim.api.nvim_command 'colorscheme highlite'
     end,
     lazy = false,
     priority = 1000,
-    version = '^3.0.0', -- NOTE: optional; only update when a new version releases
+    version = '^4.0.0',
   },
 }
 ```
 
-#### Others
+### Others
 
 1. Install a plugin manager such as [`packer.nvim`](https://github.com/wbthomason/packer.nvim):
-  ```lua
-  -- packer.nvim example
-  local install_path = vim.fn.stdpath('data')..'/site/pack/packer/opt/packer.nvim'
+    ```lua
+    -- packer.nvim example
+    local install_path = vim.fn.stdpath('data')..'/site/pack/packer/opt/packer.nvim'
 
-  if not vim.loop.fs_stat(vim.fn.glob(install_path)) then
-    vim.fn.system {'git', 'clone', 'https://github.com/wbthomason/packer.nvim', install_path}
-  end
+    if not vim.loop.fs_stat(vim.fn.glob(install_path)) then
+      vim.fn.system {'git', 'clone', 'https://github.com/wbthomason/packer.nvim', install_path}
+    end
 
-  vim.api.nvim_command 'packadd packer.nvim'
+    vim.api.nvim_command 'packadd packer.nvim'
 
-  return require('packer').startup {function(use)
-    use {'wbthomason/packer.nvim', opt = true}
-    use {'Iron-E/nvim-highlite', branch = 'master-v3'}
-  end}
-  ```
-2. Specify this colorscheme as your default colorscheme in the `init.vim`:
-  ```vim
-  " Enable 24-bit color output. Only do this IF your environment supports it.
-  " This plugin is fully compatible with 8-bit, 16-bit, and 24-bit colors.
-  set termguicolors
-  " Use the colorscheme
-  colorscheme highlite
-  ```
-  Or using `init.lua`:
-  ```lua
-  vim.opt.termguicolors = true
-  vim.api.nvim_command 'colorscheme highlite'
-  ```
+    return require('packer').startup {function(use)
+      use {'wbthomason/packer.nvim', opt = true}
+      use {'Iron-E/nvim-highlite', branch = 'master-v4'}
+    end}
+    ```
+2. Optional – setup the plugin (see [Configuration](#configuration) for more info):
+    ```lua
+    require('highlite').setup {generator = {plugins = {vim = false}, syntax = false}}
+    ```
+3. Specify this colorscheme as your default colorscheme:
+    ```lua
+    vim.api.nvim_command 'colorscheme highlite'
+    ```
+
+## Configuration
+
+You can configure what highlight groups get generated for both built-in and your custom colorschemes. Do this by calling `setup` _before_ executing `:colorscheme` for any colorscheme created with `nvim-highlite`.
+
+The available options are explained in the following sections. Note that the more you *dis*able, the faster your startup time will be.
+
+### Generator
+
+Controls what highlight groups get created by the plugin.
+
+> **Note**
+>
+> All integrations are enabled by default, and the `setup` table accepts a deny list. If you instead want to use an allow list, you can do something like this instead:
+>
+> ```lua
+> local allow_list = {__index = function() return false end}
+> require('highlite').setup {
+>   generator = {
+>     plugins = {
+>       nvim = {packer = false}, -- use all but packer
+>       vim = setmetatable({coc = true}, allow_list), -- only use `coc`
+>     },
+>     syntax = setmetatable({man = true}, allow_list), -- only use `man` sytnax highlighting
+>   },
+> }
+> ```
+
+#### Plugins
+
+Controls generating highlighting for plugins. You can disable all integrations:
+
+```lua
+require('highlite').setup {generator = {plugins = false}}
+```
+
+…or, to disable specific plugins, see [Neovim](#neovim) and [Vim](#vim).
+
+##### Neovim
+
+Controls generation for neovim plugins. You can disable all neovim plugin integrations:
+
+```lua
+require('highlite').setup {
+  generator = {
+    plugins = {nvim = false},
+  },
+}
+```
+
+…or, to disable generation for certain plugins:
+
+```lua
+require('highlite').setup {
+  generator = {
+    plugins = {nvim = {packer = false}},
+  },
+}
+```
+
+###### List of Neovim Plugins
+
+<details>
+
+<!-- panvimdoc-ignore-start -->
+
+  <summary>Click to expand</summary>
+
+<!-- panvimdoc-ignore-end -->
+
+  <ul>
+    <li><a href="https://github.com/romgrk/barbar.nvim">
+        barbar
+    </a></li>
+    <li><a href="https://github.com/hrsh7th/nvim-cmp/">
+        cmp
+    </a></li>
+    <li><a href="https://github.com/lewis6991/gitsigns.nvim">
+        gitsigns
+    </a></li>
+    <li><a href="https://github.com/lukas-reineke/indent-blankline.nvim">
+        indent_blankline
+    </a></li>
+    <li><a href="https://github.com/folke/lazy.nvim">
+        lazy
+    </a></li>
+    <li><a href="https://github.com/nvimdev/lspsaga.nvim">
+        lspsaga
+    </a></li>
+    <li><a href="https://github.com/echasnovski/mini.nvim">
+        mini
+    </a></li>
+    <li><a href="https://github.com/nvim-tree/nvim-tree.lua">
+        nvim_tree
+    </a></li>
+    <li><a href="https://github.com/wbthomason/packer.nvim">
+        packer
+    </a></li>
+    <li><a href="https://github.com/simrat39/symbols-outline.nvim">
+        symbols_outline
+    </a></li>
+    <li><a href="https://github.com/folke/todo-comments.nvim">
+        todo_comments
+    </a></li>
+    <li><a href="https://github.com/folke/trouble.nvim">
+        trouble
+    </a></li>
+  </ul>
+</details>
+
+##### Vim
+
+Controls generation for vim plugins. You can disable all vim plugin integrations:
+
+```lua
+require('highlite').setup {
+  generator = {
+    plugins = {vim = false},
+  },
+}
+```
+
+…or, to disable generation for certain plugins:
+
+```lua
+require('highlite').setup {
+  generator = {
+    plugins = {vim = {ale = false}}
+  },
+}
+```
+
+###### List of Vim Plugins
+
+<details>
+
+<!-- panvimdoc-ignore-start -->
+
+  <summary>Click to expand</summary>
+
+<!-- panvimdoc-ignore-end -->
+
+  <ul>
+    <li><a href="https://github.com/dense-analysis/ale">
+        ale
+    </a></li>
+    <li><a href="https://github.com/neoclide/coc.nvim">
+        coc
+    </a></li>
+    <li><a href="https://github.com/lambdalisue/fern.vim">
+        fern
+    </a></li>
+    <li><a href="https://github.com/preservim/nerdtree">
+        nerdtree
+    </a></li>
+    <li><a href="https://github.com/easymotion/vim-easymotion">
+        vim_easymotion
+    </a></li>
+    <li><a href="https://github.com/airblade/vim-gitgutter">
+        vim_gitgutter
+    </a></li>
+    <li><a href="https://github.com/thaerkh/vim-indentguides">
+        vim_indent_guides
+    </a></li>
+    <li><a href="https://github.com/zsugabubus/vim-jumpmotion">
+        vim_jumpmotion
+    </a></li>
+    <li><a href="https://github.com/machakann/vim-sandwich">
+        vim_sandwich
+    </a></li>
+    <li><a href="https://github.com/mhinz/vim-signify">
+        vim_signify
+    </a></li>
+  </ul>
+</details>
+
+#### Syntax
+
+Controls generating legacy syntax highlighting. You can disable generation for all filetypes:
+
+```lua
+require('highlite').setup {
+  generator = {syntax = false},
+}
+```
+
+…or, to disable generation for certain filetypes:
+
+```lua
+require('highlite').setup {
+  generator = {
+    syntax = {dosini = false, git = false},
+  },
+}
+```
+
+> **Note**
+>
+> Treesitter highlighting is always enabled. You can safely disable `:syntax` highlighting if you only use treesitter.
+
+##### List of Syntax Filetypes
+
+<details>
+
+<!-- panvimdoc-ignore-start -->
+
+  <summary>Click to expand</summary>
+
+<!-- panvimdoc-ignore-end -->
+
+  <ul>
+    <li><a href="https://github.com/whonore/Coqtail">
+        coq
+    </a></li>
+    <li><a href="https://github.com/bfrg/vim-cpp-modern">
+        cpp
+    </a></li>
+    <li>
+		cs
+	</li>
+    <li>
+		css
+	</li>
+    <li><a href="https://github.com/dart-lang/dart-vim-plugin">
+        dart
+    </a></li>
+    <li>
+		dosini
+	</li>
+    <li><a href="https://github.com/liuchengxu/graphviz">
+        dot
+    </a></li>
+    <li><a href="https://github.com/tpope/vim-git">
+        git
+    </a></li>
+    <li><a href="https://github.com/fatih/vim-go">
+        go
+    </a></li>
+    <li>
+		help
+	</li>
+    <li><a href="https://github.com/othree/html5">
+        html
+    </a></li>
+    <li><a href="https://github.com/mboughaba/i3config">
+        i3config
+    </a></li>
+    <li><a href="https://github.com/uiiaoo/java-syntax">
+        java
+    </a></li>
+    <li><a href="https://github.com/pangloss/vim-javascript">
+        javascript
+    </a></li>
+    <li><a href="https://github.com/elzr/vim-json">
+        json
+    </a></li>
+    <li><a href="https://github.com/tbastos/vim-lua">
+        lua
+    </a></li>
+    <li>
+		make
+	</li>
+    <li>
+		man
+	</li>
+    <li><a href="https://github.com/plasticboy/vim-markdown">
+        markdown
+    </a></li>
+    <li><a href="https://github.com/vim-python/python-syntax">
+        python
+    </a></li>
+    <li><a href="https://github.com/jlcrochet/vim-razor">
+        razor
+    </a></li>
+    <li><a href="https://github.com/vim-ruby/vim-ruby">
+        ruby
+    </a></li>
+    <li><a href="https://github.com/Iron-E/rust.vim/tree/feature/struct-definition-identifiers">
+        rust
+    </a></li>
+    <li>
+		scala
+	</li>
+    <li><a href="https://github.com/cakebaker/scss-syntax">
+        scss
+    </a></li>
+    <li><a href="https://github.com/arzg/vim-sh">
+        sh
+    </a></li>
+    <li>
+		solidity
+	</li>
+    <li><a href="https://github.com/shmup/vim-sql-syntax">
+        sql
+    </a></li>
+    <li><a href="https://github.com/lervag/vimtex">
+        tex
+    </a></li>
+    <li><a href="https://github.com/Iron-E/vim-toml/tree/feature/delimiter-highlighting">
+        toml
+    </a></li>
+    <li>
+		vimscript
+	</li>
+    <li>
+		xdefaults
+	</li>
+    <li><a href="https://github.com/amadeus/vim-xml">
+        xml
+    </a></li>
+    <li>
+		xxd
+	</li>
+    <li><a href="https://github.com/Iron-E/vim-yaml/tree/patch-1">
+        yaml
+    </a></li>
+  </ul>
+</details>
+
+### Terminal Palette
+
+Colors for Neovim's `:terminal` are automatically set for all built-in colorschemes (see `:h terminal-config`). To disable this, do the following:
+
+```lua
+require('highlite').setup {terminal_palette = false}
+```
 
 ## Usage
 
-This repository in itself is an example of how to use `nvim-highlite`. Aside from this, the following colorschemes are built using `nvim-highlite`:
+### Built-in Colorschemes
 
-* [nord-lite](https://github.com/NarutoXY/nvim-highlite)
-* [nvim-deus](https://github.com/tandy1229/nvim-deus)
-* [nvim-deus](https://github.com/theniceboy/nvim-deus)
-* [nvim-soluarized](https://github.com/Iron-E/nvim-soluarized)
-* [one-nvim](https://github.com/Th3Whit3Wolf/one-nvim)
-* (if you use this, open an issue and I'll add it here!)
-
-### As Dependency
-
-Below is an example of how to use `nvim-highlite` as a dependency.
-
-* See `:h highlite-usage` for more.
+To use one of the built-in colorschemes, simply do:
 
 ```lua
--- Import nvim-highlite
-local highlite = require('highlite')
-
--- First, define some colors
-local red = {'#FF0000', 1, 'red'}
-local black = {'#000000', 0, 'black'}
-local white = {'#FFFFFF', 255, 'white'}
-
--- Highlight 'Identifier'
-highlite.highlight('Identifier', {bg = red, fg = black, bold = true})
-
--- Highlight 'Function' conditionally according to background color.
-highlite.highlight('Function', {bg = black, fg = red, light = {bg = white}})
-
--- Link 'Example' to 'Identifier'
-highlite.highlight('Example', 'Identifier')
-highlite.highlight('Example2', {link = 'Identifier'})
-
--- You can also reference specific attributes of another highlight group.
-highlite.highlight('AnotherExample', {bg = highlite.group('SpellBad').bg, fg = white})
+vim.api.nvim_command 'colorscheme <name>'
 ```
 
-### As Template
+> **Warning**
+>
+> If you _want_ to configure this plugin, make sure you do so before executing `:colorscheme`! See [Configuration](#configuration) for more.
 
-Below is an example of how to use `nvim-highlite` as a template.
+### Exporting Colorschemes
 
-* See [`highlite.vim`](colors/highlite.vim) for more.
+> **Note**
+>
+> This specific feature requires Neovim 0.9+
+
+This plugin has the ability to export _any_ colorscheme (not just ours!) to various formats, including:
+
+* `wezterm` theme
+
+To make use of this, just run this after installing the plugin:
 
 ```lua
--- First, define some colors
-local red = {'#FF0000', 1, 'red'}
-local black = {'#000000', 0, 'black'}
-local white = {'#FFFFFF', 255, 'white'}
+require('highlite.export').<format>(
+  '<colorscheme name>',
+  {force = true|false, silent = true|false},
+  dir -- OPTIONAL: specify the output directory
+)
+```
 
--- Next define some highlight groups.
-local highlight_groups = {
-  -- Any field which can be set to "NONE" doesn't need to be set
-  Identifier = {bg = red, fg = black, bold = true},
+If your plugin manager supports update hooks (e.g. `lazy.nvim`, `packer.nvim`, `vim-plug`) you can run this function whenever a given colorscheme plugin updates.
 
-  -- If your colorscheme should respond to multiple background settings, you can do that too:
-  Function = {bg = black, fg = red, light = {bg = white}},
+For example, to generate a Wezterm theme from [tokyonight.nvim](https://github.com/folke/tokyonight.nvim) whenever it updates, you can do something like this (example for [lazy.nvim][lazy]):
 
-  -- Both of these set a link
-  Field = 'Identifier',
-  Method = {link = 'Function'},
-
-  -- You can also reference specific attributes of another highlight group, even if it is a link.
-  SomethingElse = function(self) return {fg = self.Field.fg, bg = self.Method.bg} end,
+```lua
+{'folke/tokyonight.nvim',
+  build = function() require('highlite.export').wezterm('tokyonight', {force = true}) end,
+  config = function() vim.api.nvim_command 'colorscheme tokyonight' end,
+  dependencies = 'Iron-E/nvim-highlite',
+  priority = 1000,
 }
-
--- The rest is mostly handled by the template.
 ```
+
+> **Warning**
+>
+> If you use `lazy.nvim`'s `build` option to export colorschemes, it is possible that the background color might not export correctly. See folke/lazy.nvim#753 for details and a workaround.
+
+### Importing/Writing Colorschemes
+
+To create your own colorscheme, or import an existing one, see [the advanced usage guide][usage].
+
+## Contribution
+
+See the [contributing guide][contributing].
+
+## Limitations
+
+### `cterm` Colors
+
+The generator, for simplicity and speed purposes, does not include `cterm` highlight groups. This was also partially motivated by a [survey of configurations](https://gist.github.com/echasnovski/fa70dc75c475369747d2a485a13303fb). However, you _can_ make this plugin work with `cterm` colors! See [How Can I Get This Plugin To Work _Without_ `termguicolors`?][no-guicolors]
+
+### Generated Terminal Palettes
+
+While `nvim-highlite` _provides_ terminal palettes for all built-in colorschemes, `nvim-highlite` cannot _generate_ new terminal palettes because of its semantic color palette approach. In layman's terms, terminal palettes are created by saying, "this is what 'red' looks like", "this is what 'blue' looks like", etc. This is a problem for `nvim-highlite` because:
+
+* it's possible for an `nvim-highlite` color palette to not even have all the colors necessary (terminal palettes need 16, `nvim-highlite` only needs 6); and
+* there is no association between color names in `nvim-highlite` (e.g. `error`, `func`) and the color value (e.g. "#A80000", "#CF55F0"). Thus, there's no easy way to assign e.g. the terminal "red" color based on one of the semantic names.
+
+See [Creating A Terminal Palette](./doc/advanced-usage.md#1b-creating-a-terminal-palette-optional) for more information.
 
 ## FAQ
 
-> How can I override the highlighting of one specific highlight group in my `init.vim`?
+### "How can I get this plugin to work _without_ `termguicolors`?"
 
-When using this plugin, it is important to know that you can't just run `:hi` on a highlight group and expect that its changes will be retained. You must attach them to the `ColorScheme` `autocmd` event, as shown below:
+You can use [mini.colors][mini.colors]— it will infer a cterm palette based on the GUI colors from _any_ colorscheme.
 
-```vim
-packadd nvim-highlite
-set termguicolors "optional
-
-" WARN: don't do this!
-hi! Error guifg=#000000 guibg=#FFFFFF
-
-" NOTE: do this instead
-augroup Highlite
-  " You can also use `highlite.highlight()` instead of `:hi!`
-  autocmd ColorScheme highlite hi! Error guifg=#000000 guibg=#FFFFFF
-augroup end
-
-colorscheme highlite
-```
+To use it, do this instead of `:colorscheme <name>`:
 
 ```lua
-vim.api.nvim_command 'packadd nvim-highlite'
-vim.api.nvim_set_option('termguicolors', true)
+-- replace `<name>` with the name of any of the builtin colorschemes
+require('mini.colors').get_colorscheme('<name>'):add_cterm_attributes():apply()
+```
 
--- WARN: don't do this!
-vim.api.nvim_set_hl(0, 'Error', {fg = '#000000', bg = '#FFFFFF'})
+If your plugin manager has update hooks (e.g. vim-plug, packer.nvim, lazy.nvim) you can save performance by doing the above _once_ every update. Here is an example for [lazy.nvim][lazy]:
 
--- NOTE: do this instead
+```lua
+{'Iron-E/nvim-highlite',
+  build = function()
+    require('mini.colors')
+      -- replace `<name>` with the name of any of the builtin colorschemes
+      .get_colorscheme('<name>', {new_name = 'my-custom-colorscheme'})
+      :add_cterm_attributes()
+      :write()
+  end,
+  config = function() vim.api.nvim_command 'colorscheme my-custom-colorscheme' end,
+  dependencies = 'echasnovski/mini.colors',
+  priority = 1000,
+}
+```
+
+> **Warning**
+>
+> If you use `lazy.nvim`'s `build` option to export colorschemes, it is possible that the background color might not export correctly. See folke/lazy.nvim#753 for details and a workaround.
+
+### "How can I override highlights in my `init.lua`?"
+
+You can either write your own colorscheme, or add an `autocmd` to your config. Both have merits: a custom colorscheme has better performance, but an `autocmd` will work with multiple colorschemes (if you like to switch between them).
+
+> **Note**
+>
+> For information about creating your own colorscheme, see [the docs][usage].
+
+You can add an `autocmd` to your config like this:
+
+```lua
 vim.api.nvim_create_autocmd('ColorScheme', {
   callback = function()
     vim.api.nvim_set_hl(0, 'Error', {fg = '#000000', bg = '#FFFFFF'})
     -- other groups
   end,
   group = vim.api.nvim_create_augroup('config', {clear = true}),
-  pattern = 'highlite',
+  pattern = 'highlite', -- apply to just the highlite colorscheme
+  -- pattern = {'highlite', 'tokyonight'}, -- apply to highlite and tokyonight
+  -- pattern = '*', -- apply to all colorschemes
 })
 
+-- WARN: make sure the colorscheme gets loaded AFTER setting the autocommand!
 vim.api.nvim_command 'colorscheme highlite'
 ```
 
 Of course, substitute `highlite` with the name of your colorscheme.
 
-> Why am I receiving `E5108: Error executing lua [string ":lua"]:1: module '<colorscheme>' not found`?
+<!-- panvimdoc-ignore-start -->
 
-Ensure your colorscheme's base folder is in Neovim's `rtp` before sourcing.
+### "How does this compare to `XYZ` plugin?"
 
-> What syntax files should I use for `X` language?
+It doesn't seem right as a plugin author to directly weigh the benefits of others' work. Instead, here are some facts about `nvim-highlite` which can help you decide what to use:
 
-You can either use [`nvim-treesitter`](https://github.com/nvim-treesitter/nvim-treesitter), [`vim-polyglot`](https://github.com/sheerun/vim-polyglot), or some of the following:
+* You only need 6 colors to create a colorscheme, but you can use as many as you want.
+    * Want to use 1,000 colors? Go for it.
+* _Great_ effort has been taken to reduce the startup cost of this plugin.
+    * It uses the latest API functions, instead of doing string interpolation to generate a `:highlight` command.
+* While our semantic color palette prevents _generating_ a terminal palette, it makes creating a new colorscheme easier.
+    * __Remember:__ all built-in colorschemes come with a terminal palette.
+* This plugin can import any colorscheme written in a language Neovim supports, and give it support for the latest Neovim highlights.
+    * Contributors can use specially-made internal tools which automate certain development tasks.
+* This plugin provides a great starting point for a custom colorscheme:
+    * all of the built-in highlight groups;
+    * diagnostics, LSP, treesitter;
+    * custom support for 20+ plugins (not counting ones that work out of the box); and
+    * custom support for 30+ filetypes (not counting ones that work out of the box).
+* If something isn't to your liking, there are many tools for the purpose of customizing what is provided.
+  * The syntax is familiar, simple, stable, and orthogonal.
 
-| Language   | Syntax Plugin                                                                             |
-|:-----------|:------------------------------------------------------------------------------------------|
-| ALGOL      | [sterpe/vim-algol68](https://github.com/sterpe/vim-algol68)                               |
-| C++        | [bfrg/vim-cpp-modern](https://github.com/bfrg/vim-cpp-modern)                             |
-| Coq        | [whonore/Coqtail](https://github.com/whonore/Coqtail)                                     |
-| Dart       | [dart-lang/dart-vim-plugin](https://github.com/dart-lang/dart-vim-plugin)                 |
-| DTrace     | [vim-scripts/dtrace-syntax-file](https://github.com/vim-scripts/dtrace-syntax-file)       |
-| F#         | [ionide/Ionide-vim](https://github.com/ionide/Ionide-vim)                                 |
-| Gas        | [Shirk/vim-gas](https://github.com/Shirk/vim-gas)                                         |
-| Git        | [tpope/vim-git](https://github.com/tpope/vim-git)                                         |
-| Go         | [fatih/vim-go](https://github.com/fatih/vim-go)                                           |
-| GraphViz   | [liuchengxu/graphviz](https://github.com/liuchengxu/graphviz)                             |
-| HTML5      | [othree/html5](https://github.com/othree/html5)                                           |
-| i3conf     | [mboughaba/i3config](https://github.com/mboughaba/i3config)                               |
-| Java       | [Iron-E/java-syntax](https://github.com/Iron-E/java-syntax)                               |
-| JavaScript | [pangloss/vim-javascript](https://github.com/pangloss/vim-javascript)                     |
-| JSON       | [elzr/vim-json](https://github.com/elzr/vim-json)                                         |
-| Julia      | [JuliaEditorSupport/julia-vim](https://github.com/JuliaEditorSupport/julia-vim)           |
-| Kotlin     | [udalov/kotlin-vim](https://github.com/udalov/kotlin-vim)                                 |
-| LESS       | [groenewege/vim-less](https://github.com/groenewege/vim-less)                             |
-| LLVM       | [rhysd/vim-llvm](https://github.com/rhysd/vim-llvm)                                       |
-| Lua        | [tbastos/vim-lua](https://github.com/tbastos/vim-lua)                                     |
-| Markdown   | [plasticboy/vim-markdown](https://github.com/plasticboy/vim-markdown)                     |
-| MIPS       | [vim-scripts/mips](https://github.com/vim-scripts/mips)                                   |
-| Moonscript | [leafo/moonscript-vim](https://github.com/leafo/moonscript-vim)                           |
-| PlantUML   | [aklt/plantuml-syntax](https://github.com/aklt/plantuml-syntax)                           |
-| Prettier   | [prettier/vim-prettier](https://github.com/prettier/vim-prettier)                         |
-| Python     | [vim-python/python-syntax](https://github.com/vim-python/python-syntax)                   |
-| Razor      | [jlcrochet/vim-razor](https://github.com/jlcrochet/vim-razor)                             |
-| RST        | [marshallward/vim-restructuredtext](https://github.com/marshallward/vim-restructuredtext) |
-| Ruby       | [vim-ruby/vim-ruby](https://github.com/vim-ruby/vim-ruby)                                 |
-| Rust       | [Iron-E/rust.vim](https://github.com/Iron-E/rust.vim)                                     |
-| SCSS       | [cakebaker/scss-syntax](https://github.com/cakebaker/scss-syntax)                         |
-| Shell      | [arzg/vim-sh](https://github.com/arzg/vim-sh)                                             |
-| SQL        | [shmup/vim-sql-syntax](https://github.com/shmup/vim-sql-syntax)                           |
-| Stylus     | [wavded/vim-stylus](https://github.com/wavded/vim-stylus)                                 |
-| SystemD    | [wgwoods/vim-systemd-syntax](https://github.com/wgwoods/vim-systemd-syntax)               |
-| SystemTap  | [nickhutchinson/vim-systemtap](https://github.com/nickhutchinson/vim-systemtap)           |
-| TeX        | [lervag/vimtex](https://github.com/lervag/vimtex)                                         |
-| TOML       | [Iron-E/vim-toml](https://github.com/Iron-E/vim-toml/tree/feature/delimiter-highlighting) |
-| Ungrammar  | [Iron-E/vim-ungrammar](https://github.com/Iron-E/vim-ungrammar)                           |
-| VB.NET     | [vim-scripts/vbnet](https://github.com/vim-scripts/vbnet)                                 |
-| Vim Logs   | [MTDL9/vim-log-highlighting](https://github.com/MTDL9/vim-log-highlighting)               |
-| XML        | [amadeus/vim-xml](https://github.com/amadeus/vim-xml)                                     |
-| YAML       | [Iron-E/vim-yaml](https://github.com/Iron-E/vim-yaml/tree/patch-1)                        |
-| YATS       | [HerringtonDarkholme/yats](https://github.com/HerringtonDarkholme/yats)                   |
+Here is a list of excellent plugins in the same vein. If you are feeling conflicted, you can read their documentation and decide for yourself what suits your needs the best:
 
-## Contribution
+* [echasnovski/mini.base16](https://github.com/echasnovski/mini.base16)
+* [rktjmp/lush.nvim](https://github.com/rktjmp/lush.nvim)
+* [themercorp/themer.lua](https://github.com/themercorp/themer.lua)
 
-This repository is looking for contributions! The following things are appreciated:
+### "What font is that in the screenshots?"
 
-* [ ] More default support for plugins, languages, etc.
-* [ ] Setup scripts for Windows.
+JetBrains Mono.
 
-If you would like to contribute something, and you aren't sure how, open a ticket! I'd love to help you help me.
+<!-- panvimdoc-ignore-end -->
 
-## Additional Licenses
 
-* `nvim-highlite` is licensed under GPLv3.
-* `colortrans.py` is licensed under MIT.
+```{.include}
+./doc/advanced-usage.md
+./doc/contributing.md
+```
+
+[built-in-colorschemes]: #built-in-colorschemes
+[contributing]: ./doc/contributing.md
+[lazy]: https://github.com/folke/lazy.nvim
+[mini.colors]: https://github.com/echasnovski/mini.colors
+[no-guicolors]: #how-can-i-get-this-plugin-to-work-without-termguicolors
+[usage]: ./doc/advanced-usage.md
