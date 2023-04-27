@@ -496,8 +496,9 @@ vim.api.nvim_command 'colorscheme <name>'
 
 This plugin has the ability to export _any_ colorscheme (not just ours!) to various formats, including:
 
-* Neovim Lua theme
-* `wezterm` theme
+* `nvim` theme (Lua)
+* `vim` theme (Vimscript)
+* `wezterm` theme (TOML)
 
 To make use of this, just run this after installing the plugin:
 

@@ -2,6 +2,17 @@ local Fmt = require 'highlite.fmt' --- @type highlite.Fmt
 local Fs = require 'highlite.fs' --- @type highlite.Fs
 local Util = require 'highlite.utils' --- @type highlite.Utils
 
+--- Skip plugins that don't depend on a colorscheme
+--- @param group string
+--- @return boolean filter_it
+local function include_hl_group_for_nvim_export(group)
+	return not (
+		group:find '^colorizer_' or
+		group:find '^DevIcon' or
+		group:find '^Stl_?[1-9a-f]*'
+	)
+end
+
 --- @class highlite.Export
 local Export = {}
 
@@ -27,9 +38,14 @@ vim.api.nvim_set_var('colors_name', '%s')
 	--- @return string
 	local function fmt_groups()
 		local s = ''
-		for group, definition in pairs(vim.api.nvim_get_hl(0, {})) do
-			-- Skip nvim-colorizer, nvim-web-devicons, and heirline
-			if not (group:find '^colorizer_' or group:find '^DevIcon' or group:find '^Stl_?[1-9a-f]*') then
+
+		local groups = vim.api.nvim_get_hl(0, {})
+		local keys = vim.tbl_keys(groups)
+		table.sort(keys)
+
+		for _, group in ipairs(keys) do
+			local definition = groups[group]
+			if include_hl_group_for_nvim_export(group) then
 				s = s .. "\n\thl(0, '" .. group .. "', " .. vim.inspect(definition, {indent = '', newline = ' '}) .. ')'
 			end
 		end
@@ -39,7 +55,7 @@ vim.api.nvim_set_var('colors_name', '%s')
 
 	--- @return string
 	local function fmt_terminal()
-		return '\n\tg.terminal_color_0 = ' .. vim.inspect(vim.g.terminal_color_0) ..
+		return '\n\n\tg.terminal_color_0 = ' .. vim.inspect(vim.g.terminal_color_0) ..
 			'\n\tg.terminal_color_1 = ' .. vim.inspect(vim.g.terminal_color_1) ..
 			'\n\tg.terminal_color_2 = ' .. vim.inspect(vim.g.terminal_color_2) ..
 			'\n\tg.terminal_color_3 = ' .. vim.inspect(vim.g.terminal_color_3) ..
@@ -88,6 +104,157 @@ vim.api.nvim_set_var('colors_name', '%s')
 
 		Fs.write(
 			dir .. '/' .. filename .. '.lua',
+			FMT:format(dark_groups, dark_terminal, light_groups, light_terminal, filename),
+			opts
+		)
+	end
+end
+
+do
+	local FMT = [[
+highlight clear
+if &background == 'dark' %s%s
+else%s%s
+endif
+
+let g:colors_name = '%s'
+]]
+
+	--- Disables default values in a `:highlight` command.
+	local NONE = 'NONE'
+
+	--- Used to generate `gui=` and `cterm=` fields of a `:highlight` command.
+	--- @param definition table
+	--- @param attribute string
+	local function attr(definition, attribute)
+		return definition[attribute] and attribute .. ',' or ''
+	end
+
+	--- Convert the `base_10` integer to a hex string, or return `NONE`
+	--- @param base_10? integer
+	--- @return string
+	local function hex(base_10)
+		return base_10 and '#' .. bit.tohex(base_10, 6) or NONE
+	end
+
+	--- @return string
+	local function fmt_groups()
+		local s = ''
+
+		local groups = vim.api.nvim_get_hl(0, {})
+		local keys = vim.tbl_keys(groups)
+		table.sort(keys)
+
+		for _, group in ipairs(keys) do
+			local definition = groups[group]
+			if include_hl_group_for_nvim_export(group) then
+				if definition.cterm == nil then definition.cterm = {} end
+				if definition.link then
+					s = s .. '\n\thi link ' .. group .. ' ' .. definition.link
+				else
+					local cterm =
+						attr(definition.cterm, 'bold') ..
+						attr(definition.cterm, 'italic') ..
+						attr(definition.cterm, 'nocombine') ..
+						attr(definition.cterm, 'reverse') ..
+						attr(definition.cterm, 'standout') ..
+						attr(definition.cterm, 'strikethrough') ..
+						attr(definition.cterm, 'strikethrough') ..
+						attr(definition.cterm, 'undercurl') ..
+						attr(definition.cterm, 'underdashed') ..
+						attr(definition.cterm, 'underdotted') ..
+						attr(definition.cterm, 'underdouble') ..
+						attr(definition.cterm, 'underline')
+
+					if #cterm < 1 then
+						cterm = NONE
+					end
+
+					local gui =
+						attr(definition, 'bold') ..
+						attr(definition, 'italic') ..
+						attr(definition, 'nocombine') ..
+						attr(definition, 'reverse') ..
+						attr(definition, 'standout') ..
+						attr(definition, 'strikethrough') ..
+						attr(definition, 'strikethrough') ..
+						attr(definition, 'undercurl') ..
+						attr(definition, 'underdashed') ..
+						attr(definition, 'underdotted') ..
+						attr(definition, 'underdouble') ..
+						attr(definition, 'underline')
+
+					if #gui < 1 then
+						gui = NONE
+					end
+
+					s = s .. '\n\thi ' .. group ..
+						' blend=' .. (definition.blend or NONE) ..
+						' cterm=' .. cterm ..
+						' ctermbg=' .. (definition.ctermbg or NONE) ..
+						' ctermfg=' .. (definition.ctermfg or NONE) ..
+						' gui=' .. gui ..
+						' guibg=' .. hex(definition.bg) ..
+						' guifg=' .. hex(definition.fg) ..
+						' guisp=' .. hex(definition.sp)
+				end
+			end
+		end
+
+		return s
+	end
+
+	--- @return string
+	local function fmt_terminal()
+		return '\n\n\tlet g:terminal_color_0 = ' .. vim.inspect(vim.g.terminal_color_0) ..
+			'\n\tlet g:terminal_color_1 = ' .. vim.inspect(vim.g.terminal_color_1) ..
+			'\n\tlet g:terminal_color_2 = ' .. vim.inspect(vim.g.terminal_color_2) ..
+			'\n\tlet g:terminal_color_3 = ' .. vim.inspect(vim.g.terminal_color_3) ..
+			'\n\tlet g:terminal_color_4 = ' .. vim.inspect(vim.g.terminal_color_4) ..
+			'\n\tlet g:terminal_color_5 = ' .. vim.inspect(vim.g.terminal_color_5) ..
+			'\n\tlet g:terminal_color_6 = ' .. vim.inspect(vim.g.terminal_color_6) ..
+			'\n\tlet g:terminal_color_7 = ' .. vim.inspect(vim.g.terminal_color_7) ..
+			'\n\tlet g:terminal_color_8 = ' .. vim.inspect(vim.g.terminal_color_8) ..
+			'\n\tlet g:terminal_color_9 = ' .. vim.inspect(vim.g.terminal_color_9) ..
+			'\n\tlet g:terminal_color_10 = ' .. vim.inspect(vim.g.terminal_color_10) ..
+			'\n\tlet g:terminal_color_11 = ' .. vim.inspect(vim.g.terminal_color_11) ..
+			'\n\tlet g:terminal_color_12 = ' .. vim.inspect(vim.g.terminal_color_12) ..
+			'\n\tlet g:terminal_color_13 = ' .. vim.inspect(vim.g.terminal_color_13) ..
+			'\n\tlet g:terminal_color_14 = ' .. vim.inspect(vim.g.terminal_color_14) ..
+			'\n\tlet g:terminal_color_15 = ' .. vim.inspect(vim.g.terminal_color_15)
+	end
+
+	--- NOTE: this function strips out leading dots from colorscheme names, e.g. `.foo` → `foo`.
+	---       You can use this to create a bootstrap custom colorscheme in `colors/.custom.lua` and it will get written
+	---       to `colors/custom.lua`.
+	--- @type highlite.export.format
+	function Export.vim(colorscheme, opts, dir)
+		if opts == nil then opts = {} end
+
+		-- checked for backwards compatability
+		if dir == nil then
+			dir = opts.dir or vim.fn.stdpath('config') .. '/colors/'
+		end
+
+		dir = vim.fs.normalize(dir)
+		local filename = opts.filename or colorscheme
+		local previous_bg = vim.api.nvim_get_option 'background' --- @type highlite.bg
+		local previous_colorscheme = vim.api.nvim_get_var 'colors_name'
+
+		Util.switch_colorscheme(colorscheme)
+		vim.api.nvim_set_option('background', 'dark')
+		local dark_groups = fmt_groups()
+		local dark_terminal = fmt_terminal()
+
+		vim.api.nvim_set_option('background', 'light')
+		local light_groups = fmt_groups()
+		local light_terminal = fmt_terminal()
+
+		Util.switch_colorscheme(previous_colorscheme)
+		vim.api.nvim_set_option('background', previous_bg)
+
+		Fs.write(
+			dir .. '/' .. filename .. '.vim',
 			FMT:format(dark_groups, dark_terminal, light_groups, light_terminal, filename),
 			opts
 		)
