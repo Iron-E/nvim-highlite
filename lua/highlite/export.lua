@@ -21,7 +21,7 @@ if vim.api.nvim_get_option 'background' == 'dark' then%s%s
 else%s%s
 end
 
-vim.api.nvim_set_var('colors_name', %s)
+vim.api.nvim_set_var('colors_name', '%s')
 ]]
 
 	--- @return string
