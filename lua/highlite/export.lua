@@ -8,6 +8,86 @@ local Export = {}
 --- @alias highlite.export.format async fun(colorscheme: string, write_opts?: highlite.Fs.write.opts, dir?: string)
 
 do
+	local FMT = [[
+local g = vim.g
+local hl = vim.api.nvim_set_hl
+
+vim.api.nvim_command 'highlight clear'
+if vim.api.nvim_get_option 'background' == 'dark' then%s%s
+else%s%s
+end
+
+vim.api.nvim_set_var('colors_name', %s)
+]]
+
+	--- @return string
+	local function fmt_groups()
+		local s = ''
+		for group, definition in pairs(vim.api.nvim_get_hl(0, {})) do
+			-- Skip nvim-colorizer, nvim-web-devicons, and heirline
+			if not (group:find '^colorizer_' or group:find '^DevIcon' or group:find '^Stl_?[1-9a-f]*') then
+				s = s .. "\n\thl(0, '" .. group .. "', " .. vim.inspect(definition, {indent = '', newline = ' '}) .. ')'
+			end
+		end
+
+		return s
+	end
+
+	--- @return string
+	local function fmt_terminal()
+		return '\n\tg.terminal_color_0 = ' .. vim.inspect(vim.g.terminal_color_0) ..
+			'\n\tg.terminal_color_1 = ' .. vim.inspect(vim.g.terminal_color_1) ..
+			'\n\tg.terminal_color_2 = ' .. vim.inspect(vim.g.terminal_color_2) ..
+			'\n\tg.terminal_color_3 = ' .. vim.inspect(vim.g.terminal_color_3) ..
+			'\n\tg.terminal_color_4 = ' .. vim.inspect(vim.g.terminal_color_4) ..
+			'\n\tg.terminal_color_5 = ' .. vim.inspect(vim.g.terminal_color_5) ..
+			'\n\tg.terminal_color_6 = ' .. vim.inspect(vim.g.terminal_color_6) ..
+			'\n\tg.terminal_color_7 = ' .. vim.inspect(vim.g.terminal_color_7) ..
+			'\n\tg.terminal_color_8 = ' .. vim.inspect(vim.g.terminal_color_8) ..
+			'\n\tg.terminal_color_9 = ' .. vim.inspect(vim.g.terminal_color_9) ..
+			'\n\tg.terminal_color_10 = ' .. vim.inspect(vim.g.terminal_color_10) ..
+			'\n\tg.terminal_color_11 = ' .. vim.inspect(vim.g.terminal_color_11) ..
+			'\n\tg.terminal_color_12 = ' .. vim.inspect(vim.g.terminal_color_12) ..
+			'\n\tg.terminal_color_13 = ' .. vim.inspect(vim.g.terminal_color_13) ..
+			'\n\tg.terminal_color_14 = ' .. vim.inspect(vim.g.terminal_color_14) ..
+			'\n\tg.terminal_color_15 = ' .. vim.inspect(vim.g.terminal_color_15)
+	end
+
+	--- NOTE: this function strips out leading dots from colorscheme names, e.g. `.foo` → `foo`.
+	---       You can use this to create a bootstrap custom colorscheme in `colors/.custom.lua` and it will get written
+	---       to `colors/custom.lua`.
+	function Export.nvim(colorscheme, write_opts, dir)
+		if dir == nil then
+			dir = vim.fn.stdpath('config') .. '/colors/'
+		end
+
+		dir = vim.fs.normalize(dir)
+
+		local previous_bg = vim.api.nvim_get_option 'background' --- @type highlite.bg
+		local previous_colorscheme = vim.api.nvim_get_var 'colors_name'
+
+		Util.switch_colorscheme(colorscheme)
+		vim.api.nvim_set_option('background', 'dark')
+		local dark_groups = fmt_groups()
+		local dark_terminal = fmt_terminal()
+
+		vim.api.nvim_set_option('background', 'light')
+		local light_groups = fmt_groups()
+		local light_terminal = fmt_terminal()
+
+		Util.switch_colorscheme(previous_colorscheme)
+		vim.api.nvim_set_option('background', previous_bg)
+
+		local name = colorscheme:gsub('^%.', '')
+		Fs.write(
+			dir .. '/' .. name .. '.lua',
+			FMT:format(dark_groups, dark_terminal, light_groups, light_terminal, name),
+			write_opts
+		)
+	end
+end
+
+do
 	local FMT = [["
 origin_url = 'https://github.com/Iron-E/nvim-highlite'
 
