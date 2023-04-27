@@ -2,10 +2,13 @@
 local Fmt = {}
 
 do
+	--- @alias highlite.Fmt.string.substitution nil|boolean|integer|string
+
 	--- @class highlite.Fmt.string.opts
-	--- @field convert_int_attributes? 'hex_literal'|'hex_string' if `Foo.bar` is an integer (e.g. when `Normal.fg == 16777215`), convert it to a hex string (e.g. `'#FFFFFF'`) or a hex literal (e.g. `0xFFFFFF`)
-	--- @field default? true|string if `true`, use default values when formatting returns `nil` for a highlight group
+	--- @field convert_int_attributes? false|'hex_literal'|'hex_string' if `Foo.bar` is an integer (e.g. when `Normal.fg == 16777215`), convert it to a hex string (e.g. `'#FFFFFF'`) or a hex literal (e.g. `0xFFFFFF`)
+	--- @field default? true|{[string]: highlite.Fmt.string.substitution} if `true`, use default values when formatting returns `nil` for a highlight group
 	--- @field loadstring_compat? boolean if `true`, enable compatability for `loadstring`ing the returned value
+	--- @field map? fun(attribute: string, value: highlite.Fmt.string.substitution): highlite.Fmt.string.substitution
 	local FMT_STRING_DEFUALT_OPTS =
 	{
 		convert_int_attributes = 'hex_string',
@@ -53,7 +56,7 @@ do
 	end
 
 	--- @param cb fun(s: integer): string
-	--- @return fun(definition: table, attribute: string): nil|integer|string
+	--- @return fun(definition: table, attribute: string): highlite.Fmt.string.substitution
 	local function wrap(cb)
 		return function(definition, attribute)
 			local substitution = definition[attribute]
@@ -77,8 +80,8 @@ do
 	function Fmt.string(format, opts)
 		if opts == nil then
 			opts = FMT_STRING_DEFUALT_OPTS
-		elseif opts.default == nil then
-			opts.default = FMT_STRING_DEFUALT_OPTS.default
+		else
+			opts = vim.tbl_extend('keep', opts, FMT_STRING_DEFUALT_OPTS)
 		end
 
 		--- Cache of `get_hl`s
@@ -93,7 +96,10 @@ do
 		elseif opts.convert_int_attributes == 'hex_string' then
 			fmt_attribute = wrap(function(s) return left_delim .. '#' .. bit.tohex(s, 6):upper() .. right_delim end)
 		else
-			fmt_attribute = function(definition, attribute) return definition[attribute] end
+			--- @param definition table
+			--- @param attribute string
+			--- @return highlite.Fmt.string.substitution
+			function fmt_attribute(definition, attribute) return definition[attribute] end
 		end
 
 		return format:gsub(FMT_STRING_PATTERN, function(match)
@@ -110,7 +116,7 @@ do
 			local attribute = 'fg'
 
 			--- What to replace `match` with
-			--- @type nil|integer|string
+			--- @type highlite.Fmt.string.substitution
 			local substitution
 
 			-- iterate over alternations in `${Foo.bg | Foo.fg}`
@@ -130,27 +136,36 @@ do
 				end
 
 				local formatted = fmt_attribute(definition, attribute)
+
+				if opts.map ~= nil then
+					formatted = opts.map(attribute, formatted)
+				end
+
 				if formatted ~= nil then -- value exists, we're done
 					substitution = formatted
 					break
 				end
 			end
 
-			if substitution == nil then
-				if opts.default == true then
-					local default = FMT_STRING_DEFAULT_SUBSTITUTIONS[attribute]
-					if type(default) == 'string' then
-						default = left_delim .. default .. right_delim
-					end
-
-					substitution = tostring(default)
-				else
-					--- @diagnostic disable-next-line:cast-local-type we JUST checked `default == true`
-					substitution = opts.default
-				end
+			-- Try to use the configured defaults, if they are present
+			if substitution == nil and opts.default ~= true then
+				substitution = opts.default[attribute]
 			end
 
-			return substitution
+			-- If:
+			--   1. There were no configured defaults, or
+			--   2. There were configured defaults, but they returned `nil`,
+			-- Then fall back on the predetermined defaults.
+			if substitution == nil then
+				local default = FMT_STRING_DEFAULT_SUBSTITUTIONS[attribute]
+				if type(default) == 'string' then
+					default = left_delim .. default .. right_delim
+				end
+
+				substitution = default
+			end
+
+			return tostring(substitution)
 		end)
 	end
 end

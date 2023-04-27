@@ -311,6 +311,13 @@ do
 		},
 	}]]
 
+	--- @type highlite.Fmt.string.opts
+	local FMT_OPTS =
+	{
+		default = vim.defaulttable(function() return 'nil' end),
+		loadstring_compat = true,
+	}
+
 	--- Create a wezterm theme out of the `palette`
 	--- @async
 	--- @param name string the name of an *installed* Neovim colorscheme. Can be written in either Lua or VimScript
@@ -320,7 +327,11 @@ do
 		-- NOTE: we force this plugin to load colorschemes with all groups enabled
 		if name:find '^highlite' then require('highlite').setup() end
 
-		opts = vim.tbl_extend('force', opts or {}, {default = 'nil', loadstring_compat = true})
+		if opts == nil then
+			opts = FMT_OPTS
+		else
+			opts = vim.tbl_extend('force', opts, FMT_OPTS)
+		end
 
 		local previous_bg = vim.api.nvim_get_option 'background' --- @type highlite.bg
 		local previous_colorscheme = vim.api.nvim_get_var 'colors_name'

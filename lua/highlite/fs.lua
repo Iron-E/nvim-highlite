@@ -48,10 +48,13 @@ do
 		bit.bor(
 			bit.lshift(1, 7),
 			bit.bor(
-				bit.lshift(1, 5),
+				bit.lshift(1, 6),
 				bit.bor(
-					bit.lshift(1, 3),
-					bit.bor(bit.lshift(1, 2), bit.lshift(1, 0))
+					bit.lshift(1, 5),
+					bit.bor(
+						bit.lshift(1, 3),
+						bit.bor(bit.lshift(1, 2), bit.lshift(1, 0))
+					)
 				)
 			)
 		)
