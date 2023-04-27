@@ -614,15 +614,15 @@ Of course, substitute `highlite` with the name of your colorscheme.
 
 ### "How does this compare to `XYZ` plugin?"
 
-It doesn't seem right as a plugin author to directly weigh the benefits of others' work. Instead, here are some facts about `nvim-highlite` which can help you decide what to use:
+It doesn't seem right as a plugin author to weigh the benefits of others' work. Instead, here are some facts notable about `nvim-highlite`:
 
 * You only need 6 colors to create a colorscheme, but you can use as many as you want.
     * Want to use 1,000 colors? Go for it.
 * _Great_ effort has been taken to reduce the startup cost of this plugin.
-    * It uses the latest API functions, instead of doing string interpolation to generate a `:highlight` command.
 * While our semantic color palette prevents _generating_ a terminal palette, it makes creating a new colorscheme easier.
     * __Remember:__ all built-in colorschemes come with a terminal palette.
-* This plugin can import any colorscheme written in a language Neovim supports, and give it support for the latest Neovim highlights.
+* This plugin can import any colorscheme written in a language Neovim supports, and give it support for the latest highlights.
+    * VimScript colorschemes usually become faster when ported, and sometimes Lua colorschemes do too.
     * Contributors can use specially-made internal tools which automate certain development tasks.
 * This plugin provides a great starting point for a custom colorscheme:
     * all of the built-in highlight groups;
@@ -630,9 +630,9 @@ It doesn't seem right as a plugin author to directly weigh the benefits of other
     * custom support for 20+ plugins (not counting ones that work out of the box); and
     * custom support for 30+ filetypes (not counting ones that work out of the box).
 * If something isn't to your liking, there are many tools for the purpose of customizing what is provided.
-  * The syntax is familiar, simple, stable, and orthogonal.
+  * The syntax is familiar, simple, orthogonal, and completely stable.
 
-Here is a list of excellent plugins in the same vein. If you are feeling conflicted, you can read their documentation and decide for yourself what suits your needs the best:
+If this plugin doesn't suit your needs, here is a list of excellent alternatives:
 
 * [echasnovski/mini.base16](https://github.com/echasnovski/mini.base16)
 * [rktjmp/lush.nvim](https://github.com/rktjmp/lush.nvim)
