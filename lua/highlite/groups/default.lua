@@ -932,7 +932,7 @@ local function from_palette(palette, opts)
 		if all_syntax or syntax.python ~= false then
 			groups.pythonBrackets = '@punctuation.bracket.python'
 			groups.pythonBuiltinFunc = '@function.builtin.python'
-			groups.pythonBuiltinObj = '@class.python'
+			groups.pythonBuiltinObj = '@lsp.type.class.python'
 			groups.pythonBuiltinType = '@type.builtin.python'
 			groups.pythonClass = '@lsp.type.class.python'
 			groups.pythonClassParameters = 'pythonParameters'
