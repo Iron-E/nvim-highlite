@@ -34,6 +34,52 @@ This repository has an [editorconfig](./.editorconfig). Neovim 0.9 supports edit
 
 This section is about contributing new features to `nvim-highlite`.
 
+### Export Targets
+
+`nvim-highlite` has an internal string formatting library that allows you to easily write a template for whatever you need, and all the logic will be handled behind the scenes:
+
+```lua
+function Fmt.string(format: string, opts?: highlite.Fmt.string.opts)
+  -> formatted: string, count: integer
+```
+
+The `opts` are as follows:
+
+```lua
+--- @class highlite.Fmt.string.opts
+--- @field convert_int_attributes? false|'hex_literal'|'hex_string' if `Foo.bar` is an integer (e.g. when `Normal.fg == 16777215`), convert it to a hex string (e.g. `'#FFFFFF'`) or a hex literal (e.g. `0xFFFFFF`)
+--- @field default? true|{[string]: highlite.Fmt.string.substitution} if `true`, use default values when formatting returns `nil` for a highlight group
+--- @field loadstring_compat? boolean if `true`, enable compatability for `loadstring`ing the returned value
+--- @field map? fun(attribute: string, value: highlite.Fmt.string.substitution): highlite.Fmt.string.substitution
+local FMT_STRING_DEFUALT_OPTS = {
+  convert_int_attributes = 'hex_string',
+  default = true,
+}
+```
+
+For example, you can do this:
+
+```lua
+local Fmt = require 'highlite.fmt' --- @type highlite.Fmt
+local formatted = Fmt.string [[
+normal_bg = ${Normal.bg}
+fallback_bg = ${undefined_group.bg | defined_group.underline}
+terminal_idx_1 = ${1}
+]]
+```
+
+* The [`Import`](../lua/highlite/import.lua) and [`Export`](../lua/highlite/export.lua) modules have more examples.
+
+The [`Fs`](../lua/highlite/fs.lua) module will be of use for writing the end result.
+
+### Import Targets
+
+Depending on the format, you might have to write a custom parser. Neovim supports JSON with `vim.json`, Lua can be read with `loadstring`, and VimScript can be parsed with `nvim_parse_expression`.
+
+Considering the open-ended nature of this topic, open an issue if you have trouble working on what you would like to do.
+
+The [`Fs`](../lua/highlite/fs.lua) module might be of interest.
+
 ### Palettes
 
 > **Note**
