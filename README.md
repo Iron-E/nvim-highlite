@@ -497,7 +497,6 @@ vim.api.nvim_command 'colorscheme <name>'
 This plugin has the ability to export _any_ colorscheme (not just ours!) to various formats, including:
 
 * Neovim Lua theme
-    * NOTE: this particular exporter has special functionality. Since exporting requires an input colorscheme, you can create a `colors/.foo.vim`/`lua` file, and the leading `.` will be stripped. For example, `colors/.foo.lua` will become `colors/foo.lua`. This way, you can continually bootstrap generation of a custom colorscheme into a standalone colorscheme without the source file standing out.
 * `wezterm` theme
 
 To make use of this, just run this after installing the plugin:
@@ -505,8 +504,22 @@ To make use of this, just run this after installing the plugin:
 ```lua
 require('highlite.export').<format>(
   '<colorscheme name>',
-  {force = true|false, silent = true|false},
-  dir -- OPTIONAL: specify the output directory
+  -- all options below are OPTIONAL
+  {
+    -- controls the directory where the exported colorscheme will be written.
+    dir = '~/.config/nvim/colors/',
+
+    -- controls the name of the file that is created, as well as the name of the
+    -- output colorscheme.
+    filename = 'foo',
+
+    -- if `false`, an existing target file will not be overwritten. Instead, a
+    -- file with a similar name will be created.
+    force = true,
+
+    -- if `true`, the function will not notify you when it is finished.
+    silent = false,
+  }
 )
 ```
 

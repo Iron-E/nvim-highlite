@@ -5,7 +5,11 @@ local Util = require 'highlite.utils' --- @type highlite.Utils
 --- @class highlite.Export
 local Export = {}
 
---- @alias highlite.export.format async fun(colorscheme: string, write_opts?: highlite.Fs.write.opts, dir?: string)
+--- @class highlite.export.options: highlite.Fs.write.opts
+--- @field dir? string the output directory
+--- @field filename? string the name of the file without an extension
+
+--- @alias highlite.export.format async fun(colorscheme: string, opts?: highlite.export.options, dir_DEPRECATED?: string)
 
 do
 	local FMT = [[
@@ -56,13 +60,17 @@ vim.api.nvim_set_var('colors_name', %s)
 	--- NOTE: this function strips out leading dots from colorscheme names, e.g. `.foo` → `foo`.
 	---       You can use this to create a bootstrap custom colorscheme in `colors/.custom.lua` and it will get written
 	---       to `colors/custom.lua`.
-	function Export.nvim(colorscheme, write_opts, dir)
+	--- @type highlite.export.format
+	function Export.nvim(colorscheme, opts, dir)
+		if opts == nil then opts = {} end
+
+		-- checked for backwards compatability
 		if dir == nil then
-			dir = vim.fn.stdpath('config') .. '/colors/'
+			dir = opts.dir or vim.fn.stdpath('config') .. '/colors/'
 		end
 
 		dir = vim.fs.normalize(dir)
-
+		local filename = opts.filename or colorscheme
 		local previous_bg = vim.api.nvim_get_option 'background' --- @type highlite.bg
 		local previous_colorscheme = vim.api.nvim_get_var 'colors_name'
 
@@ -78,11 +86,10 @@ vim.api.nvim_set_var('colors_name', %s)
 		Util.switch_colorscheme(previous_colorscheme)
 		vim.api.nvim_set_option('background', previous_bg)
 
-		local name = colorscheme:gsub('^%.', '')
 		Fs.write(
-			dir .. '/' .. name .. '.lua',
-			FMT:format(dark_groups, dark_terminal, light_groups, light_terminal, name),
-			write_opts
+			dir .. '/' .. filename .. '.lua',
+			FMT:format(dark_groups, dark_terminal, light_groups, light_terminal, filename),
+			opts
 		)
 	end
 end
@@ -191,22 +198,29 @@ fg_color = ${Normal.bg}
 
 	--- Create a wezterm theme out of the `palette`
 	--- @type highlite.export.format
-	function Export.wezterm(colorscheme, write_opts, dir)
-		local previous_colorscheme = vim.g.colors_name
+	function Export.wezterm(colorscheme, opts, dir)
+		if opts == nil then opts = {} end
 
-		Util.switch_colorscheme(colorscheme)
-
+		-- checked for backwards compatability
 		if dir == nil then
-			dir = vim.loop.os_getenv(
-				vim.loop.os_uname().sysname == 'Windows' and
-					'WEZTERM_EXECUTABLE_DIR' or
-					'WEZTERM_CONFIG_DIR'
+			dir = opts.dir or vim.loop.os_getenv(vim.loop.os_uname().sysname == 'Windows' and
+				'WEZTERM_EXECUTABLE_DIR' or
+				'WEZTERM_CONFIG_DIR'
 			) .. '/colors'
 		end
 
-		local toml = '[metadata]\nname = "' .. colorscheme .. Fmt.string(FMT, FMT_OPTS)
+		dir = vim.fs.normalize(dir)
+		local filename = opts.filename or colorscheme
+		local previous_colorscheme = vim.api.nvim_get_var 'colors_name'
 
-		Fs.write(vim.fs.normalize(dir) .. '/' .. colorscheme .. '.toml', toml, write_opts)
+		Util.switch_colorscheme(colorscheme)
+
+		Fs.write(
+			dir .. '/' .. filename .. '.toml',
+			'[metadata]\nname = "' .. filename .. Fmt.string(FMT, FMT_OPTS),
+			opts
+		)
+
 		Util.switch_colorscheme(previous_colorscheme)
 	end
 end
