@@ -39,9 +39,17 @@ do
 	end
 
 	--- Validate that an attribute is one of the expected values
-	--- @param attribute string
+	--- @param attribute? string
+	--- @return boolean is_valid
 	local function validate_attribute(attribute)
 		return FMT_STRING_DEFAULT_SUBSTITUTIONS[attribute] ~= nil
+	end
+
+	--- Validate that an attribute is one of the expected values
+	--- @param idx? number
+	--- @return boolean is_valid
+	local function validate_terminal(idx)
+		return idx ~= nil and math.floor(idx) == idx and idx > 0 and idx < 17
 	end
 
 	--- @param cb fun(s: integer): string
@@ -92,7 +100,9 @@ do
 			match = fmt_string_strip_delim(match)
 
 			if match:find '^%d+$' then -- is a terminal color
-				return left_delim .. (vim.g['terminal_color_' .. (tonumber(match) - 1)] or ''):upper() .. right_delim
+				local idx = tonumber(match)
+				vim.validate {index = {idx, validate_terminal, '1–16'}}
+				return left_delim .. (vim.g['terminal_color_' .. (idx - 1)] or ''):upper() .. right_delim
 			end
 
 			--- The last attribute whose value was checked
