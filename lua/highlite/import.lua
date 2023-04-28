@@ -359,7 +359,6 @@ do
 			Nvim.with_both_bgs(function(bg) import_bg(by_bg, name, bg, opts) end)
 		end)
 
-
 		for bg, tbl in pairs(by_bg) do
 			Palette.derive(bg, tbl.palette)
 			-- NOTE: deriving doesn't resolve all color values immediately; it only happens when an index is missing.
