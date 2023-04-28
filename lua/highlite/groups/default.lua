@@ -350,7 +350,9 @@ local function from_palette(palette, opts)
 
 		if all_nvim_plugins or nvim_plugins.barbar ~= false then
 			groups.BufferAlternate = buffer_alternate
-			groups.BufferAlternateERROR = Groups.extend({fg = palette.error}, buffer_alternate)
+			groups.BufferAlternateADDED = Groups.extend({fg = palette.diff_add}, buffer_alternate)
+			groups.BufferAlternateCHANGED = Groups.extend({fg = palette.diff_change}, buffer_alternate)
+			groups.BufferAlternateDELETED = Groups.extend({fg = palette.diff_delete}, buffer_alternate)
 			groups.BufferAlternateHINT = Groups.extend({fg = palette.hint}, buffer_alternate)
 			groups.BufferAlternateIndex = Groups.extend({fg = palette.number}, buffer_alternate)
 			groups.BufferAlternateINFO = Groups.extend({fg = palette.info}, buffer_alternate)
@@ -360,6 +362,9 @@ local function from_palette(palette, opts)
 			groups.BufferAlternateWARN = Groups.extend({fg = palette.warning}, buffer_alternate)
 
 			groups.BufferCurrent = 'TabLineSel'
+			groups.BufferCurrentADDED = Groups.extend({fg = palette.diff_add}, tabline_sel)
+			groups.BufferCurrentCHANGED = Groups.extend({fg = palette.diff_change}, tabline_sel)
+			groups.BufferCurrentDELETED = Groups.extend({fg = palette.diff_delete}, tabline_sel)
 			groups.BufferCurrentERROR = Groups.extend({fg = palette.error}, tabline_sel)
 			groups.BufferCurrentHINT = Groups.extend({fg = palette.hint}, tabline_sel)
 			groups.BufferCurrentIndex = Groups.extend({fg = palette.number}, tabline_sel)
@@ -370,6 +375,9 @@ local function from_palette(palette, opts)
 			groups.BufferCurrentWARN = Groups.extend({fg = palette.warning}, tabline_sel)
 
 			groups.BufferInactive = 'TabLine'
+			groups.BufferInactiveADDED = Groups.extend({fg = palette.diff_add}, tabline)
+			groups.BufferInactiveCHANGED = Groups.extend({fg = palette.diff_change}, tabline)
+			groups.BufferInactiveDELETED = Groups.extend({fg = palette.diff_delete}, tabline)
 			groups.BufferInactiveERROR = Groups.extend({fg = palette.error}, tabline)
 			groups.BufferInactiveHINT = Groups.extend({fg = palette.hint}, tabline)
 			groups.BufferInactiveIndex = Groups.extend({fg = palette.number}, tabline)
@@ -383,6 +391,9 @@ local function from_palette(palette, opts)
 			groups.BufferTabpageFill = 'TabLineFill'
 
 			groups.BufferVisible = buffer_visible
+			groups.BufferVisibleADDED = Groups.extend({fg = palette.diff_add}, buffer_visible)
+			groups.BufferVisibleCHANGED = Groups.extend({fg = palette.diff_change}, buffer_visible)
+			groups.BufferVisibleDELETED = Groups.extend({fg = palette.diff_delete}, buffer_visible)
 			groups.BufferVisibleERROR = Groups.extend({fg = palette.error}, buffer_visible)
 			groups.BufferVisibleHINT = Groups.extend({fg = palette.hint}, buffer_visible)
 			groups.BufferVisibleIndex = Groups.extend({fg = palette.number}, buffer_visible)
