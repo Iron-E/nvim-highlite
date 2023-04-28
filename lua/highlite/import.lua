@@ -356,8 +356,7 @@ do
 		local by_bg = {}
 
 		Nvim.with_colorscheme(name, function()
-			local previous_bg = Nvim.with_alt_bg(function(bg) import_bg(by_bg, name, bg, opts) end)
-			import_bg(by_bg, name, previous_bg, opts)
+			Nvim.with_both_bgs(function(bg) import_bg(by_bg, name, bg, opts) end)
 		end)
 
 

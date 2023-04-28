@@ -90,11 +90,7 @@ vim.api.nvim_set_var('colors_name', '%s')
 		local filename = opts.filename or colorscheme
 
 		Nvim.with_colorscheme(colorscheme, function()
-			local previous_bg = Nvim.with_alt_bg(function(bg)
-				by_bg[bg] = {groups = fmt_groups(), terminal = fmt_terminal()}
-			end)
-
-			by_bg[previous_bg] = {groups = fmt_groups(), terminal = fmt_terminal()}
+			Nvim.with_both_bgs(function(bg) by_bg[bg] = {groups = fmt_groups(), terminal = fmt_terminal()} end)
 		end)
 
 		Fs.write(
@@ -243,11 +239,7 @@ let g:colors_name = '%s'
 		local filename = opts.filename or colorscheme
 
 		Nvim.with_colorscheme(colorscheme, function()
-			local previous_bg = Nvim.with_alt_bg(function(bg)
-				by_bg[bg] = {groups = fmt_groups(), terminal = fmt_terminal()}
-			end)
-
-			by_bg[previous_bg] = {groups = fmt_groups(), terminal = fmt_terminal()}
+			Nvim.with_both_bgs(function(bg) by_bg[bg] = {groups = fmt_groups(), terminal = fmt_terminal()} end)
 		end)
 
 		Fs.write(
