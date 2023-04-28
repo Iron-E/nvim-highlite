@@ -199,24 +199,31 @@ let g:colors_name = '%s'
 		return s
 	end
 
+	--- Convert a `nil` value to one that is parseable in VimScript
+	--- @param color? highlite.color
+	--- @return string
+	local function nil_to_null(color)
+		return color == nil and 'v:null' or vim.inspect(color)
+	end
+
 	--- @return string
 	local function fmt_terminal()
-		return '\n\n\tlet g:terminal_color_0 = ' .. vim.inspect(vim.g.terminal_color_0) ..
-			'\n\tlet g:terminal_color_1 = ' .. vim.inspect(vim.g.terminal_color_1) ..
-			'\n\tlet g:terminal_color_2 = ' .. vim.inspect(vim.g.terminal_color_2) ..
-			'\n\tlet g:terminal_color_3 = ' .. vim.inspect(vim.g.terminal_color_3) ..
-			'\n\tlet g:terminal_color_4 = ' .. vim.inspect(vim.g.terminal_color_4) ..
-			'\n\tlet g:terminal_color_5 = ' .. vim.inspect(vim.g.terminal_color_5) ..
-			'\n\tlet g:terminal_color_6 = ' .. vim.inspect(vim.g.terminal_color_6) ..
-			'\n\tlet g:terminal_color_7 = ' .. vim.inspect(vim.g.terminal_color_7) ..
-			'\n\tlet g:terminal_color_8 = ' .. vim.inspect(vim.g.terminal_color_8) ..
-			'\n\tlet g:terminal_color_9 = ' .. vim.inspect(vim.g.terminal_color_9) ..
-			'\n\tlet g:terminal_color_10 = ' .. vim.inspect(vim.g.terminal_color_10) ..
-			'\n\tlet g:terminal_color_11 = ' .. vim.inspect(vim.g.terminal_color_11) ..
-			'\n\tlet g:terminal_color_12 = ' .. vim.inspect(vim.g.terminal_color_12) ..
-			'\n\tlet g:terminal_color_13 = ' .. vim.inspect(vim.g.terminal_color_13) ..
-			'\n\tlet g:terminal_color_14 = ' .. vim.inspect(vim.g.terminal_color_14) ..
-			'\n\tlet g:terminal_color_15 = ' .. vim.inspect(vim.g.terminal_color_15)
+		return '\n\n\tlet g:terminal_color_0 = ' .. nil_to_null(vim.g.terminal_color_0) ..
+			'\n\tlet g:terminal_color_1 = ' .. nil_to_null(vim.g.terminal_color_1) ..
+			'\n\tlet g:terminal_color_2 = ' .. nil_to_null(vim.g.terminal_color_2) ..
+			'\n\tlet g:terminal_color_3 = ' .. nil_to_null(vim.g.terminal_color_3) ..
+			'\n\tlet g:terminal_color_4 = ' .. nil_to_null(vim.g.terminal_color_4) ..
+			'\n\tlet g:terminal_color_5 = ' .. nil_to_null(vim.g.terminal_color_5) ..
+			'\n\tlet g:terminal_color_6 = ' .. nil_to_null(vim.g.terminal_color_6) ..
+			'\n\tlet g:terminal_color_7 = ' .. nil_to_null(vim.g.terminal_color_7) ..
+			'\n\tlet g:terminal_color_8 = ' .. nil_to_null(vim.g.terminal_color_8) ..
+			'\n\tlet g:terminal_color_9 = ' .. nil_to_null(vim.g.terminal_color_9) ..
+			'\n\tlet g:terminal_color_10 = ' .. nil_to_null(vim.g.terminal_color_10) ..
+			'\n\tlet g:terminal_color_11 = ' .. nil_to_null(vim.g.terminal_color_11) ..
+			'\n\tlet g:terminal_color_12 = ' .. nil_to_null(vim.g.terminal_color_12) ..
+			'\n\tlet g:terminal_color_13 = ' .. nil_to_null(vim.g.terminal_color_13) ..
+			'\n\tlet g:terminal_color_14 = ' .. nil_to_null(vim.g.terminal_color_14) ..
+			'\n\tlet g:terminal_color_15 = ' .. nil_to_null(vim.g.terminal_color_15)
 	end
 
 	--- NOTE: this function strips out leading dots from colorscheme names, e.g. `.foo` → `foo`.
