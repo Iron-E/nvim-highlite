@@ -36,7 +36,11 @@ This section is about contributing new features to `nvim-highlite`.
 
 ### Export Targets
 
-`nvim-highlite` has an internal string formatting library that allows you to easily write a template for whatever you need, and all the logic will be handled behind the scenes:
+Export targets go in the [`export`](../lua/highlite/export.lua) module.
+
+* The [`Fs`](../lua/highlite/fs.lua) module will be of use for writing the end result.
+
+There has an internal string formatting library that allows you to easily write a template for whatever you need, and all the logic will be handled behind the scenes:
 
 ```lua
 function Fmt.string(format: string, opts?: highlite.Fmt.string.opts)
@@ -68,17 +72,17 @@ terminal_idx_1 = ${1}
 ]]
 ```
 
-* The [`Import`](../lua/highlite/import.lua) and [`Export`](../lua/highlite/export.lua) modules have more examples.
-
-The [`Fs`](../lua/highlite/fs.lua) module will be of use for writing the end result.
+* The [`import`](../lua/highlite/import.lua) and [`export`](../lua/highlite/export.lua) modules have more examples.
 
 ### Import Targets
+
+Import targets go in the [`import`](../lua/highlite/import.lua) module.
+
+* The [`Fs`](../lua/highlite/fs.lua) module will be of use for file reading.
 
 Depending on the format, you might have to write a custom parser. Neovim supports JSON with `vim.json`, Lua can be read with `loadstring`, and VimScript can be parsed with `nvim_parse_expression`.
 
 Considering the open-ended nature of this topic, open an issue if you have trouble working on what you would like to do.
-
-The [`Fs`](../lua/highlite/fs.lua) module might be of interest.
 
 ### Palettes
 
