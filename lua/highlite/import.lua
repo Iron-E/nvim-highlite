@@ -1,9 +1,9 @@
 local default_groups_from_palette = require 'highlite.groups.default' --- @type highlite.groups.from_palette
 local Fmt = require 'highlite.fmt' --- @type highlite.Fmt
 local Fs = require 'highlite.fs' --- @type highlite.Fs
+local Nvim = require 'highlite.nvim' --- @type highlite.Nvim
 local Palette = require 'highlite.color.palette' --- @type highlite.color.Palette
 local Table = require 'highlite.table' --- @type highlite.Table
-local Util = require 'highlite.utils' --- @type highlite.Utils
 
 --- @class highlite.Import
 local Import = {}
@@ -318,11 +318,30 @@ do
 		loadstring_compat = true,
 	}
 
+	--- @alias highlite.Import.nvim.return {[highlite.bg]: {palette: highlite.color.palette, terminal: highlite.color.palette.terminal}}
+
+	--- @param tbl highlite.Import.nvim.return
+	--- @param colorscheme string
+	--- @param bg highlite.bg
+	--- @param opts highlite.Fmt.string.opts
+	local function import_bg(tbl, colorscheme, bg, opts)
+		local load, err = loadstring(Fmt.string(FMT, opts))
+		if load == nil or err then
+			error(
+				'Could not load formatted string for colorscheme ' .. colorscheme ..
+				' with options ' .. vim.inspect(opts, {indent = '', newline = ' '}) ..
+				(err == nil and '' or ': ' .. err)
+			)
+		end
+
+		tbl[bg] = load()
+	end
+
 	--- Create a wezterm theme out of the `palette`
 	--- @async
 	--- @param name string the name of an *installed* Neovim colorscheme. Can be written in either Lua or VimScript
 	--- @param opts? highlite.Fmt.string.opts
-	--- @return {[highlite.bg]: {palette: highlite.color.palette, terminal: highlite.color.palette.terminal}}
+	--- @return highlite.Import.nvim.return
 	function Import.nvim(name, opts)
 		-- NOTE: we force this plugin to load colorschemes with all groups enabled
 		if name:find '^highlite' then require('highlite').setup() end
@@ -333,34 +352,14 @@ do
 			opts = vim.tbl_extend('force', opts, FMT_OPTS)
 		end
 
-		local previous_bg = vim.api.nvim_get_option 'background' --- @type highlite.bg
-		local previous_colorscheme = vim.api.nvim_get_var 'colors_name'
-
+		--- @type highlite.Import.nvim.return
 		local by_bg = {}
-		local next_bg = previous_bg == 'dark' and 'light' or 'dark' --- @type highlite.bg
 
-		--- @param bg highlite.bg
-		local function import_bg(bg)
-			local load, err = loadstring(Fmt.string(FMT, opts))
-			if load == nil or err then
-				error(
-					'Could not load formatted string for colorscheme ' .. name ..
-					' with options ' .. vim.inspect(opts, {indent = '', newline = ' '}) ..
-					(err == nil and '' or ': ' .. err)
-				)
-			end
+		Nvim.with_colorscheme(name, function()
+			local previous_bg = Nvim.with_alt_bg(function(bg) import_bg(by_bg, name, bg, opts) end)
+			import_bg(by_bg, name, previous_bg, opts)
+		end)
 
-			by_bg[bg] = load()
-		end
-
-		Util.switch_colorscheme(name)
-
-		vim.api.nvim_set_option('background', next_bg)
-		import_bg(next_bg)
-		vim.api.nvim_set_option('background', previous_bg)
-		import_bg(previous_bg)
-
-		Util.switch_colorscheme(previous_colorscheme)
 
 		for bg, tbl in pairs(by_bg) do
 			Palette.derive(bg, tbl.palette)

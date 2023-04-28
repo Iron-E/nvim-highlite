@@ -1,6 +1,6 @@
 local Fmt = require 'highlite.fmt' --- @type highlite.Fmt
 local Fs = require 'highlite.fs' --- @type highlite.Fs
-local Util = require 'highlite.utils' --- @type highlite.Utils
+local Nvim = require 'highlite.nvim' --- @type highlite.Nvim
 
 --- Skip plugins that don't depend on a colorscheme
 --- @param group string
@@ -86,25 +86,20 @@ vim.api.nvim_set_var('colors_name', '%s')
 		end
 
 		dir = vim.fs.normalize(dir)
+		local by_bg = {}
 		local filename = opts.filename or colorscheme
-		local previous_bg = vim.api.nvim_get_option 'background' --- @type highlite.bg
-		local previous_colorscheme = vim.api.nvim_get_var 'colors_name'
 
-		Util.switch_colorscheme(colorscheme)
-		vim.api.nvim_set_option('background', 'dark')
-		local dark_groups = fmt_groups()
-		local dark_terminal = fmt_terminal()
+		Nvim.with_colorscheme(colorscheme, function()
+			local previous_bg = Nvim.with_alt_bg(function(bg)
+				by_bg[bg] = {groups = fmt_groups(), terminal = fmt_terminal()}
+			end)
 
-		vim.api.nvim_set_option('background', 'light')
-		local light_groups = fmt_groups()
-		local light_terminal = fmt_terminal()
-
-		Util.switch_colorscheme(previous_colorscheme)
-		vim.api.nvim_set_option('background', previous_bg)
+			by_bg[previous_bg] = {groups = fmt_groups(), terminal = fmt_terminal()}
+		end)
 
 		Fs.write(
 			dir .. '/' .. filename .. '.lua',
-			FMT:format(dark_groups, dark_terminal, light_groups, light_terminal, filename),
+			FMT:format(by_bg.dark.groups, by_bg.dark.terminal, by_bg.light.groups, by_bg.light.terminal, filename),
 			opts
 		)
 	end
@@ -237,25 +232,20 @@ let g:colors_name = '%s'
 		end
 
 		dir = vim.fs.normalize(dir)
+		local by_bg = {}
 		local filename = opts.filename or colorscheme
-		local previous_bg = vim.api.nvim_get_option 'background' --- @type highlite.bg
-		local previous_colorscheme = vim.api.nvim_get_var 'colors_name'
 
-		Util.switch_colorscheme(colorscheme)
-		vim.api.nvim_set_option('background', 'dark')
-		local dark_groups = fmt_groups()
-		local dark_terminal = fmt_terminal()
+		Nvim.with_colorscheme(colorscheme, function()
+			local previous_bg = Nvim.with_alt_bg(function(bg)
+				by_bg[bg] = {groups = fmt_groups(), terminal = fmt_terminal()}
+			end)
 
-		vim.api.nvim_set_option('background', 'light')
-		local light_groups = fmt_groups()
-		local light_terminal = fmt_terminal()
-
-		Util.switch_colorscheme(previous_colorscheme)
-		vim.api.nvim_set_option('background', previous_bg)
+			by_bg[previous_bg] = {groups = fmt_groups(), terminal = fmt_terminal()}
+		end)
 
 		Fs.write(
 			dir .. '/' .. filename .. '.vim',
-			FMT:format(dark_groups, dark_terminal, light_groups, light_terminal, filename),
+			FMT:format(by_bg.dark.groups, by_bg.dark.terminal, by_bg.light.groups, by_bg.light.terminal, filename),
 			opts
 		)
 	end
@@ -378,17 +368,14 @@ fg_color = ${Normal.bg}
 
 		dir = vim.fs.normalize(dir)
 		local filename = opts.filename or colorscheme
-		local previous_colorscheme = vim.api.nvim_get_var 'colors_name'
 
-		Util.switch_colorscheme(colorscheme)
-
-		Fs.write(
-			dir .. '/' .. filename .. '.toml',
-			'[metadata]\nname = "' .. filename .. Fmt.string(FMT, FMT_OPTS),
-			opts
-		)
-
-		Util.switch_colorscheme(previous_colorscheme)
+		Nvim.with_colorscheme(colorscheme, function()
+			Fs.write(
+				dir .. '/' .. filename .. '.toml',
+				'[metadata]\nname = "' .. filename .. Fmt.string(FMT, FMT_OPTS),
+				opts
+			)
+		end)
 	end
 end
 

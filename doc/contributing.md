@@ -27,8 +27,8 @@ This repository has an [editorconfig](./.editorconfig). Neovim 0.9 supports edit
 | `highlite.groups.types`        | Shared type definitions for highlight group templates   |
 | `highlite.groups.<foo>`        | Highlight group generation templates                    |
 | `highlite.import`              | Import other colorschemes to the `nvim-highlite` format |
+| `highlite.nvim`                | Nvim API utilities                                      |
 | `highlite.table`               | Utilities for working with `table`s                     |
-| `highlite.util`                | Misc utilities                                          |
 
 ## Features
 
