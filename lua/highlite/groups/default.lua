@@ -1029,16 +1029,17 @@ local function from_palette(palette, opts)
 		end
 
 		if all_syntax or syntax.sh ~= false then
-			groups.shDerefSimple = '@variable.sh'
 			groups.shDeref = 'shDerefSimple'
+			groups.shDerefSimple = '@variable.sh'
 			groups.shDerefVarArray = '@field.sh'
-			groups.shOption = '@parameter.sh'
 			groups.shFunctionKey = '@function.sh'
 			groups.shLoop = '@repeat.sh'
+			groups.shOption = '@parameter.sh'
 			groups.shParen = '@punctuation.bracket.sh'
 			groups.shQuote = '@punctuation.delimiter.sh'
 			groups.shSet = 'Statement'
 			groups.shTestOpr = '@debug.sh'
+			groups.shWrapLineOperator = '@character.special'
 		end
 
 		if all_syntax or syntax.solidity ~= false then
