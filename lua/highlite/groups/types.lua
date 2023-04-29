@@ -2,7 +2,7 @@
 
 --- @alias highlite.groups.from_palette.opts.plugins.nvim 'barbar'|'cmp'|'gitsigns'|'indent_blankline'|'lazy'|'lspsaga'|'mini'|'nvim_tree'|'packer'|'symbols_outline'|'todo_comments'|'trouble'
 --- @alias highlite.groups.from_palette.opts.plugins.vim 'ale'|'coc'|'fern'|'nerdtree'|'vim_easymotion'|'vim_gitgutter'|'vim_indent_guides'|'vim_jumpmotion'|'vim_sandwich'|'vim_signify'
---- @alias highlite.groups.from_palette.opts.syntax 'coq'|'cpp'|'cs'|'css'|'dart'|'dosini'|'dot'|'git'|'go'|'help'|'html'|'i3config'|'java'|'javascript'|'json'|'lua'|'make'|'man'|'markdown'|'python'|'razor'|'ruby'|'rust'|'scala'|'scss'|'sh'|'solidity'|'sql'|'tex'|'toml'|'vimscript'|'xdefaults'|'xml'|'xxd'|'yaml'
+--- @alias highlite.groups.from_palette.opts.syntax 'coq'|'cpp'|'cs'|'css'|'dart'|'dosini'|'dot'|'git'|'go'|'help'|'html'|'i3config'|'java'|'javascript'|'json'|'lua'|'make'|'man'|'markdown'|'python'|'razor'|'ruby'|'rust'|'scala'|'scss'|'sh'|'solidity'|'sql'|'tex'|'toml'|'vim'|'xdefaults'|'xml'|'xxd'|'yaml'
 
 --- @class highlite.groups.from_palette.opts.plugins
 --- @field nvim boolean|{[highlite.groups.from_palette.opts.plugins.nvim]: nil|boolean}
