@@ -219,40 +219,40 @@ require('highlite').setup {
 
   <ul>
     <li><a href="https://github.com/romgrk/barbar.nvim">
-        barbar
+      barbar
     </a></li>
     <li><a href="https://github.com/hrsh7th/nvim-cmp/">
-        cmp
+      cmp
     </a></li>
     <li><a href="https://github.com/lewis6991/gitsigns.nvim">
-        gitsigns
+      gitsigns
     </a></li>
     <li><a href="https://github.com/lukas-reineke/indent-blankline.nvim">
-        indent_blankline
+      indent_blankline
     </a></li>
     <li><a href="https://github.com/folke/lazy.nvim">
-        lazy
+      lazy
     </a></li>
     <li><a href="https://github.com/nvimdev/lspsaga.nvim">
-        lspsaga
+      lspsaga
     </a></li>
     <li><a href="https://github.com/echasnovski/mini.nvim">
-        mini
+      mini
     </a></li>
     <li><a href="https://github.com/nvim-tree/nvim-tree.lua">
-        nvim_tree
+      nvim_tree
     </a></li>
     <li><a href="https://github.com/wbthomason/packer.nvim">
-        packer
+      packer
     </a></li>
     <li><a href="https://github.com/simrat39/symbols-outline.nvim">
-        symbols_outline
+      symbols_outline
     </a></li>
     <li><a href="https://github.com/folke/todo-comments.nvim">
-        todo_comments
+      todo_comments
     </a></li>
     <li><a href="https://github.com/folke/trouble.nvim">
-        trouble
+      trouble
     </a></li>
   </ul>
 </details>
@@ -291,34 +291,34 @@ require('highlite').setup {
 
   <ul>
     <li><a href="https://github.com/dense-analysis/ale">
-        ale
+      ale
     </a></li>
     <li><a href="https://github.com/neoclide/coc.nvim">
-        coc
+      coc
     </a></li>
     <li><a href="https://github.com/lambdalisue/fern.vim">
-        fern
+      fern
     </a></li>
     <li><a href="https://github.com/preservim/nerdtree">
-        nerdtree
+      nerdtree
     </a></li>
     <li><a href="https://github.com/easymotion/vim-easymotion">
-        vim_easymotion
+      vim_easymotion
     </a></li>
     <li><a href="https://github.com/airblade/vim-gitgutter">
-        vim_gitgutter
+      vim_gitgutter
     </a></li>
     <li><a href="https://github.com/thaerkh/vim-indentguides">
-        vim_indent_guides
+      vim_indent_guides
     </a></li>
     <li><a href="https://github.com/zsugabubus/vim-jumpmotion">
-        vim_jumpmotion
+      vim_jumpmotion
     </a></li>
     <li><a href="https://github.com/machakann/vim-sandwich">
-        vim_sandwich
+      vim_sandwich
     </a></li>
     <li><a href="https://github.com/mhinz/vim-signify">
-        vim_signify
+      vim_signify
     </a></li>
   </ul>
 </details>
@@ -359,109 +359,109 @@ require('highlite').setup {
 
   <ul>
     <li><a href="https://github.com/whonore/Coqtail">
-        coq
+      coq
     </a></li>
     <li><a href="https://github.com/bfrg/vim-cpp-modern">
-        cpp
+      cpp
     </a></li>
     <li>
-		cs
-	</li>
+      cs
+    </li>
     <li>
-		css
-	</li>
+      css
+    </li>
     <li><a href="https://github.com/dart-lang/dart-vim-plugin">
-        dart
+      dart
     </a></li>
     <li>
-		dosini
-	</li>
+      dosini
+    </li>
     <li><a href="https://github.com/liuchengxu/graphviz">
-        dot
+      dot
     </a></li>
     <li><a href="https://github.com/tpope/vim-git">
-        git
+      git
     </a></li>
     <li><a href="https://github.com/fatih/vim-go">
-        go
+      go
     </a></li>
     <li>
-		help
-	</li>
+      help
+    </li>
     <li><a href="https://github.com/othree/html5">
-        html
+      html
     </a></li>
     <li><a href="https://github.com/mboughaba/i3config">
-        i3config
+      i3config
     </a></li>
     <li><a href="https://github.com/uiiaoo/java-syntax">
-        java
+      java
     </a></li>
     <li><a href="https://github.com/pangloss/vim-javascript">
-        javascript
+      javascript
     </a></li>
     <li><a href="https://github.com/elzr/vim-json">
-        json
+      json
     </a></li>
     <li><a href="https://github.com/tbastos/vim-lua">
-        lua
+      lua
     </a></li>
     <li>
-		make
-	</li>
+      make
+    </li>
     <li>
-		man
-	</li>
+      man
+    </li>
     <li><a href="https://github.com/plasticboy/vim-markdown">
-        markdown
+      markdown
     </a></li>
     <li><a href="https://github.com/vim-python/python-syntax">
-        python
+      python
     </a></li>
     <li><a href="https://github.com/jlcrochet/vim-razor">
-        razor
+      razor
     </a></li>
     <li><a href="https://github.com/vim-ruby/vim-ruby">
-        ruby
+      ruby
     </a></li>
     <li><a href="https://github.com/Iron-E/rust.vim/tree/feature/struct-definition-identifiers">
-        rust
+      rust
     </a></li>
     <li>
-		scala
-	</li>
+      scala
+    </li>
     <li><a href="https://github.com/cakebaker/scss-syntax">
-        scss
+      scss
     </a></li>
     <li><a href="https://github.com/arzg/vim-sh">
-        sh
+      sh
     </a></li>
     <li>
-		solidity
-	</li>
+      solidity
+    </li>
     <li><a href="https://github.com/shmup/vim-sql-syntax">
-        sql
+      sql
     </a></li>
     <li><a href="https://github.com/lervag/vimtex">
-        tex
+      tex
     </a></li>
     <li><a href="https://github.com/Iron-E/vim-toml/tree/feature/delimiter-highlighting">
-        toml
+      toml
     </a></li>
     <li>
-		vimscript
-	</li>
+      vim
+    </li>
     <li>
-		xdefaults
-	</li>
+      xdefaults
+    </li>
     <li><a href="https://github.com/amadeus/vim-xml">
-        xml
+      xml
     </a></li>
     <li>
-		xxd
-	</li>
+      xxd
+    </li>
     <li><a href="https://github.com/Iron-E/vim-yaml/tree/patch-1">
-        yaml
+      yaml
     </a></li>
   </ul>
 </details>

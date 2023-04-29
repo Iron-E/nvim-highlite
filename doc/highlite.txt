@@ -335,7 +335,7 @@ sql
 tex
 
 toml
-vimscriptxdefaults
+vimxdefaults
 xml
 xxd
 yaml
