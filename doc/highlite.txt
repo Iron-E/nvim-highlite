@@ -1019,7 +1019,7 @@ To generate groups, you can do:
     local Highlite = require 'highlite' --- @type Highlite
     
     local palette = … -- derive or get a built-in palette
-    local groups = Highlite.groups('highlite', palette) -- or any of the built-in groups
+    local groups = Highlite.groups('default', palette) -- or any of the built-in groups
 <
 
 
@@ -1237,7 +1237,7 @@ COMPLETE EXAMPLE ~
     }
     
     --[[ Generate Groups ]]
-    local groups = Highlite.groups('highlite', palette)
+    local groups = Highlite.groups('default', palette)
     
     --[[ Override Groups ]]
     
@@ -1293,7 +1293,7 @@ Then `imported.dark.palette` is the color palette for a dark `&background`.
       
       Highlite.setup(
         'example',
-        Highlite.groups('highlite', imported[bg].palette),
+        Highlite.groups('default', imported[bg].palette),
         imported[bg].terminal
       )
   <
@@ -1371,9 +1371,9 @@ PROJECT LAYOUT                                       *highlite-project-layout*
   highlite.import                Import other colorschemes to the
                                  nvim-highlite format
 
-  highlite.table                 Utilities for working with tables
+  highlite.nvim                  Nvim API utilities
 
-  highlite.util                  Misc utilities
+  highlite.table                 Utilities for working with tables
   ----------------------------------------------------------------------------
 
 FEATURES                                                   *highlite-features*
@@ -1383,9 +1383,14 @@ This section is about contributing new features to `nvim-highlite`.
 
 EXPORT TARGETS ~
 
-`nvim-highlite` has an internal string formatting library that allows you to
-easily write a template for whatever you need, and all the logic will be
-handled behind the scenes:
+Export targets go in the `export` <../lua/highlite/export.lua> module.
+
+
+- The `Fs` <../lua/highlite/fs.lua> module will be of use for writing the end result.
+
+There has an internal string formatting library that allows you to easily write
+a template for whatever you need, and all the logic will be handled behind the
+scenes:
 
 >lua
     function Fmt.string(format: string, opts?: highlite.Fmt.string.opts)
@@ -1418,13 +1423,15 @@ For example, you can do this:
 <
 
 
-- The `Import` <../lua/highlite/import.lua> and `Export` <../lua/highlite/export.lua> modules have more examples.
-
-The `Fs` <../lua/highlite/fs.lua> module will be of use for writing the end
-result.
+- The `import` <../lua/highlite/import.lua> and `export` <../lua/highlite/export.lua> modules have more examples.
 
 
 IMPORT TARGETS ~
+
+Import targets go in the `import` <../lua/highlite/import.lua> module.
+
+
+- The `Fs` <../lua/highlite/fs.lua> module will be of use for file reading.
 
 Depending on the format, you might have to write a custom parser. Neovim
 supports JSON with `vim.json`, Lua can be read with `loadstring`, and VimScript
@@ -1432,8 +1439,6 @@ can be parsed with `nvim_parse_expression`.
 
 Considering the open-ended nature of this topic, open an issue if you have
 trouble working on what you would like to do.
-
-The `Fs` <../lua/highlite/fs.lua> module might be of interest.
 
 
 PALETTES ~

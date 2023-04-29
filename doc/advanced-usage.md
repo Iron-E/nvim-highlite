@@ -333,7 +333,7 @@ To generate groups, you can do:
 local Highlite = require 'highlite' --- @type Highlite
 
 local palette = … -- derive or get a built-in palette
-local groups = Highlite.groups('highlite', palette) -- or any of the built-in groups
+local groups = Highlite.groups('default', palette) -- or any of the built-in groups
 ```
 
 #### List of Built-in Groups
@@ -538,7 +538,7 @@ local terminal_palette = {
 }
 
 --[[ Generate Groups ]]
-local groups = Highlite.groups('highlite', palette)
+local groups = Highlite.groups('default', palette)
 
 --[[ Override Groups ]]
 
@@ -593,7 +593,7 @@ Then `imported.dark.palette` is the color palette for a dark `&background`.
 >
 > Highlite.setup(
 >   'example',
->   Highlite.groups('highlite', imported[bg].palette),
+>   Highlite.groups('default', imported[bg].palette),
 >   imported[bg].terminal
 > )
 > ```
