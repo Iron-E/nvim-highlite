@@ -2,6 +2,11 @@
 
 Welcome to the advanced usage guide for `nvim-highlite`! This will teach you how to create your own colorscheme using this plugin, whether it be from scratch, one of our built-in colorschemes, or another existing colorscheme.
 
+## tl;dr
+
+* [Create a Colorscheme](#complete-example)
+* [Import a Colorscheme](#importing-colorschemes)
+
 ## Concepts
 
 Before jumping straight into [Creating Your Colorscheme](#creating-your-colorscheme), it is important to know about the *concepts* which `nvim-highlite` is designed around. There are several terms which you will see:
@@ -615,12 +620,9 @@ local imported = Import.nvim 'zellner'
 
 #### `mini.colors`
 
-<!--
-TODO: write about benefits
-      * Automatic light/dark variants
-      * Hue/saturation/value adjustment
-      * Interactive palette testing
--->
+[`echasnovski/mini.colors`](https://github.com/echasnovski/mini.colors) is a fantastic plugin (as is the rest of `mini.nvim`) that allows you to easily manipulate colors, fiddle with existing colorschemes, and generate light/dark variants of a specific palette.
+
+If you have used [rktjmp/lush.nvim](https://github.com/rktjmp/lush.nvim) and miss its suite of utilities to work with colors / preview your work in this plugin, `mini.colors` may be able to help bridge the gap!
 
 [ayu]: https://github.com/ayu-theme/ayu-vim
 [creating-your-colorscheme]: #creating-your-colorscheme

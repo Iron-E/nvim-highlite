@@ -13,6 +13,7 @@ Table of Contents                                 *highlite-table-of-contents*
   - Limitations                                         |highlite-limitations|
   - FAQ                                                         |highlite-faq|
 2. Advanced Usage                                    |highlite-advanced-usage|
+  - tl;dr                                                     |highlite-tl;dr|
   - Concepts                                               |highlite-concepts|
   - Creating Your Colorscheme             |highlite-creating-your-colorscheme|
   - Importing Colorschemes                   |highlite-importing-colorschemes|
@@ -545,6 +546,13 @@ Of course, substitute `highlite` with the name of your colorscheme.
 Welcome to the advanced usage guide for `nvim-highlite`! This will teach you
 how to create your own colorscheme using this plugin, whether it be from
 scratch, one of our built-in colorschemes, or another existing colorscheme.
+
+
+TL;DR                                                         *highlite-tl;dr*
+
+
+- |highlite-create-a-colorscheme|
+- |highlite-import-a-colorscheme|
 
 
 CONCEPTS                                                   *highlite-concepts*
@@ -1319,6 +1327,15 @@ HELPFUL TOOLS ~
 
 
 mini.colors                                             *highlite-mini.colors*
+
+`echasnovski/mini.colors` <https://github.com/echasnovski/mini.colors> is a
+fantastic plugin (as is the rest of `mini.nvim`) that allows you to easily
+manipulate colors, fiddle with existing colorschemes, and generate light/dark
+variants of a specific palette.
+
+If you have used rktjmp/lush.nvim <https://github.com/rktjmp/lush.nvim> and
+miss its suite of utilities to work with colors / preview your work in this
+plugin, `mini.colors` may be able to help bridge the gap!
 
 
 ==============================================================================
