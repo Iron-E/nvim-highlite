@@ -557,12 +557,14 @@ The generator, for simplicity and speed purposes, does not include `cterm` highl
 
 ### Generated Terminal Palettes
 
-While `nvim-highlite` _provides_ terminal palettes for all built-in colorschemes, `nvim-highlite` cannot _generate_ new terminal palettes because of its semantic color palette approach. In layman's terms, terminal palettes are created by saying, "this is what 'red' looks like", "this is what 'blue' looks like", etc. This is a problem for `nvim-highlite` because:
+While `nvim-highlite` _provides_ terminal palettes for all built-in colorschemes, `nvim-highlite` cannot _generate_ new terminal palettes because of the difference in how terminal palettes and `nvim-highlite`'s palletes are defined:
 
-* it's possible for an `nvim-highlite` color palette to not even have all the colors necessary (terminal palettes need 16, `nvim-highlite` only needs 6); and
-* there is no association between color names in `nvim-highlite` (e.g. `error`, `func`) and the color value (e.g. "#A80000", "#CF55F0"). Thus, there's no easy way to assign e.g. the terminal "red" color based on one of the semantic names.
+* terminal palettes are created specifying the RGB color value of specific color names (e.g. "red" = "#FF0000"), and
+* `nvim-highlite`'s palettes are defined by assigning an RGB color value to semantic categories (e.g. `keyword` = "#4422AA").
 
-See [Creating A Terminal Palette](./doc/advanced-usage.md#1b-creating-a-terminal-palette-optional) for more information.
+This is a problem because there is no association between token types (e.g. `error`, `func`) and the color value (e.g. "#A80000", "#CF55F0"). Thus, there's no *performant* way to assign a color to e.g. "red".
+
+See [Creating A Terminal Palette](./doc/advanced-usage.md#1b-creating-a-terminal-palette-optional) for a tutorial on how to write one yourself, or [mini.colors][mini.colors] for a supplementary plugin that can generate this palette for you.
 
 ## FAQ
 
