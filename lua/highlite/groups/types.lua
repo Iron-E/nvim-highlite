@@ -14,7 +14,7 @@
 
 --- @alias highlite.groups.from_palette fun(palette: highlite.color.palette, opts: highlite.groups.from_palette.opts): highlite.groups.FromPalette
 
---- @alias highlite.groups.shortname 'default'|''seoul256-light'|'seoul256'
+--- @alias highlite.groups.shortname 'default'|'highlite'|'seoul256-light'|'seoul256'
 
 --- @class highlite.groups.FromPalette: highlite.groups
 --- @operator call(string): highlite.group.new

@@ -5,7 +5,7 @@ local default_groups_from_palette = require 'highlite.groups.default' --- @type 
 local function from_palette(palette, opts)
 	local groups = default_groups_from_palette(palette, opts)
 
-	groups.Error.fg = palette.text
+	groups.Folded.fg = palette.bg
 
 	return groups
 end

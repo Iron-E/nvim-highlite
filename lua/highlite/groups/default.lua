@@ -137,7 +137,7 @@ local function from_palette(palette, opts)
 
 		-- Folds
 		FoldColumn = {bg = palette.bg_contrast_high, bold = true},
-		Folded = {fg = palette.bg, bg = palette.fold, italic = true},
+		Folded = {fg = palette.text, bg = palette.fold, italic = true},
 
 		-- Diffs
 		DiffAdd = {fg = palette.bg, bg = palette.string},
