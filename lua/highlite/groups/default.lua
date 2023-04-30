@@ -131,7 +131,7 @@ local function from_palette(palette, opts)
 		NormalFloat = 'Pmenu',
 		Pmenu = {fg = palette.text, bg = palette.bg_contrast_low},
 		PmenuSbar = {bg = palette.bg_contrast_high},
-		PmenuSel = {bg = palette.select},
+		PmenuSel = 'Visual',
 		PmenuThumb = {bg = palette.text_contrast_bg_high},
 		WildMenu = 'PmenuSel',
 
@@ -181,7 +181,7 @@ local function from_palette(palette, opts)
 		DiagnosticDeprecated = {strikethrough = true},
 
 		DiagnosticError = 'Error',
-		DiagnosticFloatingError = 'ErrorMsg',
+		DiagnosticFloatingError = '@text.danger',
 		DiagnosticSignError = 'DiagnosticFloatingError',
 		DiagnosticUnderlineError = {sp = palette.error, undercurl = true},
 
@@ -191,7 +191,7 @@ local function from_palette(palette, opts)
 		DiagnosticUnderlineHint = {sp = palette.hint, undercurl = true},
 
 		DiagnosticInfo = {fg = palette.bg, bg = palette.info, bold = true},
-		DiagnosticFloatingInfo = {fg = palette.info},
+		DiagnosticFloatingInfo = '@text.note',
 		DiagnosticSignInfo = 'DiagnosticFloatingInfo',
 		DiagnosticUnderlineInfo = {sp = palette.info, undercurl = true},
 
@@ -201,7 +201,7 @@ local function from_palette(palette, opts)
 		DiagnosticUnderlineOk = {sp = palette.ok, undercurl = true},
 
 		DiagnosticWarn = {fg = palette.bg, bg = palette.warning, bold = true},
-		DiagnosticFloatingWarn = 'WarningMsg',
+		DiagnosticFloatingWarn = '@text.warning',
 		DiagnosticSignWarn = 'DiagnosticFloatingWarn',
 		DiagnosticUnderlineWarn = {sp = palette.warning, undercurl = true},
 
@@ -287,19 +287,20 @@ local function from_palette(palette, opts)
 		['@tag.attribute'] = {fg = palette.tag_attribute},
 		['@tag.delimiter'] = {fg = palette.tag_delimiter},
 		['@text'] = {fg = palette.text},
-		['@text.danger'] = 'DiagnosticError',
-		['@text.diff.add'] = 'DiffAdd',
-		['@text.diff.delete'] = 'DiffDelete',
+		['@text.danger'] = 'ErrorMsg',
+		['@text.diff.add'] = {fg = palette.diff_add},
+		['@text.diff.change'] = {fg = palette.diff_change},
+		['@text.diff.delete'] = {fg = palette.diff_delete},
 		['@text.emphasis'] = 'Italic',
 		['@text.literal'] = {fg = palette.text_literal},
-		['@text.note'] = 'DiagnosticInfo',
+		['@text.note'] = {fg = palette.info},
 		['@text.quote'] = '@comment',
 		['@text.reference'] = {fg = palette.text_reference},
 		['@text.strike'] = {strikethrough = true},
 		['@text.strong'] = 'Bold',
-		['@text.todo'] = 'Todo',
+		['@text.todo'] = {fg = palette.todo},
 		['@text.underline'] = {underline = true},
-		['@text.warning'] = 'DiagnosticWarn',
+		['@text.warning'] = {fg = palette.warn},
 		['@type.builtin'] = {fg = palette.type_builtin},
 		['@variable'] = {fg = palette.variable},
 		['@variable.builtin'] = {fg = palette.variable_builtin, italic = true},
@@ -439,9 +440,9 @@ local function from_palette(palette, opts)
 		end
 
 		if all_nvim_plugins or nvim_plugins.gitsigns ~= false then
-			groups.GitSignsAdd = {fg = palette.diff_add}
-			groups.GitSignsChange = {fg = palette.diff_change}
-			groups.GitSignsDelete = {fg = palette.diff_delete}
+			groups.GitSignsAdd = '@text.diff.add'
+			groups.GitSignsChange = '@text.diff.change'
+			groups.GitSignsDelete = '@text.diff.delete'
 		end
 
 		if all_nvim_plugins or nvim_plugins.indent_blankline ~= false then
@@ -471,6 +472,17 @@ local function from_palette(palette, opts)
 			groups.LazyUrl = '@text.uri.lazy'
 		end
 
+		if all_nvim_plugins or nvim_plugins.lsp_signature ~= false then
+			groups.LspSignatureActiveParameter = 'Visual'
+		end
+
+		if all_nvim_plugins or nvim_plugins.lspconfig ~= false then
+			groups.LspInfoBorder = 'FloatBorder'
+			groups.LspInfoList = '@text.literal'
+			groups.LspInfoTip = '@text.note.lspinfo'
+			groups.LspInfoTitle = 'FloatTitle'
+		end
+
 		if all_nvim_plugins or nvim_plugins.lspsaga ~= false then
 			groups.DefinitionCount = 'Number'
 			groups.DefinitionIcon = 'Special'
@@ -486,13 +498,13 @@ local function from_palette(palette, opts)
 		end
 
 		if all_nvim_plugins or nvim_plugins.nvim_tree ~= false then
-			-- TODO: make this not depend on GitSigns
-			groups.NvimTreeGitDeleted = 'GitSignsDelete'
+			groups.NvimTreeRootFolder = '@text.title.NvimTree'
+			groups.NvimTreeGitDeleted = '@text.diff.delete.NvimTree'
 			groups.NvimTreeGitDirty = {fg = palette.warning}
 			groups.NvimTreeGitIgnored = 'Ignore'
 			groups.NvimTreeGitMerge = 'NvimTreeGitRenamed'
-			groups.NvimTreeGitNew = 'GitSignsAdd'
-			groups.NvimTreeGitRenamed = 'GitSignsChange'
+			groups.NvimTreeGitNew = '@text.diff.add.NvimTree'
+			groups.NvimTreeGitRenamed = '@text.diff.change.NvimTree'
 			groups.NvimTreeGitStaged = {fg = palette.type}
 		end
 
@@ -511,13 +523,13 @@ local function from_palette(palette, opts)
 		end
 
 		if all_nvim_plugins or nvim_plugins.todo_comments ~= false then
-			groups.TodoFgFIX = {fg = palette.error}
-			groups.TodoFgHACK = {fg = palette.diff_change}
-			groups.TodoFgNOTE = {fg = palette.info}
+			groups.TodoFgFIX = '@text.danger'
+			groups.TodoFgHACK = '@text.diff.change'
+			groups.TodoFgNOTE = '@text.note'
 			groups.TodoFgPERF = {fg = palette.ok}
 			groups.TodoFgTEST = {fg = palette.hint}
-			groups.TodoFgTODO = {fg = palette.todo}
-			groups.TodoFgWARN = {fg = palette.warning}
+			groups.TodoFgTODO = '@text.todo'
+			groups.TodoFgWARN = '@text.warning'
 
 			groups.TodoBgFIX = {fg = palette.bg, bg = palette.error, bold = true, italic = true, nocombine = true}
 			groups.TodoBgHACK = {fg = palette.bg, bg = palette.diff_change, bold = true, italic = true, nocombine = true}
@@ -560,8 +572,28 @@ local function from_palette(palette, opts)
 			groups.CocWarningSign = 'DiagnosticSignWarn'
 		end
 
+		if all_vim_plugins or vim_plugins.easymotion ~= false then
+			groups.EasyMotion = {reverse = true}
+		end
+
 		if all_vim_plugins or vim_plugins.fern ~= false then
 			groups.FernBranchText = 'Directory'
+		end
+
+		if all_vim_plugins or vim_plugins.gitgutter ~= false then
+			groups.GitGutterAdd = '@text.diff.add'
+			groups.GitGutterChange = '@text.diff.change'
+			groups.GitGutterDelete = '@text.diff.delete'
+			groups.GitGutterChangeDelete = 'GitGutterChange'
+		end
+
+		if all_vim_plugins or vim_plugins.indent_guides ~= false then
+			groups.IndentGuidesOdd = {bg = palette.bg_contrast_high}
+			groups.IndentGuidesEven = {bg = palette.text_contrast_bg_low}
+		end
+
+		if all_vim_plugins or vim_plugins.jumpmotion ~= false then
+			groups.JumpMotion = {reverse = true}
 		end
 
 		if all_vim_plugins or vim_plugins.nerdtree ~= false then
@@ -575,35 +607,28 @@ local function from_palette(palette, opts)
 			groups.NERDTreeLinkTarget = 'Tag'
 		end
 
-		if all_vim_plugins or vim_plugins.vim_easymotion ~= false then
-			groups.EasyMotion = {reverse = true}
-		end
-
-		if all_vim_plugins or vim_plugins.vim_gitgutter ~= false then
-			groups.GitGutterAdd = {fg = palette.diff_add}
-			groups.GitGutterChange = {fg = palette.diff_change}
-			groups.GitGutterDelete = {fg = palette.diff_delete}
-			groups.GitGutterChangeDelete = 'GitGutterChange'
-		end
-
-		if all_vim_plugins or vim_plugins.vim_indent_guides ~= false then
-			groups.IndentGuidesOdd = {bg = palette.bg_contrast_high}
-			groups.IndentGuidesEven = {bg = palette.text_contrast_bg_low}
-		end
-
-		if all_vim_plugins or vim_plugins.vim_jumpmotion ~= false then
-			groups.JumpMotion = {reverse = true}
-		end
-
-		if all_vim_plugins or vim_plugins.vim_sandwich ~= false then
+		if all_vim_plugins or vim_plugins.sandwich ~= false then
 			groups.OperatorSandwichChange = 'DiffText'
 		end
 
-		if all_vim_plugins or vim_plugins.vim_signify ~= false then
-			groups.SignifySignAdd = {fg = palette.diff_add}
-			groups.SignifySignChange = {fg = palette.diff_change}
-			groups.SignifySignDelete = {fg = palette.diff_delete}
+		if all_vim_plugins or vim_plugins.signify ~= false then
+			groups.SignifySignAdd = '@text.diff.add'
+			groups.SignifySignChange = '@text.diff.change'
+			groups.SignifySignDelete = '@text.diff.delete'
 			groups.SignifySignChangeDelete = 'SignifySignChange'
+		end
+
+		if all_vim_plugins or vim_plugins.swap ~= false then
+			groups.SwapCurrentItem = 'Visual'
+			groups.SwapSelectedItem = 'IncSearch'
+		end
+
+		if all_vim_plugins or vim_plugins.undotree ~= false then
+			groups.UndotreeBranch = '@punctuation.delimiter.undotree'
+			groups.UndotreeCurrent = '@text.title.undotree'
+			groups.UndotreeSeq = '@number.undotree'
+			groups.UndotreeNode = '@character.special.undotree'
+			groups.UndotreeTimeStamp = '@string.special.undotree'
 		end
 	end
 

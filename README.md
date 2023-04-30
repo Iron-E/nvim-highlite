@@ -221,8 +221,14 @@ require('highlite').setup {
     <li><a href="https://github.com/romgrk/barbar.nvim">
       barbar
     </a></li>
+    <li><a href="https://github.com/kevinhwang91/nvim-bqf">
+      bqf
+    </a></li>
     <li><a href="https://github.com/hrsh7th/nvim-cmp/">
       cmp
+    </a></li>
+    <li><a href="https://github.com/ibhagwan/fzf-lua">
+      fzf_lua
     </a></li>
     <li><a href="https://github.com/lewis6991/gitsigns.nvim">
       gitsigns
@@ -233,17 +239,28 @@ require('highlite').setup {
     <li><a href="https://github.com/folke/lazy.nvim">
       lazy
     </a></li>
+    <li><a href="https://github.com/neovim/nvim-lspconfig">
+      lspconfig
+    </a></li>
     <li><a href="https://github.com/nvimdev/lspsaga.nvim">
       lspsaga
+    </a></li>
+    <li><a href="https://github.com/ray-x/lsp_signature.nvim">
+      lsp_signature
     </a></li>
     <li><a href="https://github.com/echasnovski/mini.nvim">
       mini
     </a></li>
+    <li><a href="https://github.com/nvim-neo-tree/neo-tree.nvim">
+      neo_tree
     <li><a href="https://github.com/nvim-tree/nvim-tree.lua">
       nvim_tree
     </a></li>
     <li><a href="https://github.com/wbthomason/packer.nvim">
       packer
+    </a></li>
+    <li><a href="https://github.com/tversteeg/registers.nvim">
+      registers
     </a></li>
     <li><a href="https://github.com/simrat39/symbols-outline.nvim">
       symbols_outline
@@ -296,29 +313,41 @@ require('highlite').setup {
     <li><a href="https://github.com/neoclide/coc.nvim">
       coc
     </a></li>
+    <li><a href="https://github.com/kristijanhusak/vim-dadbod-ui">
+      dadbod_ui
+    </a></li>
+    <li><a href="https://github.com/easymotion/vim-easymotion">
+      easymotion
+    </a></li>
     <li><a href="https://github.com/lambdalisue/fern.vim">
       fern
+    </a></li>
+    <li><a href="https://github.com/airblade/vim-gitgutter">
+      gitgutter
+    </a></li>
+    <li><a href="https://github.com/thaerkh/vim-indentguides">
+      indent_guides
+    </a></li>
+    <li><a href="https://github.com/zsugabubus/vim-jumpmotion">
+      jumpmotion
     </a></li>
     <li><a href="https://github.com/preservim/nerdtree">
       nerdtree
     </a></li>
-    <li><a href="https://github.com/easymotion/vim-easymotion">
-      vim_easymotion
-    </a></li>
-    <li><a href="https://github.com/airblade/vim-gitgutter">
-      vim_gitgutter
-    </a></li>
-    <li><a href="https://github.com/thaerkh/vim-indentguides">
-      vim_indent_guides
-    </a></li>
-    <li><a href="https://github.com/zsugabubus/vim-jumpmotion">
-      vim_jumpmotion
-    </a></li>
     <li><a href="https://github.com/machakann/vim-sandwich">
-      vim_sandwich
+      sandwich
     </a></li>
     <li><a href="https://github.com/mhinz/vim-signify">
-      vim_signify
+      signify
+    </a></li>
+    <li><a href="https://github.com/machakann/vim-swap">
+      swap
+    </a></li>
+    <li><a href="https://github.com/mbbill/undotree">
+      undotree
+    </a></li>
+    <li><a href="https://github.com/dstein64/vim-win">
+      win
     </a></li>
   </ul>
 </details>

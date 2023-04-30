@@ -104,7 +104,7 @@ local Table = require 'highlite.table' --- @type highlite.Table
 --- * `text`
 local PALETTE_ALTS =
 {
-	annotation = 'preproc',
+	annotation = 'attribute',
 	attribute = 'preproc',
 	bg_contrast_high = 'bg',
 	bg_contrast_low = 'bg',
@@ -121,7 +121,7 @@ local PALETTE_ALTS =
 	constant = 'storage',
 	constant_builtin = 'special',
 	constructor = 'func',
-	decorator = 'func',
+	decorator = 'attribute',
 	define = 'preproc',
 	diff_add = 'ok',
 	diff_change = 'number',
