@@ -5,9 +5,9 @@ local Options = require 'highlite.groups.options' --- @type highlite.groups.Opti
 --- @package
 --- @param groups highlite.groups the current table being indexed.
 --- @param name string the key to resolve the value for.
---- @return highlite.group.new # the value at `tbl[key]`, when highlight links and embedded functions have been accounted for.
+--- @return nil|highlite.group.new # the value at `tbl[key]`, when highlight links and embedded functions have been accounted for.
 local function resolve(groups, name) -- {{{
-	local original_group = rawget(groups, name) or {}
+	local original_group = rawget(groups, name)
 
 	if type(original_group) == 'string'  then
 		return resolve(groups, original_group)
@@ -231,7 +231,7 @@ local function from_palette(palette, opts)
 		['@lsp.type.decorator'] = {fg = palette.decorator},
 		['@lsp.type.enum'] = {fg = palette.enum, bold = true},
 		['@lsp.type.enumMember'] = {fg = palette.field_enum},
-		['@lsp.type.event.lua'] = '@event',
+		['@lsp.type.event'] = '@event',
 		['@lsp.type.float'] = '@float',
 		['@lsp.type.interface'] = {fg = palette.interface},
 		['@lsp.type.keyword'] = '@keyword',
@@ -1039,7 +1039,7 @@ local function from_palette(palette, opts)
 			groups.shQuote = '@punctuation.delimiter.sh'
 			groups.shSet = 'Statement'
 			groups.shTestOpr = '@debug.sh'
-			groups.shWrapLineOperator = '@character.special'
+			groups.shWrapLineOperator = '@character.special.sh'
 		end
 
 		if all_syntax or syntax.solidity ~= false then

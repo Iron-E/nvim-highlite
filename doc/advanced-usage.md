@@ -7,47 +7,167 @@ Welcome to the advanced usage guide for `nvim-highlite`! This will teach you how
 * [Create a Colorscheme](#complete-example)
 * [Import a Colorscheme](#importing-colorschemes)
 
-## Concepts
+## Creating Your Colorscheme
 
-Before jumping straight into [Creating Your Colorscheme](#creating-your-colorscheme), it is important to know about the *concepts* which `nvim-highlite` is designed around. There are several terms which you will see:
+At last, you are ready to create a colorscheme! You should follow these sections in order to ensure your success.
 
-### Color
+### Where to Put Your Colorscheme
 
-**Color**s in `nvim-highlite` can be either:
-
-* a hex color string, e.g. `"#ffffff"`; or
-* an integer in base 10 which converts to a hex color string in base 16, e.g. `0xFFFFFF`.
+Colorschemes must be defined in a very specific location in order to be visible to Neovim's `:colorscheme` command. In order for `:colorscheme foo` to work, there must be a `colors/foo.vim` or `colors/foo.lua` file located within your `&runtimepath`.
 
 > **Note**
 >
-> Lua can easily convert between both formats:
->
-> ```lua
-> assert("ffffff" == bit.tohex(0xFFFFFF, 6))
-> assert(0xFFFFFF == tonumber("ffffff", 16))
-> ```
+> To check your runtime path, do `lua for _, p in ipairs(vim.opt.rtp:get()) do print(p) end`.
 
-### Palette
+#### Personal Colorscheme
 
-A **palette** is a semantic collection of **color**s. For example:
+If you are making this colorscheme for yourself, that file should be in your configuration directory. Run this snippet to show where that is:
 
 ```lua
-{
-  bg = '#000000',
-  bg_contrast_high = '#404040',
-  bg_contrast_low = '#202020',
+:lua = vim.fn.stdpath('config') .. '/colors/'
+```
 
-  text = '#cdcdcd',
-  text_dark = '#aaaaaa',
-  text_light = '#ffffff',
+#### Re-distributable Colorscheme
+
+If you are making this colorscheme for others to be able to install— first, consider [contributing](./contributing.md)! I'd love to have more colorschemes built-in with this repository.
+
+If you'd rather have the colorscheme live separately from this repository, create a repository and `git clone https://github.com/YOUR_USERNAME/YOUR_REPO YOUR_PROGRAMMING_DIR/YOUR_REPO`. You can then use a plugin manager to load this directory— here is an example for [lazy.nvim](https://github.com/folke/lazy.nvim):
+
+```lua
+require('lazy').setup(
+  {
+    {'YOUR_USERNAME/YOUR_REPO',
+      config = function() vim.api.nvim_command 'colorscheme YOUR_COLORSCHEME' end,
+      dependencies = 'Iron-E/nvim-highlite',
+      priority = 1000,
+    },
+  },
+  {dev = {fallback = true, path = 'YOUR_PROGRAMMING_DIR', patterns = {'YOUR_USERNAME'}}}
+)
+```
+
+Make sure to replace `YOUR_COLORSCHEME`, `YOUR_PROGRAMMING_DIR`, `YOUR_REPO`, `YOUR_USERNAME` with what those values would actually be.
+
+### 1. Generating a Palette
+
+Now that [your file has been created](#0-creating-a-file), you can start developing your colorscheme. The first thing to do is decide on your palette: will base it off of one that is built-in, or create a new one?
+
+* If you like the look of one of the built-in colorschemes, you should use one of the built-in palettes.
+* If you want to make a new colorscheme, or port another colorscheme over to `highlite`, you should derive it.
+
+#### Deriving a Palette
+
+There are currently [80+ fields to a palette](#list-of-palette-colors), and that number will probably only grow over time. To make the process of creating a palette for `nvim-highlite` easier, there is `Palette.derive`. Using this function, only 6(!!) colors need to be defined:
+
+```lua
+local Palette = require 'highlite.color.palette' --- @type highlite.color.Palette
+local colors = Palette.derive('dark', {
+  bg = '#202020', -- colors can be a string
+  error = 0xAA0000, -- or an integer
+  ok = '#00aa00',
+  text = '#cccccc',
+  statement = '#33ccFF',
+  storage = '#cc7700',
+})
+```
+
+Of course… that means your colorscheme only uses six colors. Even though only those six are *required*, it is *recommended* to define more. With more information, `derive` becomes more accurate. Some groups that are *recommended* are:
+
+* `func`
+* `hint` (& `info`, if you want them be distinct from `hint`s)
+* `uri`
+* `warning`
+
+Here is another example showing all of the above, which includes detection of light/dark backgrounds:
+
+```lua
+local Palette = require 'highlite.color.palette' --- @type highlite.color.Palette
+
+local bg = vim.api.nvim_get_option 'background'
+local colors = Palette.derive(bg, bg == 'dark' and {
+  bg = '#202020',
+  error = '#aa0000',
+  func = '#cc00aa',
+  hint = '#cc0055',
+  info = '#ccbb88',
+  ok = '#33bb55',
+  statement = '#33ccFF',
+  storage = '#cc7700',
+  text = '#cccccc',
+  uri = '#00aa00',
+  warning = '#ffbb00',
+} or {
+  -- light palette goes here
+})
+```
+
+##### 1b. Creating a Terminal Palette (Optional)
+
+To define a terminal palette, all you have to do is define a list with colors in the following order:
+
+1. black
+2. dark red
+3. dark green
+4. dark yellow / orange
+5. blue
+6. dark magenta
+7. dark cyan
+8. gray / "dark white"
+9. dark gray / "light black"
+10. red
+11. green
+12. yellow
+13. light blue
+14. magenta
+15. cyan
+16. white
+
+> **Warning**
+>
+> While other colors may either be a string (e.g. `'#FFFFFF'`) or an integer (e.g. `0xFFFFFF`), but the colors in the terminal palette _must_ be strings.
+
+For example:
+
+```lua
+local terminal_palette = {
+  '#101017', '#aa0000', '#33bb55', '#cc7700', '#133099', '#990066', '#33ccFF', '#cccccc',
+  '#808080', '#FF2222', '#00aa00', '#7f6f20', '#1259ff', '#cc00aa', '#3388aa', '#ffffff',
 }
 ```
 
+#### Using a Built-in Palette
+
+```lua
+local Highlite = require 'highlite' --- @type Highlite
+
+local palette, terminal_palette = Highlite.palette 'highlite' -- or any of the built-in palettes, e.g. 'ayu'
+```
+
+The `terminal_palette` will automatically be `nil` when you turn off terminal highlighting in `setup`.
+
+##### List of Built-in Palettes
+
+| Name               | Description                                                                   |
+|:-------------------|:------------------------------------------------------------------------------|
+| `ayu`              | Based on `ayu` from [ayu-theme/ayu-vim][ayu]                                  |
+| `everforest`       | Based on `everforest` from [sainnhe/everforest][everforest]                   |
+| `gruvbox-material` | Based on `gruvbox-material` from [sainnhe/gruvbox-material][gruvbox-material] |
+| `gruvbox`          | Based on `gruvbox` from [morhetz/gruvbox][gruvbox]                            |
+| `highlite`         | The original `nvim-highlite` palette                                          |
+| `iceberg`          | Based on `iceberg` from [cocopon/iceberg.vim][iceberg]                        |
+| `molokai`          | Based on `molokai` from [tomasr/molokai][molokai]                             |
+| `papercolor`       | Based on `papercolor` from [nlknguyen/papercolor-theme][papercolor]           |
+| `seoul256-light`   | Based on `seoul256-light` from [junegunn/seoul256.vim][seoul256]              |
+| `seoul256`         | Based on `seoul256` from [junegunn/seoul256.vim][seoul256]                    |
+| `solarized8-flat`  | Based on `solarized8-flat` from [lifepillar/vim-solarized8][solarized]        |
+| `solarized8-high`  | Based on `solarized8-high` from [lifepillar/vim-solarized8][solarized]        |
+| `solarized8-low`   | Based on `solarized8-low` from [lifepillar/vim-solarized8][solarized]         |
+| `solarized8`       | Based on `solarized8` from [lifepillar/vim-solarized8][solarized]             |
+| `sonokai`          | Based on `sonokai` from [sainnhe/sonokai][sonokai]                            |
+
 #### List of Palette Colors
 
-> **Note**
->
-> You do *not* need to assign all of these! You can define a small number of them, a full palette will be created (see [Deriving a Palette][deriving-a-palette]).
+**Remember:** you do not need to define all of these.
 
 | Field                   | Definition                                                                              |
 |:------------------------|:----------------------------------------------------------------------------------------|
@@ -140,174 +260,23 @@ A **palette** is a semantic collection of **color**s. For example:
 | `variable_builtin`      | a variable from the language, e.g. `self`                                               |
 | `warning`               | diagnostic warnings                                                                     |
 
-### Highlight Groups
+##### Extending the Palette
 
-A **Group** is a collection of attributes, based on a **palette**, which defines how certain types of text look. Follows the format of `nvim_set_hl`'s `{val}` parameter. Example:
-
-```lua
-local colors = require('highlite.color.palette').derive(…) -- see "Deriving a Palette" for more info
-local normal = {fg = colors.text, bg = colors.bg}
-```
-
-`nvim-highlite` also accepts a shorthand `:highlight link` syntax:
-
-```lua
-local float = 'Number' -- same as `{link = 'Number'}`
-```
-
-## Creating Your Colorscheme
-
-At last, you are ready to create a colorscheme! You should follow these sections in order to ensure your success.
-
-### Where to Put Your Colorscheme
-
-Colorschemes must be defined in a very specific location in order to be visible to Neovim's `:colorscheme` command. In order for `:colorscheme foo` to work, there must be a `colors/foo.vim` or `colors/foo.lua` file located within your `&runtimepath`.
-
-> **Note**
->
-> To check your runtime path, do `lua for _, p in ipairs(vim.opt.rtp:get()) do print(p) end`.
-
-#### Personal Colorscheme
-
-If you are making this colorscheme for yourself, that file should be in your configuration directory. Run this snippet to show where that is:
-
-```lua
-:lua = vim.fn.stdpath('config') .. '/colors/'
-```
-
-#### Re-distributable Colorscheme
-
-If you are making this colorscheme for others to be able to install— first, consider [contributing](./contributing.md)! I'd love to have more colorschemes built-in with this repository.
-
-If you'd rather have the colorscheme live separately from this repository, create a repository and `git clone https://github.com/YOUR_USERNAME/YOUR_REPO YOUR_PROGRAMMING_DIR/YOUR_REPO`. You can then use a plugin manager to load this directory— here is an example for [lazy.nvim](https://github.com/folke/lazy.nvim):
-
-```lua
-require('lazy').setup(
-  {
-    {'YOUR_USERNAME/YOUR_REPO',
-      config = function() vim.api.nvim_command 'colorscheme YOUR_COLORSCHEME' end,
-      dependencies = 'Iron-E/nvim-highlite',
-      priority = 1000,
-    },
-  },
-  {dev = {fallback = true, path = 'YOUR_PROGRAMMING_DIR', patterns = {'YOUR_USERNAME'}}}
-)
-```
-
-Make sure to replace `YOUR_COLORSCHEME`, `YOUR_PROGRAMMING_DIR`, `YOUR_REPO`, `YOUR_USERNAME` with what those values would actually be.
-
-### 1. Generating a Palette
-
-Now that [your file has been created](#0-creating-a-file), you can start developing your colorscheme. The first thing to do is decide on your palette: will base it off of one that is built-in, or create a new one?
-
-* If you like the look of one of the built-in colorschemes, you should use one of the built-in palettes.
-* If you want to make a new colorscheme, or port another colorscheme over to `highlite`, you should derive it.
-
-#### Deriving a Palette
-
-There are currently 40+ fields to a palette, and that number will probably only grow over time. To make the process of creating a palette for `nvim-highlite` easier, there is `Palette.derive`. Using this function, only 6(!!) colors need to be defined:
-
-```lua
-local Palette = require 'highlite.color.palette' --- @type highlite.color.Palette
-local colors = Palette.derive('dark', {
-  bg = '#202020',
-  error = '#aa0000',
-  ok = '#00aa00',
-  text = '#cccccc',
-  statement = '#33ccFF',
-  storage = '#cc7700',
-})
-```
-
-Of course… that means your colorscheme only uses six colors. Even though only those six are *required*, it is *recommended* to define more. With more information, `derive` becomes more accurate. Some groups that are *recommended* are:
-
-* `func`
-* `hint` (& `info`, if you want them be distinct from `hint`s)
-* `uri`
-* `warning`
-
-Here is another example showing all of the above, which includes detection of light/dark backgrounds:
-
-```lua
-local Palette = require 'highlite.color.palette' --- @type highlite.color.Palette
-
-local bg = vim.api.nvim_get_option 'background'
-local colors = Palette.derive(bg, bg == 'dark' and {
-  bg = '#202020',
-  error = '#aa0000',
-  func = '#cc00aa',
-  hint = '#cc0055',
-  info = '#ccbb88',
-  ok = '#33bb55',
-  statement = '#33ccFF',
-  storage = '#cc7700',
-  text = '#cccccc',
-  uri = '#00aa00',
-  warning = '#ffbb00',
-} or {
-  -- light palette goes here
-})
-```
-
-##### 1b. Creating a Terminal Palette (Optional)
-
-To define a terminal palette, all you have to do is define a list with colors in the following order:
-
-1. black
-2. dark red
-3. dark green
-4. dark yellow / orange
-5. blue
-6. dark magenta
-7. dark cyan
-8. gray / "dark white"
-9. dark gray / "light black"
-10. red
-11. green
-12. yellow
-13. light blue
-14. magenta
-15. cyan
-16. white
-
-For example:
-
-```lua
-local terminal_palette = {
-  '#101017', '#aa0000', '#33bb55', '#cc7700', '#133099', '#990066', '#33ccFF', '#cccccc',
-  '#808080', '#FF2222', '#00aa00', '#7f6f20', '#1259ff', '#cc00aa', '#3388aa', '#ffffff',
-}
-```
-
-#### Using a Built-in Palette
+You may add *extra* colors to the palette, if what is available is not fine-grained enough. You can add as many colors as you like. Example:
 
 ```lua
 local Highlite = require 'highlite' --- @type Highlite
 
-local palette, terminal_palette = Highlite.palette 'highlite' -- or any of the built-in palettes, e.g. 'ayu'
+local palette, terminal_palette = Highlite.palette 'highlite'
+
+-- also works with derive
+palette.my_custom_color = '#FF0000'
+
+local groups = Highlite.groups('default', palette)
+groups.Error = {fg = palette.my_custom_color}
+
+-- … other colorscheme logic
 ```
-
-The `terminal_palette` will automatically be `nil` when you turn off terminal highlighting in `setup`.
-
-##### List of Built-in Palettes
-
-| Name               | Description                                                                   |
-|:-------------------|:------------------------------------------------------------------------------|
-| `ayu`              | Based on `ayu` from [ayu-theme/ayu-vim][ayu]                                  |
-| `everforest`       | Based on `everforest` from [sainnhe/everforest][everforest]                   |
-| `gruvbox-material` | Based on `gruvbox-material` from [sainnhe/gruvbox-material][gruvbox-material] |
-| `gruvbox`          | Based on `gruvbox` from [morhetz/gruvbox][gruvbox]                            |
-| `highlite`         | The original `nvim-highlite` palette                                          |
-| `iceberg`          | Based on `iceberg` from [cocopon/iceberg.vim][iceberg]                        |
-| `molokai`          | Based on `molokai` from [tomasr/molokai][molokai]                             |
-| `papercolor`       | Based on `papercolor` from [nlknguyen/papercolor-theme][papercolor]           |
-| `seoul256-light`   | Based on `seoul256-light` from [junegunn/seoul256.vim][seoul256]              |
-| `seoul256`         | Based on `seoul256` from [junegunn/seoul256.vim][seoul256]                    |
-| `solarized8-flat`  | Based on `solarized8-flat` from [lifepillar/vim-solarized8][solarized]        |
-| `solarized8-high`  | Based on `solarized8-high` from [lifepillar/vim-solarized8][solarized]        |
-| `solarized8-low`   | Based on `solarized8-low` from [lifepillar/vim-solarized8][solarized]         |
-| `solarized8`       | Based on `solarized8` from [lifepillar/vim-solarized8][solarized]             |
-| `sonokai`          | Based on `sonokai` from [sainnhe/sonokai][sonokai]                            |
 
 #### `highlite.Color` Reference
 
@@ -349,7 +318,29 @@ local groups = Highlite.groups('default', palette) -- or any of the built-in gro
 
 #### 2a. Overriding Groups (Optional)
 
-`nvim-highlite` provides utility for overriding the groups which it generates. Most of these are documented in the [`highlite.Groups` reference](#highlitegroups-reference), but there is one other utility which is notable:
+`nvim-highlite` **groups** follow the format of `nvim_set_hl`'s `{val}` parameter. Example:
+
+```lua
+local colors = require('highlite.color.palette').derive(…) -- see "Deriving a Palette" for more info
+local normal = {fg = colors.text, bg = colors.bg}
+```
+
+`nvim-highlite` also accepts a shorthand `:highlight link` syntax:
+
+```lua
+local float = 'Number' -- same as `{link = 'Number'}`
+```
+
+##### Resolving Highlight Links
+
+`nvim-highlite` provides a convenient way to resolve highlight links within the defined colorscheme:
+
+```lua
+--- @param group string
+--- @return nil|table
+```
+
+Example:
 
 ```lua
 local palette = … -- see instructions for generating a palette
@@ -376,7 +367,15 @@ groups.Baz = groups.Bar
 
 -- create a new highlight group `Xyz` using `Bar`'s unlinked `fg` attribute
 groups.Xyz = {fg = groups'Bar'.fg}
+
+-- you can chain resolves, in case one group isn't available
+groups.Zyx = {fg = (groups"Doesn't Exist" or groups'Might Exist' or {}).fg}
 ```
+
+###### Limitations
+
+* For LSP and treesitter groups: if `@foo.bar` is not defined explicitly, the un-linker will not attempt to lookup `@foo`.
+  * As a workaround, you can do `groups'@foo.bar' or groups'@foo' or {}` to check for the existence of fallback highlights manually.
 
 ##### `highlite.Groups` Reference
 
@@ -412,7 +411,7 @@ All of the functions in `Groups` are specialized for working with highlight grou
 > local cloned = Groups.clone(DiagnosticError) -- invalid!
 > ```
 >
-> There is a way to resolve highlight links into a valid group definition— see [Overriding Groups](#2a-overriding-groups-optional).
+> There is a way to resolve highlight links into a valid group definition— see [Resolving Highlight Links](#resolving-highlight-links).
 
 ###### `Groups.clone()`
 
