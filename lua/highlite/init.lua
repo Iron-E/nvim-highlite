@@ -35,22 +35,22 @@ function Highlite.generate(scheme_name, groups, terminal_palette)
 		vim.api.nvim_set_hl(0, name, definition)
 	end
 
-	vim.g.terminal_color_0 = terminal_palette[1]
-	vim.g.terminal_color_1 = terminal_palette[2]
-	vim.g.terminal_color_2 = terminal_palette[3]
-	vim.g.terminal_color_3 = terminal_palette[4]
-	vim.g.terminal_color_4 = terminal_palette[5]
-	vim.g.terminal_color_5 = terminal_palette[6]
-	vim.g.terminal_color_6 = terminal_palette[7]
-	vim.g.terminal_color_7 = terminal_palette[8]
-	vim.g.terminal_color_8 = terminal_palette[9]
-	vim.g.terminal_color_9 = terminal_palette[10]
-	vim.g.terminal_color_10 = terminal_palette[11]
-	vim.g.terminal_color_11 = terminal_palette[12]
-	vim.g.terminal_color_12 = terminal_palette[13]
-	vim.g.terminal_color_13 = terminal_palette[14]
-	vim.g.terminal_color_14 = terminal_palette[15]
-	vim.g.terminal_color_15 = terminal_palette[16]
+	vim.api.nvim_set_var('terminal_color_0', terminal_palette[1])
+	vim.api.nvim_set_var('terminal_color_1', terminal_palette[2])
+	vim.api.nvim_set_var('terminal_color_2', terminal_palette[3])
+	vim.api.nvim_set_var('terminal_color_3', terminal_palette[4])
+	vim.api.nvim_set_var('terminal_color_4', terminal_palette[5])
+	vim.api.nvim_set_var('terminal_color_5', terminal_palette[6])
+	vim.api.nvim_set_var('terminal_color_6', terminal_palette[7])
+	vim.api.nvim_set_var('terminal_color_7', terminal_palette[8])
+	vim.api.nvim_set_var('terminal_color_8', terminal_palette[9])
+	vim.api.nvim_set_var('terminal_color_9', terminal_palette[10])
+	vim.api.nvim_set_var('terminal_color_10', terminal_palette[11])
+	vim.api.nvim_set_var('terminal_color_11', terminal_palette[12])
+	vim.api.nvim_set_var('terminal_color_12', terminal_palette[13])
+	vim.api.nvim_set_var('terminal_color_13', terminal_palette[14])
+	vim.api.nvim_set_var('terminal_color_14', terminal_palette[15])
+	vim.api.nvim_set_var('terminal_color_15', terminal_palette[16])
 
 	vim.api.nvim_set_var('colors_name', scheme_name)
 end
