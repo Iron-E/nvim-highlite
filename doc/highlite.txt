@@ -198,7 +198,7 @@ bqf
 
 cmp
 
-fzf_lua
+fzf
 
 gitsigns
 

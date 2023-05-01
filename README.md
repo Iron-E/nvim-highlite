@@ -228,7 +228,7 @@ require('highlite').setup {
       cmp
     </a></li>
     <li><a href="https://github.com/ibhagwan/fzf-lua">
-      fzf_lua
+      fzf
     </a></li>
     <li><a href="https://github.com/lewis6991/gitsigns.nvim">
       gitsigns
