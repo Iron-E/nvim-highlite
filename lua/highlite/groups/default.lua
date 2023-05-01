@@ -126,7 +126,7 @@ local function from_palette(palette, opts)
 		VisualNOS = 'Visual',
 
 		-- Popups
-		FloatBorder = {fg = palette.text_contrast_bg_low},
+		FloatBorder = {fg = palette.text_contrast_bg_high},
 		--(FloatTitle defined below)
 		NormalFloat = 'Pmenu',
 		Pmenu = {fg = palette.text, bg = palette.bg_contrast_low},
@@ -343,7 +343,7 @@ local function from_palette(palette, opts)
 	setmetatable(groups, RESOLVE_METATABLE)
 
 	--- @diagnostic disable:param-type-mismatch these are not nil
-	groups.FloatTitle = Groups.extend({bold = true}, groups 'NormalFloat')
+	groups.FloatTitle = Groups.extend({bold = true}, groups 'FloatBorder')
 	groups.MatchParen = Groups.extend({bold = true}, groups 'Tag')
 	--- @diagnostic enable:param-type-mismatch
 
@@ -437,6 +437,11 @@ local function from_palette(palette, opts)
 			groups.CmpItemKindUnit = 'Special'
 			groups.CmpItemKindValue = '@constant'
 			groups.CmpItemKindVariable = '@variable'
+		end
+
+		if all_nvim_plugins or nvim_plugins.fzf ~= false then
+			groups.FzfLuaBorder = 'FloatBorder'
+			groups.FzfLuaTitle = 'FloatTitle'
 		end
 
 		if all_nvim_plugins or nvim_plugins.gitsigns ~= false then
@@ -534,6 +539,12 @@ local function from_palette(palette, opts)
 		if all_nvim_plugins or nvim_plugins.symbols_outline ~= false then
 			groups.FocusedSymbol = {}
 			groups.SymbolsOutlineConnector = 'Delimiter'
+		end
+
+		if all_nvim_plugins or nvim_plugins.telescope ~= false then
+			groups.TelescopeBorder = 'FloatBorder'
+			groups.TelescopeNormal = 'NormalFloat'
+			groups.TelescopeTitle = 'FloatTitle'
 		end
 
 		if all_nvim_plugins or nvim_plugins.todo_comments ~= false then

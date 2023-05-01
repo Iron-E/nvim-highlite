@@ -1,6 +1,6 @@
 --- @meta
 
---- @alias highlite.groups.from_palette.opts.plugins.nvim 'barbar'|'cmp'|'gitsigns'|'indent_blankline'|'lazy'|'leap'|'lsp_signature'|'lspconfig'|'lspsaga'|'mini'|'nvim_tree'|'packer'|'sniprun'|'symbols_outline'|'todo_comments'|'trouble'
+--- @alias highlite.groups.from_palette.opts.plugins.nvim 'barbar'|'cmp'|'fzf'|'gitsigns'|'indent_blankline'|'lazy'|'leap'|'lsp_signature'|'lspconfig'|'lspsaga'|'mini'|'nvim_tree'|'packer'|'sniprun'|'symbols_outline'|'telescope'|'todo_comments'|'trouble'
 --- @alias highlite.groups.from_palette.opts.plugins.vim 'ale'|'coc'|'easymotion'|'fern'|'gitgutter'|'indent_guides'|'jumpmotion'|'nerdtree'|'sandwich'|'signify'|'swap'|'undotree'
 
 --- @alias highlite.groups.from_palette.opts.syntax 'coq'|'cpp'|'cs'|'css'|'dart'|'dosini'|'dot'|'git'|'go'|'help'|'html'|'i3config'|'java'|'javascript'|'json'|'lua'|'make'|'man'|'markdown'|'python'|'razor'|'ruby'|'rust'|'scala'|'scss'|'sh'|'solidity'|'sql'|'tex'|'toml'|'vim'|'xdefaults'|'xml'|'xxd'|'yaml'

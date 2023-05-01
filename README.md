@@ -268,6 +268,9 @@ require('highlite').setup {
     <li><a href="https://github.com/simrat39/symbols-outline.nvim">
       symbols_outline
     </a></li>
+    <li><a href="https://github.com/nvim-telescope/telescope.nvim">
+      telescope
+    </a></li>
     <li><a href="https://github.com/folke/todo-comments.nvim">
       todo_comments
     </a></li>
