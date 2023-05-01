@@ -145,10 +145,13 @@ let g:colors_name = '%s'
 		for _, group in ipairs(keys) do
 			local definition = groups[group]
 			if include_hl_group_for_nvim_export(group) then
-				if definition.cterm == nil then definition.cterm = {} end
 				if definition.link then
 					s = s .. '\n\thi! link ' .. group .. ' ' .. definition.link
 				else
+					if definition.cterm == nil then
+						definition.cterm = {}
+					end
+
 					local cterm =
 						attr(definition.cterm, 'bold') ..
 						attr(definition.cterm, 'italic') ..
@@ -156,16 +159,11 @@ let g:colors_name = '%s'
 						attr(definition.cterm, 'reverse') ..
 						attr(definition.cterm, 'standout') ..
 						attr(definition.cterm, 'strikethrough') ..
-						attr(definition.cterm, 'strikethrough') ..
 						attr(definition.cterm, 'undercurl') ..
 						attr(definition.cterm, 'underdashed') ..
 						attr(definition.cterm, 'underdotted') ..
 						attr(definition.cterm, 'underdouble') ..
 						attr(definition.cterm, 'underline')
-
-					if #cterm < 1 then
-						cterm = NONE
-					end
 
 					local gui =
 						attr(definition, 'bold') ..
@@ -174,23 +172,18 @@ let g:colors_name = '%s'
 						attr(definition, 'reverse') ..
 						attr(definition, 'standout') ..
 						attr(definition, 'strikethrough') ..
-						attr(definition, 'strikethrough') ..
 						attr(definition, 'undercurl') ..
 						attr(definition, 'underdashed') ..
 						attr(definition, 'underdotted') ..
 						attr(definition, 'underdouble') ..
 						attr(definition, 'underline')
 
-					if #gui < 1 then
-						gui = NONE
-					end
-
-					s = s .. '\n\thi! ' .. group ..
+					s = s .. '\n\thi ' .. group ..
 						' blend=' .. (definition.blend or NONE) ..
-						' cterm=' .. cterm ..
+						' cterm=' .. (#cterm < 1 and NONE or cterm) ..
 						' ctermbg=' .. (definition.ctermbg or NONE) ..
 						' ctermfg=' .. (definition.ctermfg or NONE) ..
-						' gui=' .. gui ..
+						' gui=' .. (#gui < 1 and NONE or gui) ..
 						' guibg=' .. hex(definition.bg) ..
 						' guifg=' .. hex(definition.fg) ..
 						' guisp=' .. hex(definition.sp)
