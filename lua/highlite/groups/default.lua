@@ -517,6 +517,13 @@ local function from_palette(palette, opts)
 			groups.packerSuccess = 'DiagnosticFloatingOk'
 		end
 
+		if all_nvim_plugins or nvim_plugins.sniprun ~= false then
+			groups.SniprunFloatingWinErr = 'DiagnosticFloatingError'
+			groups.SniprunFloatingWinOk = 'DiagnosticFloatingOk'
+			groups.SniprunVirtualTextError = 'DiagnosticVirtualTextError'
+			groups.SniprunVirtualTextOk = 'DiagnosticVirtualTextOk'
+		end
+
 		if all_nvim_plugins or nvim_plugins.symbols_outline ~= false then
 			groups.FocusedSymbol = {}
 			groups.SymbolsOutlineConnector = 'Delimiter'
