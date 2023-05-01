@@ -194,7 +194,11 @@ LIST OF NEOVIM PLUGINS
 
 barbar
 
+bqf
+
 cmp
+
+fzf_lua
 
 gitsigns
 
@@ -202,19 +206,39 @@ indent_blankline
 
 lazy
 
+leap
+
+lspconfig
+
 lspsaga
+
+lsp_signature
 
 mini
 
+neo_tree
 nvim_tree
+>
+    <li><a href="https://github.com/wbthomason/packer.nvim">
+      packer
+    </a></li>
+    <li><a href="https://github.com/tversteeg/registers.nvim">
+      registers
+    </a></li>
+    <li><a href="https://github.com/simrat39/symbols-outline.nvim">
+      symbols_outline
+    </a></li>
+    <li><a href="https://github.com/nvim-telescope/telescope.nvim">
+      telescope
+    </a></li>
+    <li><a href="https://github.com/folke/todo-comments.nvim">
+      todo_comments
+    </a></li>
+    <li><a href="https://github.com/folke/trouble.nvim">
+      trouble
+    </a></li>
+<
 
-packer
-
-symbols_outline
-
-todo_comments
-
-trouble
 
 VIM
 
@@ -247,21 +271,29 @@ ale
 
 coc
 
+dadbod_ui
+
+easymotion
+
 fern
+
+gitgutter
+
+indent_guides
+
+jumpmotion
 
 nerdtree
 
-vim_easymotion
+sandwich
 
-vim_gitgutter
+signify
 
-vim_indent_guides
+swap
 
-vim_jumpmotion
+undotree
 
-vim_sandwich
-
-vim_signify
+win
 
 Syntax                                                       *highlite-Syntax*
 
