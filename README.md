@@ -239,6 +239,9 @@ require('highlite').setup {
     <li><a href="https://github.com/folke/lazy.nvim">
       lazy
     </a></li>
+    <li><a href="https://github.com/ggandor/leap.nvim">
+      leap
+    </a></li>
     <li><a href="https://github.com/neovim/nvim-lspconfig">
       lspconfig
     </a></li>

@@ -472,6 +472,12 @@ local function from_palette(palette, opts)
 			groups.LazyUrl = '@text.uri.lazy'
 		end
 
+		if all_nvim_plugins or nvim_plugins.leap ~= false then
+			groups.LeapLabelPrimary = {bold = true, reverse = true}
+			groups.LeapLabelSecondary = Groups.extend({bold = true}, groups'IncSearch')
+			groups.LeapLabelSelected = 'Visual'
+		end
+
 		if all_nvim_plugins or nvim_plugins.lsp_signature ~= false then
 			groups.LspSignatureActiveParameter = 'Visual'
 		end
@@ -494,6 +500,7 @@ local function from_palette(palette, opts)
 
 		if all_nvim_plugins or nvim_plugins.mini ~= false then
 			groups.MiniJump = 'MiniJump2dSpot'
+			groups.MiniJump2dSpot = {bold = true, reverse = true}
 			groups.MiniSurround = {reverse = true}
 		end
 
@@ -580,7 +587,7 @@ local function from_palette(palette, opts)
 		end
 
 		if all_vim_plugins or vim_plugins.easymotion ~= false then
-			groups.EasyMotion = {reverse = true}
+			groups.EasyMotion = {bold = true, reverse = true}
 		end
 
 		if all_vim_plugins or vim_plugins.fern ~= false then
@@ -600,7 +607,7 @@ local function from_palette(palette, opts)
 		end
 
 		if all_vim_plugins or vim_plugins.jumpmotion ~= false then
-			groups.JumpMotion = {reverse = true}
+			groups.JumpMotion = {bold = true, reverse = true}
 		end
 
 		if all_vim_plugins or vim_plugins.nerdtree ~= false then
