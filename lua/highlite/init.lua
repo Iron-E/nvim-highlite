@@ -26,7 +26,10 @@ function Highlite.generate(scheme_name, groups, terminal_palette)
 
 	--- @cast terminal_palette -nil
 
-	vim.api.nvim_command 'highlight clear'
+	if vim.g.colors_name ~= nil then
+		vim.api.nvim_command 'highlight clear'
+	end
+
 	for name, definition in pairs(groups) do
 		if type(definition) == 'string' then -- `definition` is a link
 			definition = {link = definition}
