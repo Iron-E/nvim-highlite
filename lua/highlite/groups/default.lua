@@ -556,7 +556,7 @@ local function from_palette(palette, opts)
 		end
 
 		if all_nvim_plugins or nvim_plugins.mini ~= false then
-			groups.MiniJump = 'MiniJump2dSpot'
+			groups.MiniJump = {sp = palette.search, underdouble = true}
 			groups.MiniJump2dSpot = {bold = true, reverse = true}
 			groups.MiniSurround = {reverse = true}
 		end
@@ -876,7 +876,7 @@ local function from_palette(palette, opts)
 
 		if all_syntax or syntax.html ~= false then
 			groups.htmlArg = '@tag.attribute'
-			groups.htmlSpecialChar = '@character.special.html'
+			groups.htmlSpecialChar = '@string.special.html'
 			groups.htmlBold = 'Bold'
 			groups.htmlEndTag = 'htmlTag'
 			groups.htmlH1 = 'H1'
@@ -1039,7 +1039,7 @@ local function from_palette(palette, opts)
 			groups.mkdItalic = 'mkdBold'
 			groups.mkdLineBreak = 'NonText'
 			groups.mkdLink = '@text.uri.markdown'
-			groups.mkdListItem = '@character.special.markdown'
+			groups.mkdListItem = '@punctuation.special.markdown'
 			groups.mkdRule = {fg = palette.text_contrast_bg_low, sp = palette.text_contrast_bg_high, underline = true}
 			groups.mkdURL = 'mkdLink'
 		end
@@ -1080,7 +1080,7 @@ local function from_palette(palette, opts)
 			groups.razorcsTypeNullable = 'Special'
 			groups.razorcsUnaryOperatorKeyword = '@operator.razor'
 			groups.razorcsXMLTag = '@tag.xml'
-			groups.razorDelimiter = '@character.special.razor'
+			groups.razorDelimiter = '@punctuation.special.razor'
 			groups.razorEventAttribute = '@preproc.conditional.razor'
 			groups.razorFor = 'razorIf'
 			groups.razorhtmlAttribute = '@field.html'
@@ -1105,7 +1105,7 @@ local function from_palette(palette, opts)
 			groups.rustIdentifier = '@variable.rust'
 			groups.rustStaticLifetime = '@storageclass.rust'
 			groups.rustStringDelimiter = 'rustCharacterDelimiter'
-			groups.rustUnused = '@character.special.rust'
+			groups.rustUnused = '@variable.builtin.rust'
 			groups.rustEscape = '@string.escape.rust'
 		end
 
@@ -1141,7 +1141,7 @@ local function from_palette(palette, opts)
 			groups.shQuote = '@punctuation.delimiter.sh'
 			groups.shSet = 'Statement'
 			groups.shTestOpr = '@debug.sh'
-			groups.shWrapLineOperator = '@character.special.sh'
+			groups.shWrapLineOperator = '@punctuation.special.sh'
 		end
 
 		if all_syntax or syntax.solidity ~= false then
