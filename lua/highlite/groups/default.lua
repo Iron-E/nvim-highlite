@@ -10,9 +10,9 @@ local function resolve(groups, name) -- {{{
 	local original_group = rawget(groups, name)
 
 	if type(original_group) == 'string'  then
-		return resolve(groups, original_group)
-	elseif original_group.link then
-		return resolve(groups, original_group.link)
+		original_group = resolve(groups, original_group)
+	elseif original_group and original_group.link then
+		original_group = resolve(groups, original_group.link)
 	end
 
 	return original_group
