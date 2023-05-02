@@ -32,9 +32,35 @@ local function from_palette(palette, opts)
 	local line_nr = {fg = palette.text_contrast_bg_low}
 	local status_line = {fg = palette.string, bg = palette.bg_contrast_high}
 
+	local boolean = {fg = palette.boolean}
+	local character = {fg = palette.character}
+	local comment = {fg = palette.text_contrast_bg_low, italic = true}
+	local conditional = {fg = palette.conditional, italic = true}
+	local constant = {fg = palette.constant}
+	local define = {fg = palette.define, nocombine = true}
+	local delimiter = {fg = palette.punctuation}
+	local exception = {fg = palette.throw, bold = true}
+	local float = {fg = palette.float}
+	local function_ = {fg = palette.func}
+	local identifier = {fg = palette.identifier}
+	local include = {fg = palette.include, nocombine = true}
+	local keyword = {fg = palette.keyword}
+	local label = {fg = palette.label, bold = true}
+	local macro = {fg = palette.macro, italic = true}
+	local number = {fg = palette.number}
+	local operator = {fg = palette.operator, bold = true}
+	local pre_proc = {fg = palette.preproc}
+	local preproc_conditional = {fg = palette.preproc_conditional, italic = true}
+	local repeat_ = {fg = palette.loop, italic = true}
+	local statement = {fg = palette.statement}
+	local storage_class = {fg = palette.storage, bold = true}
+	local string_ = {fg = palette.string}
+	local structure = {fg = palette.structure, bold = true}
 	local tabline = {fg = palette.text, bg = palette.bg_contrast_high}
 	local tabline_fill = {fg = palette.bg, bg = palette.bg}
 	local tabline_sel = {fg = palette.text, bg = palette.bg_contrast_low, sp = palette.buffer_current, underline = true}
+	local type_ = {fg = palette.type}
+	local type_definition = {fg = palette.type, italic = true}
 
 	local buffer_alternate = Groups.extend({sp = palette.buffer_alternate, underline = true}, tabline)
 	local buffer_visible = Groups.extend({sp = palette.buffer_active, underline = true}, tabline)
@@ -65,38 +91,38 @@ local function from_palette(palette, opts)
 		NonText = {fg = palette.bg_contrast_high},
 
 		-- Literals
-		Constant = {fg = palette.constant},
-		String = {fg = palette.string},
-		Character = {fg = palette.character},
-		Number = {fg = palette.number},
-		Boolean = {fg = palette.boolean},
-		Float = {fg = palette.float},
+		Constant = constant,
+		String = string_,
+		Character = character,
+		Number = number,
+		Boolean = boolean,
+		Float = float,
 
 		-- Syntax
-		Comment = {fg = palette.text_contrast_bg_low, italic = true},
-		Conditional = {fg = palette.conditional, italic = true},
+		Comment = comment,
+		Conditional = conditional,
 		Debug = 'WarningMsg',
-		Delimiter = {fg = palette.punctuation},
-		Exception = {fg = palette.throw, bold = true},
-		Function = {fg = palette.func},
-		Identifier = {fg = palette.identifier},
-		Keyword = {fg = palette.keyword},
-		Label = {fg = palette.label, bold = true},
+		Delimiter = delimiter,
+		Exception = exception,
+		Function = function_,
+		Identifier = identifier,
+		Keyword = keyword,
+		Label = label,
 		Noise = 'Delimiter',
-		Operator = {fg = palette.operator, bold = true},
-		Repeat = {fg = palette.loop, italic = true},
-		Statement = {fg = palette.statement},
-		StorageClass = {fg = palette.storage, bold = true},
-		Structure = {fg = palette.structure, bold = true},
-		Type = {fg = palette.type},
-		Typedef = {fg = palette.type, italic = true},
+		Operator = operator,
+		Repeat = repeat_,
+		Statement = statement,
+		StorageClass = storage_class,
+		Structure = structure,
+		Type = type_,
+		Typedef = type_definition,
 
 		-- Pre-processor
-		Define = {fg = palette.define, nocombine = true},
-		Include = {fg = palette.include, nocombine = true},
-		Macro = {fg = palette.macro, italic = true},
-		PreCondit = {fg = palette.preproc_conditional, italic = true},
-		PreProc = {fg = palette.preproc},
+		Define = define,
+		Include = include,
+		Macro = macro,
+		PreCondit = preproc_conditional,
+		PreProc = pre_proc,
 
 		-- Special
 		Special = {fg = palette.special, bold = true},
@@ -256,36 +282,34 @@ local function from_palette(palette, opts)
 		['@lsp.typemod.variable.defaultLibrary'] = '@variable.builtin',
 
 		-- Treesitter
-		['@attribute'] = {fg = palette.attribute},
-		['@character.special'] = {fg = palette.character_special, bold = true},
-		['@comment.documentation'] = {fg = palette.comment_documentation},
-		['@conceal'] = 'Conceal',
-		['@constant.builtin'] = {fg = palette.constant_builtin, bold = true},
-		['@constructor'] = {fg = palette.constructor},
+		['@attribute'] = {fg = palette.attribute, nocombine = true},
+		['@character.special'] = {fg = palette.character_special, bold = true, nocombine = true},
+		['@comment.documentation'] = {fg = palette.comment_documentation, nocombine = true},
+		['@constant.builtin'] = {fg = palette.constant_builtin, bold = true, nocombine = true},
+		['@constructor'] = {fg = palette.constructor, nocombine = true},
 		['@error'] = 'Error',
-		['@event'] = {fg = palette.event},
-		['@field'] = {fg = palette.field},
-		['@function.builtin'] = {fg = palette.func_builtin, italic = true},
-		['@keyword.coroutine'] = {fg = palette.keyword_coroutine},
-		['@keyword.function'] = {fg = palette.keyword_function},
-		['@keyword.operator'] = {fg = palette.keyword_operator, bold = true},
-		['@keyword.return'] = {fg = palette.keyword_return},
-		['@method'] = {fg = palette.method},
-		['@namespace'] = {fg = palette.namespace, bold = true},
-		['@parameter'] = {fg = palette.parameter, italic = true},
-		['@preproc.conditional'] = 'PreCondit',
-		['@property'] = {fg = palette.property},
-		['@punctuation.bracket'] = {fg = palette.punctuation_bracket},
-		['@punctuation.delimiter'] = {fg = palette.punctuation_delimiter},
-		['@punctuation.special'] = {fg = palette.punctuation_special},
+		['@event'] = {fg = palette.event, nocombine = true},
+		['@field'] = {fg = palette.field, nocombine = true},
+		['@function.builtin'] = {fg = palette.func_builtin, italic = true, nocombine = true},
+		['@function.macro'] = '@macro',
+		['@keyword.coroutine'] = {fg = palette.keyword_coroutine, nocombine = true},
+		['@keyword.function'] = {fg = palette.keyword_function, nocombine = true},
+		['@keyword.operator'] = {fg = palette.keyword_operator, bold = true, nocombine = true},
+		['@keyword.return'] = {fg = palette.keyword_return, nocombine = true},
+		['@method'] = {fg = palette.method, nocombine = true},
+		['@namespace'] = {fg = palette.namespace, bold = true, nocombine = true},
+		['@parameter'] = {fg = palette.parameter, italic = true, nocombine = true},
+		['@property'] = {fg = palette.property, nocombine = true},
+		['@punctuation.bracket'] = {fg = palette.punctuation_bracket, nocombine = true},
+		['@punctuation.delimiter'] = {fg = palette.punctuation_delimiter, nocombine = true},
+		['@punctuation.special'] = {fg = palette.punctuation_special, nocombine = true},
 		['@string.documentation'] = '@comment.documentation',
-		['@string.escape'] = {fg = palette.string_escape, italic = true},
-		['@string.regex'] = {fg = palette.string_regex},
-		['@string.special'] = {fg = palette.string_special},
-		['@structure'] = 'Structure',
-		['@tag'] = {fg = palette.tag, bold = true},
-		['@tag.attribute'] = {fg = palette.tag_attribute},
-		['@tag.delimiter'] = {fg = palette.tag_delimiter},
+		['@string.escape'] = {fg = palette.string_escape, italic = true, nocombine = true},
+		['@string.regex'] = {fg = palette.string_regex, nocombine = true},
+		['@string.special'] = {fg = palette.string_special, nocombine = true},
+		['@tag'] = {fg = palette.tag, bold = true, nocombine = true},
+		['@tag.attribute'] = {fg = palette.tag_attribute, nocombine = true},
+		['@tag.delimiter'] = {fg = palette.tag_delimiter, nocombine = true},
 		['@text'] = {fg = palette.text},
 		['@text.danger'] = 'ErrorMsg',
 		['@text.diff.add'] = {fg = palette.diff_add},
@@ -296,15 +320,15 @@ local function from_palette(palette, opts)
 		['@text.note'] = {fg = palette.info},
 		['@text.quote'] = '@comment',
 		['@text.reference'] = {fg = palette.text_reference},
-		['@text.strike'] = {strikethrough = true},
+		['@text.strike'] = {nocombine = true, strikethrough = true},
 		['@text.strong'] = 'Bold',
 		['@text.todo'] = {fg = palette.todo},
-		['@text.underline'] = {underline = true},
+		['@text.underline'] = {nocombine = true, underline = true},
 		['@text.warning'] = {fg = palette.warning},
-		['@type.builtin'] = {fg = palette.type_builtin},
+		['@type.builtin'] = {fg = palette.type_builtin, nocombine = true},
 		['@type.qualifier'] = '@storageclass',
-		['@variable'] = {fg = palette.variable},
-		['@variable.builtin'] = {fg = palette.variable_builtin, italic = true},
+		['@variable'] = {fg = palette.variable, nocombine = true},
+		['@variable.builtin'] = {fg = palette.variable_builtin, italic = true, nocombine = true},
 
 		-- Dart
 		['@lsp.type.string.dart'] = {},
@@ -320,6 +344,7 @@ local function from_palette(palette, opts)
 		['@lsp.typemod.function.global.lua'] = '@lsp.type.function',
 		['@lsp.typemod.variable.defaultLibrary.lua'] = '@lsp.type.class.lua',
 		['@lsp.typemod.variable.definition.lua'] = '@lsp.typemod.variable.defaultLibrary',
+		['@namespace.builtin.lua'] = '@structure.lua',
 
 		-- Rust
 		['@lsp.mod.callable.rust'] = '@lsp.type.function',
@@ -344,10 +369,35 @@ local function from_palette(palette, opts)
 
 	setmetatable(groups, RESOLVE_METATABLE)
 
-	--- @diagnostic disable:param-type-mismatch these are not nil
-	groups.FloatTitle = Groups.extend({bold = true}, groups 'FloatBorder')
-	groups.MatchParen = Groups.extend({bold = true}, groups 'Tag')
-	--- @diagnostic enable:param-type-mismatch
+	groups.FloatTitle = Groups.extend({bold = true}, groups'FloatBorder')
+	groups.MatchParen = Groups.extend({bold = true}, groups'Tag')
+
+	-- HACK: disable sub-namespaced highlights applying.
+	--       required because of overly-eager captures in built-in many
+	--       treesitter highlights.
+	groups['@boolean'] = Groups.extend({nocombine = true}, boolean)
+	groups['@character'] = Groups.extend({nocombine = true}, character)
+	groups['@comment'] = Groups.extend({nocombine = true}, comment)
+	groups['@conceal'] = Groups.extend({nocombine = true}, groups'Conceal')
+	groups['@conditional'] = Groups.extend({nocombine = true}, conditional)
+	groups['@constant'] = Groups.extend({nocombine = true}, constant)
+	groups['@define'] = Groups.extend({nocombine = true}, define)
+	groups['@float'] = Groups.extend({nocombine = true}, float)
+	groups['@function'] = Groups.extend({nocombine = true}, function_)
+	groups['@include'] = Groups.extend({nocombine = true}, include)
+	groups['@keyword'] = Groups.extend({nocombine = true}, keyword)
+	groups['@macro'] = Groups.extend({nocombine = true}, macro)
+	groups['@number'] = Groups.extend({nocombine = true}, number)
+	groups['@operator'] = Groups.extend({nocombine = true}, operator)
+	groups['@preproc'] = Groups.extend({nocombine = true}, pre_proc)
+	groups['@preproc.conditional'] = Groups.extend({nocombine = true}, preproc_conditional)
+	groups['@punctuation'] = Groups.extend({nocombine = true}, delimiter)
+	groups['@repeat'] = Groups.extend({nocombine = true}, repeat_)
+	groups['@storageclass'] = Groups.extend({nocombine = true}, storage_class)
+	groups['@string'] = Groups.extend({nocombine = true}, string_)
+	groups['@structure'] = Groups.extend({nocombine = true}, structure)
+	groups['@type'] = Groups.extend({nocombine = true}, type_)
+	groups['@type.definition'] = Groups.extend({nocombine = true}, type_definition)
 
 	if any_nvim_plugins then
 		local nvim_plugins = type(opts.plugins) == 'table' and opts.plugins.nvim or {}
