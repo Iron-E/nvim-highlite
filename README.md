@@ -540,7 +540,7 @@ To make use of this, just run this after installing the plugin:
 ```lua
 require('highlite.export').<format>(
   '<colorscheme name>',
-  -- all options below are OPTIONAL
+  -- all settings below are OPTIONAL
   {
     -- controls the directory where the exported colorscheme will be written.
     dir = '~/.config/nvim/colors/',
@@ -548,6 +548,11 @@ require('highlite.export').<format>(
     -- controls the name of the file that is created, as well as the name of the
     -- output colorscheme.
     filename = 'foo',
+
+    -- skip exporting certain groups. Currently only works for the `nvim` and `vim` targets
+    filter = function(group, default_filter)
+      return default_filter(group) or (group:find '^Nvim' or group:find '^Redraw') ~= nil
+    end,
 
     -- if `false`, an existing target file will not be overwritten. Instead, a
     -- file with a similar name will be created.

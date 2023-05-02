@@ -5,19 +5,18 @@ local Nvim = require 'highlite.nvim' --- @type highlite.Nvim
 --- Skip plugins that don't depend on a colorscheme
 --- @param group string
 --- @return boolean filter_it
-local function include_hl_group_for_nvim_export(group)
-	return not (
-		group:find '^colorizer_' or
-		group:find '^DevIcon' or
-		group:find '^Stl_?[1-9a-f]*'
-	)
+local function default_hl_group_filter(group)
+	return (group:find '^colorizer_' or group:find '^DevIcon' or group:find '^Stl_?[1-9a-f]*') ~= nil
 end
 
 --- @class highlite.Export
 local Export = {}
 
+--- @alias highlite.export.options.filter fun(group, default_filter: fun(group): boolean): boolean
+
 --- @class highlite.export.options: highlite.Fs.write.opts
 --- @field dir? string the output directory
+--- @field filter? highlite.export.options.filter if this function returns `true`, then the `group` will be skipped
 --- @field filename? string the name of the file without an extension
 
 --- @alias highlite.export.format async fun(colorscheme: string, opts?: highlite.export.options, dir_DEPRECATED?: string)
@@ -39,8 +38,9 @@ end
 vim.api.nvim_set_var('colors_name', '%s')
 ]]
 
+	--- @param filter highlite.export.options.filter
 	--- @return string
-	local function fmt_groups()
+	local function fmt_groups(filter)
 		local s = ''
 
 		local groups = vim.api.nvim_get_hl(0, {})
@@ -48,8 +48,8 @@ vim.api.nvim_set_var('colors_name', '%s')
 		table.sort(keys)
 
 		for _, group in ipairs(keys) do
-			local definition = groups[group]
-			if include_hl_group_for_nvim_export(group) then
+			if not filter(group, default_hl_group_filter) then
+				local definition = groups[group]
 				s = s .. "\n\thl(0, '" .. group .. "', " .. vim.inspect(definition, {indent = '', newline = ' '}) .. ')'
 			end
 		end
@@ -89,12 +89,18 @@ vim.api.nvim_set_var('colors_name', '%s')
 			dir = opts.dir or vim.fn.stdpath('config') .. '/colors/'
 		end
 
+		if opts.filter == nil then
+			opts.filter = default_hl_group_filter
+		end
+
 		dir = vim.fs.normalize(dir)
 		local by_bg = {}
 		local filename = opts.filename or colorscheme
 
 		Nvim.with_colorscheme(colorscheme, function()
-			Nvim.with_both_bgs(function(bg) by_bg[bg] = {groups = fmt_groups(), terminal = fmt_terminal()} end)
+			Nvim.with_both_bgs(function(bg)
+				by_bg[bg] = {groups = fmt_groups(opts.filter), terminal = fmt_terminal()}
+			end)
 		end)
 
 		Fs.write(
@@ -134,8 +140,9 @@ let g:colors_name = '%s'
 		return base_10 and '#' .. bit.tohex(base_10, 6) or NONE
 	end
 
+	--- @param filter highlite.export.options.filter
 	--- @return string
-	local function fmt_groups()
+	local function fmt_groups(filter)
 		local s = ''
 
 		local groups = vim.api.nvim_get_hl(0, {})
@@ -144,7 +151,7 @@ let g:colors_name = '%s'
 
 		for _, group in ipairs(keys) do
 			local definition = groups[group]
-			if include_hl_group_for_nvim_export(group) then
+			if not filter(group, default_hl_group_filter) then
 				if definition.link then
 					s = s .. '\n\thi! link ' .. group .. ' ' .. definition.link
 				else
@@ -233,12 +240,18 @@ let g:colors_name = '%s'
 			dir = opts.dir or vim.fn.stdpath('config') .. '/colors/'
 		end
 
+		if opts.filter == nil then
+			opts.filter = default_hl_group_filter
+		end
+
 		dir = vim.fs.normalize(dir)
 		local by_bg = {}
 		local filename = opts.filename or colorscheme
 
 		Nvim.with_colorscheme(colorscheme, function()
-			Nvim.with_both_bgs(function(bg) by_bg[bg] = {groups = fmt_groups(), terminal = fmt_terminal()} end)
+			Nvim.with_both_bgs(function(bg)
+				by_bg[bg] = {groups = fmt_groups(opts.filter), terminal = fmt_terminal()}
+			end)
 		end)
 
 		Fs.write(

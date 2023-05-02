@@ -416,7 +416,7 @@ To make use of this, just run this after installing the plugin:
 >lua
     require('highlite.export').<format>(
       '<colorscheme name>',
-      -- all options below are OPTIONAL
+      -- all settings below are OPTIONAL
       {
         -- controls the directory where the exported colorscheme will be written.
         dir = '~/.config/nvim/colors/',
@@ -424,6 +424,11 @@ To make use of this, just run this after installing the plugin:
         -- controls the name of the file that is created, as well as the name of the
         -- output colorscheme.
         filename = 'foo',
+    
+        -- skip exporting certain groups. Currently only works for the `nvim` and `vim` targets
+        filter = function(group, default_filter)
+          return default_filter(group) or (group:find '^Nvim' or group:find '^Redraw') ~= nil
+        end,
     
         -- if `false`, an existing target file will not be overwritten. Instead, a
         -- file with a similar name will be created.
@@ -1357,6 +1362,13 @@ TIPS                                                           *highlite-tips*
 
 
 HELPFUL TOOLS ~
+
+
+:Inspect / :InspectTree                     *highlite-:Inspect-/-:InspectTree*
+
+Neovim 0.9+ comes with the built-in `:Inspect` & `:InspectTree` commands. They
+let you analyze the highlights that are being applied to the character under
+your cursor.
 
 
 mini.colors                                             *highlite-mini.colors*
