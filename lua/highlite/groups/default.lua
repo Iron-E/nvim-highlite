@@ -302,6 +302,7 @@ local function from_palette(palette, opts)
 		['@text.underline'] = {underline = true},
 		['@text.warning'] = {fg = palette.warning},
 		['@type.builtin'] = {fg = palette.type_builtin},
+		['@type.qualifier'] = '@storageclass',
 		['@variable'] = {fg = palette.variable},
 		['@variable.builtin'] = {fg = palette.variable_builtin, italic = true},
 
