@@ -617,6 +617,10 @@ local imported = Import.nvim 'zellner'
 
 ### Helpful Tools
 
+#### `:Inspect` / `:InspectTree`
+
+Neovim 0.9+ comes with the built-in `:Inspect` & `:InspectTree` commands. They let you analyze the highlights that are being applied to the character under your cursor.
+
 #### `mini.colors`
 
 [`echasnovski/mini.colors`](https://github.com/echasnovski/mini.colors) is a fantastic plugin (as is the rest of `mini.nvim`) that allows you to easily manipulate colors, fiddle with existing colorschemes, and generate light/dark variants of a specific palette.
