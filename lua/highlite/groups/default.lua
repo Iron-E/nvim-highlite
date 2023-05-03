@@ -192,7 +192,7 @@ local function from_palette(palette, opts)
 		SignColumn = {},
 
 		-- Messages
-		Error = {fg = palette.bg, bg = palette.syntax_error, bold = true},
+		Error = {bg = palette.syntax_error},
 		ErrorMsg = {fg = palette.error, bold = true},
 		ModeMsg = {fg = palette.message},
 		MoreMsg = 'ModeMsg',
@@ -206,7 +206,7 @@ local function from_palette(palette, opts)
 
 		DiagnosticDeprecated = {strikethrough = true},
 
-		DiagnosticError = 'Error',
+		DiagnosticError = {fg = palette.bg, bg = palette.error, bold = true},
 		DiagnosticFloatingError = '@text.danger',
 		DiagnosticSignError = 'DiagnosticFloatingError',
 		DiagnosticUnderlineError = {sp = palette.error, undercurl = true},

@@ -208,7 +208,7 @@ local function get(bg, get_terminal)
 			string_regex = 0x2AA198,
 			string_special = 0xCB4B16,
 			structure = 0xB58900,
-			syntax_error = 0xFDF6E3,
+			syntax_error = 0xFA9619,
 			tag = 0xCB4B16,
 			tag_attribute = 0xCB4B16,
 			tag_delimiter = 0xCB4B16,
