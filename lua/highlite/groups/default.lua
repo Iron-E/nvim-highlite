@@ -374,6 +374,9 @@ local function from_palette(palette, opts)
 		['@lsp.typemod.string.injected.rust'] = '@lsp.type.string',
 		['@type.qualifier.rust'] = '@storageclass.rust',
 		['@storageclass.lifetime.rust'] = {fg = palette.storage},
+
+		-- Vimdoc
+		['@string.keycode.vimdoc'] = 'SpecialKey',
 	} -- }}}
 
 	setmetatable(groups, RESOLVE_METATABLE)

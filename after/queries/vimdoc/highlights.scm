@@ -1,0 +1,3 @@
+;; extends
+
+(keycode) @string.keycode
