@@ -336,6 +336,12 @@ local function from_palette(palette, opts)
 		['@variable'] = {fg = palette.variable, nocombine = true},
 		['@variable.builtin'] = {fg = palette.variable_builtin, italic = true, nocombine = true},
 
+		-- C
+		['@type.qualifier.c'] = '@storageclass.c',
+
+		-- C++
+		['@type.qualifier.cpp'] = '@storageclass.cpp',
+
 		-- Dart
 		['@lsp.type.string.dart'] = {},
 
