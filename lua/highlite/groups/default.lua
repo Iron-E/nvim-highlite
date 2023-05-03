@@ -18,8 +18,11 @@ local function resolve(groups, name) -- {{{
 	return original_group
 end -- }}}
 
+--- Clear a highlight group
+--- @type highlite.group.new
+local NONE = {}
+
 --- Used to allow calling a table to resolve its contents.
---- @package
 local RESOLVE_METATABLE = {__call = resolve}
 
 --- Generate the default highlight groups using the `palette`.
@@ -38,6 +41,7 @@ local function from_palette(palette, opts)
 	local line_nr = {fg = palette.text_contrast_bg_low}
 	local macro = {fg = palette.macro, italic = true}
 	local operator = {fg = palette.operator, bold = true}
+	local exception = {fg = palette.throw, bold = true}
 	local pre_proc = {fg = palette.preproc}
 	local preproc_conditional = {fg = palette.preproc_conditional, italic = true}
 	local repeat_ = {fg = palette.loop, italic = true}
@@ -91,7 +95,7 @@ local function from_palette(palette, opts)
 		Conditional = conditional,
 		Debug = 'WarningMsg',
 		Delimiter = delimiter,
-		Exception = {fg = palette.throw, bold = true},
+		Exception = exception,
 		Function = {fg = palette.func},
 		Identifier = {fg = palette.identifier},
 		Keyword = keyword,
@@ -156,7 +160,7 @@ local function from_palette(palette, opts)
 		-- Diffs
 		DiffAdd = {fg = palette.bg, bg = palette.string},
 		diffAdded = 'DiffAdd',
-		DiffChange = {},
+		DiffChange = NONE,
 		DiffDelete = {fg = palette.bg, bg = palette.error},
 		DiffText = {fg = palette.bg, bg = palette.diff_change},
 		diffRemoved = 'DiffDelete',
@@ -177,7 +181,7 @@ local function from_palette(palette, opts)
 
 		-- Conditional Column Highlighting
 		ColorColumn = {bg = palette.bg_contrast_high},
-		SignColumn = {},
+		SignColumn = NONE,
 
 		-- Messages
 		Error = {bg = palette.syntax_error},
@@ -234,37 +238,40 @@ local function from_palette(palette, opts)
 		--[[ Syntax (LSP / TreeSitter) ]]
 
 		-- LSP
-		['@lsp.mod.annotation'] = {fg = palette.annotation},
+		['@lsp.mod.annotation'] = {fg = palette.annotation, nocombine = true},
 		['@lsp.mod.constant'] = '@constant',
 		['@lsp.mod.interpolation'] = '@string.special',
 		['@lsp.mod.readonly'] = '@lsp.mod.constant',
 		['@lsp.mod.static'] = {italic = true},
 		['@lsp.type.boolean'] = '@boolean',
 		['@lsp.type.character'] = '@character',
-		['@lsp.type.class'] = {fg = palette.class, bold = true},
+		['@lsp.type.class'] = {fg = palette.class, bold = true, nocombine = true},
 		['@lsp.type.decorator'] = {fg = palette.decorator},
-		['@lsp.type.enum'] = {fg = palette.enum, bold = true},
-		['@lsp.type.enumMember'] = {fg = palette.field_enum},
+		['@lsp.type.enum'] = {fg = palette.enum, bold = true, nocombine = true},
+		['@lsp.type.enumMember'] = {fg = palette.field_enum, nocombine = true},
 		['@lsp.type.event'] = '@event',
 		['@lsp.type.float'] = '@float',
-		['@lsp.type.interface'] = {fg = palette.interface},
+		['@lsp.type.interface'] = {fg = palette.interface, nocombine = true},
 		['@lsp.type.keyword'] = '@keyword',
+		['@lsp.type.lifetime'] = '@storageclass.lifetime',
 		['@lsp.type.macro'] = '@macro',
 		['@lsp.type.method'] = '@method',
 		['@lsp.type.namespace'] = '@namespace',
 		['@lsp.type.number'] = '@number',
-		['@lsp.type.operator'] = '@operator',
+		['@lsp.type.operator'] = NONE,
 		['@lsp.type.parameter'] = '@parameter',
 		['@lsp.type.property'] = '@property',
 		['@lsp.type.string'] = '@string',
 		['@lsp.type.struct'] = '@structure',
 		['@lsp.type.type'] = '@type',
-		['@lsp.type.typeParameter'] = {fg = palette.type_parameter, italic = true},
+		['@lsp.type.typeAlias'] = '@type.definition',
+		['@lsp.type.typeParameter'] = {fg = palette.type_parameter, italic = true, nocombine = true},
 		['@lsp.type.variable'] = '@variable',
+		['@lsp.typemod.deriveHelper.attribute'] = '@attribute',
 		['@lsp.typemod.function.defaultLibrary'] = '@function.builtin',
-		['@lsp.typemod.string.constant'] = '@lsp.typemod.string.static',
-		['@lsp.typemod.string.readonly'] = '@lsp.typemod.string.static',
-		['@lsp.typemod.string.static'] = '@lsp.type.string',
+		['@lsp.typemod.string.constant'] = NONE,
+		['@lsp.typemod.string.readonly'] = NONE,
+		['@lsp.typemod.string.static'] = NONE,
 		['@lsp.typemod.type.defaultLibrary'] = '@type.builtin',
 		['@lsp.typemod.type.readonly'] = '@lsp.type.type',
 		['@lsp.typemod.variable.defaultLibrary'] = '@variable.builtin',
@@ -272,6 +279,7 @@ local function from_palette(palette, opts)
 		-- Treesitter
 		-- HACK: a lot of these have `nocombine` because of overly-eager captures
 		--       in many built-in highlight queries.
+		--(@debug defined below)
 		['@attribute'] = {fg = palette.attribute, nocombine = true},
 		['@character.special'] = {fg = palette.character_special, bold = true},
 		['@comment.documentation'] = {fg = palette.comment_documentation},
@@ -282,6 +290,7 @@ local function from_palette(palette, opts)
 		['@define'] = Groups.extend({nocombine = true}, define),
 		['@error'] = 'Error',
 		['@event'] = {fg = palette.event, nocombine = true},
+		['@exception'] = Groups.extend({nocombine = true}, exception),
 		['@field'] = {fg = palette.field, nocombine = true},
 		['@function.builtin'] = {fg = palette.func_builtin, italic = true},
 		['@function.macro'] = '@macro',
@@ -306,6 +315,7 @@ local function from_palette(palette, opts)
 		['@punctuation.special'] = {fg = palette.punctuation_special, nocombine = true},
 		['@repeat'] = Groups.extend({nocombine = true}, repeat_),
 		['@storageclass'] = Groups.extend({nocombine = true}, storage_class),
+		['@storageclass.lifetime'] = {fg = palette.storage},
 		['@string.documentation'] = '@comment.documentation',
 		['@string.escape'] = {fg = palette.string_escape, italic = true, nocombine = true},
 		['@string.regex'] = {fg = palette.string_regex, nocombine = true},
@@ -343,43 +353,40 @@ local function from_palette(palette, opts)
 		['@type.qualifier.cpp'] = '@storageclass.cpp',
 
 		-- Dart
-		['@lsp.type.string.dart'] = {},
+		['@lsp.type.string.dart'] = NONE,
 
 		-- Go
-		['@lsp.type.number.go'] = {},
-		['@lsp.type.operator.go'] = {},
-		['@lsp.type.string.go'] = {},
+		['@lsp.type.keyword.go'] = NONE,
+		['@lsp.type.number.go'] = NONE,
+		['@lsp.type.operator.go'] = NONE,
+		['@lsp.typemod.variable.defaultLibrary.go'] = NONE,
 
 		-- Lua
 		['@constructor.lua'] = '@structure.lua',
-		['@lsp.type.variable.lua'] = {},
-		['@lsp.typemod.function.declaration.lua'] = '@lsp.type.function',
-		['@lsp.typemod.function.global.lua'] = '@lsp.type.function',
+		['@lsp.type.variable.lua'] = NONE,
+		['@lsp.typemod.function.declaration.lua'] = '@lsp.type.function.lua',
+		['@lsp.typemod.function.global.lua'] = '@lsp.type.function.lua',
 		['@lsp.typemod.variable.defaultLibrary.lua'] = '@lsp.type.class.lua',
-		['@lsp.typemod.variable.definition.lua'] = '@lsp.typemod.variable.defaultLibrary',
+		['@lsp.typemod.variable.definition.lua'] = '@variable.builtin.lua',
 		['@namespace.builtin.lua'] = '@structure.lua',
 
 		-- Rust
-		['@lsp.mod.callable.rust'] = '@lsp.type.function',
-		['@lsp.type.builtinType.rust'] = '@lsp.type.type',
-		['@lsp.type.character.rust'] = {},
-		['@lsp.type.decorator.rust'] = '@preproc',
-		['@lsp.type.derive.rust'] = '@macro',
-		['@lsp.type.enumMember.rust'] = {},
-		['@lsp.type.macro.rust'] = {},
-		['@lsp.type.operator.rust'] = {},
-		['@lsp.type.selfKeyword.rust'] = '@keyword.rust',
+		['@lsp.mod.callable.rust'] = '@lsp.type.function.rust',
+		['@lsp.type.builtinType.rust'] = '@type.builtin.rust',
+		['@lsp.type.decorator.rust'] = '@preproc.rust',
+		['@lsp.type.derive.rust'] = '@macro.rust',
+		['@lsp.type.enumMember.rust'] = NONE,
+		['@lsp.type.keyword.rust'] = NONE,
+		['@lsp.type.macro.rust'] = NONE,
+		['@lsp.type.operator.rust'] = NONE,
+		['@lsp.type.selfKeyword.rust'] = '@variable.builtin.rust',
 		['@lsp.type.selfTypeKeyword.rust'] = '@lsp.type.typeAlias.rust',
-		['@lsp.type.string.rust'] = {},
-		['@lsp.type.typeAlias.rust'] = '@type.definition',
-		['@lsp.typemod.character.injected.rust'] = '@lsp.type.character',
-		['@lsp.typemod.deriveHelper.attribute.rust'] = '@lsp.type.decorator.rust',
+		['@lsp.typemod.enumMember.injected.rust'] = '@lsp.type.enumMember',
 		['@lsp.typemod.keyword.injected.rust'] = '@keyword.rust',
-		['@lsp.typemod.macro.injected.rust'] = '@macro',
-		['@lsp.typemod.operator.injected.rust'] = '@operator',
-		['@lsp.typemod.string.injected.rust'] = '@lsp.type.string',
+		['@lsp.typemod.macro.injected.rust'] = '@macro.rust',
+		['@lsp.typemod.operator.injected.rust'] = '@operator.rust',
+		['@lsp.typemod.variable.defaultLibrary.rust'] = NONE,
 		['@type.qualifier.rust'] = '@storageclass.rust',
-		['@storageclass.lifetime.rust'] = {fg = palette.storage},
 
 		-- Vimdoc
 		['@string.keycode.vimdoc'] = 'SpecialKey',
@@ -389,9 +396,10 @@ local function from_palette(palette, opts)
 
 	groups.FloatTitle = Groups.extend({bold = true}, groups'FloatBorder')
 	groups.MatchParen = Groups.extend({bold = true}, groups'Tag')
+	groups['@debug'] = Groups.extend({nocombine = true}, groups'Debug')
 
 	if any_nvim_plugins then
-		local nvim_plugins = type(opts.plugins) == 'table' and opts.plugins.nvim or {}
+		local nvim_plugins = type(opts.plugins) == 'table' and opts.plugins.nvim or NONE
 
 		if all_nvim_plugins or nvim_plugins.barbar ~= false then
 			groups.BufferAlternate = buffer_alternate
@@ -580,7 +588,7 @@ local function from_palette(palette, opts)
 		end
 
 		if all_nvim_plugins or nvim_plugins.symbols_outline ~= false then
-			groups.FocusedSymbol = {}
+			groups.FocusedSymbol = NONE
 			groups.SymbolsOutlineConnector = 'Delimiter'
 		end
 
@@ -622,7 +630,7 @@ local function from_palette(palette, opts)
 	end
 
 	if any_vim_plugins then
-		local vim_plugins = type(opts.plugins) == 'table' and opts.plugins.vim or {}
+		local vim_plugins = type(opts.plugins) == 'table' and opts.plugins.vim or NONE
 
 		if all_vim_plugins or vim_plugins.ale ~= false then
 			groups.ALEErrorSign = 'DiagnosticSignError'
@@ -834,7 +842,7 @@ local function from_palette(palette, opts)
 			groups.goFormatSpecifier = '@string.regex.go'
 			groups.goFunction = '@function.go'
 			groups.goFunctionCall = 'goFunction'
-			groups.goFunctionReturn = {}
+			groups.goFunctionReturn = NONE
 			groups.goImport = '@include.go'
 			groups.goImportString = '@namespace.go'
 			groups.goMethodCall = 'goFunctionCall'
@@ -981,8 +989,8 @@ local function from_palette(palette, opts)
 			groups.luaLocal = 'luaStatement'
 			groups.luaNoise = '@punctuation.lua'
 			groups.luaParens = '@punctuation.bracket.lua'
-			groups.luaSpecialTable = '@lsp.typemod.variable.defaultLibrary.lua'
-			groups.luaSpecialValue = '@lsp.typemod.function.defaultLibrary.lua'
+			groups.luaSpecialTable = '@variable.builtin.lua'
+			groups.luaSpecialValue = '@function.builtin.lua'
 			groups.luaStatement = '@keyword.lua'
 			groups.luaStringLongTag = Groups.extend({italic = true}, groups '@punctuation.bracket')
 		end
