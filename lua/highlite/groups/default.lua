@@ -326,7 +326,7 @@ local function from_palette(palette, opts)
 		['@text.underline'] = {nocombine = true, underline = true},
 		['@text.warning'] = {fg = palette.warning},
 		['@type.builtin'] = {fg = palette.type_builtin, nocombine = true},
-		['@type.qualifier'] = '@storageclass',
+		['@type.qualifier'] = '@keyword',
 		['@variable'] = {fg = palette.variable, nocombine = true},
 		['@variable.builtin'] = {fg = palette.variable_builtin, italic = true, nocombine = true},
 
@@ -365,6 +365,7 @@ local function from_palette(palette, opts)
 		['@lsp.typemod.macro.injected.rust'] = '@macro',
 		['@lsp.typemod.operator.injected.rust'] = '@operator',
 		['@lsp.typemod.string.injected.rust'] = '@lsp.type.string',
+		['@type.qualifier.rust'] = '@storageclass.rust',
 	} -- }}}
 
 	setmetatable(groups, RESOLVE_METATABLE)
