@@ -1,5 +1,6 @@
 ;; extends
 
+; show table names as structures
 (table .
 [
 	(bare_key) @structure
