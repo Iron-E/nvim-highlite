@@ -1,5 +1,4 @@
 ;; extends
-;; NOTE: TS rust highlight queries are a big tangled mess. I gave up.
 
 ; attributes
 (attribute_item . "#" @punctuation.bracket)
