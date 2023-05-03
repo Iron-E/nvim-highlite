@@ -1,0 +1,3 @@
+;; extends
+
+(doctype) @preproc
