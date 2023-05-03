@@ -2,9 +2,24 @@
 
 ; attributes
 (attribute_item . "#" @punctuation.bracket)
-(attribute (identifier) @preproc (#not-any-of? @preproc "cfg" "cfg_attr"))
-(attribute (identifier) @preproc.conditional (#any-of? @preproc.conditional "cfg" "cfg_attr"))
 (inner_attribute_item ["!" "#"] @punctuation.bracket)
+
+(attribute
+	[
+		(identifier) @preproc.conditional
+		(scoped_identifier name: (identifier) @preproc.conditional)
+	]
+	(#any-of? @preproc.conditional "cfg" "cfg_attr")
+)
+
+(attribute
+	[
+		(identifier) @preproc
+		(scoped_identifier name: (identifier) @preproc)
+	]
+	(#not-any-of? @preproc "cfg" "cfg_attr")
+)
+
 (token_tree (identifier) @keyword.operator
 	(#any-of? @keyword.operator "all" "any" "not")
 	(#has-ancestor? @keyword.operator attribute) ; NOTE: comes from `nvim-treesitter`
@@ -31,8 +46,8 @@
 ; enum variants
 (enum_variant name: (identifier) @constant !body)
 (enum_variant
-  name: (identifier) @type
-  body: [(field_declaration_list) (ordered_field_declaration_list)]
+	name: (identifier) @type
+	body: [(field_declaration_list) (ordered_field_declaration_list)]
 )
 
 ; HRTB closures
