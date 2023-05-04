@@ -299,6 +299,8 @@ do
 			text_contrast_bg_low = ${@comment.fg | Comment.fg},
 			text_literal = ${@text.literal.fg},
 			text_reference = ${@text.reference.fg},
+			text_environment = ${@text.environment},
+			text_environment_name = ${@text.environment.name},
 			throw = ${@exception.fg | Exception.fg},
 			todo = ${Todo.bg | Todo.fg | @text.todo.bg | @text.todo.fg},
 			type = ${@type.fg | Type.fg},

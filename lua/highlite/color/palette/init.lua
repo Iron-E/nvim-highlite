@@ -83,6 +83,8 @@ local Table = require 'highlite.table' --- @type highlite.Table
 --- @field text_contrast_bg_low highlite.color an accent to the `text` color which barely contrasts
 --- @field text_literal highlite.color literal text
 --- @field text_reference highlite.color references to variables in text
+--- @field text_environment highlite.color text environment delimiter
+--- @field text_environment_name highlite.color text environment name
 --- @field throw highlite.color a keyword which triggers or receives errors (e.g. `throw MyError`)
 --- @field todo highlite.color `TODO` comments
 --- @field type highlite.color type names e.g. `int`, `String`
@@ -176,6 +178,8 @@ local PALETTE_ALTS =
 	text_contrast_bg_low = 'text',
 	text_literal = 'statement',
 	text_reference = 'uri',
+	text_environment = 'text_contrast_bg_low',
+	text_environment_name = 'label',
 	throw = 'error',
 	todo = 'message',
 	type = 'keyword',

@@ -960,6 +960,10 @@ List of Palette Colors                       *highlite-List-of-Palette-Colors*
 
   text_reference          references to variables in text
 
+  text_environment        beginning/end of a text subenvironment
+
+  text_environment_name   name of a text environment
+
   throw                   a keyword which triggers or receives errors
                           (e.g. throw MyError)
 

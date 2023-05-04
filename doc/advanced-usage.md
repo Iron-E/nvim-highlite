@@ -250,6 +250,8 @@ The `terminal_palette` will automatically be `nil` when you turn off terminal hi
 | `text_contrast_bg_low`  | an accent to the `text` color which barely contrasts                                    |
 | `text_literal`          | literal text                                                                            |
 | `text_reference`        | references to variables in text                                                         |
+| `text_environment`      | beginning/end of a text subenvironment                                                  |
+| `text_environment_name` | name of a text environment                                                              |
 | `throw`                 | a keyword which triggers or receives errors (e.g. `throw MyError`)                      |
 | `todo`                  | `TODO` comments                                                                         |
 | `type`                  | type names e.g. `int`, `String`                                                         |
