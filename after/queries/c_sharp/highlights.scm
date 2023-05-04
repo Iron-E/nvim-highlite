@@ -1,7 +1,7 @@
 ;; extends
 
 ; accessors as operator-keywords
-(accessor_declaration _ @keyword.operator)
+(accessor_declaration _ @keyword.operator (#not-eq? @keyword.operator ";"))
 
 ; arrows as delimiters
 "=>" @punctuation.delimiter
