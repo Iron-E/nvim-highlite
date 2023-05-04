@@ -368,7 +368,7 @@ local function from_palette(palette, opts)
 		['@lsp.type.variable.lua'] = NONE,
 		['@lsp.typemod.function.declaration.lua'] = '@lsp.type.function.lua',
 		['@lsp.typemod.function.global.lua'] = '@lsp.type.function.lua',
-		['@lsp.typemod.variable.defaultLibrary.lua'] = '@lsp.type.class.lua',
+		['@lsp.typemod.variable.defaultLibrary.lua'] = NONE,
 		['@lsp.typemod.variable.definition.lua'] = '@variable.builtin.lua',
 		['@namespace.builtin.lua'] = '@structure.lua',
 
