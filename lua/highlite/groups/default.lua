@@ -390,6 +390,9 @@ local function from_palette(palette, opts)
 		['@lsp.typemod.variable.defaultLibrary.rust'] = NONE,
 		['@type.qualifier.rust'] = '@storageclass.rust',
 
+		-- TypeScript
+		['@type.qualifier.typescript'] = '@storageclass.c',
+
 		-- Vimdoc
 		['@string.keycode.vimdoc'] = 'SpecialKey',
 	} -- }}}
