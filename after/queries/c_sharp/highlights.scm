@@ -6,9 +6,6 @@
 ; arrows as delimiters
 "=>" @punctuation.delimiter
 
-; conditionals
-(conditional_expression ["?" ":"] @conditional.ternary)
-
 ; identifiers
 ((identifier) @variable.builtin (#eq? @variable.builtin "_"))
 
@@ -43,4 +40,4 @@
 (nullable_type "?" @punctuation.special)
 
 ; operators
-(binary_expression ["<" ">" "??"] @operator)
+(binary_expression "??" @operator)

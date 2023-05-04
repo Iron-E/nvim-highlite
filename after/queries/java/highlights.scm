@@ -3,10 +3,6 @@
 ; annotations
 (marker_annotation "@" @punctuation.special)
 
-; generics
-(type_arguments . "<" @punctuation.bracket ">" @punctuation.bracket .)
-(type_parameters . "<" @punctuation.bracket ">" @punctuation.bracket .)
-
 ; lambda
 (lambda_expression
 	parameters: (formal_parameters . "(" @function ")" @function .)

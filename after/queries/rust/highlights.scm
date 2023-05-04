@@ -63,7 +63,7 @@
 )
 
 (macro_invocation
-	macro: (identifier) @_id @include (#contains? @_id "include")
+	macro: (identifier) @_id @include (#any-of? @_id "include" "include_str")
 	"!" @include
 	(#set! "priority" 101)
 )
