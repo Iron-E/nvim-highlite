@@ -25,9 +25,6 @@
 	(#has-ancestor? @keyword.operator attribute) ; NOTE: comes from `nvim-treesitter`
 )
 
-; captures
-(captured_pattern "@" @punctuation.special)
-
 ; closure delimiters
 (closure_parameters . ("|" @function) ("|" @function) .)
 

@@ -43,5 +43,4 @@
 (nullable_type "?" @punctuation.special)
 
 ; operators
-(binary_expression ["<" ">"] @operator)
-(binary_expression "??" @operator)
+(binary_expression ["<" ">" "??"] @operator)
