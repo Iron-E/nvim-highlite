@@ -14,13 +14,13 @@
 
 (
 	[
-		(preproc_def "#define" @punctuation.delimiter)
-		(preproc_directive) @punctuation.delimiter
-		(preproc_else "#else" @punctuation.delimiter)
-		(preproc_if ["#if" "#endif"] @punctuation.delimiter)
-		(preproc_include "#include" @punctuation.delimiter)
+		(preproc_def "#define" @punctuation.special)
+		(preproc_directive) @punctuation.special
+		(preproc_else "#else" @punctuation.special)
+		(preproc_if ["#if" "#endif"] @punctuation.special)
+		(preproc_include "#include" @punctuation.special)
 	]
-	(#offset-from-start! @punctuation.delimiter 0 0 0 1)
+	(#offset-from-start! @punctuation.special 0 0 0 1)
 )
 
 (preproc_include path: _ @namespace (#offset! @namespace 0 1 0 -1))

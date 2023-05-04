@@ -1,9 +1,5 @@
 ;; extends
 
-; attributes
-(attribute_item . "#" @punctuation.bracket)
-(inner_attribute_item ["!" "#"] @punctuation.bracket)
-
 (attribute
 	[
 		(identifier) @preproc.conditional

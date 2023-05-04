@@ -1,5 +1,10 @@
 ;; extends
 
+; decorator
+(decorator "@" @punctuation.special
+	(#set! "priority" 101)
+)
+
 ; namespaces
 (aliased_import alias: (identifier) @namespace)
 (
