@@ -41,10 +41,15 @@
 )
 
 ; enum variants
-(enum_variant name: (identifier) @constant !body)
-(enum_variant
-	name: (identifier) @type
-	body: [(field_declaration_list) (ordered_field_declaration_list)]
+(call_expression
+	function: (scoped_identifier
+		name: (identifier) @type (#lua-match? @type "^%u")
+	)
+)
+
+(enum_variant name: (identifier) @type)
+((identifier) @type.builtin
+	(#any-of? @type.builtin "Some" "None" "Ok" "Err")
 )
 
 ; HRTB closures
@@ -52,13 +57,13 @@
 
 ; macros
 (macro_invocation
-	macro: (identifier) @_id @debug (#contains? @_id "dbg" "debug")
+	macro: (identifier) @_id @debug (#contains? @_id "assert" "dbg" "debug")
 	"!" @debug
 	(#set! "priority" 101)
 )
 
 (macro_invocation
-	macro: (identifier) @_id @include (#lua-match? @_id "^include")
+	macro: (identifier) @_id @include (#contains? @_id "include")
 	"!" @include
 	(#set! "priority" 101)
 )
@@ -67,18 +72,47 @@
 (match_pattern "_" @variable.builtin)
 
 ; raw identifiers
-((field_identifier) @punctuation.special
+(
+	[
+		(field_identifier) @punctuation.special
+		(identifier) @punctuation.special
+	]
 	(#lua-match? @punctuation.special "^r#")
 	(#offset-from-start! @punctuation.special 0 0 0 2)
 )
 
-((identifier) @punctuation.special
+((raw_string_literal) @punctuation.special
 	(#lua-match? @punctuation.special "^r#")
 	(#offset-from-start! @punctuation.special 0 0 0 2)
 )
 
-; trait bounds
-(removed_trait_bound "?" @punctuation.special)
+((raw_string_literal) @punctuation.special
+	(#lua-match? @punctuation.special "^r#")
+	(#offset-from-end! @punctuation.special 0 -1 0 0)
+)
+
+((raw_string_literal) @punctuation.special
+	(#lua-match? @punctuation.special "^r##")
+	(#offset-from-start! @punctuation.special 0 0 0 3)
+)
+
+((raw_string_literal) @punctuation.special
+	(#lua-match? @punctuation.special "^r##")
+	(#offset-from-end! @punctuation.special 0 -2 0 0)
+)
+
+((raw_string_literal) @punctuation.special
+	(#lua-match? @punctuation.special "^r###")
+	(#offset-from-start! @punctuation.special 0 0 0 4)
+)
+
+((raw_string_literal) @punctuation.special
+	(#lua-match? @punctuation.special "^r###")
+	(#offset-from-end! @punctuation.special 0 -3 0 0)
+)
 
 ; `try!`
 (try_expression ("?" @exception))
+
+; unsafe
+"unsafe" @exception
