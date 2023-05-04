@@ -53,16 +53,21 @@
 ; HRTB closures
 (ERROR "for" "<" @punctuation.bracket (lifetime) ">" @punctuation.bracket)
 
-; includes
-((macro_invocation macro: (identifier) @_id (#eq? @_id "include")) @include
-	(#offset-from-start! @include 0 0 0 8)
+; macros
+(macro_invocation
+	macro: (identifier) @_id @debug (#contains? @_id "dbg" "debug")
+	"!" @debug
 	(#set! "priority" 101)
 )
 
-((macro_invocation macro: (identifier) @_id (#eq? @_id "include_str")) @include
-	(#offset-from-start! @include 0 0 0 12)
+(macro_invocation
+	macro: (identifier) @_id @include (#lua-match? @_id "^include")
+	"!" @include
 	(#set! "priority" 101)
 )
+
+; patterns
+(match_pattern "_" @variable.builtin)
 
 ; raw identifiers
 ((field_identifier) @punctuation.special
