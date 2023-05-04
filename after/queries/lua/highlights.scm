@@ -1,5 +1,8 @@
 ;; extends
 
+; builtins
+(vararg_expression) @variable.builtin
+
 ; debug
 ((identifier) @debug (#eq? @debug "debug"))
 
