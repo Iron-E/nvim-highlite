@@ -1,11 +1,5 @@
 ;; extends
 
-; inline latex
-("$" @conceal
-	(#set! conceal "")
-	(#set! "priority" 101)
-)
-
 ; punctuation
 ((list_marker_dot) @punctuation.delimiter (#offset-from-end! @punctuation.delimiter 0 -2 0 0))
 
