@@ -34,11 +34,13 @@ This repository has an [editorconfig](./.editorconfig). Neovim 0.9 supports edit
 
 This section is about contributing new features to `nvim-highlite`.
 
-### Export Targets
+### Export Format
 
-Export targets go in the [`export`](../lua/highlite/export.lua) module.
+Export formats go in the [`export`](../lua/highlite/export.lua) module.
 
-* The [`Fs`](../lua/highlite/fs.lua) module will be of use for writing the end result.
+The [`Fs`](../lua/highlite/fs.lua) module will be of use for writing the end result.
+
+#### `highlite.Fmt`
 
 There has an internal string formatting library that allows you to easily write a template for whatever you need, and all the logic will be handled behind the scenes:
 
@@ -74,15 +76,18 @@ terminal_idx_1 = ${1}
 
 * The [`import`](../lua/highlite/import.lua) and [`export`](../lua/highlite/export.lua) modules have more examples.
 
-### Import Targets
+### Import Format
 
-Import targets go in the [`import`](../lua/highlite/import.lua) module.
+Import formats go in the [`import`](../lua/highlite/import.lua) module.
 
-* The [`Fs`](../lua/highlite/fs.lua) module will be of use for file reading.
+Some useful tools for writing support for new import formats are:
 
-Depending on the format, you might have to write a custom parser. Neovim supports JSON with `vim.json`, Lua can be read with `loadstring`, and VimScript can be parsed with `nvim_parse_expression`.
+* `loadstring`
+* `vim.api.nvim_parse_expression`
+* `vim.json.decode`
+* `vim.treesitter` + a parser for the language in question
 
-Considering the open-ended nature of this topic, open an issue if you have trouble working on what you would like to do.
+The [`Fs`](../lua/highlite/fs.lua) module will be of use for file reading.
 
 ### Palettes
 
