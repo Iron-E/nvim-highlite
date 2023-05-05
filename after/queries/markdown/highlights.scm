@@ -6,6 +6,16 @@
 	(#set! "priority" 101)
 )
 
+; punctuation
+((list_marker_dot) @punctuation.delimiter (#offset-from-end! @punctuation.delimiter 0 -2 0 0))
+
+; BUG: doesn't work because of neovim/neovim#17099
+; (pipe_table
+; 	(pipe_table_header . "|" "|"* @punctuation.delimiter "|" .)
+; 	(pipe_table_delimiter_row . "|" _* @punctuation.delimiter "|" .)
+; 	(pipe_table_row . "|" "|"* @punctuation.delimiter "|" .)
+; )
+
 ; text environments
 (fenced_code_block
 	(fenced_code_block_delimiter) @text.environment
