@@ -17,13 +17,13 @@ Colorschemes must be defined in a very specific location in order to be visible 
 
 > **Note**
 >
-> To check your runtime path, do `lua for _, p in ipairs(vim.opt.rtp:get()) do print(p) end`.
+> To check your runtime path, do `:lua for _, p in ipairs(vim.opt.rtp:get()) do print(p) end`.
 
 #### Personal Colorscheme
 
 If you are making this colorscheme for yourself, that file should be in your configuration directory. Run this snippet to show where that is:
 
-```lua
+```vim
 :lua = vim.fn.stdpath('config') .. '/colors/'
 ```
 
