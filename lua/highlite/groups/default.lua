@@ -412,6 +412,29 @@ local function from_palette(palette, opts)
 	if any_nvim_plugins then
 		local nvim_plugins = type(opts.plugins) == 'table' and opts.plugins.nvim or NONE
 
+		if all_nvim_plugins or nvim_plugins.aerial ~= false then
+			groups.AerialBooleanIcon = '@boolean.aerial'
+			groups.AerialClassIcon = '@lsp.type.class.aerial'
+			groups.AerialConstructorIcon = '@constructor.aerial'
+			groups.AerialEnumIcon = '@lsp.type.enum.aerial'
+			groups.AerialEnumMemberIcon = '@lsp.type.enumMember.aerial'
+			groups.AerialEventIcon = '@event.aerial'
+			groups.AerialFieldIcon = '@field.aerial'
+			groups.AerialFileIcon = 'Directory'
+			groups.AerialInterfaceIcon = '@lsp.type.interface.aerial'
+			groups.AerialKeyIcon = '@field.aerial'
+			groups.AerialMethodIcon = '@method.aerial'
+			groups.AerialNamespaceIcon = '@namespace.aerial'
+			groups.AerialNullIcon = '@constant.builtin.aerial'
+			groups.AerialNumberIcon = '@number.aerial'
+			groups.AerialOperatorIcon = '@operator.aerial'
+			groups.AerialPropertyIcon = '@property.aerial'
+			groups.AerialStringIcon = '@string.aerial'
+			groups.AerialStructIcon = '@structure.aerial'
+			groups.AerialTypeParameterIcon = '@lsp.type.typeParameter.aerial'
+			groups.AerialVariableIcon = '@variable.aerial'
+		end
+
 		if all_nvim_plugins or nvim_plugins.barbar ~= false then
 			groups.BufferAlternate = buffer_alternate
 			groups.BufferAlternateADDED = Groups.extend({fg = palette.diff_add}, buffer_alternate)

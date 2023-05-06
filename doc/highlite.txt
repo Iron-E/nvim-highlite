@@ -192,6 +192,8 @@ integrations:
 LIST OF NEOVIM PLUGINS
 
 
+aerial.nvim
+
 barbar
 
 bqf
@@ -611,7 +613,7 @@ there must be a `colors/foo.vim` or `colors/foo.lua` file located within your
 
 
   **Note**
-  To check your runtime path, do `lua for _, p in ipairs(vim.opt.rtp:get()) do
+  To check your runtime path, do `:lua for _, p in ipairs(vim.opt.rtp:get()) do
   print(p) end`.
 
 Personal Colorscheme                           *highlite-Personal-Colorscheme*
@@ -956,13 +958,15 @@ List of Palette Colors                       *highlite-List-of-Palette-Colors*
 
   text_contrast_bg_low    an accent to the text color which barely contrasts
 
-  text_literal            literal text
-
-  text_reference          references to variables in text
+  text_environment_name   name of a text environment
 
   text_environment        beginning/end of a text subenvironment
 
-  text_environment_name   name of a text environment
+  text_literal            literal text
+
+  text_math               mathematical text
+
+  text_reference          references to variables in text
 
   throw                   a keyword which triggers or receives errors
                           (e.g. throw MyError)

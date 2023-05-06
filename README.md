@@ -218,6 +218,9 @@ require('highlite').setup {
 <!-- panvimdoc-ignore-end -->
 
   <ul>
+    <li><a href="https://github.com/stevearc/aerial.nvim">
+      aerial.nvim
+    </a></li>
     <li><a href="https://github.com/romgrk/barbar.nvim">
       barbar
     </a></li>
