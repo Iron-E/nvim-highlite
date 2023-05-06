@@ -337,7 +337,17 @@ do
 			)
 		end
 
-		tbl[bg] = load()
+		local loaded =  load()
+
+		-- Fill in all missing values by deriving
+		-- NOTE: deriving doesn't resolve all color values immediately;
+		--       it only happens when indexing. we generate the default
+		--       groups so that all of the color values will have been
+		--       indexed at least once, thus completing the derive.
+		Palette.derive(bg, loaded.palette)
+		default_groups_from_palette(loaded.palette, {plugins = true, syntax = true})
+
+		tbl[bg] = loaded
 	end
 
 	--- Create a wezterm theme out of the `palette`
@@ -359,17 +369,7 @@ do
 		local by_bg = {}
 
 		Nvim.with_colorscheme(name, function()
-			Nvim.with_both_bgs(function(bg)
-				import_bg(by_bg, name, bg, opts)
-
-				-- Fill in all missing values by deriving
-				-- NOTE: deriving doesn't resolve all color values immediately;
-				--       it only happens when indexing. we generate the default
-				--       groups so that all of the color values will have been
-				--       indexed at least once, thus completing the derive.
-				Palette.derive(bg, by_bg[bg].palette)
-				default_groups_from_palette(by_bg[bg].palette, {plugins = true, syntax = true})
-			end)
+			Nvim.with_both_bgs(function(bg) import_bg(by_bg, name, bg, opts) end)
 		end)
 
 		return by_bg

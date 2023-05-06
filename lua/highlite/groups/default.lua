@@ -333,7 +333,7 @@ local function from_palette(palette, opts)
 		['@text.environment'] = {fg = palette.text_environment},
 		['@text.environment.name'] = {fg = palette.text_environment_name},
 		['@text.literal'] = {fg = palette.text_literal},
-		['@text.math'] = {fg = palette.math},
+		['@text.math'] = {fg = palette.text_math},
 		['@text.note'] = {fg = palette.info},
 		['@text.quote'] = '@comment',
 		['@text.reference'] = {fg = palette.text_reference, underline = true},
