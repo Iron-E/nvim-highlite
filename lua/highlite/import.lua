@@ -359,16 +359,18 @@ do
 		local by_bg = {}
 
 		Nvim.with_colorscheme(name, function()
-			Nvim.with_both_bgs(function(bg) import_bg(by_bg, name, bg, opts) end)
-		end)
+			Nvim.with_both_bgs(function(bg)
+				import_bg(by_bg, name, bg, opts)
 
-		for bg, tbl in pairs(by_bg) do
-			Palette.derive(bg, tbl.palette)
-			-- NOTE: deriving doesn't resolve all color values immediately; it only happens when an index is missing.
-			--       we derive the default groups so that all of the color values will have been indexed at least once,
-			--       thus forcing the derive.
-			default_groups_from_palette(tbl.palette, {plugins = true, syntax = true})
-		end
+				-- Fill in all missing values by deriving
+				-- NOTE: deriving doesn't resolve all color values immediately;
+				--       it only happens when indexing. we generate the default
+				--       groups so that all of the color values will have been
+				--       indexed at least once, thus completing the derive.
+				Palette.derive(bg, by_bg[bg].palette)
+				default_groups_from_palette(by_bg[bg].palette, {plugins = true, syntax = true})
+			end)
+		end)
 
 		return by_bg
 	end
