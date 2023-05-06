@@ -6,6 +6,9 @@
 ; debug
 ((identifier) @debug (#eq? @debug "debug"))
 
+; repeat
+"in" @repeat
+
 ; require `@namespace`s
 (function_call
 	name: (identifier) @_fn (#eq? @_fn "require")
