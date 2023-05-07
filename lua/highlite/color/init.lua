@@ -39,7 +39,8 @@ local Color = {}
 --- @return highlite.color.hex accented
 function Color.saturate(color, factor)
 	if type(color) == 'string' then
-		color = tonumber(color:sub(2), 16)
+		local normalized = color:gsub('#', '0x')
+		color = tonumber(normalized) or error('Could not interpret color ' .. vim.inspect(color))
 	end
 
 	return multiply_channel(color, 16, factor) +

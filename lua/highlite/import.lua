@@ -299,7 +299,7 @@ do
 			text_literal = ${@text.literal.fg},
 			text_math = ${@text.math.fg},
 			text_reference = ${@text.reference.fg},
-			throw = ${@exception.fg | Exception.fg},
+			throw = ${@exception.fg | Exception.fg | @exception.bg | Exception.bg},
 			todo = ${Todo.bg | Todo.fg | @text.todo.bg | @text.todo.fg},
 			type = ${@type.fg | Type.fg},
 			type_builtin = ${@type.builtin.fg},
