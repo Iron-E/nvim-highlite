@@ -93,12 +93,9 @@ return get
 	--- @param p highlite.color.palette
 	--- @return string
 	local function fmt_palette(p)
-		local keys = vim.tbl_keys(p)
-		table.sort(keys)
-
 		local s = ''
-		for _, color in ipairs(keys) do
-			s = s .. NEW_LINE .. color .. ' = ' .. p[color] .. ','
+		for color, value in vim.spairs(p) do
+			s = s .. NEW_LINE .. color .. ' = ' .. value .. ','
 		end
 
 		return s

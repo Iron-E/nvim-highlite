@@ -34,12 +34,7 @@ end
 local function fmt_groups(filter)
 	local s = ''
 
-	local groups = vim.api.nvim_get_hl(0, {})
-	local keys = vim.tbl_keys(groups)
-	table.sort(keys)
-
-	for _, group in ipairs(keys) do
-		local definition = groups[group]
+	for group, definition in vim.spairs(vim.api.nvim_get_hl(0, {})) do
 		if not filter(group, Native.default_hl_group_filter) then
 			if definition.link then
 				s = s .. '\n\thi! link ' .. group .. ' ' .. definition.link

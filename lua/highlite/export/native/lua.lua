@@ -22,13 +22,8 @@ vim.api.nvim_set_var('colors_name', '%s')
 local function fmt_groups(filter)
 	local s = ''
 
-	local groups = vim.api.nvim_get_hl(0, {})
-	local keys = vim.tbl_keys(groups)
-	table.sort(keys)
-
-	for _, group in ipairs(keys) do
+	for group, definition in vim.spairs(vim.api.nvim_get_hl(0, {})) do
 		if not filter(group, Native.default_hl_group_filter) then
-			local definition = groups[group]
 			s = s .. "\n\thl(0, '" .. group .. "', " .. vim.inspect(definition, {indent = '', newline = ' '}) .. ')'
 		end
 	end
