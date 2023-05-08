@@ -9,6 +9,7 @@ end
 --- @class highlite.Export
 local Export =
 {
+	bat = wrap 'bat',
 	nvim = wrap 'native.lua',
 	vim = wrap 'native.vim',
 	wezterm = wrap 'wezterm',
