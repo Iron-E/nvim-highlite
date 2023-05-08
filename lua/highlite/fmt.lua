@@ -8,11 +8,12 @@ do
 	--- @field convert_int_attributes? false|'hex_literal'|'hex_string' if `Foo.bar` is an integer (e.g. when `Normal.fg == 16777215`), convert it to a hex string (e.g. `'#FFFFFF'`) or a hex literal (e.g. `0xFFFFFF`)
 	--- @field default? true|{[string]: highlite.Fmt.string.substitution} if `true`, use default values when formatting returns `nil` for a highlight group
 	--- @field loadstring_compat? boolean if `true`, enable compatability for `loadstring`ing the returned value
-	--- @field map? fun(attribute: string, value: highlite.Fmt.string.substitution): highlite.Fmt.string.substitution
+	--- @field map? {[string]: nil|fun(value: boolean|integer|string): highlite.Fmt.string.substitution}
 	local FMT_STRING_DEFUALT_OPTS =
 	{
 		convert_int_attributes = 'hex_string',
 		default = true,
+		map = {},
 	}
 
 	--- The pattern which is used to find and replace palette strings.
@@ -136,13 +137,15 @@ do
 				end
 
 				local formatted = fmt_attribute(definition, attribute)
+				if formatted ~= nil then -- value exists, we're done
+					if opts.map[attribute] then
+						formatted = opts.map[attribute](formatted)
+					end
 
-				if opts.map ~= nil then
-					formatted = opts.map(attribute, formatted)
+					substitution = formatted
 				end
 
-				if formatted ~= nil then -- value exists, we're done
-					substitution = formatted
+				if substitution ~= nil then -- value found; we're done
 					break
 				end
 			end

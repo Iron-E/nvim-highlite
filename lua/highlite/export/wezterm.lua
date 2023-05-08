@@ -81,26 +81,22 @@ local FMT_OPTS =
 		underline = '"None"',
 	},
 
-	map = function(attribute, value)
-		if value then
-			if attribute == 'bold' then
-				value = '"Bold"'
-			elseif attribute == 'blend' and value > 49 then
-				value = '"Half"'
-			elseif attribute == 'underdouble' then
-				value = '"Bold"'
-			elseif attribute == 'underline' or
-				attribute == 'undercurl' or
-				attribute == 'underdashed' or
-				attribute == 'underdotted'
-			then
-				value = '"Single"'
+	map =
+	{
+		bold = function() return '"Bold"' end,
+		blend = function(value)
+			if value > 49 then
+				return '"Half"'
 			end
-		end
-
-		return value
-	end,
+		end,
+		underdouble = function() return '"Underdouble"' end,
+		underline = function() return '"Single"' end,
+	},
 }
+
+FMT_OPTS.map.undercurl = FMT_OPTS.map.underline
+FMT_OPTS.map.underdashed = FMT_OPTS.map.underline
+FMT_OPTS.map.underdotted = FMT_OPTS.map.underline
 
 --- Create a wezterm theme out of the `palette`
 --- @type highlite.export.format.module
