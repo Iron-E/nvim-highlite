@@ -325,7 +325,7 @@ local function from_palette(palette, opts)
 		['@tag.attribute'] = {fg = palette.tag_attribute, nocombine = true},
 		['@tag.delimiter'] = {fg = palette.tag_delimiter, nocombine = true},
 		['@text'] = {fg = palette.text},
-		['@text.danger'] = 'ErrorMsg',
+		['@text.danger'] = {fg = palette.error},
 		['@text.diff.add'] = {fg = palette.diff_add},
 		['@text.diff.change'] = {fg = palette.diff_change},
 		['@text.diff.delete'] = {fg = palette.diff_delete},
