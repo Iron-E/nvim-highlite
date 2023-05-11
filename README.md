@@ -219,7 +219,7 @@ require('highlite').setup {
 
   <ul>
     <li><a href="https://github.com/stevearc/aerial.nvim">
-      aerial.nvim
+      aerial
     </a></li>
     <li><a href="https://github.com/romgrk/barbar.nvim">
       barbar
