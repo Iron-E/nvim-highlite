@@ -89,7 +89,7 @@ I recommend using lazy.nvim <https://github.com/folke/lazy.nvim>:
           vim.api.nvim_command 'colorscheme highlite'
         end,
         lazy = false,
-        priority = 1000,
+        priority = math.huge,
         version = '^4.0.0',
       },
     }
