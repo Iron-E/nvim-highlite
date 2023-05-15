@@ -12,23 +12,25 @@ This repository has an [editorconfig](./.editorconfig). Neovim 0.9 supports edit
 
 ## Project Layout
 
-| Module                         | Description                                             |
-|:-------------------------------|:--------------------------------------------------------|
-| `highlite`                     | Construct & configure colorschemes                      |
-| `highlite.color`               | Color manipulation functions                            |
-| `highlite.color.palette`       | Palette deriving                                        |
-| `highlite.color.palette.types` | Shared type definitions for built-in palettes           |
-| `highlite.color.palette.<foo>` | Built-in color palettes                                 |
-| `highlite.export`              | Exporting colorschemes to other formats                 |
-| `highlite.fmt`                 | String formatting                                       |
-| `highlite.fs`                  | Operations on the filesystem                            |
-| `highlite.groups`              | Utilities for working with highlight groups             |
-| `highlite.groups.options`      | User configuration resolvers                            |
-| `highlite.groups.types`        | Shared type definitions for highlight group templates   |
-| `highlite.groups.<foo>`        | Highlight group generation templates                    |
-| `highlite.import`              | Import other colorschemes to the `nvim-highlite` format |
-| `highlite.nvim`                | Nvim API utilities                                      |
-| `highlite.table`               | Utilities for working with `table`s                     |
+| Module                         | Description                                                       |
+|:-------------------------------|:------------------------------------------------------------------|
+| `highlite`                     | Construct & configure colorschemes                                |
+| `highlite.color`               | Color manipulation functions                                      |
+| `highlite.color.palette`       | Palette deriving                                                  |
+| `highlite.color.palette.types` | Shared type definitions for built-in palettes                     |
+| `highlite.color.palette.<foo>` | Built-in color palettes                                           |
+| `highlite.export`              | Boilerplate for exporting various formats                         |
+| `highlite.export.<format>`     | Formats that can be exported to from a colorscheme                |
+| `highlite.fmt`                 | String formatting                                                 |
+| `highlite.fs`                  | Operations on the filesystem                                      |
+| `highlite.groups`              | Utilities for working with highlight groups                       |
+| `highlite.groups.options`      | User configuration resolvers                                      |
+| `highlite.groups.types`        | Shared type definitions for highlight group templates             |
+| `highlite.groups.<foo>`        | Highlight group generation templates                              |
+| `highlite.import`              | Boilerplate for importing from various formats to `nvim-highlite` |
+| `highlite.import.<format>`     | Formats that can be imported to `nvim-highlite`                   |
+| `highlite.nvim`                | Nvim API utilities                                                |
+| `highlite.table`               | Utilities for working with `table`s                               |
 
 ## Features
 

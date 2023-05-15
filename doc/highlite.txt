@@ -1411,9 +1411,9 @@ have to install a plugin.
 
 PROJECT LAYOUT                                       *highlite-project-layout*
 
-  ----------------------------------------------------------------------------
+  -------------------------------------------------------------------------------
   Module                         Description
-  ------------------------------ ---------------------------------------------
+  ------------------------------ ------------------------------------------------
   highlite                       Construct & configure colorschemes
 
   highlite.color                 Color manipulation functions
@@ -1424,7 +1424,10 @@ PROJECT LAYOUT                                       *highlite-project-layout*
 
   highlite.color.palette.<foo>   Built-in color palettes
 
-  highlite.export                Exporting colorschemes to other formats
+  highlite.export                Boilerplate for exporting various formats
+
+  highlite.export.<format>       Formats that can be exported to from a
+                                 colorscheme
 
   highlite.fmt                   String formatting
 
@@ -1439,13 +1442,15 @@ PROJECT LAYOUT                                       *highlite-project-layout*
 
   highlite.groups.<foo>          Highlight group generation templates
 
-  highlite.import                Import other colorschemes to the
-                                 nvim-highlite format
+  highlite.import                Boilerplate for importing from various formats
+                                 to nvim-highlite
+
+  highlite.import.<format>       Formats that can be imported to nvim-highlite
 
   highlite.nvim                  Nvim API utilities
 
   highlite.table                 Utilities for working with tables
-  ----------------------------------------------------------------------------
+  -------------------------------------------------------------------------------
 
 FEATURES                                                   *highlite-features*
 
