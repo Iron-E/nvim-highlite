@@ -318,6 +318,7 @@ local function from_palette(palette, opts)
 		['@storageclass.lifetime'] = {fg = palette.storage},
 		['@string.documentation'] = '@comment.documentation',
 		['@string.escape'] = {fg = palette.string_escape, italic = true, nocombine = true},
+		['@string.keycode'] = 'SpecialKey',
 		['@string.regex'] = {fg = palette.string_regex, nocombine = true},
 		['@string.special'] = {fg = palette.string_special, nocombine = true},
 		['@structure'] = Groups.extend({nocombine = true}, structure),
@@ -398,9 +399,6 @@ local function from_palette(palette, opts)
 
 		-- TypeScript
 		['@type.qualifier.typescript'] = '@storageclass.c',
-
-		-- Vimdoc
-		['@string.keycode.vimdoc'] = 'SpecialKey',
 	} -- }}}
 
 	setmetatable(groups, RESOLVE_METATABLE)
