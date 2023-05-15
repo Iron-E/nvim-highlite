@@ -20,9 +20,9 @@
 		(preproc_if ["#if" "#endif"] @punctuation.special)
 		(preproc_include "#include" @punctuation.special)
 	]
-	(#offset-from-start! @punctuation.special 0 0 0 1)
+	(#offset-from! "start" @punctuation.special 0 0 0 1)
 )
 
 (preproc_include path: _ @namespace (#offset! @namespace 0 1 0 -1))
-((system_lib_string) @punctuation.bracket (#offset-from-start! @punctuation.bracket 0 0 0 1))
-((system_lib_string) @punctuation.bracket (#offset-from-end! @punctuation.bracket 0 -1 0 0))
+((system_lib_string) @punctuation.bracket (#offset-from! "start" @punctuation.bracket 0 0 0 1))
+((system_lib_string) @punctuation.bracket (#offset-from! "end" @punctuation.bracket 0 -1 0 0))

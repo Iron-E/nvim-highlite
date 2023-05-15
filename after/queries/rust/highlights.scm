@@ -33,7 +33,7 @@
 
 ((ERROR) @storageclass
 	(#eq? @storageclass "~")
-	(#offset-from-start! @storageclass 0 0 0 1)
+	(#offset-from! "start" @storageclass 0 0 0 1)
 )
 
 ; enum variants

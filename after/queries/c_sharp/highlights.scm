@@ -26,7 +26,7 @@
 		(region_directive)
 		(endregion_directive)
 	] @punctuation.special
-	(#offset-from-start! @punctuation.special 0 -1 0 0)
+	(#offset-from! "start" @punctuation.special 0 -1 0 0)
 )
 
 ; namespaces

@@ -7,7 +7,7 @@
 ((augroup_name) @keyword (#lua-match? @keyword "[Ee][Nn][Dd]"))
 
 ; namespaces
-((scope) @punctuation.delimiter (#offset-from-end! @punctuation.delimiter 0 -1 0 0))
+((scope) @punctuation.delimiter (#offset-from! "end" @punctuation.delimiter 0 -1 0 0))
 
 ; normal commands
 (commands) @string
