@@ -362,6 +362,9 @@ local function from_palette(palette, opts)
 		-- C++
 		['@type.qualifier.cpp'] = '@storageclass.cpp',
 
+		-- C#
+		['@lsp.type.keyword.cs'] = NONE,
+
 		-- Dart
 		['@lsp.type.string.dart'] = NONE,
 
