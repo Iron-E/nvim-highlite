@@ -251,6 +251,7 @@ local function from_palette(palette, opts)
 		['@lsp.type.enumMember'] = {fg = palette.field_enum, nocombine = true},
 		['@lsp.type.event'] = '@event',
 		['@lsp.type.float'] = '@float',
+		['@lsp.type.identifier'] = 'Identifier',
 		['@lsp.type.interface'] = {fg = palette.interface, nocombine = true},
 		['@lsp.type.keyword'] = '@keyword',
 		['@lsp.type.lifetime'] = '@storageclass.lifetime',
