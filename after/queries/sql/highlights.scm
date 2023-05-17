@@ -5,7 +5,6 @@
 	(keyword_array)
 	(keyword_brin)
 	(keyword_btree)
-	(keyword_count)
 	(keyword_float)
 	(keyword_gin)
 	(keyword_gist)
