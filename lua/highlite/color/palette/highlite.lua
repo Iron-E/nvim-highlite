@@ -110,7 +110,7 @@ local function get(bg, get_terminal)
 			throw = 0xFF4090,
 			todo = 0x33DBC3,
 			type = 0x33DBC3,
-			type_builtin = 0x33DBC3,
+			type_builtin = 0x99FF99,
 			type_parameter = 0x33DBC3,
 			uri = 0x2BFF99,
 			variable = 0xC0C0C0,

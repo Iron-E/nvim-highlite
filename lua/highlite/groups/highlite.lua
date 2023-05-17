@@ -6,6 +6,7 @@ local function from_palette(palette, opts)
 	local groups = default_groups_from_palette(palette, opts)
 
 	groups.Folded.fg = palette.bg
+	groups['@type.builtin'].italic = true
 
 	return groups
 end
