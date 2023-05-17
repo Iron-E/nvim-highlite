@@ -1,26 +1,5 @@
 ;; extends
 
-(attribute
-	[
-		(identifier) @preproc.conditional
-		(scoped_identifier name: (identifier) @preproc.conditional)
-	]
-	(#any-of? @preproc.conditional "cfg" "cfg_attr")
-)
-
-(attribute
-	[
-		(identifier) @preproc
-		(scoped_identifier name: (identifier) @preproc)
-	]
-	(#not-any-of? @preproc "cfg" "cfg_attr")
-)
-
-(token_tree (identifier) @keyword.operator
-	(#any-of? @keyword.operator "all" "any" "not")
-	(#has-ancestor? @keyword.operator attribute) ; NOTE: comes from `nvim-treesitter`
-)
-
 ; closure delimiters
 (closure_parameters . ("|" @function) ("|" @function) .)
 
@@ -37,10 +16,12 @@
 )
 
 ; enum variants
-(call_expression
-	function: (scoped_identifier
-		name: (identifier) @type (#lua-match? @type "^%u")
-	)
+(scoped_identifier
+	name: (identifier) @type (#lua-match? @type "^%u%l")
+)
+
+(scoped_type_identifier
+	name: (type_identifier) @structure (#lua-match? @structure "^%u%l")
 )
 
 (enum_variant name: (identifier) @type)
@@ -66,6 +47,28 @@
 
 ; patterns
 (match_pattern "_" @variable.builtin)
+
+;; preprocs
+(attribute
+	[
+		(identifier) @preproc.conditional
+		(scoped_identifier name: (identifier) @preproc.conditional)
+	]
+	(#any-of? @preproc.conditional "cfg" "cfg_attr")
+)
+
+(attribute
+	[
+		(identifier) @preproc
+		(scoped_identifier name: (identifier) @preproc)
+	]
+	(#not-any-of? @preproc "cfg" "cfg_attr")
+)
+
+(token_tree (identifier) @keyword.operator
+	(#any-of? @keyword.operator "all" "any" "not")
+	(#has-ancestor? @keyword.operator attribute) ; NOTE: comes from `nvim-treesitter`
+)
 
 ; raw identifiers
 (
