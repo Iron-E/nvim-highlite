@@ -398,6 +398,7 @@ local function from_palette(palette, opts)
 		['@lsp.typemod.enumMember.defaultLibrary.rust'] = '@type.builtin',
 		['@lsp.typemod.keyword.injected.rust'] = '@keyword.rust',
 		['@lsp.typemod.macro.injected.rust'] = '@macro.rust',
+		['@lsp.typemod.operator.attribute.rust'] = '@operator.rust',
 		['@lsp.typemod.operator.injected.rust'] = '@operator.rust',
 		['@lsp.typemod.variable.defaultLibrary.rust'] = NONE,
 		['@lsp.typemod.variable.injected.rust'] = '@variable.rust',
