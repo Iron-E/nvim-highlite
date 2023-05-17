@@ -34,7 +34,7 @@
 
 ; macros
 (macro_invocation
-	macro: (identifier) @_id @debug (#contains? @_id "assert" "dbg" "debug")
+	macro: (identifier) @_id @debug (#contains? @_id "dbg" "debug")
 	"!" @debug
 	(#set! "priority" 101)
 )
@@ -42,6 +42,12 @@
 (macro_invocation
 	macro: (identifier) @_id @include (#any-of? @_id "include" "include_str")
 	"!" @include
+	(#set! "priority" 101)
+)
+
+(macro_invocation
+	macro: (identifier) @_id @exception (#any-of? @_id "todo" "unimplemented")
+	"!" @exception
 	(#set! "priority" 101)
 )
 
