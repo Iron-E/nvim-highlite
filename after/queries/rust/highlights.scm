@@ -74,37 +74,37 @@
 		(identifier) @punctuation.special
 	]
 	(#lua-match? @punctuation.special "^r#")
-	(#offset-from-start! @punctuation.special 0 0 0 2)
+	(#offset-from! "start" @punctuation.special 0 0 0 2)
 )
 
 ((raw_string_literal) @punctuation.special
 	(#lua-match? @punctuation.special "^r#")
-	(#offset-from-start! @punctuation.special 0 0 0 2)
+	(#offset-from! "start" @punctuation.special 0 0 0 2)
 )
 
 ((raw_string_literal) @punctuation.special
 	(#lua-match? @punctuation.special "^r#")
-	(#offset-from-end! @punctuation.special 0 -1 0 0)
+	(#offset-from! "end" @punctuation.special 0 -1 0 0)
 )
 
 ((raw_string_literal) @punctuation.special
 	(#lua-match? @punctuation.special "^r##")
-	(#offset-from-start! @punctuation.special 0 0 0 3)
+	(#offset-from! "start" @punctuation.special 0 0 0 3)
 )
 
 ((raw_string_literal) @punctuation.special
 	(#lua-match? @punctuation.special "^r##")
-	(#offset-from-end! @punctuation.special 0 -2 0 0)
+	(#offset-from! "end" @punctuation.special 0 -2 0 0)
 )
 
 ((raw_string_literal) @punctuation.special
 	(#lua-match? @punctuation.special "^r###")
-	(#offset-from-start! @punctuation.special 0 0 0 4)
+	(#offset-from! "start" @punctuation.special 0 0 0 4)
 )
 
 ((raw_string_literal) @punctuation.special
 	(#lua-match? @punctuation.special "^r###")
-	(#offset-from-end! @punctuation.special 0 -3 0 0)
+	(#offset-from! "end" @punctuation.special 0 -3 0 0)
 )
 
 ; `try!`
