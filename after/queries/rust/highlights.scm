@@ -46,7 +46,7 @@
 )
 
 (macro_invocation
-	macro: (identifier) @_id @exception (#any-of? @_id "todo" "unimplemented")
+	macro: (identifier) @_id @exception (#any-of? @_id "todo" "unimplemented" "unreachable")
 	"!" @exception
 	(#set! "priority" 101)
 )
