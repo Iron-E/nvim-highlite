@@ -3,18 +3,6 @@
 ; closure delimiters
 (closure_parameters . ("|" @function) ("|" @function) .)
 
-; de/ref characters
-(reference_expression . "&" @storageclass)
-(reference_pattern . "&" @storageclass)
-(reference_type . "&" @storageclass)
-(self_parameter . "&" @storageclass)
-(unary_expression . "*" @storageclass)
-
-((ERROR) @storageclass
-	(#eq? @storageclass "~")
-	(#offset-from! "start" @storageclass 0 0 0 1)
-)
-
 ; enum variants
 (scoped_identifier
 	name: (identifier) @type (#lua-match? @type "^%u%l")
@@ -120,6 +108,20 @@
 ((raw_string_literal) @punctuation.special
 	(#lua-match? @punctuation.special "^r###")
 	(#offset-from! "end" @punctuation.special 0 -3 0 0)
+)
+
+; storageclass
+(reference_expression . "&" @storageclass)
+(reference_pattern . "&" @storageclass)
+(reference_type . "&" @storageclass)
+(self_parameter . "&" @storageclass)
+(unary_expression . "*" @storageclass)
+
+"move" @storageclass
+
+((ERROR) @storageclass
+	(#eq? @storageclass "~")
+	(#offset-from! "start" @storageclass 0 0 0 1)
 )
 
 ; `try!`
