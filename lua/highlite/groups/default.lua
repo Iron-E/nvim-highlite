@@ -636,6 +636,7 @@ local function from_palette(palette, opts)
 		if all_nvim_plugins or nvim_plugins.telescope ~= false then
 			groups.TelescopeBorder = 'FloatBorder'
 			groups.TelescopeNormal = 'NormalFloat'
+			groups.TelescopePromptCounter = '@number.TelescopePrompt'
 			groups.TelescopeTitle = 'FloatTitle'
 		end
 
