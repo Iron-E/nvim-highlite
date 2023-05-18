@@ -51,6 +51,12 @@
 	(#set! "priority" 101)
 )
 
+(token_binding_pattern
+	type: (fragment_specifier) @type.builtin
+)
+
+(token_repetition_pattern ["?" "*" "+" ] @repeat)
+
 ; patterns
 (match_pattern "_" @variable.builtin)
 
