@@ -78,6 +78,7 @@
 	]
 	(#lua-match? @punctuation.special "^r#")
 	(#offset-from! "start" @punctuation.special 0 0 0 2)
+	(#set! priority 128)
 )
 
 ((raw_string_literal) @punctuation.special
