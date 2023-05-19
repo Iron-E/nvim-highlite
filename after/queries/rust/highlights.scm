@@ -34,7 +34,15 @@
 )
 
 (macro_invocation
-	macro: (identifier) @_id @exception (#any-of? @_id "todo" "unimplemented" "unreachable")
+	macro: (identifier) @_id @exception (#any-of? @_id
+		"assert"
+		"assert_eq"
+		"assert_ne"
+		"panic"
+		"todo"
+		"unimplemented"
+		"unreachable"
+	)
 	"!" @exception
 	(#set! "priority" 101)
 )
