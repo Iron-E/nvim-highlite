@@ -13,6 +13,11 @@
 	(keyword_spgist)
 ] @function.builtin
 
+; identifiers
+(column_definition name: (identifier) @field)
+(keyword_null) @constant.builtin
+(table_reference name: (identifier) @structure)
+
 ; operators
 [
 	(keyword_as)
@@ -20,5 +25,3 @@
 ] @keyword.operator
 
 ; structures
-(field table_alias: (identifier) @structure)
-(relation table_alias: (identifier) @structure)
