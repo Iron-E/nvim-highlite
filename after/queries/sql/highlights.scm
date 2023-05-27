@@ -1,5 +1,8 @@
 ;; extends
 
+; conditionals
+(keyword_if) @conditional
+
 ; functions
 [
 	(keyword_array)
@@ -23,5 +26,3 @@
 	(keyword_as)
 	(keyword_cast)
 ] @keyword.operator
-
-; structures
