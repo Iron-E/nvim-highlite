@@ -402,6 +402,7 @@ local function from_palette(palette, opts)
 		['@lsp.typemod.macro.injected.rust'] = '@macro.rust',
 		['@lsp.typemod.operator.attribute.rust'] = '@operator.rust',
 		['@lsp.typemod.operator.injected.rust'] = '@operator.rust',
+		['@lsp.typemod.string.injected.rust'] = '@string.rust',
 		['@lsp.typemod.variable.defaultLibrary.rust'] = NONE,
 		['@lsp.typemod.variable.injected.rust'] = '@variable.rust',
 		['@type.qualifier.rust'] = '@storageclass.rust',
