@@ -416,7 +416,7 @@ local function from_palette(palette, opts)
 	groups.FloatTitle = Groups.extend({bold = true}, groups'FloatBorder')
 	groups.MatchParen = Groups.extend({bold = true}, groups'Tag')
 	groups['@debug'] = Groups.extend({nocombine = true}, groups'Debug')
-	groups['@lsp.type.constParameter'] = Groups.extend(Groups.clone(groups'@parameter' or {}), groups'Constant')
+	groups['@lsp.type.constParameter'] = Groups.extend(Groups.clone(groups'Constant'), groups'@parameter')
 
 	if any_nvim_plugins then
 		local nvim_plugins = type(opts.plugins) == 'table' and opts.plugins.nvim or NONE
