@@ -26,3 +26,6 @@
 	(keyword_as)
 	(keyword_cast)
 ] @keyword.operator
+
+; punctuation
+(parameter "$" @punctuation.special)
