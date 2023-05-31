@@ -22,6 +22,12 @@
 (field name: (identifier) @field)
 (keyword_null) @constant.builtin
 (table_reference name: (identifier) @structure)
+((identifier) @variable.builtin
+	(#eq? @variable.builtin "EXCLUDED")
+)
+
+; events
+(keyword_conflict) @event
 
 ; operators
 [
