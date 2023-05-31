@@ -17,7 +17,9 @@
 ] @function.builtin
 
 ; identifiers
+(column (identifier) @field)
 (column_definition name: (identifier) @field)
+(field name: (identifier) @field)
 (keyword_null) @constant.builtin
 (table_reference name: (identifier) @structure)
 
