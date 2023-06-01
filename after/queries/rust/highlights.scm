@@ -28,13 +28,13 @@
 )
 
 (macro_invocation
-	macro: (identifier) @_id @include (#any-of? @_id "include" "include_str")
+	macro: (identifier) @_id @include (#contains? @_id "include")
 	"!" @include
 	(#set! "priority" 101)
 )
 
 (macro_invocation
-	macro: (identifier) @_id @exception (#any-of? @_id
+	macro: (identifier) @_id @exception (#contains? @_id
 		"assert"
 		"assert_eq"
 		"assert_ne"
