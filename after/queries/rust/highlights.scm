@@ -90,6 +90,11 @@
 )
 
 ((raw_string_literal) @punctuation.special
+	(#lua-match? @punctuation.special "^r")
+	(#offset-from! "start" @punctuation.special 0 0 0 1)
+)
+
+((raw_string_literal) @punctuation.special
 	(#lua-match? @punctuation.special "^r#")
 	(#offset-from! "start" @punctuation.special 0 0 0 2)
 )
