@@ -10,10 +10,12 @@
 ; repeat
 "in" @repeat
 
-; require `@namespace`s
+; strings
 (function_call
 	name: (identifier) @_fn (#eq? @_fn "require")
 	arguments: (arguments (string
 		content: (string_content) @namespace
 	))
 )
+
+(string_content (escape_sequence) @string.escape)
