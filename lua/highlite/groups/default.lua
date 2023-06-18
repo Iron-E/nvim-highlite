@@ -249,6 +249,7 @@ local function from_palette(palette, opts)
 		['@lsp.type.decorator'] = {fg = palette.decorator},
 		['@lsp.type.enum'] = {fg = palette.enum, bold = true, nocombine = true},
 		['@lsp.type.enumMember'] = {fg = palette.field_enum, nocombine = true},
+		['@lsp.type.escapeSequence'] = '@string.escape',
 		['@lsp.type.event'] = '@event',
 		['@lsp.type.float'] = '@float',
 		['@lsp.type.identifier'] = 'Identifier',
