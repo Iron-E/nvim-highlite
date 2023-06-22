@@ -84,43 +84,43 @@
 		(field_identifier) @punctuation.special
 		(identifier) @punctuation.special
 	]
-	(#lua-match? @punctuation.special "^r#")
+	(#lua-match? @punctuation.special "^r#\"")
 	(#offset-from! "start" @punctuation.special 0 0 0 2)
 	(#set! priority 128)
 )
 
 ((raw_string_literal) @punctuation.special
-	(#lua-match? @punctuation.special "^r")
+	(#lua-match? @punctuation.special "^r\"")
 	(#offset-from! "start" @punctuation.special 0 0 0 1)
 )
 
 ((raw_string_literal) @punctuation.special
-	(#lua-match? @punctuation.special "^r#")
+	(#lua-match? @punctuation.special "^r#\"")
 	(#offset-from! "start" @punctuation.special 0 0 0 2)
 )
 
 ((raw_string_literal) @punctuation.special
-	(#lua-match? @punctuation.special "^r#")
+	(#lua-match? @punctuation.special "^r#\"")
 	(#offset-from! "end" @punctuation.special 0 -1 0 0)
 )
 
 ((raw_string_literal) @punctuation.special
-	(#lua-match? @punctuation.special "^r##")
+	(#lua-match? @punctuation.special "^r##\"")
 	(#offset-from! "start" @punctuation.special 0 0 0 3)
 )
 
 ((raw_string_literal) @punctuation.special
-	(#lua-match? @punctuation.special "^r##")
+	(#lua-match? @punctuation.special "^r##\"")
 	(#offset-from! "end" @punctuation.special 0 -2 0 0)
 )
 
 ((raw_string_literal) @punctuation.special
-	(#lua-match? @punctuation.special "^r###")
+	(#lua-match? @punctuation.special "^r###\"")
 	(#offset-from! "start" @punctuation.special 0 0 0 4)
 )
 
 ((raw_string_literal) @punctuation.special
-	(#lua-match? @punctuation.special "^r###")
+	(#lua-match? @punctuation.special "^r###\"")
 	(#offset-from! "end" @punctuation.special 0 -3 0 0)
 )
 
