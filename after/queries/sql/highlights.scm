@@ -21,7 +21,7 @@
 (column_definition name: (identifier) @field)
 (field name: (identifier) @field)
 (keyword_null) @constant.builtin
-(table_reference name: (identifier) @structure)
+(object_reference name: (identifier) @structure)
 ((identifier) @variable.builtin
 	(#eq? @variable.builtin "EXCLUDED")
 )
