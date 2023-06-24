@@ -11,17 +11,23 @@
 	(keyword_float)
 	(keyword_gin)
 	(keyword_gist)
-	(keyword_group_concat)
 	(keyword_hash)
 	(keyword_spgist)
 ] @function.builtin
 
-; identifiers
-(column (identifier) @field)
-(column_definition name: (identifier) @field)
-(field name: (identifier) @field)
+(invocation (object_reference
+	name: (identifier) @function.builtin
+	(#lua-match? @function.builtin "[Cc][Oo][Nn][Cc][Aa][Tt]")
+))
+
+; ; identifiers
+; (column (identifier) @field)
+; (column_definition name: (identifier) @field)
+; (field name: (identifier) @field)
+(create_table (object_reference name: (identifier) @structure))
 (keyword_null) @constant.builtin
-(object_reference name: (identifier) @structure)
+(relation (object_reference name: (identifier) @structure))
+
 ((identifier) @variable.builtin
 	(#eq? @variable.builtin "EXCLUDED")
 )
