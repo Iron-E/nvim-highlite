@@ -84,7 +84,7 @@
 		(field_identifier) @punctuation.special
 		(identifier) @punctuation.special
 	]
-	(#lua-match? @punctuation.special "^r#\"")
+	(#lua-match? @punctuation.special "^r#")
 	(#offset-from! "start" @punctuation.special 0 0 0 2)
 	(#set! priority 128)
 )
