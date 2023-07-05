@@ -24,7 +24,9 @@
 ; (column (identifier) @field)
 ; (column_definition name: (identifier) @field)
 ; (field name: (identifier) @field)
+(all_fields (object_reference name: (identifier) @variable) "*" @character.special)
 (create_table (object_reference name: (identifier) @structure))
+(field (object_reference name: (identifier) @variable))
 (keyword_null) @constant.builtin
 (relation (object_reference name: (identifier) @structure))
 
