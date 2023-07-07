@@ -69,12 +69,6 @@ local function from_palette(palette, opts)
 		Title = 'Bold',
 		Underlined = {fg = palette.uri, underline = true},
 		Whitespace = 'NonText',
-		H1 = {fg = palette.error, bold = true},
-		H2 = {fg = palette.warning, bold = true},
-		H3 = {fg = palette.diff_change, bold = true},
-		H4 = {fg = palette.string, bold = true},
-		H5 = {fg = palette.type, bold = true},
-		H6 = {fg = palette.fold, bold = true},
 
 		-- "Non"-text
 		Conceal = 'Ignore',
@@ -342,12 +336,12 @@ local function from_palette(palette, opts)
 		['@text.reference'] = {fg = palette.text_reference, underline = true},
 		['@text.strike'] = {strikethrough = true},
 		['@text.strong'] = 'Bold',
-		['@text.title.1'] = 'H1',
-		['@text.title.2'] = 'H2',
-		['@text.title.3'] = 'H3',
-		['@text.title.4'] = 'H4',
-		['@text.title.5'] = 'H5',
-		['@text.title.6'] = 'H6',
+		['@text.title.1'] = {fg = palette.error, bold = true},
+		['@text.title.2'] = {fg = palette.warning, bold = true},
+		['@text.title.3'] = {fg = palette.diff_change, bold = true},
+		['@text.title.4'] = {fg = palette.string, bold = true},
+		['@text.title.5'] = {fg = palette.type, bold = true},
+		['@text.title.6'] = {fg = palette.fold, bold = true},
 		['@text.todo'] = {fg = palette.todo},
 		['@text.underline'] = {underline = true},
 		['@text.warning'] = {fg = palette.warning},
@@ -557,8 +551,8 @@ local function from_palette(palette, opts)
 			groups.LazyCommitIssue = 'LazyUrl'
 			groups.LazyCommitType = '@type.lazy'
 			groups.LazyDir = 'Directory'
-			groups.LazyH1 = 'H1'
-			groups.LazyH2 = 'H2'
+			groups.LazyH1 = '@text.title.1'
+			groups.LazyH2 = '@text.title.2'
 			groups.LazyProp = '@field.lazy'
 			groups.LazyReasonEvent = '@repeat.lazy'
 			groups.LazyReasonFt = '@conditional.lazy'
@@ -923,12 +917,12 @@ local function from_palette(palette, opts)
 			groups.htmlSpecialChar = '@string.special.html'
 			groups.htmlBold = 'Bold'
 			groups.htmlEndTag = 'htmlTag'
-			groups.htmlH1 = 'H1'
-			groups.htmlH2 = 'H2'
-			groups.htmlH3 = 'H3'
-			groups.htmlH4 = 'H4'
-			groups.htmlH5 = 'H5'
-			groups.htmlH6 = 'H6'
+			groups.htmlH1 = '@text.title.1'
+			groups.htmlH2 = '@text.title.2'
+			groups.htmlH3 = '@text.title.3'
+			groups.htmlH4 = '@text.title.4'
+			groups.htmlH5 = '@text.title.5'
+			groups.htmlH6 = '@text.title.6'
 			groups.htmlItalic = 'Italic'
 			groups.htmlSpecialTagName = '@keyword.html'
 			groups.htmlTag = '@tag.delimiter.html'
@@ -1046,11 +1040,11 @@ local function from_palette(palette, opts)
 		end
 
 		if all_syntax or syntax.man ~= false then
-			groups.manHeader = 'H1'
+			groups.manHeader = '@text.title.1'
 			groups.manOptionDesc = '@parameter.sh'
 			groups.manReference = '@text.uri'
-			groups.manSectionHeading = 'H2'
-			groups.manSubHeading = 'H3'
+			groups.manSectionHeading = '@text.title.2'
+			groups.manSubHeading = '@text.title.3'
 			groups.manUnderline = '@text.literal'
 		end
 
@@ -1058,12 +1052,12 @@ local function from_palette(palette, opts)
 			groups.markdownCode = 'mkdCode'
 			groups.markdownCodeDelimiter = 'mkdCodeDelimiter'
 			groups.markdownEscape = '@string.escape.markdown'
-			groups.markdownH1 = 'H1'
-			groups.markdownH2 = 'H2'
-			groups.markdownH3 = 'H3'
-			groups.markdownH4 = 'H4'
-			groups.markdownH5 = 'H5'
-			groups.markdownH6 = 'H6'
+			groups.markdownH1 = '@text.title.1'
+			groups.markdownH2 = '@text.title.2'
+			groups.markdownH3 = '@text.title.3'
+			groups.markdownH4 = '@text.title.4'
+			groups.markdownH5 = '@text.title.5'
+			groups.markdownH6 = '@text.title.6'
 			groups.markdownLinkDelimiter = 'mkdDelimiter'
 			groups.markdownLinkText = 'mkdLink'
 			groups.markdownLinkTextDelimiter = 'markdownLinkDelimiter'
