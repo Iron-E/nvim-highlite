@@ -15,10 +15,8 @@
 ; )
 
 ; text environments
-(fenced_code_block
-	(fenced_code_block_delimiter) @text.environment
-	(info_string) @text.environment.name
-)
+(fenced_code_block (info_string) @text.environment.name)
+(fenced_code_block_delimiter) @text.environment
 
 ; titles
 (atx_heading
