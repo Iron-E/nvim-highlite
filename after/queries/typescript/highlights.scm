@@ -6,5 +6,7 @@
 	arguments: (arguments (string (string_fragment) @namespace))
 )
 
+(internal_module name: (identifier) @namespace (#set! "priority" 126))
+
 ; storageclass
 "const" @storageclass
