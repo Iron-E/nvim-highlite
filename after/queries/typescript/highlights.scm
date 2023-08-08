@@ -9,9 +9,15 @@
 (import_statement source: (string (string_fragment) @namespace))
 (internal_module name: (identifier) @namespace (#set! "priority" 126))
 
+; modifiers
+"const" @storageclass
+
+[
+	"private"
+	"protected"
+	"public"
+] @keyword
+
 ; operators
 (intersection_type "&" @operator)
 (union_type "|" @operator)
-
-; storageclass
-"const" @storageclass
