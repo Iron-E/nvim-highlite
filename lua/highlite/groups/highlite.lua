@@ -7,6 +7,7 @@ local function from_palette(palette, opts)
 
 	groups.Folded.fg = palette.bg
 	groups['@type.builtin'].italic = true
+	groups['@lsp.typemod.interface.defaultLibrary'].italic = true
 
 	return groups
 end
