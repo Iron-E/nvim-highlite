@@ -268,6 +268,7 @@ local function from_palette(palette, opts)
 		['@lsp.typemod.string.constant'] = NONE,
 		['@lsp.typemod.string.readonly'] = NONE,
 		['@lsp.typemod.string.static'] = NONE,
+		['@lsp.typemod.type.declaration'] = '@type.definition',
 		['@lsp.typemod.type.defaultLibrary'] = '@type.builtin',
 		['@lsp.typemod.type.readonly'] = '@lsp.type.type',
 		['@lsp.typemod.variable.defaultLibrary'] = '@variable.builtin',
