@@ -42,6 +42,7 @@ local Table = require 'highlite.table' --- @type highlite.Table
 --- @field include highlite.color e.g. `#include` in C
 --- @field info highlite.color diagnostic info
 --- @field interface highlite.color e.g. `interface Foo`
+--- @field interface_builtin highlite.color e.g. `interface Foo`
 --- @field keyword highlite.color keywords, e.g. `local` in Lua
 --- @field keyword_coroutine highlite.color e.g. `await`
 --- @field keyword_function highlite.color e.g. `fn` in Rust, `def` in Python
@@ -142,6 +143,7 @@ local PALETTE_ALTS =
 	include = 'preproc',
 	info = 'warning',
 	interface = 'type',
+	interface_builtin = 'type_builtin',
 	keyword = 'statement',
 	keyword_coroutine = 'keyword',
 	keyword_function = 'type_builtin',
