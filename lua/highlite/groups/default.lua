@@ -513,7 +513,7 @@ local function from_palette(palette, opts)
 			groups.CmpItemKindFile = 'Directory'
 			groups.CmpItemKindFolder = 'CmpItemKindFile'
 			groups.CmpItemKindFunction = '@function'
-			groups.CmpItemKindInterface = '@interface'
+			groups.CmpItemKindInterface = '@lsp.type.interface'
 			groups.CmpItemKindKeyword = '@keyword'
 			groups.CmpItemKindMethod = '@method'
 			groups.CmpItemKindModule = '@namespace'
