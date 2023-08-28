@@ -6,6 +6,7 @@
 	arguments: (arguments (string (string_fragment) @namespace))
 )
 
+(export_statement source: (string (string_fragment) @namespace))
 (import_statement source: (string (string_fragment) @namespace))
 (internal_module name: (identifier) @namespace (#set! "priority" 126))
 
