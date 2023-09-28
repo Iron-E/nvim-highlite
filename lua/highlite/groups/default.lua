@@ -543,8 +543,10 @@ local function from_palette(palette, opts)
 		end
 
 		if all_nvim_plugins or nvim_plugins.indent_blankline ~= false then
-			groups.IndentBlanklineSpaceChar = 'IndentBlanklineChar'
+			groups.IblIndent = 'IndentBlanklineChar'
+			groups.IblWhitespace = 'IndentBlanklineChar'
 			groups.IndentBlanklineChar = Groups.extend({nocombine = true}, groups 'Whitespace')
+			groups.IndentBlanklineSpaceChar = 'IndentBlanklineChar'
 		end
 
 		if all_nvim_plugins or nvim_plugins.lazy ~= false then
