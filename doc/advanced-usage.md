@@ -143,7 +143,7 @@ local Highlite = require 'highlite' --- @type Highlite
 local palette, terminal_palette = Highlite.palette 'highlite' -- or any of the built-in palettes, e.g. 'ayu'
 ```
 
-The `terminal_palette` will automatically be `nil` when you turn off terminal highlighting in `setup`.
+The `terminal_palette` will automatically be `nil` when you turn off terminal highlighting in `generate`.
 
 ##### List of Built-in Palettes
 
@@ -497,12 +497,12 @@ local green_red_bold_italic = Groups.extend_selected(green_red_italic, white_bol
 > This mutates `child`! Use `Groups.clone()` first if this is a problem.
 
 
-### 3. Setup
+### 3. Generate
 
-Finally, now that you have your **palette** and your **groups**, you can setup your colorscheme:
+Finally, now that you have your **palette** and your **groups**, you can generate your colorscheme:
 
 ```lua
-require('highlite').setup(
+require('highlite').generate(
   '<name>', -- replace `<name>` with the name of the file you created in step 1
   groups,
   terminal_palette -- OPTIONAL: set the terminal colors
@@ -556,8 +556,8 @@ groups.luaStringLongTag = Groups.extend({italic = true}, groups '@punctuation.br
 -- Use `msgsep` in `fillchars`? Override `MsgSeparator` to only highlight the foreground
 groups.MsgSeparator = {fg = colors.text_contrast_bg_high}
 
---[[ Setup ]]
-Highlite.setup('highlite-example', groups, terminal_palette)
+--[[ Generate ]]
+Highlite.generate('highlite-example', groups, terminal_palette)
 ```
 
 ## Importing Colorschemes
@@ -599,7 +599,7 @@ Then `imported.dark.palette` is the color palette for a dark `&background`.
 > local bg = vim.api.nvim_get_option 'background'
 > local imported = Import.nvim 'zellner'
 >
-> Highlite.setup(
+> Highlite.generate(
 >   'example',
 >   Highlite.groups('default', imported[bg].palette),
 >   imported[bg].terminal
