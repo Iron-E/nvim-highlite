@@ -44,4 +44,4 @@
 ] @keyword.operator
 
 ; punctuation
-(parameter "$" @punctuation.special)
+((parameter) @punctuation.special (#offset-from! "start" @punctuation.special 0 0 0 1))
