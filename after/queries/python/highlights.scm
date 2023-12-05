@@ -14,7 +14,10 @@
 	(dotted_name (identifier) @namespace)
 ])
 
-(import_from_statement module_name: (dotted_name (identifier) @namespace))
+(import_from_statement module_name: [
+	(dotted_name (identifier) @namespace)
+	(relative_import (dotted_name (identifier) @namespace))
+])
 
 ; Privates
 ((identifier) @type (#lua-match? @type "^_+[A-Z]+[a-z]+"))
