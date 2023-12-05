@@ -24,7 +24,7 @@
 (
 	(identifier) @constant
 	(#lua-match? @constant "^_*[A-Z][A-Z_]*$")
-	(#not-has-parent? @constant aliased_import)
+	(#not-has-ancestor? @constant import_statement)
 )
 
 ; Punctuation
