@@ -164,6 +164,7 @@ local function from_palette(palette, opts)
 		--(MatchParen defined below)
 
 		-- Searching
+		CurSearch = 'IncSearch',
 		IncSearch = {bg = palette.search, fg = palette.bg, nocombine = true},
 		Search = {sp = palette.search, underline = true},
 
