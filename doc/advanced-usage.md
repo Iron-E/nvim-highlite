@@ -316,9 +316,12 @@ local groups = Highlite.groups('default', palette) -- or any of the built-in gro
 
 #### List of Built-in Groups
 
-| Name               | Description                                                    |
-|:-------------------|:---------------------------------------------------------------|
-| `default`          | The default groups: all Neovim built-ins and some Lua plugins. |
+| Name             | Description                                                    | Parent Group |
+|:-----------------|:---------------------------------------------------------------|:-------------|
+| `default`        | The default groups: all Neovim built-ins and some Lua plugins. |              |
+| `highlite`       | Overrides for the `highlite` pallete.                          | `default`    |
+| `seoul256-light` | Overrides for the `seoul256-light` pallete.                    | `seoul256`   |
+| `seoul256`       | Overrides for the `seoul256` pallete.                          | `default`    |
 
 #### 2a. Overriding Groups (Optional)
 
