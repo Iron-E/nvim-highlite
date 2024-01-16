@@ -323,8 +323,8 @@ local FMT = [[
 		<dict>
 			<key>name</key> <string>Special Punctuation</string>
 			<key>scope</key> <string>
-				<!-- markup.list.numbered, -->
-				<!-- markup.list.unnumbered, -->
+				markup.list.numbered,
+				markup.list.unnumbered,
 				markup.other,
 				punctuation.definition.annotation,
 				punctuation.definition.keyword,
