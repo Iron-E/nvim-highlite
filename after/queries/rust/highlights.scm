@@ -22,19 +22,19 @@
 
 ; macros
 (macro_invocation
-	macro: (identifier) @_id @debug (#contains? @_id "dbg" "debug")
-	"!" @debug
+	macro: (identifier) @_id @keyword.debug (#contains? @_id "dbg" "debug")
+	"!" @keyword.debug
 	(#set! "priority" 101)
 )
 
 (macro_invocation
-	macro: (identifier) @_id @include (#contains? @_id "include")
-	"!" @include
+	macro: (identifier) @_id @keyword.import (#contains? @_id "include")
+	"!" @keyword.import
 	(#set! "priority" 101)
 )
 
 (macro_invocation
-	macro: (identifier) @_id @exception (#contains? @_id
+	macro: (identifier) @_id @keyword.exception (#contains? @_id
 		"assert"
 		"assert_eq"
 		"assert_ne"
@@ -43,7 +43,7 @@
 		"unimplemented"
 		"unreachable"
 	)
-	"!" @exception
+	"!" @keyword.exception
 	(#set! "priority" 101)
 )
 
@@ -51,7 +51,7 @@
 	type: (fragment_specifier) @type.builtin
 )
 
-(token_repetition_pattern ["?" "*" "+" ] @repeat)
+(token_repetition_pattern ["?" "*" "+" ] @keyword.repeat)
 
 ; patterns
 (match_pattern "_" @variable.builtin)
@@ -59,18 +59,18 @@
 ;; preprocs
 (attribute
 	[
-		(identifier) @preproc.conditional
-		(scoped_identifier name: (identifier) @preproc.conditional)
+		(identifier) @keyword.directive.conditional
+		(scoped_identifier name: (identifier) @keyword.directive.conditional)
 	]
-	(#any-of? @preproc.conditional "cfg" "cfg_attr")
+	(#any-of? @keyword.directive.conditional "cfg" "cfg_attr")
 )
 
 (attribute
 	[
-		(identifier) @preproc
-		(scoped_identifier name: (identifier) @preproc)
+		(identifier) @keyword.directive
+		(scoped_identifier name: (identifier) @keyword.directive)
 	]
-	(#not-any-of? @preproc "cfg" "cfg_attr")
+	(#not-any-of? @keyword.directive "cfg" "cfg_attr")
 )
 
 (token_tree (identifier) @keyword.operator
@@ -125,21 +125,21 @@
 )
 
 ; storageclass
-(reference_expression . "&" @storageclass)
-(reference_pattern . "&" @storageclass)
-(reference_type . "&" @storageclass)
-(self_parameter . "&" @storageclass)
-(unary_expression . "*" @storageclass)
+(reference_expression . "&" @keyword.storage)
+(reference_pattern . "&" @keyword.storage)
+(reference_type . "&" @keyword.storage)
+(self_parameter . "&" @keyword.storage)
+(unary_expression . "*" @keyword.storage)
 
-"move" @storageclass
+"move" @keyword.storage
 
-((ERROR) @storageclass
-	(#eq? @storageclass "~")
-	(#offset-from! "start" @storageclass 0 0 0 1)
+((ERROR) @keyword.storage
+	(#eq? @keyword.storage "~")
+	(#offset-from! "start" @keyword.storage 0 0 0 1)
 )
 
 ; `try!`
-(try_expression ("?" @exception))
+(try_expression ("?" @keyword.exception))
 
 ; unsafe
-"unsafe" @exception
+"unsafe" @keyword.exception

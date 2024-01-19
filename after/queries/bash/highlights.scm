@@ -5,7 +5,7 @@
 (expansion ["${" "}"] @punctuation.special)
 
 ; repeat
-(for_statement "in" @repeat)
+(for_statement "in" @keyword.repeat)
 
 ; variables
 (variable_name) @variable

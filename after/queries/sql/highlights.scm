@@ -1,7 +1,7 @@
 ;; extends
 
 ; conditionals
-(keyword_if) @conditional
+(keyword_if) @keyword.conditional
 
 ; functions
 [
@@ -21,9 +21,9 @@
 ))
 
 ; ; identifiers
-; (column (identifier) @field)
-; (column_definition name: (identifier) @field)
-; (field name: (identifier) @field)
+; (column (identifier) @variable.member)
+; (column_definition name: (identifier) @variable.member)
+; (field name: (identifier) @variable.member)
 (all_fields (object_reference name: (identifier) @variable) "*" @character.special)
 (create_table (object_reference name: (identifier) @structure))
 (field (object_reference name: (identifier) @variable))

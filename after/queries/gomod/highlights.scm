@@ -4,8 +4,8 @@
 ["(" ")"] @punctuation.bracket
 
 ; includes
-(module_directive "module" @include)
-(require_directive "require" @include)
+(module_directive "module" @keyword.import)
+(require_directive "require" @keyword.import)
 
 ; versions
 [

@@ -18,8 +18,8 @@
 )
 
 ; macro
-(region_directive (preproc_message) @text.title) @preproc
-(endregion_directive (preproc_message) @text.title) @preproc
+(region_directive (preproc_message) @markup.title) @keyword.directive
+(endregion_directive (preproc_message) @markup.title) @keyword.directive
 
 (
 	[
@@ -30,9 +30,9 @@
 )
 
 ; namespaces
-(using_directive (identifier) @namespace)
-(qualified_name (identifier) @namespace
-	(#has-ancestor? @namespace namespace_declaration using_directive) ; NOTE: from nvim-treesitter
+(using_directive (identifier) @module)
+(qualified_name (identifier) @module
+	(#has-ancestor? @module namespace_declaration using_directive) ; NOTE: from nvim-treesitter
 )
 
 ; nullable

@@ -17,4 +17,4 @@
 (named_node name: (identifier) @structure)
 
 ; quantifier
-(quantifier) @repeat
+(quantifier) @keyword.repeat

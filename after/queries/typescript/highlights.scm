@@ -3,15 +3,15 @@
 ; namespaces
 (call_expression
 	function: (identifier) @_function (#eq? @_function "require")
-	arguments: (arguments (string (string_fragment) @namespace))
+	arguments: (arguments (string (string_fragment) @module))
 )
 
-(export_statement source: (string (string_fragment) @namespace))
-(import_statement source: (string (string_fragment) @namespace))
-(internal_module name: (identifier) @namespace (#set! "priority" 126))
+(export_statement source: (string (string_fragment) @module))
+(import_statement source: (string (string_fragment) @module))
+(internal_module name: (identifier) @module (#set! "priority" 126))
 
 ; modifiers
-"const" @storageclass
+"const" @keyword.storage
 
 [
 	"private"

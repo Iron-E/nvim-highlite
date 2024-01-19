@@ -1,4 +1,4 @@
 ;; extends
 
-; key in `"key": value` as @field
-(pair key: (string (string_content) @field))
+; key in `"key": value` as @variable.member
+(pair key: (string (string_content) @variable.member))

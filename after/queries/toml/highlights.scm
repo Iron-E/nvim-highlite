@@ -5,7 +5,7 @@
 
 (pair (bare_key) @structure (inline_table))
 (pair
-	(dotted_key (bare_key) @field .)
+	(dotted_key (bare_key) @variable.member .)
 	(_) @_value
 	(#not-has-type? @_value inline_table)
 )

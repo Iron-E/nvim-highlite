@@ -13,21 +13,21 @@
 
 ; Namespaces
 (attribute
-  object: (identifier) @namespace (#lua-match? @namespace "[_a-z]+")
+  object: (identifier) @module (#lua-match? @module "[_a-z]+")
   attribute: (identifier) @_type (#lua-match? @_type "^_*[A-Z]+[a-z]+")
 )
 
 (import_statement name: [
 	(aliased_import [
-		(dotted_name (identifier) @namespace)
-		(identifier) @namespace
+		(dotted_name (identifier) @module)
+		(identifier) @module
 	])
-	(dotted_name (identifier) @namespace)
+	(dotted_name (identifier) @module)
 ])
 
 (import_from_statement module_name: [
-	(dotted_name (identifier) @namespace)
-	(relative_import (dotted_name (identifier) @namespace))
+	(dotted_name (identifier) @module)
+	(relative_import (dotted_name (identifier) @module))
 ])
 
 ; Privates
