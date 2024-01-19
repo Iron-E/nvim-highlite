@@ -94,9 +94,9 @@ local FMT = [[
 			<key>name</key> <string>@floatloating Point Number</string>
 			<key>scope</key> <string>constant.numeric.float</string>
 			<key>settings</key> <dict>
-				<key>background</key> <string>${@float.bg}</string>
-				<key>foreground</key> <string>${@float.fg}</string>
-				<key>fontStyle</key> <string>${@float.bold}${@float.italic}${@float.strikethrough}${@float.undercurl}${@float.underdashed}${@float.underdotted}${@float.underdouble}${@float.underline}</string>
+				<key>background</key> <string>${@float.bg | @number.float.bg}</string>
+				<key>foreground</key> <string>${@float.fg | @number.float.fg}</string>
+				<key>fontStyle</key> <string>${@float.bold | @number.float.bold}${@float.italic | @number.float.italic}${@float.strikethrough | @number.float.strikethrough}${@float.undercurl | @number.float.undercurl}${@float.underdashed | @number.float.underdashed}${@float.underdotted | @number.float.underdotted}${@float.underdouble | @number.float.underdouble}${@float.underline | @number.float.underline}</string>
 			</dict>
 		</dict>
 
@@ -134,9 +134,9 @@ local FMT = [[
 			<key>name</key> <string>Format String</string>
 			<key>scope</key> <string>constant.other.placeholder</string>
 			<key>settings</key> <dict>
-				<key>background</key> <string>${@string.special.bg}</string>
-				<key>foreground</key> <string>${@string.special.fg}</string>
-				<key>fontStyle</key> <string>${@string.special.bold}${@string.special.italic}${@string.special.strikethrough}${@string.special.undercurl}${@string.special.underdashed}${@string.special.underdotted}${@string.special.underdouble}${@string.special.underline}</string>
+				<key>background</key> <string>${@string.special.bg | @markup.link.label.bg}</string>
+				<key>foreground</key> <string>${@string.special.fg | @markup.link.label.fg}</string>
+				<key>fontStyle</key> <string>${@string.special.bold | @markup.link.label.bold}${@string.special.italic | @markup.link.label.italic}${@string.special.strikethrough | @markup.link.label.strikethrough}${@string.special.undercurl | @markup.link.label.undercurl}${@string.special.underdashed | @markup.link.label.underdashed}${@string.special.underdotted | @markup.link.label.underdotted}${@string.special.underdouble | @markup.link.label.underdouble}${@string.special.underline | @markup.link.label.underline}</string>
 			</dict>
 		</dict>
 
@@ -224,9 +224,9 @@ local FMT = [[
 			<key>name</key> <string>Namespace</string>
 			<key>scope</key> <string>entity.name.namespace, support.namespace</string>
 			<key>settings</key> <dict>
-				<key>background</key> <string>${@namespace.bg}</string>
-				<key>foreground</key> <string>${@namespace.fg}</string>
-				<key>fontStyle</key> <string>${@namespace.bold}${@namespace.italic}${@namespace.strikethrough}${@namespace.undercurl}${@namespace.underdashed}${@namespace.underdotted}${@namespace.underdouble}${@namespace.underline}</string>
+				<key>background</key> <string>${@namespace.bg | @module.bg}</string>
+				<key>foreground</key> <string>${@namespace.fg | @module.fg}</string>
+				<key>fontStyle</key> <string>${@namespace.bold | @module.bold}${@namespace.italic | @module.italic}${@namespace.strikethrough | @module.strikethrough}${@namespace.undercurl | @module.undercurl}${@namespace.underdashed | @module.underdashed}${@namespace.underdotted | @module.underdotted}${@namespace.underdouble | @module.underdouble}${@namespace.underline | @module.underline}</string>
 			</dict>
 		</dict>
 
@@ -244,9 +244,9 @@ local FMT = [[
 			<key>name</key> <string>Heading/Section</string>
 			<key>scope</key> <string>entity.name.section, markup.heading</string>
 			<key>settings</key> <dict>
-				<key>background</key> <string>${@text.title.bg}</string>
-				<key>foreground</key> <string>${@text.title.fg}</string>
-				<key>fontStyle</key> <string>${@text.title.bold}${@text.title.italic}${@text.title.strikethrough}${@text.title.undercurl}${@text.title.underdashed}${@text.title.underdotted}${@text.title.underdouble}${@text.title.underline}</string>
+				<key>background</key> <string>${@text.title.bg | @markup.heading.bg}</string>
+				<key>foreground</key> <string>${@text.title.fg | @markup.heading.fg}</string>
+				<key>fontStyle</key> <string>${@text.title.bold | @markup.heading.bold}${@text.title.italic | @markup.heading.italic}${@text.title.strikethrough | @markup.heading.strikethrough}${@text.title.undercurl | @markup.heading.undercurl}${@text.title.underdashed | @markup.heading.underdashed}${@text.title.underdotted | @markup.heading.underdotted}${@text.title.underdouble | @markup.heading.underdouble}${@text.title.underline | @markup.heading.underline}</string>
 			</dict>
 		</dict>
 
@@ -294,9 +294,9 @@ local FMT = [[
 			<key>name</key> <string>Control Keyword</string>
 			<key>scope</key> <string>keyword.control</string>
 			<key>settings</key> <dict>
-				<key>background</key> <string>${@repeat.bg}</string>
-				<key>foreground</key> <string>${@repeat.fg}</string>
-				<key>fontStyle</key> <string>${@repeat.bold}${@repeat.italic}${@repeat.strikethrough}${@repeat.undercurl}${@repeat.underdashed}${@repeat.underdotted}${@repeat.underdouble}${@repeat.underline}</string>
+				<key>background</key> <string>${@repeat.bg | @keyword.repeat.bg}</string>
+				<key>foreground</key> <string>${@repeat.fg | @keyword.repeat.fg}</string>
+				<key>fontStyle</key> <string>${@repeat.bold | @keyword.repeat.bold}${@repeat.italic | @keyword.repeat.italic}${@repeat.strikethrough | @keyword.repeat.strikethrough}${@repeat.undercurl | @keyword.repeat.undercurl}${@repeat.underdashed | @keyword.repeat.underdashed}${@repeat.underdotted | @keyword.repeat.underdotted}${@repeat.underdouble | @keyword.repeat.underdouble}${@repeat.underline | @keyword.repeat.underline}</string>
 			</dict>
 		</dict>
 
@@ -304,9 +304,9 @@ local FMT = [[
 			<key>name</key> <string>Conditional Keyword</string>
 			<key>scope</key> <string>keyword.control.conditional</string>
 			<key>settings</key> <dict>
-				<key>background</key> <string>${@conditional.bg}</string>
-				<key>foreground</key> <string>${@conditional.fg}</string>
-				<key>fontStyle</key> <string>${@conditional.bold}${@conditional.italic}${@conditional.strikethrough}${@conditional.undercurl}${@conditional.underdashed}${@conditional.underdotted}${@conditional.underdouble}${@conditional.underline}</string>
+				<key>background</key> <string>${@conditional.bg | @keyword.conditional.bg}</string>
+				<key>foreground</key> <string>${@conditional.fg | @keyword.conditional.fg}</string>
+				<key>fontStyle</key> <string>${@conditional.bold | @keyword.conditional.bold}${@conditional.italic | @keyword.conditional.italic}${@conditional.strikethrough | @keyword.conditional.strikethrough}${@conditional.undercurl | @keyword.conditional.undercurl}${@conditional.underdashed | @keyword.conditional.underdashed}${@conditional.underdotted | @keyword.conditional.underdotted}${@conditional.underdouble | @keyword.conditional.underdouble}${@conditional.underline | @keyword.conditional.underline}</string>
 			</dict>
 		</dict>
 
@@ -314,9 +314,9 @@ local FMT = [[
 			<key>name</key> <string>Import Keyword</string>
 			<key>scope</key> <string>keyword.control.import</string>
 			<key>settings</key> <dict>
-				<key>background</key> <string>${@include.bg}</string>
-				<key>foreground</key> <string>${@include.fg}</string>
-				<key>fontStyle</key> <string>${@include.bold}${@include.italic}${@include.strikethrough}${@include.undercurl}${@include.underdashed}${@include.underdotted}${@include.underdouble}${@include.underline}</string>
+				<key>background</key> <string>${@include.bg | @keyword.import.bg}</string>
+				<key>foreground</key> <string>${@include.fg | @keyword.import.fg}</string>
+				<key>fontStyle</key> <string>${@include.bold | @keyword.import.bold}${@include.italic | @keyword.import.italic}${@include.strikethrough | @keyword.import.strikethrough}${@include.undercurl | @keyword.import.undercurl}${@include.underdashed | @keyword.import.underdashed}${@include.underdotted | @keyword.import.underdotted}${@include.underdouble | @keyword.import.underdouble}${@include.underline | @keyword.import.underline}</string>
 			</dict>
 		</dict>
 
@@ -333,9 +333,9 @@ local FMT = [[
 				punctuation.section.interpolation.end
 			</string>
 			<key>settings</key> <dict>
-				<key>background</key> <string>${@punctuation.special.bg}</string>
-				<key>foreground</key> <string>${@punctuation.special.fg}</string>
-				<key>fontStyle</key> <string>${@punctuation.special.bold}${@punctuation.special.italic}${@punctuation.special.strikethrough}${@punctuation.special.undercurl}${@punctuation.special.underdashed}${@punctuation.special.underdotted}${@punctuation.special.underdouble}${@punctuation.special.underline}</string>
+				<key>background</key> <string>${@punctuation.special.bg | @markup.list.bg}</string>
+				<key>foreground</key> <string>${@punctuation.special.fg | @markup.list.fg}</string>
+				<key>fontStyle</key> <string>${@punctuation.special.bold | @markup.list.bold}${@punctuation.special.italic | @markup.list.italic}${@punctuation.special.strikethrough | @markup.list.strikethrough}${@punctuation.special.undercurl | @markup.list.undercurl}${@punctuation.special.underdashed | @markup.list.underdashed}${@punctuation.special.underdotted | @markup.list.underdotted}${@punctuation.special.underdouble | @markup.list.underdouble}${@punctuation.special.underline | @markup.list.underline}</string>
 			</dict>
 		</dict>
 
@@ -397,9 +397,9 @@ local FMT = [[
 			<key>name</key> <string>Diff Added</string>
 			<key>scope</key> <string>markup.inserted</string>
 			<key>settings</key> <dict>
-				<key>background</key> <string>${@text.diff.add.bg}</string>
-				<key>foreground</key> <string>${@text.diff.add.fg}</string>
-				<key>fontStyle</key> <string>${@text.diff.add.bold}${@text.diff.add.italic}${@text.diff.add.strikethrough}${@text.diff.add.undercurl}${@text.diff.add.underdashed}${@text.diff.add.underdotted}${@text.diff.add.underdouble}${@text.diff.add.underline}</string>
+				<key>background</key> <string>${@text.diff.add.bg | @diff.plus.bg}</string>
+				<key>foreground</key> <string>${@text.diff.add.fg | @diff.plus.fg}</string>
+				<key>fontStyle</key> <string>${@text.diff.add.bold | @diff.plus.bold}${@text.diff.add.italic | @diff.plus.italic}${@text.diff.add.strikethrough | @diff.plus.strikethrough}${@text.diff.add.undercurl | @diff.plus.undercurl}${@text.diff.add.underdashed | @diff.plus.underdashed}${@text.diff.add.underdotted | @diff.plus.underdotted}${@text.diff.add.underdouble | @diff.plus.underdouble}${@text.diff.add.underline | @diff.plus.underline}</string>
 			</dict>
 		</dict>
 
@@ -407,9 +407,9 @@ local FMT = [[
 			<key>name</key> <string>Diff Removed</string>
 			<key>scope</key> <string>markup.deleted</string>
 			<key>settings</key> <dict>
-				<key>background</key> <string>${@text.diff.delete.bg}</string>
-				<key>foreground</key> <string>${@text.diff.delete.fg}</string>
-				<key>fontStyle</key> <string>${@text.diff.delete.bold}${@text.diff.delete.italic}${@text.diff.delete.strikethrough}${@text.diff.delete.undercurl}${@text.diff.delete.underdashed}${@text.diff.delete.underdotted}${@text.diff.delete.underdouble}${@text.diff.delete.underline}</string>
+				<key>background</key> <string>${@text.diff.delete.bg | @diff.minus.bg}</string>
+				<key>foreground</key> <string>${@text.diff.delete.fg | @diff.minus.fg}</string>
+				<key>fontStyle</key> <string>${@text.diff.delete.bold | @diff.minus.bold}${@text.diff.delete.italic | @diff.minus.italic}${@text.diff.delete.strikethrough | @diff.minus.strikethrough}${@text.diff.delete.undercurl | @diff.minus.undercurl}${@text.diff.delete.underdashed | @diff.minus.underdashed}${@text.diff.delete.underdotted | @diff.minus.underdotted}${@text.diff.delete.underdouble | @diff.minus.underdouble}${@text.diff.delete.underline | @diff.minus.underline}</string>
 			</dict>
 		</dict>
 
@@ -417,9 +417,9 @@ local FMT = [[
 			<key>name</key> <string>URIs</string>
 			<key>scope</key> <string>markup.underline.link</string>
 			<key>settings</key> <dict>
-				<key>background</key> <string>${@text.uri.bg}</string>
-				<key>foreground</key> <string>${@text.uri.fg}</string>
-				<key>fontStyle</key> <string>${@text.uri.bold}${@text.uri.italic}${@text.uri.strikethrough}${@text.uri.undercurl}${@text.uri.underdashed}${@text.uri.underdotted}${@text.uri.underdouble}${@text.uri.underline}</string>
+				<key>background</key> <string>${@text.uri.bg | @string.special.url.bg | @markup.link.url.bg}</string>
+				<key>foreground</key> <string>${@text.uri.fg | @string.special.url.fg | @markup.link.url.fg}</string>
+				<key>fontStyle</key> <string>${@text.uri.bold | @string.special.url.bold | @markup.link.url.bold}${@text.uri.italic | @string.special.url.italic | @markup.link.url.italic}${@text.uri.strikethrough | @string.special.url.strikethrough | @markup.link.url.strikethrough}${@text.uri.undercurl | @string.special.url.undercurl | @markup.link.url.undercurl}${@text.uri.underdashed | @string.special.url.underdashed | @markup.link.url.underdashed}${@text.uri.underdotted | @string.special.url.underdotted | @markup.link.url.underdotted}${@text.uri.underdouble | @string.special.url.underdouble | @markup.link.url.underdouble}${@text.uri.underline | @string.special.url.underline | @markup.link.url.underline}</string>
 			</dict>
 		</dict>
 
@@ -427,9 +427,9 @@ local FMT = [[
 			<key>name</key> <string>Quote</string>
 			<key>scope</key> <string>markup.quote</string>
 			<key>settings</key> <dict>
-				<key>background</key> <string>${@text.quote.bg}</string>
-				<key>foreground</key> <string>${@text.quote.fg}</string>
-				<key>fontStyle</key> <string>${@text.quote.bold}${@text.quote.italic}${@text.quote.strikethrough}${@text.quote.undercurl}${@text.quote.underdashed}${@text.quote.underdotted}${@text.quote.underdouble}${@text.quote.underline}</string>
+				<key>background</key> <string>${@text.quote.bg | @markup.quote.bg}</string>
+				<key>foreground</key> <string>${@text.quote.fg | @markup.quote.fg}</string>
+				<key>fontStyle</key> <string>${@text.quote.bold | @markup.quote.bold}${@text.quote.italic | @markup.quote.italic}${@text.quote.strikethrough | @markup.quote.strikethrough}${@text.quote.undercurl | @markup.quote.undercurl}${@text.quote.underdashed | @markup.quote.underdashed}${@text.quote.underdotted | @markup.quote.underdotted}${@text.quote.underdouble | @markup.quote.underdouble}${@text.quote.underline | @markup.quote.underline}</string>
 			</dict>
 		</dict>
 
@@ -437,9 +437,9 @@ local FMT = [[
 			<key>name</key> <string>Code</string>
 			<key>scope</key> <string>markup.raw.inline, markup.raw.block</string>
 			<key>settings</key> <dict>
-				<key>background</key> <string>${@text.literal.bg}</string>
-				<key>foreground</key> <string>${@text.literal.fg}</string>
-				<key>fontStyle</key> <string>${@text.literal.bold}${@text.literal.italic}${@text.literal.strikethrough}${@text.literal.undercurl}${@text.literal.underdashed}${@text.literal.underdotted}${@text.literal.underdouble}${@text.literal.underline}</string>
+				<key>background</key> <string>${@text.literal.bg | @markup.raw.bg}</string>
+				<key>foreground</key> <string>${@text.literal.fg | @markup.raw.fg}</string>
+				<key>fontStyle</key> <string>${@text.literal.bold | @markup.raw.bold}${@text.literal.italic | @markup.raw.italic}${@text.literal.strikethrough | @markup.raw.strikethrough}${@text.literal.undercurl | @markup.raw.undercurl}${@text.literal.underdashed | @markup.raw.underdashed}${@text.literal.underdotted | @markup.raw.underdotted}${@text.literal.underdouble | @markup.raw.underdouble}${@text.literal.underline | @markup.raw.underline}</string>
 			</dict>
 		</dict>
 
@@ -472,9 +472,9 @@ local FMT = [[
 			<key>name</key> <string>Storage Class</string>
 			<key>scope</key> <string>storage.modifier</string>
 			<key>settings</key> <dict>
-				<key>background</key> <string>${@storageclass.bg}</string>
-				<key>foreground</key> <string>${@storageclass.fg}</string>
-				<key>fontStyle</key> <string>${@storageclass.bold}${@storageclass.italic}${@storageclass.strikethrough}${@storageclass.undercurl}${@storageclass.underdashed}${@storageclass.underdotted}${@storageclass.underdouble}${@storageclass.underline}</string>
+				<key>background</key> <string>${@storageclass.bg | @keyword.storage.bg}</string>
+				<key>foreground</key> <string>${@storageclass.fg | @keyword.storage.fg}</string>
+				<key>fontStyle</key> <string>${@storageclass.bold | @keyword.storage.bold}${@storageclass.italic | @keyword.storage.italic}${@storageclass.strikethrough | @keyword.storage.strikethrough}${@storageclass.undercurl | @keyword.storage.undercurl}${@storageclass.underdashed | @keyword.storage.underdashed}${@storageclass.underdotted | @keyword.storage.underdotted}${@storageclass.underdouble | @keyword.storage.underdouble}${@storageclass.underline | @keyword.storage.underline}</string>
 			</dict>
 		</dict>
 
@@ -527,9 +527,9 @@ local FMT = [[
 			<key>name</key> <string>string.regexp</string>
 			<key>scope</key> <string>string.regexp</string>
 			<key>settings</key> <dict>
-				<key>background</key> <string>${@string.regex.bg}</string>
-				<key>foreground</key> <string>${@string.regex.fg}</string>
-				<key>fontStyle</key> <string>${@string.regex.bold}${@string.regex.italic}${@string.regex.strikethrough}${@string.regex.undercurl}${@string.regex.underdashed}${@string.regex.underdotted}${@string.regex.underdouble}${@string.regex.underline}</string>
+				<key>background</key> <string>${@string.regex.bg | @string.regexp.bg}</string>
+				<key>foreground</key> <string>${@string.regex.fg | @string.regexp.fg}</string>
+				<key>fontStyle</key> <string>${@string.regex.bold | @string.regexp.bold}${@string.regex.italic | @string.regexp.italic}${@string.regex.strikethrough | @string.regexp.strikethrough}${@string.regex.undercurl | @string.regexp.undercurl}${@string.regex.underdashed | @string.regexp.underdashed}${@string.regex.underdotted | @string.regexp.underdotted}${@string.regex.underdouble | @string.regexp.underdouble}${@string.regex.underline | @string.regexp.underline}</string>
 			</dict>
 		</dict>
 
@@ -557,9 +557,9 @@ local FMT = [[
 			<key>name</key> <string>Parameter</string>
 			<key>scope</key> <string>variable.parameter</string>
 			<key>settings</key> <dict>
-				<key>background</key> <string>${@parameter.bg}</string>
-				<key>foreground</key> <string>${@parameter.fg}</string>
-				<key>fontStyle</key> <string>${@parameter.bold}${@parameter.italic}${@parameter.strikethrough}${@parameter.undercurl}${@parameter.underdashed}${@parameter.underdotted}${@parameter.underdouble}${@parameter.underline}</string>
+				<key>background</key> <string>${@parameter.bg | @variable.parameter.bg}</string>
+				<key>foreground</key> <string>${@parameter.fg | @variable.parameter.fg}</string>
+				<key>fontStyle</key> <string>${@parameter.bold | @variable.parameter.bold}${@parameter.italic | @variable.parameter.italic}${@parameter.strikethrough | @variable.parameter.strikethrough}${@parameter.undercurl | @variable.parameter.undercurl}${@parameter.underdashed | @variable.parameter.underdashed}${@parameter.underdotted | @variable.parameter.underdotted}${@parameter.underdouble | @variable.parameter.underdouble}${@parameter.underline | @variable.parameter.underline}</string>
 			</dict>
 		</dict>
 
@@ -567,9 +567,9 @@ local FMT = [[
 			<key>name</key> <string>Property</string>
 			<key>scope</key> <string>variable.other.member</string>
 			<key>settings</key> <dict>
-				<key>background</key> <string>${@field.bg}</string>
-				<key>foreground</key> <string>${@field.fg}</string>
-				<key>fontStyle</key> <string>${@field.bold}${@field.italic}${@field.strikethrough}${@field.undercurl}${@field.underdashed}${@field.underdotted}${@field.underdouble}${@field.underline}</string>
+				<key>background</key> <string>${@field.bg | @variable.member.bg}</string>
+				<key>foreground</key> <string>${@field.fg | @variable.member.fg}</string>
+				<key>fontStyle</key> <string>${@field.bold | @variable.member.bold}${@field.italic | @variable.member.italic}${@field.strikethrough | @variable.member.strikethrough}${@field.undercurl | @variable.member.undercurl}${@field.underdashed | @variable.member.underdashed}${@field.underdotted | @variable.member.underdotted}${@field.underdouble | @variable.member.underdouble}${@field.underline | @variable.member.underline}</string>
 			</dict>
 		</dict>
 
