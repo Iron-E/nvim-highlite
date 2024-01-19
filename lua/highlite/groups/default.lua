@@ -278,88 +278,140 @@ local function from_palette(palette, opts)
 		-- Treesitter
 		-- HACK: a lot of these have `nocombine` because of overly-eager captures
 		--       in many built-in highlight queries.
-		--(@debug defined below)
+		--(@keyword.debug defined below)
 		['@attribute'] = {fg = palette.attribute, nocombine = true},
 		['@character.special'] = {fg = palette.character_special, bold = true},
 		['@comment.documentation'] = {fg = palette.comment_documentation},
+		['@comment.error'] = {fg = palette.error},
+		['@comment.hint'] = {fg = palette.hint},
+		['@comment.info'] = {fg = palette.info},
+		['@comment.todo'] = {fg = palette.todo},
+		['@comment.warning'] = {fg = palette.warning},
 		['@conceal'] = 'Conceal',
-		['@conditional'] = Groups.extend({nocombine = true}, conditional),
 		['@constant.builtin'] = {fg = palette.constant_builtin, bold = true, nocombine = true},
 		['@constructor'] = {fg = palette.constructor, nocombine = true},
-		['@define'] = Groups.extend({nocombine = true}, define),
+		['@diff.delta'] = {fg = palette.diff_change},
+		['@diff.minus'] = {fg = palette.diff_delete},
+		['@diff.plus'] = {fg = palette.diff_add},
 		['@error'] = 'Error',
 		['@event'] = {fg = palette.event, nocombine = true},
-		['@exception'] = Groups.extend({nocombine = true}, exception),
-		['@field'] = {fg = palette.field, nocombine = true},
 		['@function.builtin'] = {fg = palette.func_builtin, italic = true},
 		['@function.macro'] = '@macro',
-		['@include'] = Groups.extend({nocombine = true}, include),
+		['@function.method'] = {fg = palette.method, nocombine = true},
 		['@keyword'] = Groups.extend({nocombine = true}, keyword),
+		['@keyword.conditional'] = Groups.extend({nocombine = true}, conditional),
 		['@keyword.coroutine'] = {fg = palette.keyword_coroutine, nocombine = true},
+		['@keyword.directive'] = Groups.extend({nocombine = true}, pre_proc),
+		['@keyword.directive.conditional'] = Groups.extend({nocombine = true}, preproc_conditional),
+		['@keyword.directive.define'] = Groups.extend({nocombine = true}, define),
+		['@keyword.exception'] = Groups.extend({nocombine = true}, exception),
 		['@keyword.function'] = {fg = palette.keyword_function, nocombine = true},
+		['@keyword.import'] = Groups.extend({nocombine = true}, include),
 		['@keyword.operator'] = {fg = palette.keyword_operator, bold = true, nocombine = true},
+		['@keyword.repeat'] = Groups.extend({nocombine = true}, repeat_),
 		['@keyword.return'] = {fg = palette.keyword_return, nocombine = true},
+		['@keyword.storage'] = Groups.extend({nocombine = true}, storage_class),
+		['@keyword.storage.lifetime'] = {fg = palette.storage},
 		['@label'] = Groups.extend({nocombine = true}, label),
 		['@macro'] = Groups.extend({nocombine = true}, macro),
-		['@method'] = {fg = palette.method, nocombine = true},
-		['@namespace'] = {fg = palette.namespace, bold = true, nocombine = true},
+		['@markup'] = {fg = palette.text},
+		['@markup.emphasis'] = 'Italic',
+		['@markup.environment'] = {fg = palette.text_environment, nocombine = true},
+		['@markup.environment.name'] = {fg = palette.text_environment_name, nocombine = true},
+		['@markup.heading.1'] = {fg = palette.error, bold = true},
+		['@markup.heading.2'] = {fg = palette.warning, bold = true},
+		['@markup.heading.3'] = {fg = palette.diff_change, bold = true},
+		['@markup.heading.4'] = {fg = palette.string, bold = true},
+		['@markup.heading.5'] = {fg = palette.type, bold = true},
+		['@markup.heading.6'] = {fg = palette.fold, bold = true},
+		['@markup.link'] = {fg = palette.text_reference, underline = true},
+		['@markup.link.label'] = '@string.special' ,
+		['@markup.link.url'] = '@string.special.url',
+		['@markup.list'] = '@punctuation.special',
+		['@markup.math'] = {fg = palette.text_math},
+		['@markup.quote'] = '@comment',
+		['@markup.raw'] = {fg = palette.text_literal, nocombine = true},
+		['@markup.strike'] = {strikethrough = true},
+		['@markup.strong'] = 'Bold',
+		['@markup.underline'] = {underline = true},
+		['@module'] = {fg = palette.namespace, bold = true, nocombine = true},
 		['@operator'] = Groups.extend({nocombine = true}, operator),
-		['@parameter'] = {fg = palette.parameter, italic = true, nocombine = true},
-		['@preproc'] = Groups.extend({nocombine = true}, pre_proc),
-		['@preproc.conditional'] = Groups.extend({nocombine = true}, preproc_conditional),
 		['@property'] = {fg = palette.property, nocombine = true},
 		['@punctuation'] = Groups.extend({nocombine = true}, delimiter),
 		['@punctuation.bracket'] = {fg = palette.punctuation_bracket, nocombine = true},
 		['@punctuation.delimiter'] = {fg = palette.punctuation_delimiter, nocombine = true},
 		['@punctuation.special'] = {fg = palette.punctuation_special, nocombine = true},
-		['@repeat'] = Groups.extend({nocombine = true}, repeat_),
-		['@storageclass'] = Groups.extend({nocombine = true}, storage_class),
-		['@storageclass.lifetime'] = {fg = palette.storage},
 		['@string.documentation'] = '@comment.documentation',
 		['@string.escape'] = {fg = palette.string_escape, italic = true, nocombine = true},
 		['@string.keycode'] = 'SpecialKey',
-		['@string.regex'] = {fg = palette.string_regex, nocombine = true},
+		['@string.regexp'] = {fg = palette.string_regex, nocombine = true},
 		['@string.special'] = {fg = palette.string_special, nocombine = true},
 		['@structure'] = Groups.extend({nocombine = true}, structure),
 		['@tag'] = {fg = palette.tag, bold = true, nocombine = true},
 		['@tag.attribute'] = {fg = palette.tag_attribute, nocombine = true},
 		['@tag.delimiter'] = {fg = palette.tag_delimiter, nocombine = true},
-		['@text'] = {fg = palette.text},
-		['@text.danger'] = {fg = palette.error},
-		['@text.diff.add'] = {fg = palette.diff_add},
-		['@text.diff.change'] = {fg = palette.diff_change},
-		['@text.diff.delete'] = {fg = palette.diff_delete},
-		['@text.emphasis'] = 'Italic',
-		['@text.environment'] = {fg = palette.text_environment, nocombine = true},
-		['@text.environment.name'] = {fg = palette.text_environment_name, nocombine = true},
-		['@text.literal'] = {fg = palette.text_literal, nocombine = true},
-		['@text.math'] = {fg = palette.text_math},
-		['@text.note'] = {fg = palette.info},
-		['@text.quote'] = '@comment',
-		['@text.reference'] = {fg = palette.text_reference, underline = true},
-		['@text.strike'] = {strikethrough = true},
-		['@text.strong'] = 'Bold',
-		['@text.title.1'] = {fg = palette.error, bold = true},
-		['@text.title.2'] = {fg = palette.warning, bold = true},
-		['@text.title.3'] = {fg = palette.diff_change, bold = true},
-		['@text.title.4'] = {fg = palette.string, bold = true},
-		['@text.title.5'] = {fg = palette.type, bold = true},
-		['@text.title.6'] = {fg = palette.fold, bold = true},
-		['@text.todo'] = {fg = palette.todo},
-		['@text.underline'] = {underline = true},
-		['@text.warning'] = {fg = palette.warning},
 		['@type'] = Groups.extend({nocombine = true}, type_),
 		['@type.builtin'] = {fg = palette.type_builtin, nocombine = true},
 		['@type.definition'] = Groups.extend({nocombine = true}, type_definition),
 		['@type.qualifier'] = '@keyword',
 		['@variable'] = {fg = palette.variable, nocombine = true},
 		['@variable.builtin'] = {fg = palette.variable_builtin, italic = true, nocombine = true},
+		['@variable.member'] = {fg = palette.field, nocombine = true},
+		['@variable.parameter'] = {fg = palette.parameter, italic = true, nocombine = true},
+
+		-- HACK: these should be automatically derived, but treesitter breaking changes forces them to be explicit for
+		--       backwards compatability
+		['@number.float'] = 'Float',
+		['@string.special.url'] = 'Underlined',
+
+		-- NOTE: these are deprecated groups; they should be removed in the future
+		['@conditional'] = '@keyword.conditional',
+		['@debug'] = '@keyword.debug',
+		['@define'] = '@keyword.directive.define',
+		['@exception'] = '@keyword.exception',
+		['@field'] = '@variable.member',
+		['@float'] = '@number.float',
+		['@include'] = '@keyword.import',
+		['@method'] = '@function.method',
+		['@namespace'] = '@module',
+		['@parameter'] = '@variable.parameter',
+		['@preproc'] = '@keyword.directive',
+		['@preproc.conditional'] = '@keyword.directive.conditional',
+		['@repeat'] = '@keyword.repeat',
+		['@storageclass'] = '@keyword.storage',
+		['@storageclass.lifetime'] = '@keyword.storage.lifetime',
+		['@string.regex'] = '@string.regexp',
+		['@text'] = '@markup',
+		['@text.danger'] = '@comment.error',
+		['@text.diff.add'] = '@diff.plus',
+		['@text.diff.change'] = '@diff.delta',
+		['@text.diff.delete'] = '@diff.minus',
+		['@text.emphasis'] = '@markup.emphasis',
+		['@text.environment'] = '@markup.environment',
+		['@text.environment.name'] = '@markup.environment.name',
+		['@text.literal'] = '@markup.raw',
+		['@text.math'] = '@markup.math',
+		['@text.note'] = '@comment.info',
+		['@text.quote'] = '@markup.quote',
+		['@text.reference'] = '@markup.link',
+		['@text.strike'] = '@markup.strike',
+		['@text.strong'] = '@markup.strong',
+		['@text.title.1'] = '@markup.heading.1',
+		['@text.title.2'] = '@markup.heading.2',
+		['@text.title.3'] = '@markup.heading.3',
+		['@text.title.4'] = '@markup.heading.4',
+		['@text.title.5'] = '@markup.heading.5',
+		['@text.title.6'] = '@markup.heading.6',
+		['@text.todo'] = '@comment.todo',
+		['@text.underline'] = '@markup.underline',
+		['@text.uri'] = '@string.special.url',
+		['@text.warning'] = '@comment.warning',
 
 		-- C
-		['@type.qualifier.c'] = '@storageclass.c',
+		['@type.qualifier.c'] = '@keyword.storage.c',
 
 		-- C++
-		['@type.qualifier.cpp'] = '@storageclass.cpp',
+		['@type.qualifier.cpp'] = '@keyword.storage.cpp',
 
 		-- C#
 		['@lsp.type.keyword.cs'] = NONE,
@@ -379,13 +431,13 @@ local function from_palette(palette, opts)
 		['@lsp.typemod.function.global.lua'] = '@lsp.type.function.lua',
 		['@lsp.typemod.variable.defaultLibrary.lua'] = '@lsp.type.struct.lua',
 		['@lsp.typemod.variable.definition.lua'] = '@variable.builtin.lua',
-		['@namespace.builtin.lua'] = '@structure.lua',
+		['@module.builtin.lua'] = '@structure.lua',
 
 		-- Rust
 		['@lsp.mod.callable.rust'] = '@lsp.type.function.rust',
 		['@lsp.type.builtinType.rust'] = '@type.builtin.rust',
 		['@lsp.type.character.rust'] = NONE,
-		['@lsp.type.decorator.rust'] = '@preproc.rust',
+		['@lsp.type.decorator.rust'] = '@keyword.directive.rust',
 		['@lsp.type.derive.rust'] = '@macro.rust',
 		['@lsp.type.enumMember.rust'] = '@type',
 		['@lsp.type.keyword.rust'] = NONE,
@@ -403,18 +455,18 @@ local function from_palette(palette, opts)
 		['@lsp.typemod.string.injected.rust'] = '@string.rust',
 		['@lsp.typemod.variable.defaultLibrary.rust'] = NONE,
 		['@lsp.typemod.variable.injected.rust'] = '@variable.rust',
-		['@type.qualifier.rust'] = '@storageclass.rust',
+		['@type.qualifier.rust'] = '@keyword.storage.rust',
 
 		-- TypeScript
-		['@type.qualifier.typescript'] = '@storageclass.c',
+		['@type.qualifier.typescript'] = '@keyword.storage.c',
 	} -- }}}
 
 	setmetatable(groups, RESOLVE_METATABLE)
 
 	groups.FloatTitle = Groups.extend({bold = true}, groups'FloatBorder')
 	groups.MatchParen = Groups.extend({bold = true}, groups'Tag')
-	groups['@debug'] = Groups.extend({nocombine = true}, groups'Debug')
-	groups['@lsp.type.constParameter'] = Groups.extend(Groups.clone(groups'Constant'), groups'@parameter')
+	groups['@keyword.debug'] = Groups.extend({nocombine = true}, groups'Debug')
+	groups['@lsp.type.constParameter'] = Groups.extend(Groups.clone(groups'Constant'), groups'@variable.parameter')
 	groups['@lsp.typemod.interface.defaultLibrary'] = Groups.extend({fg = palette.builtin}, groups'@type.builtin')
 
 	if any_nvim_plugins then
@@ -427,12 +479,12 @@ local function from_palette(palette, opts)
 			groups.AerialEnumIcon = '@lsp.type.enum.aerial'
 			groups.AerialEnumMemberIcon = '@lsp.type.enumMember.aerial'
 			groups.AerialEventIcon = '@event.aerial'
-			groups.AerialFieldIcon = '@field.aerial'
+			groups.AerialFieldIcon = '@variable.member.aerial'
 			groups.AerialFileIcon = 'Directory'
 			groups.AerialInterfaceIcon = '@lsp.type.interface.aerial'
-			groups.AerialKeyIcon = '@field.aerial'
-			groups.AerialMethodIcon = '@method.aerial'
-			groups.AerialNamespaceIcon = '@namespace.aerial'
+			groups.AerialKeyIcon = '@variable.member.aerial'
+			groups.AerialMethodIcon = '@function.method.aerial'
+			groups.AerialNamespaceIcon = '@module.aerial'
 			groups.AerialNullIcon = '@constant.builtin.aerial'
 			groups.AerialNumberIcon = '@number.aerial'
 			groups.AerialOperatorIcon = '@operator.aerial'
@@ -512,17 +564,17 @@ local function from_palette(palette, opts)
 			groups.CmpItemKindEnum = '@lsp.type.enum'
 			groups.CmpItemKindEnumMember = '@lsp.type.enumMember'
 			groups.CmpItemKindEvent = '@event'
-			groups.CmpItemKindField = '@field'
+			groups.CmpItemKindField = '@variable.member'
 			groups.CmpItemKindFile = 'Directory'
 			groups.CmpItemKindFolder = 'CmpItemKindFile'
 			groups.CmpItemKindFunction = '@function'
 			groups.CmpItemKindInterface = '@lsp.type.interface'
 			groups.CmpItemKindKeyword = '@keyword'
-			groups.CmpItemKindMethod = '@method'
-			groups.CmpItemKindModule = '@namespace'
+			groups.CmpItemKindMethod = '@function.method'
+			groups.CmpItemKindModule = '@module'
 			groups.CmpItemKindOperator = '@operator'
 			groups.CmpItemKindProperty = '@property'
-			groups.CmpItemKindReference = '@storageclass'
+			groups.CmpItemKindReference = '@keyword.storage'
 			groups.CmpItemKindSnippet = 'Special'
 			groups.CmpItemKindStruct = '@structure'
 			groups.CmpItemKindText = '@string'
@@ -538,9 +590,9 @@ local function from_palette(palette, opts)
 		end
 
 		if all_nvim_plugins or nvim_plugins.gitsigns ~= false then
-			groups.GitSignsAdd = '@text.diff.add'
-			groups.GitSignsChange = '@text.diff.change'
-			groups.GitSignsDelete = '@text.diff.delete'
+			groups.GitSignsAdd = '@diff.plus'
+			groups.GitSignsChange = '@diff.delta'
+			groups.GitSignsDelete = '@diff.minus'
 		end
 
 		if all_nvim_plugins or nvim_plugins.indent_blankline ~= false then
@@ -557,19 +609,19 @@ local function from_palette(palette, opts)
 			groups.LazyCommitIssue = 'LazyUrl'
 			groups.LazyCommitType = '@type.lazy'
 			groups.LazyDir = 'Directory'
-			groups.LazyH1 = '@text.title.1'
-			groups.LazyH2 = '@text.title.2'
-			groups.LazyProp = '@field.lazy'
-			groups.LazyReasonEvent = '@repeat.lazy'
-			groups.LazyReasonFt = '@conditional.lazy'
+			groups.LazyH1 = '@markup.heading.1'
+			groups.LazyH2 = '@markup.heading.2'
+			groups.LazyProp = '@variable.member.lazy'
+			groups.LazyReasonEvent = '@keyword.repeat.lazy'
+			groups.LazyReasonFt = '@keyword.conditional.lazy'
 			groups.LazyReasonImport = '@function.lazy'
 			groups.LazyReasonKeys = '@string.lazy'
 			groups.LazyReasonPlugin = '@label.lazy'
-			groups.LazyReasonSource = '@include.lazy'
+			groups.LazyReasonSource = '@keyword.import.lazy'
 			groups.LazyReasonStart = '@constant.lazy'
 			groups.LazySpecial = 'Special'
 			groups.LazyTaskOutput = 'Statement'
-			groups.LazyUrl = '@text.uri.lazy'
+			groups.LazyUrl = '@string.special.url.lazy'
 		end
 
 		if all_nvim_plugins or nvim_plugins.leap ~= false then
@@ -584,8 +636,8 @@ local function from_palette(palette, opts)
 
 		if all_nvim_plugins or nvim_plugins.lspconfig ~= false then
 			groups.LspInfoBorder = 'FloatBorder'
-			groups.LspInfoList = '@text.literal'
-			groups.LspInfoTip = '@text.note.lspinfo'
+			groups.LspInfoList = '@markup.raw'
+			groups.LspInfoTip = '@comment.info.lspinfo'
 			groups.LspInfoTitle = 'FloatTitle'
 		end
 
@@ -595,7 +647,7 @@ local function from_palette(palette, opts)
 			groups.ReferencesCount = 'Number'
 			groups.ReferencesIcon = 'DefinitionIcon'
 			groups.TargetFileName = 'Directory'
-			groups.TargetWord = '@text.title'
+			groups.TargetWord = '@markup.title'
 		end
 
 		if all_nvim_plugins or nvim_plugins.mini ~= false then
@@ -605,13 +657,13 @@ local function from_palette(palette, opts)
 		end
 
 		if all_nvim_plugins or nvim_plugins.nvim_tree ~= false then
-			groups.NvimTreeRootFolder = '@text.title.NvimTree'
-			groups.NvimTreeGitDeleted = '@text.diff.delete.NvimTree'
+			groups.NvimTreeRootFolder = '@markup.title.NvimTree'
+			groups.NvimTreeGitDeleted = '@diff.minus.NvimTree'
 			groups.NvimTreeGitDirty = {fg = palette.warning}
 			groups.NvimTreeGitIgnored = 'Ignore'
 			groups.NvimTreeGitMerge = 'NvimTreeGitRenamed'
-			groups.NvimTreeGitNew = '@text.diff.add.NvimTree'
-			groups.NvimTreeGitRenamed = '@text.diff.change.NvimTree'
+			groups.NvimTreeGitNew = '@diff.plus.NvimTree'
+			groups.NvimTreeGitRenamed = '@diff.delta.NvimTree'
 			groups.NvimTreeGitStaged = {fg = palette.type}
 		end
 
@@ -644,13 +696,13 @@ local function from_palette(palette, opts)
 		end
 
 		if all_nvim_plugins or nvim_plugins.todo_comments ~= false then
-			groups.TodoFgFIX = '@text.danger'
-			groups.TodoFgHACK = '@text.diff.change'
-			groups.TodoFgNOTE = '@text.note'
+			groups.TodoFgFIX = '@comment.error'
+			groups.TodoFgHACK = '@diff.delta'
+			groups.TodoFgNOTE = '@comment.info'
 			groups.TodoFgPERF = {fg = palette.ok}
 			groups.TodoFgTEST = {fg = palette.hint}
-			groups.TodoFgTODO = '@text.todo'
-			groups.TodoFgWARN = '@text.warning'
+			groups.TodoFgTODO = '@comment.todo'
+			groups.TodoFgWARN = '@comment.warning'
 
 			groups.TodoBgFIX = {fg = palette.bg, bg = palette.error, bold = true, italic = true, nocombine = true}
 			groups.TodoBgHACK = {fg = palette.bg, bg = palette.diff_change, bold = true, italic = true, nocombine = true}
@@ -702,9 +754,9 @@ local function from_palette(palette, opts)
 		end
 
 		if all_vim_plugins or vim_plugins.gitgutter ~= false then
-			groups.GitGutterAdd = '@text.diff.add'
-			groups.GitGutterChange = '@text.diff.change'
-			groups.GitGutterDelete = '@text.diff.delete'
+			groups.GitGutterAdd = '@diff.plus'
+			groups.GitGutterChange = '@diff.delta'
+			groups.GitGutterDelete = '@diff.minus'
 			groups.GitGutterChangeDelete = 'GitGutterChange'
 		end
 
@@ -733,9 +785,9 @@ local function from_palette(palette, opts)
 		end
 
 		if all_vim_plugins or vim_plugins.signify ~= false then
-			groups.SignifySignAdd = '@text.diff.add'
-			groups.SignifySignChange = '@text.diff.change'
-			groups.SignifySignDelete = '@text.diff.delete'
+			groups.SignifySignAdd = '@diff.plus'
+			groups.SignifySignChange = '@diff.delta'
+			groups.SignifySignDelete = '@diff.minus'
 			groups.SignifySignChangeDelete = 'SignifySignChange'
 		end
 
@@ -746,7 +798,7 @@ local function from_palette(palette, opts)
 
 		if all_vim_plugins or vim_plugins.undotree ~= false then
 			groups.UndotreeBranch = '@punctuation.delimiter.undotree'
-			groups.UndotreeCurrent = '@text.title.undotree'
+			groups.UndotreeCurrent = '@markup.title.undotree'
 			groups.UndotreeSeq = '@number.undotree'
 			groups.UndotreeNode = '@character.special.undotree'
 			groups.UndotreeTimeStamp = '@string.special.undotree'
@@ -777,8 +829,8 @@ local function from_palette(palette, opts)
 		end
 
 		if all_syntax or syntax.cpp ~= false then
-			groups.cppSTLexception = '@exception.cpp'
-			groups.cppSTLnamespace = '@namespace.cpp'
+			groups.cppSTLexception = '@keyword.exception.cpp'
+			groups.cppSTLnamespace = '@module.cpp'
 		end
 
 		if all_syntax or syntax.cs ~= false then
@@ -787,29 +839,29 @@ local function from_palette(palette, opts)
 			groups.csBraces = '@punctuation.bracket.cs'
 			groups.csClass = 'csAccessModifier'
 			groups.csClassType = '@lsp.type.class.cs'
-			groups.csContextualStatement = '@conditional.cs'
+			groups.csContextualStatement = '@keyword.conditional.cs'
 			groups.csEndColon = '@punctuation.delimiter.cs'
 			groups.csGeneric = '@lsp.type.typeParameter.cs'
 			groups.csInterpolation = '@string.special.cs'
 			groups.csInterpolationDelimiter = '@punctuation.special.cs'
 			groups.csLogicSymbols = '@operator.cs'
-			groups.csModifier = '@storageclass.cs'
+			groups.csModifier = '@keyword.storage.cs'
 			groups.csNew = 'csLogicSymbols'
 			groups.csNewType = '@type.cs'
 			groups.csParens = 'csBraces'
-			groups.csPreCondit = '@preproc.conditional.cs'
+			groups.csPreCondit = '@keyword.directive.conditional.cs'
 			groups.csQuote = 'csEndColon'
-			groups.csRepeat = '@repeat.cs'
+			groups.csRepeat = '@keyword.repeat.cs'
 			groups.csStorage = 'csAccessModifier'
 			groups.csUnspecifiedStatement = 'csModifier'
 			groups.csXmlTag = 'xmlTagName'
 		end
 
 		if all_syntax or syntax.css ~= false then
-			groups.cssAtRule = '@preproc.conditional.css'
+			groups.cssAtRule = '@keyword.directive.conditional.css'
 			groups.cssAttr = '@keyword.css'
 			groups.cssAttrComma = '@punctuation.delimiter.css'
-			groups.cssAttributeSelector = '@field.html'
+			groups.cssAttributeSelector = '@variable.member.html'
 			groups.cssAttrRegion = '@keyword.css'
 			groups.cssBraces = 'Delimiter'
 			groups.cssClassName = '@lsp.type.class.css'
@@ -819,7 +871,7 @@ local function from_palette(palette, opts)
 			groups.cssFunctionComma = 'cssAttrComma'
 			groups.cssIdentifier = '@label.css'
 			groups.cssNoise = '@punctuation.css'
-			groups.cssProp = '@field.css'
+			groups.cssProp = '@variable.member.css'
 			groups.cssPseudoClass = '@type.builtin'
 			groups.cssPseudoClassId = '@keyword.css'
 			groups.cssSelectorOp = '@operator.css'
@@ -827,7 +879,7 @@ local function from_palette(palette, opts)
 			groups.cssTagName = '@tag.html'
 			groups.cssUIProp = 'cssProp'
 			groups.cssUnitDecorators = '@type.css'
-			groups.cssVendor = '@preproc.css'
+			groups.cssVendor = '@keyword.directive.css'
 		end
 
 		if all_syntax or syntax.dart ~= false then
@@ -836,12 +888,12 @@ local function from_palette(palette, opts)
 			groups.dartInterpolation = '@string.special'
 			groups.dartLibrary = 'dartStatement'
 			groups.dartStatement = '@keyword.dart'
-			groups.dartUri = '@namespace.dart'
+			groups.dartUri = '@module.dart'
 		end
 
 		if all_syntax or syntax.dosini ~= false then
 			groups.dosiniHeader = '@structure.dosini'
-			groups.dosiniLabel = '@field.dosini'
+			groups.dosiniLabel = '@variable.member.dosini'
 		end
 
 		if all_syntax or syntax.dot ~= false then
@@ -854,27 +906,27 @@ local function from_palette(palette, opts)
 			groups.gitcommitDiscardedFile = 'gitcommitSelectedFile'
 			groups.gitcommitOverFlow = '@error.gitcommit'
 			groups.gitcommitSelectedFile = 'Directory'
-			groups.gitcommitSummary = '@text.title.gitcommitSummary'
+			groups.gitcommitSummary = '@markup.title.gitcommitSummary'
 			groups.gitcommitUntrackedFile = 'gitcommitSelectedFile'
 
 			groups.gitconfigAssignment = 'String'
 			groups.gitconfigEscape = '@string.escape'
 			groups.gitconfigNone = 'Operator'
 			groups.gitconfigSection = '@structure.gitconfig'
-			groups.gitconfigVariable = '@field.gitconfig'
+			groups.gitconfigVariable = '@variable.member.gitconfig'
 
 			groups.gitrebaseBreak = '@keyword.gitrebase'
 			groups.gitrebaseCommit = '@number.gitrebase'
-			groups.gitrebaseDrop = '@exception.gitrebase'
-			groups.gitrebaseEdit = '@define.gitrebase'
-			groups.gitrebaseExec = '@preproc.gitrebase'
+			groups.gitrebaseDrop = '@keyword.exception.gitrebase'
+			groups.gitrebaseEdit = '@keyword.directive.define.gitrebase'
+			groups.gitrebaseExec = '@keyword.directive.gitrebase'
 			groups.gitrebaseFixup = 'gitrebaseSquash'
-			groups.gitrebaseMerge = '@preproc.gitrebase'
-			groups.gitrebasePick = '@include.gitrebase'
+			groups.gitrebaseMerge = '@keyword.directive.gitrebase'
+			groups.gitrebasePick = '@keyword.import.gitrebase'
 			groups.gitrebaseReset = 'gitrebaseLabel'
 			groups.gitrebaseReword = 'gitrebasePick'
 			groups.gitrebaseSquash = '@macro.gitrebase'
-			groups.gitrebaseSummary = '@text.title.gitrebaseSummary'
+			groups.gitrebaseSummary = '@markup.title.gitrebaseSummary'
 		end
 
 		if all_syntax or syntax.go ~= false then
@@ -882,18 +934,18 @@ local function from_palette(palette, opts)
 			groups.goBoolean = '@boolean.go'
 			groups.goBuiltins = '@function.builtin.go'
 			groups.goEscapeC = '@string.escape.go'
-			groups.goField = '@field.go'
-			groups.goFloat = '@float.go'
-			groups.goFormatSpecifier = '@string.regex.go'
+			groups.goField = '@variable.member.go'
+			groups.goFloat = '@number.float.go'
+			groups.goFormatSpecifier = '@string.regexp.go'
 			groups.goFunction = '@function.go'
 			groups.goFunctionCall = 'goFunction'
 			groups.goFunctionReturn = NONE
-			groups.goImport = '@include.go'
-			groups.goImportString = '@namespace.go'
+			groups.goImport = '@keyword.import.go'
+			groups.goImportString = '@module.go'
 			groups.goMethodCall = 'goFunctionCall'
 			groups.goPackage = 'goStatement'
 			groups.goParamType = 'goReceiverType'
-			groups.goPointerOperator = '@storageclass.go'
+			groups.goPointerOperator = '@keyword.storage.go'
 			groups.goPredefinedIdentifiers = '@constant.go'
 			groups.goReceiver = 'goBlock'
 			groups.goReceiverType = 'goTypeName'
@@ -907,10 +959,10 @@ local function from_palette(palette, opts)
 		end
 
 		if all_syntax or syntax.help ~= false then
-			groups.helpCommand = '@text.literal.help'
+			groups.helpCommand = '@markup.raw.help'
 			groups.helpHeader = '@label.help'
-			groups.helpHeadline = '@text.title.help'
-			groups.helpHyperTextJump = '@text.uri.help'
+			groups.helpHeadline = '@markup.title.help'
+			groups.helpHyperTextJump = '@string.special.url.help'
 			groups.helpHyperTextEntry = 'helpHyperTextJump'
 			groups.helpExample = 'helpCommand'
 			groups.helpNote = 'DiagnosticHint'
@@ -923,26 +975,26 @@ local function from_palette(palette, opts)
 			groups.htmlSpecialChar = '@string.special.html'
 			groups.htmlBold = 'Bold'
 			groups.htmlEndTag = 'htmlTag'
-			groups.htmlH1 = '@text.title.1'
-			groups.htmlH2 = '@text.title.2'
-			groups.htmlH3 = '@text.title.3'
-			groups.htmlH4 = '@text.title.4'
-			groups.htmlH5 = '@text.title.5'
-			groups.htmlH6 = '@text.title.6'
+			groups.htmlH1 = '@markup.heading.1'
+			groups.htmlH2 = '@markup.heading.2'
+			groups.htmlH3 = '@markup.heading.3'
+			groups.htmlH4 = '@markup.heading.4'
+			groups.htmlH5 = '@markup.heading.5'
+			groups.htmlH6 = '@markup.heading.6'
 			groups.htmlItalic = 'Italic'
 			groups.htmlSpecialTagName = '@keyword.html'
 			groups.htmlTag = '@tag.delimiter.html'
 			groups.htmlTagN = '@tag'
 			groups.htmlTagName = 'htmlSpecialTagName'
-			groups.htmlTitle = '@text.title.html'
+			groups.htmlTitle = '@markup.title.html'
 		end
 
 		if all_syntax or syntax.i3config ~= false then
 			groups.i3ConfigAction = '@function.builtin.i3config'
 			groups.i3ConfigAssign = 'i3ConfigVariable'
 			groups.i3ConfigAssignKeyword = '@keyword.i3config'
-			groups.i3ConfigBind = '@text'
-			groups.i3ConfigBindArgument = '@parameter.sh'
+			groups.i3ConfigBind = '@markup'
+			groups.i3ConfigBindArgument = '@variable.parameter.sh'
 			groups.i3ConfigBindKeyword = '@keyword.i3config'
 			groups.i3ConfigBlockKeyword = 'i3ConfigBindKeyword'
 			groups.i3ConfigBorderKeyword = 'i3ConfigBindKeyword'
@@ -980,7 +1032,7 @@ local function from_palette(palette, opts)
 			groups.i3ConfigTitleAlignKeyword = 'i3ConfigBindKeyword'
 			groups.i3ConfigUnit = '@type.i3config'
 			groups.i3ConfigUnitOr = '@operator.i3config'
-			groups.i3ConfigVariable = '@define.i3config'
+			groups.i3ConfigVariable = '@keyword.directive.define.i3config'
 			groups.i3ConfigVariableAndModifier = '@character.i3config'
 			groups.i3ConfigVariableModifier = '@operator.i3config'
 			groups.i3ConfigWindowCommandSpecial = '@punctuation.bracket.i3config'
@@ -994,10 +1046,10 @@ local function from_palette(palette, opts)
 		if all_syntax or syntax.javascript ~= false then
 			groups.jsExceptions = '@structure.javascript'
 			groups.jsFuncBlock = '@function.javascript'
-			groups.jsGlobalNodeObjects = '@include.javascript'
+			groups.jsGlobalNodeObjects = '@keyword.import.javascript'
 			groups.jsGlobalObjects = '@type.builtin.javascript'
 			groups.jsObjectKey = '@type.javascript'
-			groups.jsOf = '@repeat.javascript'
+			groups.jsOf = '@keyword.repeat.javascript'
 			groups.jsReturn = '@keyword.return.javascript'
 			groups.jsSpecial = '@string.escape'
 			groups.jsStorageClass = '@keyword.javascript'
@@ -1008,7 +1060,7 @@ local function from_palette(palette, opts)
 		if all_syntax or syntax.json ~= false then
 			groups.jsonBraces = '@punctuation.bracket.json'
 			groups.jsonEscape = '@string.escape.json'
-			groups.jsonKeyword = '@field.json'
+			groups.jsonKeyword = '@variable.member.json'
 			groups.jsonKeywordMatch = '@operator.json'
 			groups.jsonNull = '@constant.builtin.json'
 			groups.jsonQuote = '@punctuation.bracket.json'
@@ -1022,7 +1074,7 @@ local function from_palette(palette, opts)
 			groups.luaComma = '@punctuation.delimiter.lua'
 			groups.luaDocTag = '@keyword.lua'
 			groups.luaEllipsis = '@variable.builtin.lua'
-			groups.luaFuncArgName = '@parameter.lua'
+			groups.luaFuncArgName = '@variable.parameter.lua'
 			groups.luaFuncCall = '@function.call.lua'
 			groups.luaFuncId = 'luaComma'
 			groups.luaFuncKeyword = '@type.lua'
@@ -1030,7 +1082,7 @@ local function from_palette(palette, opts)
 			groups.luaFuncParens = 'luaParens'
 			groups.luaFuncTable = '@structure.lua'
 			groups.luaGotoLabel = '@label.lua'
-			groups.luaIn = '@repeat.lua'
+			groups.luaIn = '@keyword.repeat.lua'
 			groups.luaLocal = 'luaStatement'
 			groups.luaNoise = '@punctuation.lua'
 			groups.luaParens = '@punctuation.bracket.lua'
@@ -1046,24 +1098,24 @@ local function from_palette(palette, opts)
 		end
 
 		if all_syntax or syntax.man ~= false then
-			groups.manHeader = '@text.title.1'
-			groups.manOptionDesc = '@parameter.sh'
-			groups.manReference = '@text.uri'
-			groups.manSectionHeading = '@text.title.2'
-			groups.manSubHeading = '@text.title.3'
-			groups.manUnderline = '@text.literal'
+			groups.manHeader = '@markup.heading.1'
+			groups.manOptionDesc = '@variable.parameter.sh'
+			groups.manReference = '@string.special.url'
+			groups.manSectionHeading = '@markup.heading.2'
+			groups.manSubHeading = '@markup.heading.3'
+			groups.manUnderline = '@markup.raw'
 		end
 
 		if all_syntax or syntax.markdown ~= false then
 			groups.markdownCode = 'mkdCode'
 			groups.markdownCodeDelimiter = 'mkdCodeDelimiter'
 			groups.markdownEscape = '@string.escape.markdown'
-			groups.markdownH1 = '@text.title.1'
-			groups.markdownH2 = '@text.title.2'
-			groups.markdownH3 = '@text.title.3'
-			groups.markdownH4 = '@text.title.4'
-			groups.markdownH5 = '@text.title.5'
-			groups.markdownH6 = '@text.title.6'
+			groups.markdownH1 = '@markup.heading.1'
+			groups.markdownH2 = '@markup.heading.2'
+			groups.markdownH3 = '@markup.heading.3'
+			groups.markdownH4 = '@markup.heading.4'
+			groups.markdownH5 = '@markup.heading.5'
+			groups.markdownH6 = '@markup.heading.6'
 			groups.markdownLinkDelimiter = 'mkdDelimiter'
 			groups.markdownLinkText = 'mkdLink'
 			groups.markdownLinkTextDelimiter = 'markdownLinkDelimiter'
@@ -1074,7 +1126,7 @@ local function from_palette(palette, opts)
 
 			groups.mkdBold = '@conceal.markdown'
 			groups.mkdBoldItalic = 'mkdBold'
-			groups.mkdCode = '@text.literal.markdown'
+			groups.mkdCode = '@markup.raw.markdown'
 			groups.mkdCodeDelimiter = 'mkdBold'
 			groups.mkdCodeEnd = 'mkdCodeStart'
 			groups.mkdCodeStart = 'mkdCodeDelimiter'
@@ -1082,7 +1134,7 @@ local function from_palette(palette, opts)
 			groups.mkdHeading = '@punctuation.delimiter.markdown'
 			groups.mkdItalic = 'mkdBold'
 			groups.mkdLineBreak = 'NonText'
-			groups.mkdLink = '@text.uri.markdown'
+			groups.mkdLink = '@string.special.url.markdown'
 			groups.mkdListItem = '@punctuation.special.markdown'
 			groups.mkdRule = {fg = palette.text_contrast_bg_low, sp = palette.text_contrast_bg_high, underline = true}
 			groups.mkdURL = 'mkdLink'
@@ -1095,24 +1147,24 @@ local function from_palette(palette, opts)
 			groups.pythonBuiltinType = '@type.builtin.python'
 			groups.pythonClass = '@lsp.type.class.python'
 			groups.pythonClassParameters = 'pythonParameters'
-			groups.pythonDecorator = '@preproc.python'
+			groups.pythonDecorator = '@keyword.directive.python'
 			groups.pythonDottedName = 'Identifier'
 			groups.pythonError = '@error.python'
-			groups.pythonException = '@exception.python'
-			groups.pythonInclude = '@include.python'
+			groups.pythonException = '@keyword.exception.python'
+			groups.pythonInclude = '@keyword.import.python'
 			groups.pythonIndentError = 'pythonError'
 			groups.pythonLambdaExpr = 'pythonOperator'
 			groups.pythonOperator = '@operator.python'
-			groups.pythonParam = '@parameter.python'
-			groups.pythonParameters = '@parameter.python'
-			groups.pythonRun = '@preproc.python'
+			groups.pythonParam = '@variable.parameter.python'
+			groups.pythonParameters = '@variable.parameter.python'
+			groups.pythonRun = '@keyword.directive.python'
 			groups.pythonSelf = '@keyword.python'
 			groups.pythonSpaceError = 'pythonError'
 			groups.pythonStatement = '@keyword.python'
 		end
 
 		if all_syntax or syntax.razor ~= false then
-			groups.razorCode = '@preproc.razor'
+			groups.razorCode = '@keyword.directive.razor'
 			groups.razorMemberAccessOperator = '@punctuation.delimiter.razor'
 			groups.razorcsAccessor = '@operator.cs'
 			groups.razorcsAttribute = '@attribute.cs'
@@ -1125,13 +1177,13 @@ local function from_palette(palette, opts)
 			groups.razorcsUnaryOperatorKeyword = '@operator.razor'
 			groups.razorcsXMLTag = '@tag.xml'
 			groups.razorDelimiter = '@punctuation.special.razor'
-			groups.razorEventAttribute = '@preproc.conditional.razor'
+			groups.razorEventAttribute = '@keyword.directive.conditional.razor'
 			groups.razorFor = 'razorIf'
-			groups.razorhtmlAttribute = '@field.html'
+			groups.razorhtmlAttribute = '@variable.member.html'
 			groups.razorhtmlAttributeOperator = '@operator.html'
 			groups.razorhtmlTag = '@tag.html'
 			groups.razorhtmlValueDelimiter = 'Delimiter'
-			groups.razorIf = '@preproc.conditional.razor'
+			groups.razorIf = '@keyword.directive.conditional.razor'
 			groups.razorImplicitExpression = 'PreProc'
 			groups.razorLine = 'Constant'
 			groups.razorUsing = 'Include'
@@ -1144,10 +1196,10 @@ local function from_palette(palette, opts)
 		end
 
 		if all_syntax or syntax.rust ~= false then
-			groups.rustAssert = '@debug.rust'
+			groups.rustAssert = '@keyword.debug.rust'
 			groups.rustCharacterDelimiter = '@punctuation.bracket.rust'
 			groups.rustIdentifier = '@variable.rust'
-			groups.rustStaticLifetime = '@storageclass.rust'
+			groups.rustStaticLifetime = '@keyword.storage.rust'
 			groups.rustStringDelimiter = 'rustCharacterDelimiter'
 			groups.rustUnused = '@variable.builtin.rust'
 			groups.rustEscape = '@string.escape.rust'
@@ -1163,28 +1215,28 @@ local function from_palette(palette, opts)
 			groups.scssAttribute = '@punctuation'
 			groups.scssBoolean = 'Boolean'
 			groups.scssDefault = 'Keyword'
-			groups.scssDefinition = '@preproc.conditional.scss'
+			groups.scssDefinition = '@keyword.directive.conditional.scss'
 			groups.scssElse = 'scssIf'
-			groups.scssIf = '@preproc.conditional.scss'
-			groups.scssInclude = '@include.scss'
+			groups.scssIf = '@keyword.directive.conditional.scss'
+			groups.scssInclude = '@keyword.import.scss'
 			groups.scssMixinName = '@lsp.type.interface.scss'
 			groups.scssSelectorChar = '@punctuation.delimiter.scss'
 			groups.scssSelectorName = '@structure.scss'
-			groups.scssVariable = '@define.scss'
+			groups.scssVariable = '@keyword.directive.define.scss'
 			groups.scssVariableAssignment = '@operator.scss'
 		end
 
 		if all_syntax or syntax.sh ~= false then
 			groups.shDeref = 'shDerefSimple'
 			groups.shDerefSimple = '@variable.sh'
-			groups.shDerefVarArray = '@field.sh'
+			groups.shDerefVarArray = '@variable.member.sh'
 			groups.shFunctionKey = '@function.sh'
-			groups.shLoop = '@repeat.sh'
-			groups.shOption = '@parameter.sh'
+			groups.shLoop = '@keyword.repeat.sh'
+			groups.shOption = '@variable.parameter.sh'
 			groups.shParen = '@punctuation.bracket.sh'
 			groups.shQuote = '@punctuation.delimiter.sh'
 			groups.shSet = 'Statement'
-			groups.shTestOpr = '@debug.sh'
+			groups.shTestOpr = '@keyword.debug.sh'
 			groups.shWrapLineOperator = '@punctuation.special.sh'
 		end
 
@@ -1213,8 +1265,8 @@ local function from_palette(palette, opts)
 		if all_syntax or syntax.toml ~= false then
 			groups.tomlComment = '@comment.toml'
 			groups.tomlDate = '@string.special.toml'
-			groups.tomlFloat = '@float.toml'
-			groups.tomlKey = '@field.toml'
+			groups.tomlFloat = '@number.float.toml'
+			groups.tomlKey = '@variable.member.toml'
 			groups.tomlTable = '@structure.toml'
 		end
 
@@ -1232,7 +1284,7 @@ local function from_palette(palette, opts)
 			groups.vimGroup = '@structure.builtin.vim'
 			groups.vimHiAttrib = '@keyword.vim'
 			groups.vimHiBlend = 'vimHiCterm'
-			groups.vimHiCterm = '@field.vim'
+			groups.vimHiCterm = '@variable.member.vim'
 			groups.vimHiCtermFgBg = 'vimHiCterm'
 			groups.vimHiGroup = '@structure.vim'
 			groups.vimHiGui = 'vimHiCterm'
@@ -1249,7 +1301,7 @@ local function from_palette(palette, opts)
 		end
 
 		if all_syntax or syntax.xdefaults ~= false then
-			groups.xdefaultsLabel = '@field.xdefaults'
+			groups.xdefaultsLabel = '@variable.member.xdefaults'
 			groups.xdefaultsPunct = '@punctuation.delimiter.xdefaults'
 			groups.xdefaultsValue = '@string.xdefaults'
 		end
@@ -1271,7 +1323,7 @@ local function from_palette(palette, opts)
 
 		if all_syntax or syntax.yaml ~= false then
 			groups.yamlInline = '@punctuation.delimiter.yaml'
-			groups.yamlKey = '@field.yaml'
+			groups.yamlKey = '@variable.member.yaml'
 		end
 	end
 
