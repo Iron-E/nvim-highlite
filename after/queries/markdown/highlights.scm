@@ -15,5 +15,7 @@
 ; )
 
 ; text environments
-(fenced_code_block (info_string) @markup.environment.name)
-(fenced_code_block_delimiter) @markup.environment
+(fenced_code_block
+	(fenced_code_block_delimiter) @markup.environment
+	(info_string) @markup.environment.name (#set! priority 101)
+)
