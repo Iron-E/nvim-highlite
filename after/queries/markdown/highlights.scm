@@ -17,15 +17,3 @@
 ; text environments
 (fenced_code_block (info_string) @markup.environment.name)
 (fenced_code_block_delimiter) @markup.environment
-
-; titles
-(atx_heading
-	[
-		(atx_h1_marker)
-		(atx_h2_marker)
-		(atx_h3_marker)
-		(atx_h4_marker)
-		(atx_h5_marker)
-		(atx_h6_marker)
-	] @punctuation.special
-)
