@@ -1,5 +1,8 @@
 ;; extends
 
+; comments
+(note) @comment.info
+
 ; options
 (optionlink
 	"'" @conceal (#set! conceal "")
