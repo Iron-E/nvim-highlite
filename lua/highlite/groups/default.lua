@@ -273,7 +273,7 @@ local function from_palette(palette, opts)
 		['@lsp.typemod.type.defaultLibrary'] = '@type.builtin',
 		['@lsp.typemod.type.readonly'] = '@lsp.type.type',
 		['@lsp.typemod.variable.defaultLibrary'] = '@variable.builtin',
-		LspInlayHint = 'Conceal',
+		LspInlayHint = '@comment.documentation',
 
 		-- Treesitter
 		-- HACK: a lot of these have `nocombine` because of overly-eager captures
@@ -1130,7 +1130,7 @@ local function from_palette(palette, opts)
 			groups.markdownSpecialChar = '@string.special.markdown'
 			groups.markdownUrl = 'mkdLink'
 
-			groups.mkdBold = '@conceal.markdown'
+			groups.mkdBold = '@markup.environment'
 			groups.mkdBoldItalic = 'mkdBold'
 			groups.mkdCode = '@markup.raw.markdown'
 			groups.mkdCodeDelimiter = 'mkdBold'
