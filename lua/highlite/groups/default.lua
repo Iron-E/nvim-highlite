@@ -194,17 +194,17 @@ local function from_palette(palette, opts)
 		DiagnosticDeprecated = {strikethrough = true},
 
 		DiagnosticError = {fg = palette.bg, bg = palette.error, bold = true},
-		DiagnosticFloatingError = '@text.danger',
+		DiagnosticFloatingError = '@comment.error',
 		DiagnosticSignError = 'DiagnosticFloatingError',
 		DiagnosticUnderlineError = {sp = palette.error, undercurl = true},
 
 		DiagnosticHint = {fg = palette.bg, bg = palette.hint, bold = true},
-		DiagnosticFloatingHint = {fg = palette.hint},
+		DiagnosticFloatingHint = '@comment.hint',
 		DiagnosticSignHint = 'DiagnosticFloatingHint',
 		DiagnosticUnderlineHint = {sp = palette.hint, undercurl = true},
 
 		DiagnosticInfo = {fg = palette.bg, bg = palette.info, bold = true},
-		DiagnosticFloatingInfo = '@text.note',
+		DiagnosticFloatingInfo = '@comment.info',
 		DiagnosticSignInfo = 'DiagnosticFloatingInfo',
 		DiagnosticUnderlineInfo = {sp = palette.info, undercurl = true},
 
@@ -214,7 +214,7 @@ local function from_palette(palette, opts)
 		DiagnosticUnderlineOk = {sp = palette.ok, undercurl = true},
 
 		DiagnosticWarn = {fg = palette.bg, bg = palette.warning, bold = true},
-		DiagnosticFloatingWarn = '@text.warning',
+		DiagnosticFloatingWarn = '@comment.warning',
 		DiagnosticSignWarn = 'DiagnosticFloatingWarn',
 		DiagnosticUnderlineWarn = {sp = palette.warning, undercurl = true},
 
@@ -226,7 +226,7 @@ local function from_palette(palette, opts)
 		CursorColumn = {bg = palette.bg_contrast_low},
 
 		-- Misc
-		Directory = '@namespace',
+		Directory = '@module',
 		MsgSeparator = {bg = palette.text_contrast_bg_high},
 		WinSeparator = {fg = palette.text_contrast_bg_high},
 
@@ -246,17 +246,17 @@ local function from_palette(palette, opts)
 		['@lsp.type.enumMember'] = {fg = palette.field_enum, nocombine = true},
 		['@lsp.type.escapeSequence'] = '@string.escape',
 		['@lsp.type.event'] = '@event',
-		['@lsp.type.float'] = '@float',
+		['@lsp.type.float'] = '@number.float',
 		['@lsp.type.identifier'] = 'Identifier',
 		['@lsp.type.interface'] = {fg = palette.interface, nocombine = true},
 		['@lsp.type.keyword'] = '@keyword',
-		['@lsp.type.lifetime'] = '@storageclass.lifetime',
+		['@lsp.type.lifetime'] = '@keyword.storage.lifetime',
 		['@lsp.type.macro'] = '@macro',
-		['@lsp.type.method'] = '@method',
-		['@lsp.type.namespace'] = '@namespace',
+		['@lsp.type.method'] = '@function.method',
+		['@lsp.type.namespace'] = '@module',
 		['@lsp.type.number'] = '@number',
 		['@lsp.type.operator'] = NONE,
-		['@lsp.type.parameter'] = '@parameter',
+		['@lsp.type.parameter'] = '@variable.parameter',
 		['@lsp.type.property'] = '@property',
 		['@lsp.type.string'] = '@string',
 		['@lsp.type.struct'] = '@structure',
@@ -1196,9 +1196,9 @@ local function from_palette(palette, opts)
 		end
 
 		if all_syntax or syntax.ruby ~= false then
-			groups.rubyClass = 'Structure'
-			groups.rubyDefine = 'Define'
-			groups.rubyInterpolationDelimiter = 'Delimiter'
+			groups.rubyClass = '@structure.ruby'
+			groups.rubyDefine = '@define.ruby'
+			groups.rubyInterpolationDelimiter = '@punctuation.special'
 		end
 
 		if all_syntax or syntax.rust ~= false then
