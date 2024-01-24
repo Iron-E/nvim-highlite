@@ -29,6 +29,9 @@
 	(#offset-from! "start" @punctuation.special 0 -1 0 0)
 )
 
+; modifier
+(modifier "file" @type.qualifier)
+
 ; namespaces
 (using_directive (identifier) @module)
 (qualified_name (identifier) @module
