@@ -35,16 +35,16 @@ local function from_palette(palette, opts)
 	local conditional = {fg = palette.conditional, italic = true}
 	local define = {fg = palette.define, nocombine = true}
 	local delimiter = {fg = palette.punctuation}
+	local exception = {fg = palette.throw, bold = true}
 	local include = {fg = palette.include, nocombine = true}
 	local keyword = {fg = palette.keyword}
 	local label = {fg = palette.label, bold = true}
-	local line_nr = {fg = palette.text_contrast_bg_low}
 	local macro = {fg = palette.macro, italic = true}
 	local operator = {fg = palette.operator, bold = true}
-	local exception = {fg = palette.throw, bold = true}
 	local pre_proc = {fg = palette.preproc}
 	local preproc_conditional = {fg = palette.preproc_conditional, italic = true}
 	local repeat_ = {fg = palette.loop, italic = true}
+	local sign_column = {fg = palette.text_contrast_bg_low}
 	local status_line = {fg = palette.string, bg = palette.bg_contrast_high}
 	local storage_class = {fg = palette.storage, bold = true}
 	local structure = {fg = palette.structure, bold = true}
@@ -131,8 +131,8 @@ local function from_palette(palette, opts)
 
 		-- Line Highlighting
 		CursorLine = {bg = palette.bg_contrast_low},
-		CursorLineNr = Groups.extend({fg = palette.number}, line_nr),
-		LineNr = line_nr,
+		CursorLineNr = Groups.extend({fg = palette.number}, sign_column),
+		LineNr = 'SignColumn',
 		QuickFixLine = {bg = status_line.bg},
 		Visual = {bg = palette.select},
 		VisualNOS = 'Visual',
@@ -148,7 +148,7 @@ local function from_palette(palette, opts)
 		WildMenu = 'PmenuSel',
 
 		-- Folds
-		FoldColumn = {bg = palette.bg_contrast_high, bold = true},
+		FoldColumn = 'SignColumn',
 		Folded = {fg = palette.text, bg = palette.fold, italic = true},
 
 		-- Diffs
@@ -176,7 +176,7 @@ local function from_palette(palette, opts)
 
 		-- Conditional Column Highlighting
 		ColorColumn = {bg = palette.bg_contrast_high},
-		SignColumn = NONE,
+		SignColumn = sign_column,
 
 		-- Messages
 		Error = {bg = palette.syntax_error},
