@@ -662,6 +662,14 @@ local function from_palette(palette, opts)
 			groups.MiniSurround = {reverse = true}
 		end
 
+		if all_nvim_plugins or nvim_plugins.neotest ~= false then
+			groups.NeotestDir = 'Directory'
+			groups.NeotestAdapterName = '@markup.heading'
+			groups.NeotestFile = '@markup.link.label'
+			groups.NeotestNamespace = '@module'
+			groups.NeotestTest = '@function'
+		end
+
 		if all_nvim_plugins or nvim_plugins.nvim_tree ~= false then
 			groups.NvimTreeRootFolder = '@markup.title.NvimTree'
 			groups.NvimTreeGitDeleted = '@diff.minus.NvimTree'

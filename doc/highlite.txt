@@ -214,8 +214,11 @@ lsp_signature
 mini
 
 neo_tree
-nvim_tree
+neotest
 >
+    <li><a href="https://github.com/nvim-tree/nvim-tree.lua">
+      nvim_tree
+    </a></li>
     <li><a href="https://github.com/wbthomason/packer.nvim">
       packer
     </a></li>

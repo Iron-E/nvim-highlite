@@ -259,6 +259,9 @@ require('highlite').setup {
     </a></li>
     <li><a href="https://github.com/nvim-neo-tree/neo-tree.nvim">
       neo_tree
+    <li><a href="https://github.com/nvim-neotest/neotest">
+      neotest
+    </a></li>
     <li><a href="https://github.com/nvim-tree/nvim-tree.lua">
       nvim_tree
     </a></li>
