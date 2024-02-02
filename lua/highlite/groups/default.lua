@@ -663,9 +663,10 @@ local function from_palette(palette, opts)
 		end
 
 		if all_nvim_plugins or nvim_plugins.neotest ~= false then
-			groups.NeotestDir = 'Directory'
 			groups.NeotestAdapterName = '@markup.heading'
-			groups.NeotestFile = '@markup.link.label'
+			groups.NeotestDir = 'Directory'
+			groups.NeotestFile = 'Normal'
+			groups.NeotestFocused = '@markup.underline'
 			groups.NeotestNamespace = '@module'
 			groups.NeotestTest = '@function'
 		end
