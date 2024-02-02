@@ -15,13 +15,13 @@ local Nvim = {}
 --- Call the `fn` while the alternate `&bg` value is applied, then restore the original `&bg` value and call `fn` again.
 --- @param fn fun(bg: highlite.bg)
 function Nvim.with_both_bgs(fn)
-	local previous_bg = vim.api.nvim_get_option 'background' --- @type highlite.bg
+	local previous_bg = vim.api.nvim_get_option_value('background', {}) --- @type highlite.bg
 	local next_bg = previous_bg == 'dark' and 'light' or 'dark' --- @type highlite.bg
 
-	vim.api.nvim_set_option('background', next_bg)
+	vim.api.nvim_set_option_value('background', next_bg, {})
 	fn(next_bg)
 
-	vim.api.nvim_set_option('background', previous_bg)
+	vim.api.nvim_set_option_value('background', previous_bg, {})
 	fn(previous_bg)
 end
 

@@ -114,7 +114,7 @@ end
 --- @return highlite.color.palette, nil|highlite.color.palette.terminal
 function Highlite.palette(name)
 	return require('highlite.color.palette.' .. name)(
-		vim.api.nvim_get_option 'background',
+		vim.api.nvim_get_option_value('background', {}),
 		config.terminal_palette
 	)
 end
