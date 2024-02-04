@@ -199,12 +199,12 @@ local function from_palette(palette, opts)
 		DiagnosticUnderlineError = {sp = palette.error, undercurl = true},
 
 		DiagnosticHint = {fg = palette.bg, bg = palette.hint, bold = true},
-		DiagnosticFloatingHint = '@comment.hint',
+		DiagnosticFloatingHint = {fg = palette.hint},
 		DiagnosticSignHint = 'DiagnosticFloatingHint',
 		DiagnosticUnderlineHint = {sp = palette.hint, undercurl = true},
 
 		DiagnosticInfo = {fg = palette.bg, bg = palette.info, bold = true},
-		DiagnosticFloatingInfo = '@comment.info',
+		DiagnosticFloatingInfo = '@comment.note',
 		DiagnosticSignInfo = 'DiagnosticFloatingInfo',
 		DiagnosticUnderlineInfo = {sp = palette.info, undercurl = true},
 
@@ -283,8 +283,7 @@ local function from_palette(palette, opts)
 		['@character.special'] = {fg = palette.character_special, bold = true},
 		['@comment.documentation'] = {fg = palette.comment_documentation},
 		['@comment.error'] = {fg = palette.error},
-		['@comment.hint'] = {fg = palette.hint},
-		['@comment.info'] = {fg = palette.info},
+		['@comment.note'] = {fg = palette.info},
 		['@comment.todo'] = {fg = palette.todo},
 		['@comment.warning'] = {fg = palette.warning},
 		['@conceal'] = 'Conceal',
@@ -397,7 +396,7 @@ local function from_palette(palette, opts)
 		['@text.environment.name'] = '@markup.environment.name',
 		['@text.literal'] = '@markup.raw',
 		['@text.math'] = '@markup.math',
-		['@text.note'] = '@comment.info',
+		['@text.note'] = '@comment.note',
 		['@text.quote'] = '@markup.quote',
 		['@text.reference'] = '@markup.link',
 		['@text.strike'] = '@markup.strike',
@@ -643,7 +642,7 @@ local function from_palette(palette, opts)
 		if all_nvim_plugins or nvim_plugins.lspconfig ~= false then
 			groups.LspInfoBorder = 'FloatBorder'
 			groups.LspInfoList = '@markup.raw'
-			groups.LspInfoTip = '@comment.info.lspinfo'
+			groups.LspInfoTip = '@comment.note.lspinfo'
 			groups.LspInfoTitle = 'FloatTitle'
 		end
 
@@ -713,7 +712,7 @@ local function from_palette(palette, opts)
 		if all_nvim_plugins or nvim_plugins.todo_comments ~= false then
 			groups.TodoFgFIX = '@comment.error'
 			groups.TodoFgHACK = '@diff.delta'
-			groups.TodoFgNOTE = '@comment.info'
+			groups.TodoFgNOTE = '@comment.note'
 			groups.TodoFgPERF = {fg = palette.ok}
 			groups.TodoFgTEST = {fg = palette.hint}
 			groups.TodoFgTODO = '@comment.todo'

@@ -1,7 +1,7 @@
 ;; extends
 
 ; comments
-(note) @comment.info
+(note) @comment.note
 
 ; headings
 (tag text: (word) @markup.heading.5)
