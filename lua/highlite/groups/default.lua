@@ -226,7 +226,7 @@ local function from_palette(palette, opts)
 		CursorColumn = {bg = palette.bg_contrast_low},
 
 		-- Misc
-		Directory = '@module',
+		Directory = '@string.special.path',
 		MsgSeparator = {bg = palette.text_contrast_bg_high},
 		WinSeparator = {fg = palette.text_contrast_bg_high},
 
@@ -351,6 +351,7 @@ local function from_palette(palette, opts)
 		['@string.keycode'] = 'SpecialKey',
 		['@string.regexp'] = {fg = palette.string_regex, nocombine = true},
 		['@string.special'] = {fg = palette.string_special, nocombine = true},
+		['@string.special.path'] = {fg = palette.namespace, underline = true, nocombine = true},
 		['@structure'] = Groups.extend({nocombine = true}, structure),
 		['@tag'] = {fg = palette.tag, bold = true, nocombine = true},
 		['@tag.attribute'] = {fg = palette.tag_attribute, nocombine = true},
@@ -485,7 +486,7 @@ local function from_palette(palette, opts)
 			groups.AerialEnumMemberIcon = '@lsp.type.enumMember.aerial'
 			groups.AerialEventIcon = '@event.aerial'
 			groups.AerialFieldIcon = '@variable.member.aerial'
-			groups.AerialFileIcon = 'Directory'
+			groups.AerialFileIcon = '@string.special.path.aerial'
 			groups.AerialInterfaceIcon = '@lsp.type.interface.aerial'
 			groups.AerialKeyIcon = '@variable.member.aerial'
 			groups.AerialMethodIcon = '@function.method.aerial'
