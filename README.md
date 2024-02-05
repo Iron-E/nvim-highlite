@@ -280,6 +280,9 @@ require('highlite').setup {
     <li><a href="https://github.com/folke/todo-comments.nvim">
       todo_comments
     </a></li>
+    <li><a href="https://github.com/nvim-treesitter/nvim-treesitter-context">
+      treesitter_context
+    </a></li>
     <li><a href="https://github.com/folke/trouble.nvim">
       trouble
     </a></li>

@@ -735,6 +735,10 @@ local function from_palette(palette, opts)
 			groups.TodoSignWARN = 'TodoFgWARN'
 		end
 
+		if all_syntax or nvim_plugins.treesitter_context ~= false then
+			groups.TreesitterContextLineNumber = Groups.extend({fg = sign_column.fg}, groups'NormalFloat')
+		end
+
 		if all_nvim_plugins or nvim_plugins.trouble ~= false then
 			groups.TroubleCount = {fg = palette.number, sp = palette.text_contrast_bg_high, underline = true}
 		end
@@ -846,7 +850,6 @@ local function from_palette(palette, opts)
 			groups.cppSTLexception = '@keyword.exception.cpp'
 			groups.cppSTLnamespace = '@module.cpp'
 		end
-
 		if all_syntax or syntax.cs ~= false then
 			groups.csAccessModifier = '@keyword.cs'
 			groups.csAccessor = 'csLogicSymbols'
