@@ -334,7 +334,7 @@ cscss
 dart
 dosini
 dot
-
+editorconfig
 git
 
 go

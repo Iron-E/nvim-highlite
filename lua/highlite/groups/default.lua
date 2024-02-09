@@ -911,11 +911,16 @@ local function from_palette(palette, opts)
 		if all_syntax or syntax.dosini ~= false then
 			groups.dosiniHeader = '@structure.dosini'
 			groups.dosiniLabel = '@variable.member.dosini'
+			groups.dosiniSection = '@operator.dosini'
 		end
 
 		if all_syntax or syntax.dot ~= false then
 			groups.dotKeyChar = '@character.dot'
 			groups.dotType = '@type.dot'
+		end
+
+		if all_syntax or syntax.editorconfig ~= false then
+			groups.editorconfigProperty = '@property.editorconfig'
 		end
 
 		if all_syntax or syntax.git ~= false then

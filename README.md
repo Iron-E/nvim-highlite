@@ -423,6 +423,9 @@ require('highlite').setup {
     <li><a href="https://github.com/liuchengxu/graphviz">
       dot
     </a></li>
+    <li>
+      editorconfig
+    </li>
     <li><a href="https://github.com/tpope/vim-git">
       git
     </a></li>
