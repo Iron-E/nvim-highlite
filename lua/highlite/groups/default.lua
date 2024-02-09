@@ -735,7 +735,7 @@ local function from_palette(palette, opts)
 			groups.TodoSignWARN = 'TodoFgWARN'
 		end
 
-		if all_syntax or nvim_plugins.treesitter_context ~= false then
+		if all_nvim_plugins or nvim_plugins.treesitter_context ~= false then
 			groups.TreesitterContextLineNumber = Groups.extend({fg = sign_column.fg}, groups'NormalFloat')
 		end
 
