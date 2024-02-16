@@ -6,6 +6,14 @@
 	"="
 ] @operator
 
+(
+	[
+		"{" "}"
+		"[" "]"
+	] @punctuation.bracket
+	(#set! "priority" 99)
+)
+
 [
 	":"
 	","
