@@ -20,6 +20,8 @@
 	(line_continuation)
 ] @punctuation.delimiter
 
+("\"" @string (#set! conceal ""))
+
 
 ; paths
 (path) @string.special.path
