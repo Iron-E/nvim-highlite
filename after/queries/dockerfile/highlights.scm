@@ -32,6 +32,7 @@
 (
 	[
 		(image_tag)
+		(json_string)
 		(unquoted_string)
 	] @string
 	(#set! "priority" 99)
