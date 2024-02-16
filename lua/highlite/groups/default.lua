@@ -340,6 +340,7 @@ local function from_palette(palette, opts)
 		['@markup.strong'] = 'Bold',
 		['@markup.underline'] = {underline = true},
 		['@module'] = {fg = palette.namespace, bold = true, nocombine = true},
+		['@module.builtin'] = '@module', -- TODO: add builtin module palette color
 		['@operator'] = Groups.extend({nocombine = true}, operator),
 		['@property'] = {fg = palette.property, nocombine = true},
 		['@punctuation'] = Groups.extend({nocombine = true}, delimiter),
@@ -761,6 +762,21 @@ local function from_palette(palette, opts)
 			groups.CocInfoSign = 'DiagnosticSignInfo'
 			groups.CocWarningHighlight = 'DiagnosticUnderlineWarn'
 			groups.CocWarningSign = 'DiagnosticSignWarn'
+		end
+
+		if all_vim_plugins or vim_plugins.dadbod_ui ~= false then
+			groups.dbui_buffers = '@string.special.symbol'
+			groups.dbui_collapsed_tables = '@markup.list'
+			groups.dbui_connection_error = 'DiagnosticFloatingError'
+			groups.dbui_connection_ok = 'DiagnosticFloatingOk'
+			groups.dbui_expanded_tables = 'dbui_collapsed_tables'
+			groups.dbui_help = '@comment.dbui'
+			groups.dbui_help_key = '@character'
+			groups.dbui_tables = '@structure'
+
+			groups.NotificationError = 'DiagnosticError'
+			groups.NotificationInfo = 'DiagnosticInfo'
+			groups.NotificationWarning = 'DiagnosticWarning'
 		end
 
 		if all_vim_plugins or vim_plugins.easymotion ~= false then
