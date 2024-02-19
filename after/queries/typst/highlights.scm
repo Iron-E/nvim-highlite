@@ -184,16 +184,12 @@
 	"version"
 ))
 
-; headings
+; markup
 
-(heading "=" @punctuation.special (text) @markup.heading.1)
-(heading "==" @punctuation.special (text) @markup.heading.2)
-(heading "===" @punctuation.special (text) @markup.heading.3)
-(heading "====" @punctuation.special (text) @markup.heading.4)
-(heading "=====" @punctuation.special (text) @markup.heading.5)
-(heading "======" @punctuation.special (text) @markup.heading.6)
-
-; links
+[
+	(linebreak)
+	(parbreak)
+] @punctuation.special
 
 (call
 	item: (call
@@ -204,6 +200,19 @@
 	(content (text) @markup.link.label)
 	(#eq? @_call "link")
 )
+
+
+(heading "=" @punctuation.special (text) @markup.heading.1)
+(heading "==" @punctuation.special (text) @markup.heading.2)
+(heading "===" @punctuation.special (text) @markup.heading.3)
+(heading "====" @punctuation.special (text) @markup.heading.4)
+(heading "=====" @punctuation.special (text) @markup.heading.5)
+(heading "======" @punctuation.special (text) @markup.heading.6)
+
+(item "-" @markup.list)
+
+(emph "_" @markup.environment (#set! conceal ""))
+(strong "*" @markup.environment (#set! conceal ""))
 
 ; members
 
@@ -226,21 +235,12 @@
 	(#any-of? @_module "calc" "sym" "system")
 )
 
-; operators
+; punctuation
 
 [
 	"assign"
 	".."
 ] @operator
 
-; punctuation
-
-(lambda "=>" @punctuation.delimiter)
 (field "." @punctuation.delimiter)
-
-[
-	(linebreak)
-	(parbreak)
-] @punctuation.special
-
-(item "-" @markup.list)
+(lambda "=>" @punctuation.delimiter)
