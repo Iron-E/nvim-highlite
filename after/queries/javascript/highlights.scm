@@ -1,7 +1,11 @@
 ;; extends
 
 ; modifiers
-(lexical_declaration "const" @keyword.storage)
+
+[
+	"const"
+	"static"
+] @keyword.storage
 
 ; namespaces
 (call_expression

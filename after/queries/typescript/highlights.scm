@@ -11,7 +11,12 @@
 (internal_module name: (identifier) @module (#set! "priority" 126))
 
 ; modifiers
-"const" @keyword.storage
+
+[
+	"const"
+	"readonly"
+	"static"
+] @keyword.storage
 
 [
 	"private"
