@@ -336,6 +336,7 @@ local function from_palette(palette, opts)
 		['@markup.math'] = {fg = palette.text_math},
 		['@markup.quote'] = '@comment',
 		['@markup.raw'] = {fg = palette.text_literal, nocombine = true},
+		['@markup.raw.delimiter'] = '@markup.environment',
 		['@markup.strike'] = {strikethrough = true},
 		['@markup.strong'] = 'Bold',
 		['@markup.underline'] = {underline = true},
