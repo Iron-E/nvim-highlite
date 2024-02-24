@@ -2,9 +2,7 @@
 
 ; character highlighting
 
-[
-	"="
-] @operator
+"=" @operator
 
 (
 	[

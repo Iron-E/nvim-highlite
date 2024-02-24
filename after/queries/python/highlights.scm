@@ -32,11 +32,6 @@
 
 ; Privates
 ((identifier) @type (#lua-match? @type "^_+[A-Z]+[a-z]+"))
-; (
-; 	(identifier) @constant
-; 	(#lua-match? @constant "^_*[A-Z][A-Z_]*$")
-; 	(#not-has-parent? @constant aliased_import)
-; )
 
 
 ; Punctuation
