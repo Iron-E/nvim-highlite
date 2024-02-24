@@ -1,13 +1,17 @@
 ;; extends
 
 ; punctuation
-(inline_link ["[" "]" "(" ")"] @punctuation.bracket)
-(image
-	"!" @punctuation.special
-	["[" "]" "(" ")"] @punctuation.bracket
+
+(emphasis_delimiter) @markup.environment
+(image "!" @punctuation.special)
+
+(
+	[
+		"[" "]"
+		"(" ")"
+	] @markup.environment
+	(#has-parent? @markup.environment full_reference_link image inline_link link_label shortcut_link)
 )
 
-[
-	(code_span_delimiter)
-	(emphasis_delimiter)
-] @markup.environment
+((link_label) @markup.link (#offset! @markup.link 0 1 0 -1))
+(shortcut_link (link_text) @markup.link)
