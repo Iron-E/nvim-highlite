@@ -1,7 +1,7 @@
 ;; extends
 
 ; interpolation
-(command_substitution ["$(" ")"] @punctuation.special)
+(command_substitution ["`" "$(" ")"] @punctuation.special)
 (expansion ["${" "}"] @punctuation.special)
 
 ; repeat
