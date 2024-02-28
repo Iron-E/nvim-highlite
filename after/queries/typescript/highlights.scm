@@ -31,3 +31,7 @@
 
 (intersection_type "&" @operator)
 (union_type "|" @operator)
+
+; types
+
+(this_type) @type.definition
