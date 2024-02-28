@@ -1,6 +1,7 @@
 ;; extends
 
 ; namespaces
+
 (call_expression
 	function: (identifier) @_function (#eq? @_function "require")
 	arguments: (arguments (string (string_fragment) @module))
@@ -24,6 +25,9 @@
 	"public"
 ] @keyword
 
+(generator_function_declaration "*" @keyword.storage)
+
 ; operators
+
 (intersection_type "&" @operator)
 (union_type "|" @operator)
