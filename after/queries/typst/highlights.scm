@@ -1,22 +1,21 @@
 ;; extends
 
-; builtins
+; builtins (this is excessive…)
 
 [
 	(auto)
 	(none)
 ] @constant.builtin
 
-((builtin) @constant.builtin (#any-of? @constant.builtin
+((ident) @constant.builtin (#any-of? @constant.builtin
 	; alignment
-	"bottom"
-	"center"
-	"end"
-	"horizon"
-	"left"
-	"right"
-	"start"
-	"top"
+	"bottom" "top"
+	"center" "horizon"
+	"end" "start"
+	"left" "right"
+
+	; directions
+	"btt" "ltr" "rtl" "ttb"
 
 	; color
 	"aqua"
@@ -38,15 +37,37 @@
 	"teal"
 	"white"
 	"yellow"
-
-	; directions
-	"btt"
-	"ltr"
-	"rtl"
-	"ttb"
 ))
 
-((builtin) @function.builtin (#any-of? @function.builtin
+((ident) @type.builtin (#any-of? @type.builtin
+	"alignment"
+	"arguments"
+	"array"
+	"boolean"
+	"color"
+	"content"
+	"datetime"
+	"dictionary"
+	"direction"
+	"duration"
+	"float"
+	"function"
+	"gradient"
+	"int"
+	"label"
+	"length"
+	"location"
+	"module"
+	"plugin"
+	"regex"
+	"selector"
+	"str"
+	"stroke"
+	"type"
+	"version"
+))
+
+(call item: (ident) @function.builtin (#any-of? @function.builtin
 	"accent"
 	"align"
 	"angle"
@@ -146,42 +167,167 @@
 	"yaml"
 ))
 
-((builtin) @keyword.exception (#any-of? @keyword.exception
-	"panic"
-))
+(call (ident) @keyword.exception (#eq? @keyword.exception "panic"))
 
-((builtin) @module.builtin (#any-of? @module.builtin
-	"calc"
-	"sym"
-	"system"
-))
+(field (ident) @module.builtin (#any-of? @module.builtin "calc" "sym" "system"))
 
-((builtin) @type.builtin (#any-of? @type.builtin
+(tagged field: (ident) @variable.member (#any-of? @variable.member
+	"accent"
+	"align"
 	"alignment"
+	"angle"
+	"aqua"
 	"arguments"
 	"array"
+	"attach"
+	"bibliography"
+	"black"
+	"block"
+	"blue"
 	"boolean"
+	"bottom"
+	"box"
+	"btt"
+	"calc"
+	"cancel"
+	"cases"
+	"cbor"
+	"center"
+	"circle"
+	"cite"
+	"class"
+	"colbreak"
 	"color"
+	"columns"
 	"content"
+	"counter"
+	"csv"
 	"datetime"
 	"dictionary"
 	"direction"
+	"document"
 	"duration"
+	"eastern"
+	"ellipse"
+	"emph"
+	"end"
+	"enum"
+	"equation"
+	"eval"
+	"figure"
 	"float"
+	"footnote"
+	"frac"
+	"fraction"
+	"fuchsia"
 	"function"
 	"gradient"
+	"gray"
+	"green"
+	"grid"
+	"h"
+	"heading"
+	"hide"
+	"highlight"
+	"horizon"
+	"image"
 	"int"
+	"json"
 	"label"
+	"layout"
+	"left"
 	"length"
+	"lime"
+	"line"
+	"linebreak"
+	"link"
+	"list"
+	"locate"
 	"location"
+	"lorem"
+	"lower"
+	"lr"
+	"ltr"
+	"maroon"
+	"mat"
+	"measure"
+	"metadata"
 	"module"
+	"move"
+	"navy"
+	"numbering"
+	"olive"
+	"op"
+	"orange"
+	"outline"
+	"overline"
+	"pad"
+	"page"
+	"pagebreak"
+	"panic"
+	"par"
+	"parbreak"
+	"path"
+	"pattern"
+	"place"
 	"plugin"
+	"polygon"
+	"purple"
+	"query"
+	"quote"
+	"ratio"
+	"raw"
+	"read"
+	"rect"
+	"red"
+	"ref"
 	"regex"
+	"relative"
+	"repeat"
+	"repr"
+	"right"
+	"roots"
+	"rotate"
+	"rtl"
+	"scale"
 	"selector"
+	"silver"
+	"sizes"
+	"smallcaps"
+	"smartquote"
+	"square"
+	"stack"
+	"start"
+	"state"
 	"str"
+	"strike"
 	"stroke"
+	"strong"
+	"style"
+	"styles"
+	"sub"
+	"super"
+	"sym"
+	"system"
+	"table"
+	"teal"
+	"terms"
+	"text"
+	"toml"
+	"top"
+	"ttb"
 	"type"
+	"underline"
+	"underover"
+	"upper"
+	"v"
+	"variants"
+	"vec"
 	"version"
+	"white"
+	"xml"
+	"yaml"
+	"yellow"
 ))
 
 ; markup
@@ -193,7 +339,7 @@
 
 (call
 	item: (call
-		item: (builtin) @_call
+		item: (ident) @_call
 		(group (string) @markup.link.url)
 	)
 
@@ -215,25 +361,6 @@
 (strong "*" @markup.environment (#set! conceal ""))
 
 ; members
-
-(field field: (ident) @variable.member)
-(call item: (field
-	field: (ident) @function.call
-))
-
-(
-	(field
-		[
-			(builtin) @_module
-			(field
-				(builtin) @_module
-				field: (ident) @module.builtin
-			)
-		]
-		field: (ident) @constant.builtin
-	) @_field
-	(#any-of? @_module "calc" "sym" "system")
-)
 
 ; punctuation
 
