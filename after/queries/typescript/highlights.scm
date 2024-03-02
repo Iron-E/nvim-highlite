@@ -26,6 +26,7 @@
 ] @keyword
 
 (generator_function_declaration "*" @keyword.storage)
+(method_definition (accessibility_modifier) "async"? . "*" @keyword.storage)
 
 ; operators
 
