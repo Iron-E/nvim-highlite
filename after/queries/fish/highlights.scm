@@ -9,6 +9,8 @@
 
 (for_statement "in" @keyword.repeat)
 
+((variable_name) @variable.builtin (#any-of? "argv"))
+
 ; punctuation
 
 (glob) @character.special
