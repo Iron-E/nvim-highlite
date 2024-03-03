@@ -11,5 +11,7 @@
 
 ; punctuation
 
-(variable_expansion "$" @punctuation.special)
 (glob) @character.special
+
+(double_quote_string (command_substitution ["$" "(" ")"] @punctuation.special))
+(variable_expansion "$" @punctuation.special)
