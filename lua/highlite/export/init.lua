@@ -10,6 +10,7 @@ end
 local Export =
 {
 	bat = wrap 'bat',
+	fish = wrap 'fish',
 	nvim = wrap 'native.lua',
 	vim = wrap 'native.vim',
 	wezterm = wrap 'wezterm',

@@ -123,16 +123,16 @@ do
 			-- iterate over alternations in `${Foo.bg | Foo.fg}`
 			for m in vim.gsplit(match, '|', {plain = true, trimempty = true}) do
 				--- e.g. `@text.literal.fg` → `{'@text', 'literal', 'fg'}`
-				local split = vim.split(vim.trim(m), '.', {plain = true, trimempty = true})
+				local split = vim.split(vim.trim(m), '.', { plain = true, trimempty = true })
 
 				attribute = table.remove(split) --- @type string
-				vim.validate {attribute = {attribute, validate_attribute, VALIDATE_ATTRIBUTE_MSG}}
+				vim.validate { attribute = { attribute, validate_attribute, VALIDATE_ATTRIBUTE_MSG } }
 
 				local group = table.concat(split, '.') --- @type string
 
 				local definition = hl_cache[group]
 				if definition == nil then
-					definition = vim.api.nvim_get_hl(0, {link = false, name = group})
+					definition = vim.api.nvim_get_hl(0, { link = false, name = group })
 					hl_cache[group] = definition
 				end
 

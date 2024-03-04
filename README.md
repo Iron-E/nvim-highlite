@@ -544,6 +544,7 @@ vim.api.nvim_command 'colorscheme <name>'
 This plugin has the ability to export _any_ colorscheme (not just ours!) to various formats, including:
 
 * `bat` theme (tmTheme; also works for Sublime Text)
+* `fish` theme (`set_color`)
 * `nvim` theme (Lua)
 * `vim` theme (Vimscript)
 * `wezterm` theme (TOML)

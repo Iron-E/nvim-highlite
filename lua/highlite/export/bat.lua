@@ -645,7 +645,7 @@ local function export(colorscheme, opts, dir)
 
 	-- checked for backwards compatability
 	if dir == nil then
-		dir = vim.fn.system({'bat', '--config-dir'}):sub(1, -2) .. '/themes'
+		dir = opts.dir or (vim.fn.system({'bat', '--config-dir'}):sub(1, -2) .. '/themes')
 	end
 
 	dir = vim.fs.normalize(dir)
