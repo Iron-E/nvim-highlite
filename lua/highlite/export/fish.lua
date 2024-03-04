@@ -21,11 +21,11 @@ fish_color_cwd ${Directory.fg | Directory.sp}${Directory.bold}${Directory.italic
 fish_color_cwd_root ${Directory.fg | Directory.sp}${Directory.bold}${Directory.italic}${Directory.underline}
 fish_color_status ${DiagnosticSignError.fg | DiagnosticSignError.sp | @keyword.exception.fg | exception.sp | ErrorMsg.fg | ErrorMsg.sp}${DiagnosticSignError.bold | @keyword.exception.bold | ErrorMsg.bold}${DiagnosticSignError.italic | @keyword.exception.italic | ErrorMsg.italic}${DiagnosticSignError.underline | @keyword.exception.underline | ErrorMsg.underline}
 fish_color_cancel ${@string.escape.fg | escape.sp | SpecialChar.fg | SpecialChar.sp}${@string.escape.bold | SpecialChar.bold}${@string.escape.italic | SpecialChar.italic}${@string.escape.underline | SpecialChar.underline}${Normal.bg}${Normal.bold}${Normal.italic}${Normal.underline}
-fish_color_search_match ${PmenuSel.fg | PmenuSel.sp}${PmenuSel.bg}${PmenuSel.bold}${PmenuSel.italic}${PmenuSel.underline} | Search.fg | Search.sp}${IncSearch.bg | Search.bg}${IncSearch.bold | Search.bold}${IncSearch.italic | Search.italic}${IncSearch.underline | Search.underline} | Search.fg | Search.sp}${IncSearch.bg | Search.bg}${IncSearch.bold | Search.bold}${IncSearch.italic | Search.italic}${IncSearch.underline | Search.underline}
-fish_color_history_current ${PmenuSel.fg | PmenuSel.sp}${PmenuSel.bg}${PmenuSel.bold}${PmenuSel.italic}${PmenuSel.underline} | Search.fg | Search.sp}${IncSearch.bg | Search.bg}${IncSearch.bold | Search.bold}${IncSearch.italic | Search.italic}${IncSearch.underline | Search.underline}
+fish_color_search_match ${PmenuSel.fg | PmenuSel.sp}${PmenuSel.bg}${PmenuSel.bold}${PmenuSel.italic}${PmenuSel.underline}
+fish_color_history_current ${PmenuSel.fg | PmenuSel.sp}${PmenuSel.bg}${PmenuSel.bold}${PmenuSel.italic}${PmenuSel.underline}
 
-fish_pager_color_prefix ${Search.fg | Search.sp} ${Search.bg} ${Search.bold} ${Search.italic} ${Search.underline}
-fish_pager_color_description ${@comment.documentation.fg} ${@comment.documentation.bg} ${@comment.documentation.bold} ${@comment.documentation.italic} ${@comment.documentation.underline}
+fish_pager_color_prefix ${Search.fg | Search.sp}${Search.bg}${Search.bold}${Search.italic}${Search.underline}
+fish_pager_color_description ${@comment.documentation.fg}${@comment.documentation.bg}${@comment.documentation.bold}${@comment.documentation.italic}${@comment.documentation.underline}
 ]]
 
 --- @type highlite.Fmt.string.opts
