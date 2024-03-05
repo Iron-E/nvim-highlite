@@ -2,6 +2,8 @@
 
 ; builtins
 
+(begin_statement ["begin" "end"] @keyword)
+
 (command
 	name: (word) @function.builtin
 	(#any-of? @function.builtin "abbr" "path")
