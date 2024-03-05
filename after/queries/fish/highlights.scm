@@ -73,7 +73,9 @@
 
 ; punctuation
 
+(double_quote_string (command_substitution ["(" ")"] @punctuation.special))
 (glob) @character.special
 
-(double_quote_string (command_substitution ["$" "(" ")"] @punctuation.special))
-(variable_expansion "$" @punctuation.special)
+("$" @punctuation.special
+	(#has-parent? @punctuation.special command_substitution variable_expansion)
+)
