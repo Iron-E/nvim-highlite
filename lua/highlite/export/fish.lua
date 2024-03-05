@@ -6,7 +6,7 @@ fish_color_normal ${Normal.fg | Normal.sp}${Normal.bold}${Normal.italic}${Normal
 fish_color_command ${@function.fg | function.sp | Function.fg | Function.sp}${@function.bold | Function.bold}${@function.italic | Function.italic}${@function.underline | Function.underline}
 fish_color_keyword ${@keyword.fg | keyword.sp | Keyword.fg | Keyword.sp}${@keyword.bold | Keyword.bold}${@keyword.italic | Keyword.italic}${@keyword.underline | Keyword.underline}
 fish_color_quote ${@string.fg | string.sp | String.fg | String.sp}${@string.bold | String.bold}${@string.italic | String.italic}${@string.underline | String.underline}
-fish_color_redirection ${@operator.fg | operator.sp | Operator.fg | Operator.sp}${@operator.bold | Operator.bold}${@operator.italic | Operator.italic}${@operator.underline | Operator.underline}
+fish_color_redirection ${@keyword.storage.fg | StorageClass.fg} ${@keyword.storage.bg | StorageClass.bg} ${@keyword.storage.bold | StorageClass.bold} ${@keyword.storage.italic | StorageClass.italic} ${@keyword.storage.underline | StorageClass.underline}
 fish_color_end ${@punctuation.delimiter.fg | delimiter.sp | Delimiter.fg | Delimiter.sp}${@punctuation.delimiter.bold | Delimiter.bold}${@punctuation.delimiter.italic | Delimiter.italic}${@punctuation.delimiter.underline | Delimiter.underline}
 fish_color_error ${@error.fg | error.sp | Error.fg | Error.sp}${@error.bg | Error.bg}${@error.bold | Error.bold}${@error.italic | Error.italic}${@error.underline | Error.underline}
 fish_color_param ${@variable.parameter.fg | parameter.sp | Identifier.fg | Identifier.sp}${@variable.parameter.bold | Identifier.bold}${@variable.parameter.italic | Identifier.italic}${@variable.parameter.underline | Identifier.underline}
@@ -14,7 +14,7 @@ fish_color_valid_path ${@string.special.path.fg | path.sp | Directory.fg | Direc
 fish_color_option ${@variable.parameter.fg | parameter.sp | Identifier.fg | Identifier.sp}${@variable.parameter.bold | Identifier.bold}${@variable.parameter.italic | Identifier.italic}${@variable.parameter.underline | Identifier.underline}
 fish_color_comment ${@comment.fg | comment.sp | Comment.fg | Comment.sp}${@comment.bold | Comment.bold}${@comment.italic | Comment.italic}${@comment.underline | Comment.underline}
 fish_color_selection ${Visual.fg | Visual.sp}${Visual.bg}${Visual.bold}${Visual.italic}${Visual.underline}
-fish_color_operator ${@character.special.fg | special.sp | Special.fg | Special.sp}${@character.special.bold | Special.bold}${@character.special.italic | Special.italic}${@character.special.underline | Special.underline}
+fish_color_operator ${@operator.fg | Operator.fg} ${@operator.bg | Operator.bg} ${@operator.bold | Operator.bold} ${@operator.italic | Operator.italic} ${@operator.underline | Operator.underline}
 fish_color_escape ${@string.escape.fg | escape.sp | SpecialChar.fg | SpecialChar.sp}${@string.escape.bold | SpecialChar.bold}${@string.escape.italic | SpecialChar.italic}${@string.escape.underline | SpecialChar.underline}
 fish_color_autosuggestion ${LspInlayHint.fg | LspInlayHint.sp | Ignore.fg | Ignore.sp}${LspInlayHint.bold | Ignore.bold}${LspInlayHint.italic | Ignore.italic}${LspInlayHint.underline | Ignore.underline}
 fish_color_cwd ${Directory.fg | Directory.sp}${Directory.bold}${Directory.italic}${Directory.underline}
