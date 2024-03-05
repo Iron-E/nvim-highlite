@@ -9,6 +9,11 @@
 	(#any-of? @function.builtin "abbr" "path")
 )
 
+(command
+	name: (word) @keyword.import
+	(#any-of? @keyword.import "source")
+)
+
 (for_statement "in" @keyword.repeat)
 
 ((variable_name) @variable.builtin (#any-of? @variable.builtin
