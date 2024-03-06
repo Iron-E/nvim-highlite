@@ -315,6 +315,7 @@ local function from_palette(palette, opts)
 		['@label'] = Groups.extend({nocombine = true}, label),
 		['@macro'] = Groups.extend({nocombine = true}, macro),
 		['@markup'] = {fg = palette.text},
+		['@markup.danger'] = '@comment.error',
 		['@markup.emphasis'] = 'Italic',
 		['@markup.environment'] = {fg = palette.text_environment, nocombine = true},
 		['@markup.environment.name'] = {fg = palette.text_environment_name, nocombine = true},
