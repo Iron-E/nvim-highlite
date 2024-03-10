@@ -265,6 +265,7 @@ local function from_palette(palette, opts)
 		['@lsp.type.typeParameter'] = {fg = palette.type_parameter, italic = true, nocombine = true},
 		['@lsp.type.variable'] = '@variable',
 		['@lsp.typemod.deriveHelper.attribute'] = '@attribute',
+		['@lsp.typemod.function.builtin'] = '@lsp.typemod.function.defaultLibrary',
 		['@lsp.typemod.function.defaultLibrary'] = '@function.builtin',
 		['@lsp.typemod.function.readonly'] = '@lsp.type.function',
 		['@lsp.typemod.string.constant'] = NONE,
