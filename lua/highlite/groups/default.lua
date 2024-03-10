@@ -443,6 +443,9 @@ local function from_palette(palette, opts)
 		['@lsp.typemod.variable.definition.lua'] = '@variable.builtin.lua',
 		['@module.builtin.lua'] = '@structure.lua',
 
+		-- Nix
+		['@lsp.typemod.constant.builtin.nix'] = '@constant.builtin',
+
 		-- Rust
 		['@lsp.mod.callable.rust'] = '@lsp.type.function.rust',
 		['@lsp.type.builtinType.rust'] = '@type.builtin.rust',
