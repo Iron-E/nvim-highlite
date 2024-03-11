@@ -3,9 +3,6 @@
 ; comments
 (note) @comment.note
 
-; headings
-(tag text: (word) @markup.heading.5)
-
 ; markup
 (codespan "`" @markup.environment)
 (argument ["{" "}"] @markup.environment (#set! conceal ""))
