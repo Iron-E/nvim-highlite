@@ -269,6 +269,7 @@ local function from_palette(palette, opts)
 		['@lsp.typemod.function.defaultLibrary'] = '@function.builtin',
 		['@lsp.typemod.function.readonly'] = '@lsp.type.function',
 		['@lsp.typemod.string.constant'] = NONE,
+		['@lsp.typemod.string.escape'] = '@lsp.type.escapeSequence',
 		['@lsp.typemod.string.readonly'] = NONE,
 		['@lsp.typemod.string.static'] = NONE,
 		['@lsp.typemod.type.declaration'] = '@type.definition',
