@@ -7,19 +7,6 @@
 	(end_assertion)
 ] @punctuation.special
 
-(character_class "^" @punctuation.special)
-
-; qualifiers
-
-(
-	[
-		(one_or_more)
-		(optional)
-		(zero_or_more)
-	] @repeat
-	(#set! "priority" 101)
-)
-
 ; text
 
 [
