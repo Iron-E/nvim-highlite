@@ -10,3 +10,5 @@
 ])
 
 (ellipses) @variable.builtin
+
+(has_attr_expression "?" @operator)
