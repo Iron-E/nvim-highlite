@@ -8,10 +8,8 @@
 (argument ["{" "}"] @markup.environment (#set! conceal ""))
 
 ; punctuation
-(optionlink
-	"'" @punctuation.bracket (#set! conceal "")
-	text: (word) @variable.builtin
-)
+(optionlink "'" @punctuation.bracket (#set! conceal ""))
+(optionlink text: (word) @variable.builtin)
 
 (taglink "|" @punctuation.bracket)
 
