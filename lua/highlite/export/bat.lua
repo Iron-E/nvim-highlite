@@ -472,9 +472,9 @@ local FMT = [[
 			<key>name</key> <string>Storage Class</string>
 			<key>scope</key> <string>storage.modifier</string>
 			<key>settings</key> <dict>
-				<key>background</key> <string>${@storageclass.bg | @keyword.storage.bg}</string>
-				<key>foreground</key> <string>${@storageclass.fg | @keyword.storage.fg}</string>
-				<key>fontStyle</key> <string>${@storageclass.bold | @keyword.storage.bold}${@storageclass.italic | @keyword.storage.italic}${@storageclass.strikethrough | @keyword.storage.strikethrough}${@storageclass.undercurl | @keyword.storage.undercurl}${@storageclass.underdashed | @keyword.storage.underdashed}${@storageclass.underdotted | @keyword.storage.underdotted}${@storageclass.underdouble | @keyword.storage.underdouble}${@storageclass.underline | @keyword.storage.underline}</string>
+				<key>background</key> <string>${@storageclass.bg | @keyword.storage.bg | @keyword.modifier.mutability.bg}</string>
+				<key>foreground</key> <string>${@storageclass.fg | @keyword.storage.fg | @keyword.modifier.mutability.fg}</string>
+				<key>fontStyle</key> <string>${@storageclass.bold | @keyword.storage.bold | @keyword.modifier.mutability.bold}${@storageclass.italic | @keyword.storage.italic | @keyword.modifier.mutability.italic}${@storageclass.strikethrough | @keyword.storage.strikethrough | @keyword.modifier.mutability.strikethrough}${@storageclass.undercurl | @keyword.storage.undercurl | @keyword.modifier.mutability.undercurl}${@storageclass.underdashed | @keyword.storage.underdashed | @keyword.modifier.mutability.underdashed}${@storageclass.underdotted | @keyword.storage.underdotted | @keyword.modifier.mutability.underdotted}${@storageclass.underdouble | @keyword.storage.underdouble | @keyword.modifier.mutability.underdouble}${@storageclass.underline | @keyword.storage.underline | @keyword.modifier.mutability.underline}</string>
 			</dict>
 		</dict>
 
