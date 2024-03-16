@@ -250,7 +250,7 @@ local function from_palette(palette, opts)
 		['@lsp.type.identifier'] = 'Identifier',
 		['@lsp.type.interface'] = {fg = palette.interface, nocombine = true},
 		['@lsp.type.keyword'] = '@keyword',
-		['@lsp.type.lifetime'] = '@keyword.storage.lifetime',
+		['@lsp.type.lifetime'] = '@attribute',
 		['@lsp.type.macro'] = '@macro',
 		['@lsp.type.method'] = '@function.method',
 		['@lsp.type.namespace'] = '@module',
@@ -309,11 +309,12 @@ local function from_palette(palette, opts)
 		['@keyword.exception'] = Groups.extend({nocombine = true}, exception),
 		['@keyword.function'] = {fg = palette.keyword_function, nocombine = true},
 		['@keyword.import'] = Groups.extend({nocombine = true}, include),
+		['@keyword.modifier'] = '@keyword',
+		['@keyword.modifier.lifetime'] = '@attribute',
+		['@keyword.modifier.mutability'] = Groups.extend({nocombine = true}, storage_class),
 		['@keyword.operator'] = {fg = palette.keyword_operator, bold = true, nocombine = true},
 		['@keyword.repeat'] = Groups.extend({nocombine = true}, repeat_),
 		['@keyword.return'] = {fg = palette.keyword_return, nocombine = true},
-		['@keyword.storage'] = Groups.extend({nocombine = true}, storage_class),
-		['@keyword.storage.lifetime'] = {fg = palette.storage},
 		['@label'] = Groups.extend({nocombine = true}, label),
 		['@macro'] = Groups.extend({nocombine = true}, macro),
 		['@markup'] = {fg = palette.text},
@@ -365,7 +366,7 @@ local function from_palette(palette, opts)
 		['@type'] = Groups.extend({nocombine = true}, type_),
 		['@type.builtin'] = {fg = palette.type_builtin, nocombine = true},
 		['@type.definition'] = Groups.extend({nocombine = true}, type_definition),
-		['@type.qualifier'] = '@keyword',
+		['@type.pointer'] = '@keyword.modifier.mutability',
 		['@variable'] = {fg = palette.variable, nocombine = true},
 		['@variable.builtin'] = {fg = palette.variable_builtin, italic = true, nocombine = true},
 		['@variable.member'] = {fg = palette.field, nocombine = true},
@@ -384,6 +385,8 @@ local function from_palette(palette, opts)
 		['@field'] = '@variable.member',
 		['@float'] = '@number.float',
 		['@include'] = '@keyword.import',
+		['@keyword.storage'] = '@keyword.modifier.mutability',
+		['@keyword.storage.lifetime'] = '@attribute',
 		['@method'] = '@function.method',
 		['@namespace'] = '@module',
 		['@parameter'] = '@variable.parameter',
@@ -418,12 +421,7 @@ local function from_palette(palette, opts)
 		['@text.underline'] = '@markup.underline',
 		['@text.uri'] = '@string.special.url',
 		['@text.warning'] = '@comment.warning',
-
-		-- C
-		['@type.qualifier.c'] = '@keyword.storage.c',
-
-		-- C++
-		['@type.qualifier.cpp'] = '@keyword.storage.cpp',
+		['@type.qualifier'] = '@keyword.modifier',
 
 		-- C#
 		['@lsp.type.keyword.cs'] = NONE,
@@ -471,9 +469,6 @@ local function from_palette(palette, opts)
 		['@lsp.typemod.variable.defaultLibrary.rust'] = NONE,
 		['@lsp.typemod.variable.injected.rust'] = '@variable.rust',
 		['@type.qualifier.rust'] = '@keyword.storage.rust',
-
-		-- TypeScript
-		['@type.qualifier.typescript'] = '@keyword.storage.c',
 	} -- }}}
 
 	setmetatable(groups, RESOLVE_METATABLE)
@@ -874,6 +869,7 @@ local function from_palette(palette, opts)
 			groups.cppSTLexception = '@keyword.exception.cpp'
 			groups.cppSTLnamespace = '@module.cpp'
 		end
+
 		if all_syntax or syntax.cs ~= false then
 			groups.csAccessModifier = '@keyword.cs'
 			groups.csAccessor = 'csLogicSymbols'
@@ -886,7 +882,7 @@ local function from_palette(palette, opts)
 			groups.csInterpolation = '@string.special.cs'
 			groups.csInterpolationDelimiter = '@punctuation.special.cs'
 			groups.csLogicSymbols = '@operator.cs'
-			groups.csModifier = '@keyword.storage.cs'
+			groups.csModifier = '@keyword.modifier.mutability.cs'
 			groups.csNew = 'csLogicSymbols'
 			groups.csNewType = '@type.cs'
 			groups.csParens = 'csBraces'
@@ -991,7 +987,6 @@ local function from_palette(palette, opts)
 			groups.goMethodCall = 'goFunctionCall'
 			groups.goPackage = 'goStatement'
 			groups.goParamType = 'goReceiverType'
-			groups.goPointerOperator = '@keyword.storage.go'
 			groups.goPredefinedIdentifiers = '@constant.go'
 			groups.goReceiver = 'goBlock'
 			groups.goReceiverType = 'goTypeName'
@@ -1245,7 +1240,7 @@ local function from_palette(palette, opts)
 			groups.rustAssert = '@keyword.debug.rust'
 			groups.rustCharacterDelimiter = '@punctuation.bracket.rust'
 			groups.rustIdentifier = '@variable.rust'
-			groups.rustStaticLifetime = '@keyword.storage.rust'
+			groups.rustStaticLifetime = '@keyword.modifier.lifetime'
 			groups.rustStringDelimiter = 'rustCharacterDelimiter'
 			groups.rustUnused = '@variable.builtin.rust'
 			groups.rustEscape = '@string.escape.rust'
