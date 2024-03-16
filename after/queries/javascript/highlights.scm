@@ -4,8 +4,11 @@
 
 [
 	"const"
+] @keyword.modifier.mutability
+
+[
 	"static"
-] @keyword.storage
+] @keyword.modifier.lifetime
 
 ; namespaces
 (call_expression

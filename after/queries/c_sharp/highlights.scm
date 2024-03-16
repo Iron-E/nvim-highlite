@@ -30,7 +30,7 @@
 )
 
 ; modifier
-(modifier "file" @type.qualifier)
+(modifier "file" @keyword.modifier)
 
 ; namespaces
 (using_directive (identifier) @module)

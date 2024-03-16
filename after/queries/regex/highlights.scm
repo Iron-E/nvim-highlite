@@ -7,6 +7,17 @@
 	(end_assertion)
 ] @punctuation.special
 
+; qualifiers
+
+(
+	[
+		(one_or_more)
+		(optional)
+		(zero_or_more)
+	] @keyword.repeat
+	(#set! "priority" 101)
+)
+
 ; text
 
 [

@@ -16,17 +16,15 @@
 [
 	"const"
 	"readonly"
-	"static"
-] @keyword.storage
+] @keyword.modifier.mutability
 
 [
-	"private"
-	"protected"
-	"public"
-] @keyword
+	"static"
+] @keyword.modifier.lifetime
 
-(generator_function_declaration "*" @keyword.storage)
-(method_definition (accessibility_modifier) "async"? . "*" @keyword.storage)
+("*" @attribute
+	(#has-parent? @attribute generator_function_declaration method_definition)
+)
 
 ; operators
 

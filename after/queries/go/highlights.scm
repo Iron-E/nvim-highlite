@@ -19,6 +19,6 @@
 (import_spec path: _ @module (#offset! @module 0 1 0 -1))
 
 ; storageclass
-(const_declaration "const" @keyword.storage)
-(pointer_type "*" @keyword.storage)
-(unary_expression ["*" "&"] @keyword.storage)
+
+(const_declaration "const" @keyword.modifier.mutability)
+(pointer_type "*" @type.pointer)

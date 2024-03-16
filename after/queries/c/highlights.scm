@@ -1,13 +1,13 @@
 ;; extends
 
 ; member accessor
-"->" @punctuation.delimiter
-(field_expression "." @punctuation.delimiter)
+
+(field_expression ["." "->"] @punctuation.delimiter)
 
 ; de/ref
-(abstract_pointer_declarator "*" @keyword.storage)
-(pointer_declarator "*" @keyword.storage)
-(pointer_expression ["*" "&"] @keyword.storage)
+("*" @type.pointer
+	(#has-parent? @type.pointer abstract_pointer_declarator pointer_declarator)
+)
 
 ; preprocessors
 (preproc_if ["#if" "#endif"] @keyword.directive.conditional)

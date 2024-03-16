@@ -36,12 +36,12 @@
 ((mount_param_param) @structure (#match? @structure "^(--)?from\\=") (#offset! @structure 0 5 0 0))
 ((param) @structure (#match? @structure "^(--)?from\\=") (#offset! @structure 0 7 0 0))
 
-((mount_param_param) @keyword.storage (#lua-match? @keyword.storage "^type%=") (#offset! @keyword.storage 0 5 0 0))
-((mount_param_param) @number (#lua-match? @number "^[gu]id%=") (#offset! @number 0 4 0 0))
-((mount_param_param) @number (#lua-match? @number "^mode%=") (#offset! @number 0 5 0 0))
-((mount_param_param) @string (#lua-match? @string "^id%=") (#offset! @string 0 3 0 0))
-((mount_param_param) @string.special.path (#match? @string.special.path "^(source|target)\\=") (#offset! @string.special.path 0 7 0 0))
-((mount_param_param) @type.qualifier (#lua-match? @type.qualifier "^sharing%=") (#offset! @type.qualifier 0 8 0 0))
+((mount_param_param) @keyword.modifier            (#lua-match? @keyword.modifier            "^sharing%=")          (#offset! @keyword.modifier            0 8 0 0))
+((mount_param_param) @keyword.modifier.mutability (#lua-match? @keyword.modifier.mutability "^type%=")             (#offset! @keyword.modifier.mutability 0 5 0 0))
+((mount_param_param) @number                      (#lua-match? @number                      "^[gu]id%=")           (#offset! @number                      0 4 0 0))
+((mount_param_param) @number                      (#lua-match? @number                      "^mode%=")             (#offset! @number                      0 5 0 0))
+((mount_param_param) @string                      (#lua-match? @string                      "^id%=")               (#offset! @string                      0 3 0 0))
+((mount_param_param) @string.special.path         (#match?     @string.special.path         "^(source|target)\\=") (#offset! @string.special.path         0 7 0 0))
 
 ; values
 

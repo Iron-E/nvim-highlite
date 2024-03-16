@@ -125,17 +125,19 @@
 )
 
 ; storageclass
-(reference_expression . "&" @keyword.storage)
-(reference_pattern . "&" @keyword.storage)
-(reference_type . "&" @keyword.storage)
-(self_parameter . "&" @keyword.storage)
-(unary_expression . "*" @keyword.storage)
+(mutable_specifier) @keyword.modifier.mutability
 
-"move" @keyword.storage
+("&" @type.pointer (#has-parent? @type.pointer reference_pattern reference_type self_parameter))
+"ref" @type.pointer
 
-((ERROR) @keyword.storage
-	(#eq? @keyword.storage "~")
-	(#offset-from! "start" @keyword.storage 0 0 0 1)
+[
+	"move"
+	"static"
+] @keyword.modifier.lifetime
+
+((ERROR) @keyword.modifier.lifetime
+	(#eq? @keyword.modifier.lifetime "~")
+	(#offset-from! "start" @keyword.modifier.lifetime 0 0 0 1)
 )
 
 ; `try!`
