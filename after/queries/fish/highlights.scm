@@ -80,3 +80,8 @@
 ("$" @punctuation.special
 	(#has-parent? @punctuation.special command_substitution variable_expansion)
 )
+
+; HACK: treesitter builtin bracket capture doesn't have priority
+(list_element_access ["[" "]"] @punctuation.bracket)
+
+(range ".." @operator)
