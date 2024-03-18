@@ -16,6 +16,7 @@
 
 (for_statement "in" @keyword.repeat)
 
+(variable_name) @variable ; HACK: builtin treesitter @variable capture doesn't have priority
 ((variable_name) @variable.builtin (#any-of? @variable.builtin
 	"argv"
 	"BROWSER"
