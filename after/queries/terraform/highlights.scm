@@ -6,7 +6,33 @@
 (body
 (block
 	.
-	(identifier)
+	(identifier) @_block (#any-of? @_block "output")
+	.
+	[
+		(identifier) @variable.member
+		(string_lit (template_literal) @variable.member)
+	]
+	.
+)))
+
+(config_file
+(body
+(block
+	.
+	(identifier) @_block (#any-of? @_block "variable")
+	.
+	[
+		(identifier) @variable.parameter
+		(string_lit (template_literal) @variable.parameter)
+	]
+	.
+)))
+
+(config_file
+(body
+(block
+	.
+	(identifier) @_block (#not-any-of? @_block "output" "variable")
 	.
 	[
 		(identifier) @type
