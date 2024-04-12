@@ -44,3 +44,4 @@
 
 ; operators
 (binary_expression "??" @operator)
+(range_expression ".." @operator)
