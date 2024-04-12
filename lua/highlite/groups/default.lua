@@ -470,6 +470,10 @@ local function from_palette(palette, opts)
 		['@lsp.typemod.variable.defaultLibrary.rust'] = NONE,
 		['@lsp.typemod.variable.injected.rust'] = '@variable.rust',
 		['@type.qualifier.rust'] = '@keyword.storage.rust',
+
+		-- Terraform
+		['@lsp.type.type.terraform'] = NONE,
+		['@lsp.type.enumMember.terraform'] = NONE,
 	} -- }}}
 
 	setmetatable(groups, RESOLVE_METATABLE)
