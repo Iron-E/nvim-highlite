@@ -1,6 +1,6 @@
 ;; extends
 
-; block syntax
+; identifiers
 
 (config_file
 (body
@@ -44,6 +44,10 @@
 		(string_lit (template_literal) @structure)
 	])?
 )))
+
+[
+	(null_lit)
+] @constant.builtin
 
 ; operators
 
