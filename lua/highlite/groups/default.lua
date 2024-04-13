@@ -475,6 +475,7 @@ local function from_palette(palette, opts)
 		['@lsp.type.enumMember.terraform'] = NONE,
 		['@lsp.type.keyword.terraform'] = NONE,
 		['@lsp.type.property.terraform'] = NONE,
+		['@lsp.type.string.terraform'] = NONE,
 		['@lsp.type.type.terraform'] = NONE,
 		['@lsp.type.variable.terraform'] = NONE,
 	} -- }}}
