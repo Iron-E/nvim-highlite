@@ -54,3 +54,5 @@
 ("=" @operator
 	(#has-parent? @operator attribute object_elem)
 )
+
+("=>" @punctuation.delimiter)
