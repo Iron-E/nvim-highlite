@@ -1,53 +1,169 @@
 local Table = require 'highlite.table' --- @type highlite.Table
 
 -- TODO: use `TreesitterAttach` when it is available {{{
-vim.api.nvim_create_autocmd('SourcePost', {once = true, callback = function()
-	--- @param match {active: boolean, pattern: integer, [integer]: nil|TSNode}
-	--- @param predicate {[1]: string, [2]: 'end'|'start', [3]: integer, [4]: nil|integer, [5]: nil|integer, [6]: nil|integer, [7]: nil|integer}
-	--- @param metadata table
-	local function handler(match, _, _, predicate, metadata)
-		local from = predicate[2]
-		local capture_id = predicate[3]
-		local start_row_offset = predicate[4] or 0
-		local start_col_offset = predicate[5] or 0
-		local end_row_offset = predicate[6] or 0
-		local end_col_offset = predicate[7] or 0
+vim.api.nvim_create_autocmd('SourcePost', { once = true, callback = function()
+	local opts = { force = false, all = true }
 
-		local nodes = match[capture_id]
-		if nodes == nil then
-			return
+	do
+		--- @param match {active: boolean, pattern: integer, [integer]: nil|TSNode}
+		--- @param predicate {[1]: string, [2]: 'end'|'start', [3]: integer, [4]: nil|integer, [5]: nil|integer, [6]: nil|integer, [7]: nil|integer}
+		--- @param metadata table
+		local function handler(match, _, _, predicate, metadata)
+			local from = predicate[2]
+			local capture_id = predicate[3]
+			local start_row_offset = predicate[4] or 0
+			local start_col_offset = predicate[5] or 0
+			local end_row_offset = predicate[6] or 0
+			local end_col_offset = predicate[7] or 0
+
+			local nodes = match[capture_id]
+			if nodes == nil then
+				return
+			end
+
+			--- NOTE: `nodes` is a table on nvim 0.10+
+			local node = type(nodes) == 'table' and nodes[1] or nodes
+
+			if not metadata[capture_id] then
+				metadata[capture_id] = {}
+			end
+
+			local range = metadata[capture_id].range or { node:range() }
+
+			if from == 'end' then
+				range[1] = range[3] + start_row_offset
+				range[2] = range[4] + start_col_offset
+				range[3] = range[3] + end_row_offset
+				range[4] = range[4] + end_col_offset
+			else
+				-- NOTE: have to assign `3` & `4` because assigning `1` & `2` alters the relative offset
+				range[3] = range[1] + end_row_offset
+				range[4] = range[2] + end_col_offset
+				range[1] = range[1] + start_row_offset
+				range[2] = range[2] + start_col_offset
+			end
+
+			-- If this produces an invalid range, we just skip it.
+			if range[1] < range[3] or (range[1] == range[3] and range[2] <= range[4]) then
+				metadata[capture_id].range = range
+			end
 		end
 
-		--- NOTE: `nodes` is a table on nvim 0.10+
-		local node = type(nodes) == 'table' and nodes[1] or nodes
-
-		if not metadata[capture_id] then
-			metadata[capture_id] = {}
-		end
-
-		local range = metadata[capture_id].range or { node:range() }
-
-		if from == 'end' then
-			range[1] = range[3] + start_row_offset
-			range[2] = range[4] + start_col_offset
-			range[3] = range[3] + end_row_offset
-			range[4] = range[4] + end_col_offset
-		else
-			-- NOTE: have to assign `3` & `4` because assigning `1` & `2` alters the relative offset
-			range[3] = range[1] + end_row_offset
-			range[4] = range[2] + end_col_offset
-			range[1] = range[1] + start_row_offset
-			range[2] = range[2] + start_col_offset
-		end
-
-		-- If this produces an invalid range, we just skip it.
-		if range[1] < range[3] or (range[1] == range[3] and range[2] <= range[4]) then
-			metadata[capture_id].range = range
-		end
+		vim.treesitter.query.add_directive('offset-from!', handler, opts)
 	end
 
-	vim.treesitter.query.add_directive('offset-from!', handler, {force = true, all = true})
-end})
+	-- HACK: must backport `any-` TS query predicates to 0.9, however there is no way to
+	--       `vim.treesitter.query.get_predicate_handler`. So these are all copied from source.
+	--
+	-- TODO: remove when bumping minimum version to 0.10
+	if vim.fn.has('nvim-0.10') < 1 then
+		vim.treesitter.query.add_predicate('any-contains?', function(match, _, source, predicate)
+			local nodes = match[predicate[2]]
+			if not nodes or #nodes == 0 then
+				return true
+			end
+
+			for _, node in ipairs(nodes) do
+				local node_text = vim.treesitter.get_node_text(node, source)
+
+				for i = 3, #predicate do
+					local res = string.find(node_text, predicate[i], 1, true)
+					if not res then
+						return false
+					end
+				end
+			end
+
+			return true
+		end)
+
+		vim.treesitter.query.add_predicate('any-eq?', function(match, _, source, predicate)
+			local nodes = match[predicate[2]]
+			if not nodes or #nodes == 0 then
+				return true
+			end
+
+			for _, node in ipairs(nodes) do
+				local node_text = vim.treesitter.get_node_text(node, source)
+
+				local str ---@type string
+				if type(predicate[3]) == 'string' then
+					-- (#eq? @aa "foo")
+					str = predicate[3]
+				else
+					-- (#eq? @aa @bb)
+					local other = assert(match[predicate[3]])
+					assert(#other == 1, '#eq? does not support comparison with captures on multiple nodes')
+					str = vim.treesitter.get_node_text(other[1], source)
+				end
+
+				local res = str ~= nil and node_text == str
+				if not res then
+					return false
+				end
+			end
+
+			return true
+		end)
+
+		--- @param match table<integer,TSNode[]>
+		--- @param source integer|string
+		--- @param predicate any[]
+		vim.treesitter.query.add_predicate('any-lua-match?', function(match, _, source, predicate)
+			local nodes = match[predicate[2]]
+			if not nodes or #nodes == 0 then
+				return true
+			end
+
+			for _, node in ipairs(nodes) do
+				local regex = predicate[3]
+				local res = string.find(vim.treesitter.get_node_text(node, source), regex) ~= nil
+				if not res then
+					return false
+				end
+			end
+
+			return true
+		end)
+
+		do
+			local magic_prefixes = { ['\\v'] = true, ['\\m'] = true, ['\\M'] = true, ['\\V'] = true }
+			local function check_magic(str)
+				if string.len(str) < 2 or magic_prefixes[string.sub(str, 1, 2)] then
+					return str
+				end
+				return '\\v' .. str
+			end
+
+			local compiled_vim_regexes = setmetatable({}, {
+				__index = function(t, pattern)
+					local res = vim.regex(check_magic(pattern))
+					rawset(t, pattern, res)
+					return res
+				end,
+			})
+
+			local function handler(match, _, source, predicate)
+				local nodes = match[predicate[2]]
+				if not nodes or #nodes == 0 then
+					return true
+				end
+
+				for _, node in ipairs(nodes) do
+					local regex = compiled_vim_regexes[predicate[3]] ---@type vim.regex
+					local res = regex:match_str(vim.treesitter.get_node_text(node, source))
+					if not res then
+						return false
+					end
+				end
+				return true
+			end
+
+			vim.treesitter.query.add_predicate('any-match?', handler)
+			vim.treesitter.query.add_predicate('any-vim-match?', handler)
+		end
+	end
+end })
 
 --- @class highlite.config
 --- @field generate highlite.groups.from_palette.opts options for highlight group generation

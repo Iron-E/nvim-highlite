@@ -22,19 +22,19 @@
 
 ; macros
 (macro_invocation
-	macro: (identifier) @_id @keyword.debug (#contains? @_id "dbg" "debug")
+	macro: (identifier) @_id @keyword.debug (#any-contains? @_id "dbg" "debug")
 	"!" @keyword.debug
 	(#set! "priority" 101)
 )
 
 (macro_invocation
-	macro: (identifier) @_id @keyword.import (#contains? @_id "include")
+	macro: (identifier) @_id @keyword.import (#any-contains? @_id "include")
 	"!" @keyword.import
 	(#set! "priority" 101)
 )
 
 (macro_invocation
-	macro: (identifier) @_id @keyword.exception (#contains? @_id
+	macro: (identifier) @_id @keyword.exception (#any-contains? @_id
 		"assert"
 		"assert_eq"
 		"assert_ne"
