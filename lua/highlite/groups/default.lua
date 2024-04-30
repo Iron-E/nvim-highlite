@@ -363,6 +363,7 @@ local function from_palette(palette, opts)
 		['@structure'] = Groups.extend({nocombine = true}, structure),
 		['@tag'] = {fg = palette.tag, bold = true, nocombine = true},
 		['@tag.attribute'] = {fg = palette.tag_attribute, nocombine = true},
+		['@tag.builtin'] = '@type.builtin',
 		['@tag.delimiter'] = {fg = palette.tag_delimiter, nocombine = true},
 		['@type'] = Groups.extend({nocombine = true}, type_),
 		['@type.builtin'] = {fg = palette.type_builtin, nocombine = true},
