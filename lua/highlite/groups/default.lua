@@ -666,7 +666,7 @@ local function from_palette(palette, opts)
 			groups.ReferencesCount = 'Number'
 			groups.ReferencesIcon = 'DefinitionIcon'
 			groups.TargetFileName = 'Directory'
-			groups.TargetWord = '@markup.title'
+			groups.TargetWord = '@markup.heading'
 		end
 
 		if all_nvim_plugins or nvim_plugins.mini ~= false then
@@ -685,7 +685,7 @@ local function from_palette(palette, opts)
 		end
 
 		if all_nvim_plugins or nvim_plugins.nvim_tree ~= false then
-			groups.NvimTreeRootFolder = '@markup.title.NvimTree'
+			groups.NvimTreeRootFolder = '@markup.heading.NvimTree'
 			groups.NvimTreeGitDeleted = '@diff.minus.NvimTree'
 			groups.NvimTreeGitDirty = {fg = palette.warning}
 			groups.NvimTreeGitIgnored = 'Ignore'
@@ -845,7 +845,7 @@ local function from_palette(palette, opts)
 
 		if all_vim_plugins or vim_plugins.undotree ~= false then
 			groups.UndotreeBranch = '@punctuation.delimiter.undotree'
-			groups.UndotreeCurrent = '@markup.title.undotree'
+			groups.UndotreeCurrent = '@markup.heading.undotree'
 			groups.UndotreeSeq = '@number.undotree'
 			groups.UndotreeNode = '@character.special.undotree'
 			groups.UndotreeTimeStamp = '@string.special.undotree'
@@ -958,7 +958,7 @@ local function from_palette(palette, opts)
 			groups.gitcommitDiscardedFile = 'gitcommitSelectedFile'
 			groups.gitcommitOverFlow = '@error.gitcommit'
 			groups.gitcommitSelectedFile = 'Directory'
-			groups.gitcommitSummary = '@markup.title.gitcommitSummary'
+			groups.gitcommitSummary = '@markup.heading.gitcommitSummary'
 			groups.gitcommitUntrackedFile = 'gitcommitSelectedFile'
 
 			groups.gitconfigAssignment = 'String'
@@ -978,7 +978,7 @@ local function from_palette(palette, opts)
 			groups.gitrebaseReset = 'gitrebaseLabel'
 			groups.gitrebaseReword = 'gitrebasePick'
 			groups.gitrebaseSquash = '@macro.gitrebase'
-			groups.gitrebaseSummary = '@markup.title.gitrebaseSummary'
+			groups.gitrebaseSummary = '@markup.heading.gitrebaseSummary'
 		end
 
 		if all_syntax or syntax.go ~= false then
@@ -1012,7 +1012,7 @@ local function from_palette(palette, opts)
 		if all_syntax or syntax.help ~= false then
 			groups.helpCommand = '@markup.raw.help'
 			groups.helpHeader = '@label.help'
-			groups.helpHeadline = '@markup.title.help'
+			groups.helpHeadline = '@markup.heading.help'
 			groups.helpHyperTextJump = '@string.special.url.help'
 			groups.helpHyperTextEntry = 'helpHyperTextJump'
 			groups.helpExample = 'helpCommand'
@@ -1037,7 +1037,7 @@ local function from_palette(palette, opts)
 			groups.htmlTag = '@tag.delimiter.html'
 			groups.htmlTagN = '@tag'
 			groups.htmlTagName = 'htmlSpecialTagName'
-			groups.htmlTitle = '@markup.title.html'
+			groups.htmlTitle = '@markup.heading.html'
 		end
 
 		if all_syntax or syntax.i3config ~= false then
