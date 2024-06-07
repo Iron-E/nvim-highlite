@@ -9,24 +9,23 @@
 ; identifiers
 ((identifier) @variable.builtin (#eq? @variable.builtin "_"))
 
-; interpolations with the dedicated interpolation group
-(interpolation ["{" "}"] @punctuation.special)
-
 ; lambda
 (lambda_expression
 	parameters: (parameter_list . "(" @function ")" @function .)
 )
 
 ; macro
-(region_directive (preproc_message) @markup.title) @keyword.directive
-(endregion_directive (preproc_message) @markup.title) @keyword.directive
+((preproc_arg) @markup.heading
+	(#has-parent? @markup.heading preproc_region preproc_endregion)
+)
 
 (
 	[
-		(region_directive)
-		(endregion_directive)
+		(preproc_region)
+		(preproc_endregion)
 	] @punctuation.special
-	(#offset-from! "start" @punctuation.special 0 -1 0 0)
+	(#offset-from! "start" @punctuation.special 0 0 0 1)
+	(#set! "priority" 101)
 )
 
 ; modifier
@@ -35,7 +34,7 @@
 ; namespaces
 (using_directive (identifier) @module)
 (qualified_name (identifier) @module
-	(#has-ancestor? @module namespace_declaration using_directive) ; NOTE: from nvim-treesitter
+	(#has-ancestor? @module using_directive) ; NOTE: from nvim-treesitter
 )
 
 ; nullable
