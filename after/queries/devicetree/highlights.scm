@@ -21,12 +21,10 @@
 ; #foo = "bar"
 (
 	[
-		(preproc_if)
-		(preproc_def)
-		(preproc_else)
-		(preproc_ifdef)
-		(preproc_include)
-	] . _ @punctuation.special
+		"#define"
+		"#if" "#ifdef" "#ifndef" "#else" "#endif"
+ 		"#include"
+	] @punctuation.special
 	(#lua-match? @punctuation.special "^#")
 	(#offset-from! "start" @punctuation.special 0 0 0 1)
 	(#set! "priority" 101)
@@ -39,10 +37,9 @@
 )
 
 ; #if
-(preproc_if "#if" @keyword.directive.conditional)
-(preproc_ifdef . _ @keyword.directive.conditional)
+(preproc_if ["#if" "#endif"] @keyword.directive.conditional)
+(preproc_ifdef ["#ifdef" "#ifndef" "#endif"] @keyword.directive.conditional)
 (preproc_else "#else" @keyword.directive.conditional)
-(preproc_ifdef "#endif" @keyword.directive.conditional)
 
 ; #import
 (preproc_include
