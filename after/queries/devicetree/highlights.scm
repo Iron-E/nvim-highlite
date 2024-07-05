@@ -19,10 +19,17 @@
 ; preprocs
 
 ; #foo = "bar"
-((_) . _ @punctuation.special @keyword.directive
+(
+	[
+		(preproc_if)
+		(preproc_def)
+		(preproc_else)
+		(preproc_ifdef)
+		(preproc_include)
+	] . _ @punctuation.special
 	(#lua-match? @punctuation.special "^#")
-	(#offset! @keyword.directive 0 1 0 0)
 	(#offset-from! "start" @punctuation.special 0 0 0 1)
+	(#set! "priority" 101)
 )
 
 ; #define
@@ -32,29 +39,10 @@
 )
 
 ; #if
-(preproc_if "#if" @keyword.directive.conditional
-	(#offset-from! "start" @keyword.directive.conditional 0 1 0 3)
-)
-
-; #ifdef
-(preproc_ifdef "#ifdef" @keyword.directive.conditional
-	(#offset-from! "start" @keyword.directive.conditional 0 1 0 7)
-)
-
-; #ifndef
-(preproc_ifdef "#ifndef" @keyword.directive.conditional
-	(#offset-from! "start" @keyword.directive.conditional 0 1 0 8)
-)
-
-; #else
-(preproc_else "#else" @keyword.directive.conditional
-	(#offset-from! "end" @keyword.directive.conditional 0 -3 0 0)
-)
-
-; #endif
-(preproc_ifdef "#endif" @keyword.directive.conditional
-	(#offset-from! "end" @keyword.directive.conditional 0 -5 0 0)
-)
+(preproc_if "#if" @keyword.directive.conditional)
+(preproc_ifdef . _ @keyword.directive.conditional)
+(preproc_else "#else" @keyword.directive.conditional)
+(preproc_ifdef "#endif" @keyword.directive.conditional)
 
 ; #import
 (preproc_include
