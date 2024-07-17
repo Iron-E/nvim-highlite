@@ -1,5 +1,6 @@
 local Fmt = require 'highlite.fmt' --- @type highlite.Fmt
 local Nvim = require 'highlite.nvim' --- @type highlite.Nvim
+local Util = require 'highlite.export.util' --- @type highlite.export.Util
 
 local FMT = [[
 
@@ -644,11 +645,11 @@ local function export(colorscheme, opts, dir)
 	if opts == nil then opts = {} end
 
 	-- checked for backwards compatability
-	if dir == nil then
-		dir = opts.dir or (vim.fn.system({'bat', '--config-dir'}):sub(1, -2) .. '/themes')
-	end
+	dir = Util.get_normalized_dir('bat', dir or opts.dir, function ()
+		local bat_config_dir = vim.fn.system({'bat', '--config-dir'}):sub(1, -2)
+		return bat_config_dir .. '/themes'
+	end)
 
-	dir = vim.fs.normalize(dir)
 	local filename = opts.filename or colorscheme
 
 	local content --- @type string

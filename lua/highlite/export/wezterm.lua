@@ -1,5 +1,6 @@
 local Fmt = require 'highlite.fmt' --- @type highlite.Fmt
 local Nvim = require 'highlite.nvim' --- @type highlite.Nvim
+local Util = require 'highlite.export.util' --- @type highlite.export.Util
 
 local FMT = [["
 origin_url = 'https://github.com/Iron-E/nvim-highlite'
@@ -104,14 +105,15 @@ local function export(colorscheme, opts, dir)
 	if opts == nil then opts = {} end
 
 	-- checked for backwards compatability
-	if dir == nil then
-		dir = opts.dir or vim.loop.os_getenv(vim.loop.os_uname().sysname == 'Windows' and
+	dir = Util.get_normalized_dir('wezterm', dir or opts.dir, function ()
+		local wezterm_config_dir_var = vim.loop.os_uname().sysname == 'Windows' and
 			'WEZTERM_EXECUTABLE_DIR' or
 			'WEZTERM_CONFIG_DIR'
-		) .. '/colors'
-	end
 
-	dir = vim.fs.normalize(dir)
+		local wezterm_config_dir = vim.loop.os_getenv(wezterm_config_dir_var)
+		return wezterm_config_dir .. '/colors'
+	end)
+
 	local filename = opts.filename or colorscheme
 
 	local content --- @type string

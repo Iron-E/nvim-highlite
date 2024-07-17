@@ -1,5 +1,6 @@
 local Fmt = require 'highlite.fmt' --- @type highlite.Fmt
 local Nvim = require 'highlite.nvim' --- @type highlite.Nvim
+local Util = require 'highlite.export.util' --- @type highlite.export.Util
 
 local FMT = [[
 fish_color_normal ${Normal.fg | Normal.sp}${Normal.bold}${Normal.italic}${Normal.underline}
@@ -57,11 +58,11 @@ local function export(colorscheme, opts, dir)
 	if opts == nil then opts = {} end
 
 	-- checked for backwards compatability
-	if dir == nil then
-		dir = opts.dir or (vim.fn.system({'fish', '-c', 'echo $__fish_config_dir/themes'}):sub(1, -2))
-	end
+	dir = Util.get_normalized_dir('fish', dir or opts.dir, function ()
+		local fish_config_dir = vim.fn.system({'fish', '-c', 'echo $__fish_config_dir/themes'})
+		return fish_config_dir:sub(1, -2)
+	end)
 
-	dir = vim.fs.normalize(dir)
 	local filename = opts.filename or colorscheme
 
 	local content --- @type string
