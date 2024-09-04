@@ -85,7 +85,7 @@ local function from_palette(palette, opts)
 		Float = {fg = palette.float},
 
 		-- Syntax
-		Comment = {fg = palette.text_contrast_bg_low, italic = true},
+		Comment = {fg = palette.comment, italic = true},
 		Conditional = conditional,
 		Debug = 'WarningMsg',
 		Delimiter = delimiter,
