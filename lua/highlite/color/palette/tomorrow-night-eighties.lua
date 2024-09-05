@@ -7,7 +7,7 @@ local function get(bg, get_terminal)
 	bg1    = 0x393939
 	bg2    = 0x515151
 	gray   = 0x999999
-	red    = 0xF77476
+	red    = 0xEB7375
 	red_hi = 0xF72f31
 	orange = 0xF99157
 	yellow = 0xFFCC66
