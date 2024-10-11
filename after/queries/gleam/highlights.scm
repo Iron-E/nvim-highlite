@@ -1,0 +1,3 @@
+;; extends
+
+(module "/" @punctuation.delimiter)
