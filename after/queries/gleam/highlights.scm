@@ -1,5 +1,12 @@
 ;; extends
 
+; identifier
+
+(binary_expression
+	operator: "|>"
+	right: (field_access field: (label) @function)
+)
+
 ; modifiers
 
 (attribute
