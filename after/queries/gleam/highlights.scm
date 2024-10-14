@@ -20,7 +20,11 @@
 
 (case_clause_patterns "|" @operator)
 (discard) @variable.builtin
-(use "<-" @operator)
+
+(use
+	"use" @keyword.coroutine
+	"<-" @operator
+)
 
 ; punctuation
 
