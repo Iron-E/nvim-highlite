@@ -7,6 +7,8 @@
 	right: (field_access field: (label) @function)
 )
 
+(constant name: (identifier) @constant)
+
 ; modifiers
 
 (attribute
