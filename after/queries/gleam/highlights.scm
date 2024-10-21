@@ -9,6 +9,8 @@
 
 (constant name: (identifier) @constant)
 
+(hole) @variable.parameter.builtin
+
 ; modifiers
 
 (attribute
