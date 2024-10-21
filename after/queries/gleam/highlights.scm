@@ -22,7 +22,7 @@
 
 ; operator
 
-(binary_expression operator: "<>" @operator)
+(binary_expression operator: ["<>" "!="] @operator)
 (case_clause_patterns "|" @operator)
 (discard) @variable.builtin
 
