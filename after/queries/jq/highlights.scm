@@ -1,5 +1,11 @@
 ;; extends
 
+; identifiers
+
+((funcname) @function
+	(#set! "priority" 99)
+)
+
 ; punctuation
 
 (query . [ ; when at the start of a query
