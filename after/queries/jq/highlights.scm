@@ -30,3 +30,7 @@
 	.
 	")" @punctuation.special
 )
+
+((variable) @punctuation.special
+	(#offset-from! "start" @punctuation.special 0 0 0 1)
+)
