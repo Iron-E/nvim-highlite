@@ -22,12 +22,19 @@
 	term_with_object_access: (index . "." @punctuation.delimiter) ; .foo<.>bar
 ])
 
-(objectval . "." @variable.builtin .) ; {foo: <.>}
-(objectval
-	.
-	term_with_object_access: (index . "." @variable.builtin)
-	term_with_object_access: (index . "." @punctuation.delimiter)
-)
+(objectval . [ ; when at the start of an object value
+	"." @variable.builtin ; {foo: <.>}
+	(index . "." @variable.builtin) ; {foo: <.>foo}
+	array_access: ("." @variable.builtin) ; {foo: <.>[]}
+	term_with_object_access: (index . "." @variable.builtin) ; {foo: <.>bar}
+])
+
+(objectval . _ [ ; when not at the start of an object value
+	"." @punctuation.delimiter ; {foo: .[]<.>bar}
+	(index . "." @punctuation.delimiter) ; {foo: .foo<.>bar}
+	array_access: ("." @punctuation.delimiter) ; {foo: .[]<.>[]}
+	term_with_object_access: (index . "." @punctuation.delimiter) ; {foo: .foo<.>bar}
+])
 
 (string
 	"\\(" @punctuation.special
