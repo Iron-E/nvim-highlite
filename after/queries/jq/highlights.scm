@@ -6,6 +6,8 @@
 	(#set! "priority" 99)
 )
 
+(import_ (identifier) @module)
+
 ; punctuation
 
 (query . [ ; when at the start of a query
