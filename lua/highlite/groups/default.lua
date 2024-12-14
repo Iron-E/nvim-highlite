@@ -673,6 +673,13 @@ local function from_palette(palette, opts)
 			groups.MiniJump = {sp = palette.search, underdouble = true}
 			groups.MiniJump2dSpot = {bold = true, reverse = true}
 			groups.MiniSurround = {reverse = true}
+			groups.MiniIconsBlue = 'DiagnosticFloatingInfo'
+			groups.MiniIconsCyan = 'DiagnosticFloatingHint'
+			groups.MiniIconsGreen = 'DiagnosticFloatingOk'
+			groups.MiniIconsPurple = 'DiagnosticFloatingConstant'
+			groups.MiniIconsRed = 'DiagnosticFloatingError'
+			groups.MiniIconsYellow = 'DiagnosticFloatingWarn'
+			groups.MiniIconsGrey = '@markup'
 		end
 
 		if all_nvim_plugins or nvim_plugins.neotest ~= false then

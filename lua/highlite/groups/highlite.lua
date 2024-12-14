@@ -9,6 +9,14 @@ local function from_palette(palette, opts)
 	groups['@type.builtin'].italic = true
 	groups['@lsp.typemod.interface.defaultLibrary'].italic = true
 
+	if groups.MiniIconsBlue then -- mini.icons were generated
+		groups.MiniIconsAzure = '@markup.raw'
+		groups.MiniIconsBlue = '@keyword'
+		groups.MiniIconsCyan = '@type'
+		groups.MiniIconsPurple = '@function'
+		groups.MiniIconsYellow = '@boolean'
+	end
+
 	return groups
 end
 
