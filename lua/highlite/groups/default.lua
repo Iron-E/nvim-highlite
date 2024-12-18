@@ -676,6 +676,7 @@ local function from_palette(palette, opts)
 			groups.MiniIconsBlue = 'DiagnosticFloatingInfo'
 			groups.MiniIconsCyan = 'DiagnosticFloatingHint'
 			groups.MiniIconsGreen = 'DiagnosticFloatingOk'
+			groups.MiniIconsOrange = 'DiagnosticFloatingWarn'
 			groups.MiniIconsPurple = 'DiagnosticFloatingConstant'
 			groups.MiniIconsRed = 'DiagnosticFloatingError'
 			groups.MiniIconsYellow = 'DiagnosticFloatingWarn'
