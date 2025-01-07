@@ -8,6 +8,8 @@
 	(#has-ancestor? @module using_directive) ; NOTE: from nvim-treesitter
 )
 
+(generic_name (identifier) @type)
+
 ; keywords
 (modifier [
 	"file" @keyword.modifier
