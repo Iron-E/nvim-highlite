@@ -1,6 +1,7 @@
 ;; extends
 
 ; identifiers
+(attribute name: (generic_name (identifier) @attribute))
 ((identifier) @variable.builtin (#eq? @variable.builtin "_"))
 (using_directive (identifier) @module)
 (qualified_name (identifier) @module
