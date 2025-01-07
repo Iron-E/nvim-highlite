@@ -1,14 +1,14 @@
 ;; extends
 
 ; identifiers
-(attribute name: (generic_name (identifier) @attribute))
 ((identifier) @variable.builtin (#eq? @variable.builtin "_"))
 (using_directive (identifier) @module)
 (qualified_name (identifier) @module
 	(#has-ancestor? @module using_directive) ; NOTE: from nvim-treesitter
 )
 
-(generic_name (identifier) @type)
+(generic_name (identifier) @type (#not-has-ancestor? @type invocation_expression))
+(attribute name: (generic_name (identifier) @attribute))
 
 ; keywords
 (modifier [
