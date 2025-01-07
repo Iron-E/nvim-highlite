@@ -22,6 +22,7 @@
 
 ; operators
 (accessor_declaration _ @keyword.operator (#not-eq? @keyword.operator ";"))
+(as_expression operator: "as" @operator)
 (binary_expression "??" @operator)
 (range_expression ".." @operator)
 
