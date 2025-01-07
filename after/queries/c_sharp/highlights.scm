@@ -9,7 +9,16 @@
 )
 
 ; keywords
-(modifier "file" @keyword.modifier)
+(modifier [
+	"file" @keyword.modifier
+	"static" @keyword.modifier.lifetime
+	["const" "readonly"] @keyword.modifier.mutability
+])
+
+(lambda_expression [
+	((modifier) @keyword.coroutine (#eq? @keyword.coroutine "async"))
+	((modifier) @keyword.modifier.lifetime (#eq? @keyword.modifier.lifetime "static"))
+])
 
 ; operators
 (accessor_declaration _ @keyword.operator (#not-eq? @keyword.operator ";"))
