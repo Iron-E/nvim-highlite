@@ -38,12 +38,16 @@
 "=>" @punctuation.delimiter
 (type_parameter_list . "<" @punctuation.bracket ">" @punctuation.bracket .)
 
-(conditional_access_expression "?" @punctuation.special)
-(nullable_type "?" @punctuation.special)
+("?" @punctuation.special (#has-parent? @punctuation.special conditional_access_expression nullable_type))
+
+(interpolation_start) @punctuation.special
+((verbatim_string_literal) @punctuation.special (#offset-from! "start" @punctuation.special 0 0 0 1))
 
 (lambda_expression parameters: (parameter_list
-	. "(" @function
-	")" @function .
+	.
+	"(" @function
+	")" @function
+	.
 ))
 
 ; macro
