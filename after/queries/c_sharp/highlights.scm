@@ -2,10 +2,16 @@
 
 ; identifiers
 ((identifier) @variable.builtin (#eq? @variable.builtin "_"))
+((identifier) @punctuation.special
+	(#lua-match? @punctuation.special "^@")
+	(#offset-from! "start" @punctuation.special 0 0 0 1)
+)
+
 (using_directive (identifier) @module)
 (qualified_name (identifier) @module
 	(#has-ancestor? @module using_directive) ; NOTE: from nvim-treesitter
 )
+
 
 (generic_name (identifier) @type (#not-has-ancestor? @type invocation_expression))
 (attribute name: (generic_name (identifier) @attribute))
