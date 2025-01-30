@@ -12,7 +12,6 @@
 	(#has-ancestor? @module using_directive) ; NOTE: from nvim-treesitter
 )
 
-
 (generic_name (identifier) @type (#not-has-ancestor? @type invocation_expression))
 (attribute name: (generic_name (identifier) @attribute))
 
@@ -22,6 +21,8 @@
 	"static" @keyword.modifier.lifetime
 	["const" "readonly"] @keyword.modifier.mutability
 ])
+
+(parameter (modifier) @keyword.modifier)
 
 (lambda_expression [
 	((modifier) @keyword.coroutine (#eq? @keyword.coroutine "async"))
