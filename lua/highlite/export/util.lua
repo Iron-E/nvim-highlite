@@ -38,3 +38,5 @@ function Util.get_normalized_dir(name, dir, fallback)
 	dir = Util.get_dir(name, dir, fallback)
 	return vim.fs.normalize(dir)
 end
+
+return Util
