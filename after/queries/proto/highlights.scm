@@ -1,23 +1,46 @@
 ;; extends
 
 ; keywords
+
+[
+	"oneof"
+] @keyword.conditional
+
+(syntax "syntax" @variable.builtin)
+
 (ERROR
 	.
-	(ERROR) @keyword.directive
+	(ERROR) @variable.builtin
 	.
 	"="
 	.
-	"\"" @string.special
-	.
-	(decimal_lit) @string.special
-	.
-	"\"" @string.special
+	(
+		"\"" @string.special
+		.
+		(decimal_lit)? @string.special
+		.
+		"\"" @string.special
+	)?
 	.
 
-	(#eq? @keyword.directive "edition")
+	(#eq? @variable.builtin "edition")
 )
 
+(import
+	path: (string) @module
+	(#offset! @module 0 1 0 -1)
+)
+
+(option
+	"option" @keyword.directive
+	(identifier) @variable
+	(#set! "priority" 126)
+)
+
+(rpc "stream" @keyword.coroutine)
+
 ; punctuation
+
 (full_ident
 	[
 		(identifier) @module
@@ -25,13 +48,17 @@
 	]
 )
 
-(message_or_enum_type "." @punctuation.delimiter)
+(message_or_enum_type
+	"." @punctuation.delimiter
+	(#set! "priority" 126)
+)
 
 ; types
 
 (message_or_enum_type
 	(identifier) @module
 	(#lua-match? @module "^[a-z]")
+	(#set! "priority" 126)
 )
 
 (message_or_enum_type
@@ -49,4 +76,3 @@
 )
 
 (rpc_name (identifier) @function)
-(rpc "stream" @keyword.repeat)
