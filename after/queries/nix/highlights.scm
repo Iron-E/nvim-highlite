@@ -37,3 +37,9 @@
 (ellipses) @variable.builtin
 
 (has_attr_expression "?" @operator)
+
+(indented_string_expression
+	(dollar_escape) @string.escape
+	.
+	((string_fragment) @string.escape)?
+)
