@@ -38,7 +38,7 @@
 	term_with_object_access: (index . "." @punctuation.delimiter) ; {foo: .foo<.>bar}
 ])
 
-(string
+(string_interp
 	"\\(" @punctuation.special
 	.
 	(query)
