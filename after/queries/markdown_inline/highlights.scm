@@ -2,8 +2,11 @@
 
 ; punctuation
 
-(code_span_delimiter) @markup.environment
-(emphasis_delimiter) @markup.environment
+[
+	(code_span_delimiter)
+	(emphasis_delimiter)
+] @markup.environment
+
 (image "!" @punctuation.special)
 
 (
