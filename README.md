@@ -549,6 +549,7 @@ This plugin has the ability to export _any_ colorscheme (not just ours!) to vari
 * `nvim` theme (Lua)
 * `vim` theme (Vimscript)
 * `wezterm` theme (TOML)
+* `zellij` theme (kdl)
 
 To make use of this, just run this after installing the plugin:
 

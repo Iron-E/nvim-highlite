@@ -20,6 +20,7 @@ local Export =
 	nvim = wrap 'native.lua',
 	vim = wrap 'native.vim',
 	wezterm = wrap 'wezterm',
+	zellij = wrap 'zellij',
 }
 
 return Export
