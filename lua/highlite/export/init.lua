@@ -3,7 +3,12 @@ local Fs = require 'highlite.fs' --- @type highlite.Fs
 --- @param format string
 --- @return highlite.export.format
 local function wrap(format)
-	return function(...) Fs.write(require('highlite.export.' .. format)(...)) end
+	return function(...)
+		--- @type highlite.export.format.module
+		local export = require('highlite.export.' .. format)
+		local file, content, opts = export(...)
+		Fs.write(file, content, opts)
+	end
 end
 
 --- @class highlite.Export
@@ -11,6 +16,7 @@ local Export =
 {
 	bat = wrap 'bat',
 	fish = wrap 'fish',
+	ghostty = wrap 'ghostty',
 	nvim = wrap 'native.lua',
 	vim = wrap 'native.vim',
 	wezterm = wrap 'wezterm',

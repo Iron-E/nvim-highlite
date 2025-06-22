@@ -545,6 +545,7 @@ This plugin has the ability to export _any_ colorscheme (not just ours!) to vari
 
 * `bat` theme (tmTheme; also works for Sublime Text)
 * `fish` theme (`set_color`)
+* `ghostty` theme (conf)
 * `nvim` theme (Lua)
 * `vim` theme (Vimscript)
 * `wezterm` theme (TOML)
