@@ -2,25 +2,6 @@ local Fmt = require 'highlite.fmt' --- @type highlite.Fmt
 local Nvim = require 'highlite.nvim' --- @type highlite.Nvim
 local Util = require 'highlite.export.util' --- @type highlite.export.Util
 
-local PALETTE_FMT = [[
-palette = 0=#51576d
-palette = 1=#e78284
-palette = 2=#a6d189
-palette = 3=#e5c890
-palette = 4=#8caaee
-palette = 5=#f4b8e4
-palette = 6=#81c8be
-palette = 7=#a5adce
-palette = 8=#626880
-palette = 9=#e67172
-palette = 10=#8ec772
-palette = 11=#d9ba73
-palette = 12=#7b9ef0
-palette = 13=#f2a4db
-palette = 14=#5abfb5
-palette = 15=#b5bfe2
-]]
-
 local FMT = [[
 background = ${Normal.bg}
 foreground = ${Normal.fg | Normal.sp}
