@@ -420,6 +420,7 @@ various formats, including:
 - `ripgrep` theme (conf)
 - `vim` theme (Vimscript)
 - `wezterm` theme (TOML)
+- `zellij` theme (kdl)
 
 To make use of this, just run this after installing the plugin:
 

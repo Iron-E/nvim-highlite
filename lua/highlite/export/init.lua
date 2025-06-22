@@ -21,6 +21,7 @@ local Export = {
 	ripgrep = wrap("ripgrep"),
 	vim = wrap("native.vim"),
 	wezterm = wrap("wezterm"),
+	zellij = wrap("zellij"),
 }
 
 return Export
