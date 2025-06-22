@@ -26,8 +26,8 @@ background = ${Normal.bg}
 foreground = ${Normal.fg | Normal.sp}
 cursor-color = ${Cursor.fg | Cursor.sp | Normal.fg | Normal.sp}
 cursor-text = ${Cursor.bg | Normal.bg}
-selection-background = ${Visual.bg | Normal.fg | Normal.sp}
-selection-foreground = ${Visual.fg | Visual.sp | Normal.bg}
+selection-background = ${Visual.bg}
+selection-foreground = ${Visual.fg | Visual.sp | Normal.fg | Normal.sp}
 ]]
 
 --- @type highlite.Fmt.string.opts
