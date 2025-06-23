@@ -5,8 +5,8 @@ local Util = require("highlite.export.util") --- @type highlite.export.Util
 local FMT = [[
 background = ${Normal.bg}
 foreground = ${Normal.fg | Normal.sp}
-cursor-color = ${Cursor.fg | Cursor.sp | Normal.fg | Normal.sp}
-cursor-text = ${Cursor.bg | Normal.bg}
+cursor-color = ${Cursor.bg | Normal.sp | Normal.fg}
+cursor-text = ${Cursor.fg | Normal.bg}
 selection-background = ${Visual.bg}
 selection-foreground = ${Visual.fg | Visual.sp | Normal.fg | Normal.sp}
 ]]
