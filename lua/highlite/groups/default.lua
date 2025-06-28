@@ -606,6 +606,7 @@ local function from_palette(palette, opts)
 		if all_nvim_plugins or nvim_plugins.fzf ~= false then
 			groups.FzfLuaBorder = 'FloatBorder'
 			groups.FzfLuaTitle = 'FloatTitle'
+			groups.FzfLuaLivePrompt = 'FzfLuaFzfQuery'
 		end
 
 		if all_nvim_plugins or nvim_plugins.gitsigns ~= false then
