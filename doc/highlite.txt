@@ -413,6 +413,7 @@ various formats, including:
 - `fish` theme (`set_color`)
 - `ghostty` theme (conf)
 - `nvim` theme (Lua)
+- `ripgrep` theme (conf)
 - `vim` theme (Vimscript)
 - `wezterm` theme (TOML)
 

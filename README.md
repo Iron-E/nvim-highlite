@@ -547,6 +547,7 @@ This plugin has the ability to export _any_ colorscheme (not just ours!) to vari
 * `fish` theme (`set_color`)
 * `ghostty` theme (conf)
 * `nvim` theme (Lua)
+* `ripgrep` theme (conf)
 * `vim` theme (Vimscript)
 * `wezterm` theme (TOML)
 
