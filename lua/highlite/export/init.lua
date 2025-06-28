@@ -18,6 +18,7 @@ local Export =
 	fish = wrap 'fish',
 	ghostty = wrap 'ghostty',
 	nvim = wrap 'native.lua',
+	ripgrep = wrap 'ripgrep',
 	vim = wrap 'native.vim',
 	wezterm = wrap 'wezterm',
 }
