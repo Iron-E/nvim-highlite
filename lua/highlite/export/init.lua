@@ -19,6 +19,7 @@ local Export =
 	ghostty = wrap 'ghostty',
 	nvim = wrap 'native.lua',
 	ripgrep = wrap 'ripgrep',
+	tailspin = wrap 'tailspin',
 	vim = wrap 'native.vim',
 	wezterm = wrap 'wezterm',
 }
