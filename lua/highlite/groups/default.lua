@@ -555,7 +555,6 @@ local function from_palette(palette, opts)
 			groups.BufferInactiveTarget = Groups.extend({bold = true}, tabline)
 			groups.BufferInactiveWARN = Groups.extend({fg = palette.warning}, tabline)
 
-			groups.BufferTabpages = {bold = true}
 			groups.BufferTabpageFill = 'TabLineFill'
 
 			groups.BufferVisible = buffer_visible
