@@ -2,15 +2,6 @@
 
 ; Constants
 
-; BUG: this was copied directly from the nim TS queries (w/ small changes) , and it works over there but doesn't work here -_-
-; (import_from_statement
-; 	name: (aliased_import
-; 		name: (dotted_name (identifier) @_const)
-; 		alias: (identifier) @constant
-; 	)
-; 	(#lua-match? @_const "^_*[A-Z][A-Z_]*$")
-; )
-
 ; Namespaces
 (attribute
   object: (identifier) @module (#lua-match? @module "[_a-z]+")
