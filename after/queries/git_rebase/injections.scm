@@ -1,4 +1,20 @@
 ;; extends
 
-; TODO: this doesn't work for some reason. Maybe because of neovim/neovim#21275 ?
-; (operation (command) @_command (message) @gitcommit (#not-any-of? @_command "x" "exec"))
+(operation
+	(command) @_command
+	(message) @injection.content
+	(#any-of? @_command
+		"d" "drop"
+		"e" "edit"
+		"f" "fixup"
+		"m" "merge"
+		"p" "pick"
+		"r" "reword"
+		"s" "squash"
+	 	"p" "pick"
+	 	"r" "reword"
+	)
+
+	(#offset! @injection.content 0 2 0 0)
+	(#set! injection.language "gitcommit")
+)
