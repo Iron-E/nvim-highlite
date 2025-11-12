@@ -448,6 +448,14 @@ local function from_palette(palette, opts)
 		-- Nix
 		['@lsp.typemod.constant.builtin.nix'] = '@constant.builtin',
 
+		-- OpenTofu
+		['@lsp.type.enumMember.opentofu'] = NONE,
+		['@lsp.type.keyword.opentofu'] = NONE,
+		['@lsp.type.property.opentofu'] = NONE,
+		['@lsp.type.string.opentofu'] = NONE,
+		['@lsp.type.type.opentofu'] = NONE,
+		['@lsp.type.variable.opentofu'] = NONE,
+
 		-- Rust
 		['@lsp.mod.callable.rust'] = '@lsp.type.function.rust',
 		['@lsp.type.builtinType.rust'] = '@type.builtin.rust',
