@@ -6,44 +6,91 @@
 (body
 (block
 	.
-	(identifier) @_block (#any-of? @_block "output")
+	(identifier) @keyword.import (#eq? @keyword.import "module")
 	.
-	[
-		(identifier) @variable.member
-		(string_lit (template_literal) @variable.member)
-	]
+	(string_lit (template_literal) @module)
 	.
+	(block_start)
 )))
 
-(config_file
 (body
 (block
 	.
-	(identifier) @_block (#any-of? @_block "variable")
+	(identifier) @_block (#not-any-of? @_block "module")
 	.
-	[
-		(identifier) @variable.parameter
-		(string_lit (template_literal) @variable.parameter)
-	]
+	(string_lit (template_literal) @variable.member)
 	.
-)))
+	(block_start)
+))
 
-(config_file
 (body
 (block
 	.
-	(identifier) @_block (#not-any-of? @_block "output" "variable")
+	(identifier) @keyword.type (#not-any-of? @keyword.type "module")
 	.
-	[
-		(identifier) @type
-		(string_lit (template_literal) @type)
-	]
+	(string_lit (template_literal) @type)
 	.
-	([
-		(identifier) @structure
-		(string_lit (template_literal) @structure)
-	])?
-)))
+	(string_lit (template_literal) @variable.member)+
+	.
+	(block_start)
+))
+
+(expression
+	.
+	(variable_expr (identifier) @type)
+	.
+	(get_attr (identifier))
+	(#not-any-of? @type
+		"count"
+		"data"
+		"each"
+		"local"
+		"module"
+		"path"
+		"self"
+		"terraform"
+		"var"
+	)
+)
+
+(expression
+	.
+	(variable_expr (identifier) @type)
+	.
+	(get_attr (identifier) @variable.member)
+	.
+	(get_attr (identifier))
+	(#not-any-of? @type
+		"count"
+		"data"
+		"each"
+		"local"
+		"module"
+		"path"
+		"self"
+		"terraform"
+		"var"
+	)
+)
+
+(expression
+	.
+	(variable_expr (identifier) @_ident)
+	.
+	(get_attr (identifier) @module)
+	(#eq? @_ident "module")
+)
+
+(expression
+	.
+	(variable_expr (identifier) @variable.builtin)
+	.
+	(get_attr (identifier) @variable.member)
+	(#any-of? @variable.builtin
+		"path"
+		"terraform"
+	)
+)
 
 [
 	(null_lit)
