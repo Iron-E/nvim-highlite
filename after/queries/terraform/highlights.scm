@@ -7,6 +7,23 @@
 	(#eq? @keyword.repeat "for_each")
 )
 
+(body
+(block
+	.
+	(identifier) @keyword.modifier (#eq? @keyword.modifier "dynamic")
+	.
+	(string_lit (template_literal) @type)
+	.
+	(block_start)
+))
+
+(body
+(block
+	.
+	(identifier) @_block (#eq? @_block "dynamic")
+	(body (block (identifier) @keyword.return)) (#eq? @keyword.return "content")
+))
+
 (config_file
 (body
 (block
@@ -21,7 +38,7 @@
 (body
 (block
 	.
-	(identifier) @_block (#not-any-of? @_block "module")
+	(identifier) @_block (#not-any-of? @_block "dynamic" "module")
 	.
 	(string_lit (template_literal) @variable.member)
 	.
@@ -31,7 +48,7 @@
 (body
 (block
 	.
-	(identifier) @keyword.type (#not-any-of? @keyword.type "module")
+	(identifier) @keyword.type (#not-any-of? @keyword.type "dynamic" "module")
 	.
 	(string_lit (template_literal) @type)
 	.
