@@ -2,9 +2,15 @@
 
 ; identifiers
 
-(attribute
-	(identifier) @keyword.repeat
-	(#eq? @keyword.repeat "for_each")
+(block
+	.
+	(identifier) @_block (#any-of? @_block "dynamic" "module" "resource")
+	(body
+		(attribute
+			(identifier) @keyword.repeat
+			(#any-of? @keyword.repeat "count" "for_each")
+		)
+	)
 )
 
 (body
