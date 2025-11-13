@@ -103,6 +103,8 @@
 
 ; operators
 
+(conditional [ "?" ":" ] @keyword.conditional.ternary)
+
 ("=" @operator
 	(#has-parent? @operator attribute object_elem)
 )
