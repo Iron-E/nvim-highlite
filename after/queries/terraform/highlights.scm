@@ -2,6 +2,11 @@
 
 ; identifiers
 
+(attribute
+	(identifier) @keyword.repeat
+	(#eq? @keyword.repeat "for_each")
+)
+
 (config_file
 (body
 (block
