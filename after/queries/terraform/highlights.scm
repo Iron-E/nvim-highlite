@@ -115,8 +115,14 @@
 	.
 	(get_attr (identifier) @variable.member)
 	(#any-of? @variable.builtin
+		"count"
+		"data"
+		"each"
+		"local"
 		"path"
+		"self"
 		"terraform"
+		"var"
 	)
 )
 
