@@ -118,12 +118,14 @@
 	(null_lit)
 ] @constant.builtin
 
-; operators
+; punctuation
 
 (conditional [ "?" ":" ] @keyword.conditional.ternary)
 
 ("=" @operator
 	(#has-parent? @operator attribute object_elem)
 )
+
+(for_intro ":" @punctuation.delimiter)
 
 ("=>" @punctuation.delimiter)
