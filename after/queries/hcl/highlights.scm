@@ -2,6 +2,15 @@
 
 ; identifiers
 
+(
+	(variable_expr (identifier) @variable.builtin)
+	.
+	(get_attr (identifier) @variable.member)
+	.
+	(get_attr (identifier) @variable.member)*
+)
+
+
 [
 	(null_lit)
 ] @constant.builtin
