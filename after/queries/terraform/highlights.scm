@@ -63,11 +63,11 @@
 	(block_start)
 ))
 
-(expression
-	.
-	(variable_expr (identifier) @type)
+(
+	(variable_expr (identifier) @type) @_expr
 	.
 	(get_attr (identifier))
+	(#has-parent? @_expr expression binary_operation unary_operation)
 	(#not-any-of? @type
 		"count"
 		"data"
@@ -81,13 +81,13 @@
 	)
 )
 
-(expression
-	.
-	(variable_expr (identifier) @type)
+(
+	(variable_expr (identifier) @type) @_expr
 	.
 	(get_attr (identifier) @variable.member)
 	.
 	(get_attr (identifier))
+	(#has-parent? @_expr expression _operation _operation)
 	(#not-any-of? @type
 		"count"
 		"data"
@@ -101,19 +101,19 @@
 	)
 )
 
-(expression
-	.
-	(variable_expr (identifier) @_ident)
+(
+	(variable_expr (identifier) @_ident) @_expr
 	.
 	(get_attr (identifier) @module)
+	(#has-parent? @_expr expression _operation _operation)
 	(#eq? @_ident "module")
 )
 
-(expression
-	.
-	(variable_expr (identifier) @variable.builtin)
+(
+	(variable_expr (identifier) @variable.builtin) @_expr
 	.
 	(get_attr (identifier) @variable.member)
+	(#has-parent? @_expr expression _operation _operation)
 	(#any-of? @variable.builtin
 		"count"
 		"data"
