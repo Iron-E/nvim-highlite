@@ -445,6 +445,9 @@ local function from_palette(palette, opts)
 		['@lsp.typemod.variable.definition.lua'] = '@variable.builtin.lua',
 		['@module.builtin.lua'] = '@structure.lua',
 
+		-- Markdown
+		['@lsp.type.class.markdown'] = NONE,
+
 		-- Nix
 		['@lsp.typemod.constant.builtin.nix'] = '@constant.builtin',
 

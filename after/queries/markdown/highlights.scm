@@ -9,13 +9,6 @@
 	":" @punctuation.delimiter
 )
 
-; text environments
-
-(fenced_code_block [
-	(fenced_code_block_delimiter) @markup.environment
-	(info_string (language) @markup.environment.name)
-])
-
 ; titles
 
 (atx_heading
@@ -26,5 +19,5 @@
 		(atx_h4_marker)
 		(atx_h5_marker)
 		(atx_h6_marker)
-	] @punctuation.special
+	] @punctuation.delimiter
 )
