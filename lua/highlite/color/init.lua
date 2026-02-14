@@ -17,10 +17,14 @@ local MAX = 0xFF
 --- @return highlite.color.hex accented_channel
 local function multiply_channel(color, channel_bit, factor)
 	--- Shift the value all the way to the right, and mask it.
-	local masked_value = band(MAX, rshift(color, channel_bit))
+	--- e.g. 0x112233 -> 0x11, when channel_bit == 16
+	local isolated_channel_value = band(MAX, rshift(color, channel_bit))
 
-	-- multiply the value by the factor, ensure it is between 0-FF, and shift it back to where it was before.
-	return lshift(min(MAX, max(0, floor(masked_value * factor))), channel_bit)
+	--- multiply the value by the factor, and ensure it is between 0-FF
+	local bounded_multiplied_channel_value = min(MAX, max(0, floor(isolated_channel_value * factor)))
+
+	--- shift the channel back to where it was before.
+	return lshift(bounded_multiplied_channel_value, channel_bit)
 end
 
 --- @class highlite.colors
