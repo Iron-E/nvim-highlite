@@ -1,4 +1,4 @@
-local default_groups_from_palette = require 'highlite.groups.default' --- @type highlite.groups.from_palette
+local default_groups_from_palette = require("highlite.groups.default") --- @type highlite.groups.from_palette
 
 --- Generate the default highlight groups using the `palette`.
 --- @type highlite.groups.from_palette

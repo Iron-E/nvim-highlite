@@ -1,6 +1,6 @@
-local Fmt = require 'highlite.fmt' --- @type highlite.Fmt
-local Nvim = require 'highlite.nvim' --- @type highlite.Nvim
-local Util = require 'highlite.export.util' --- @type highlite.export.Util
+local Fmt = require("highlite.fmt") --- @type highlite.Fmt
+local Nvim = require("highlite.nvim") --- @type highlite.Nvim
+local Util = require("highlite.export.util") --- @type highlite.export.Util
 
 local FMT = [["
 origin_url = 'https://github.com/Iron-E/nvim-highlite'
@@ -67,10 +67,8 @@ fg_color = ${Normal.bg}
 ]]
 
 --- @type highlite.Fmt.string.opts
-local FMT_OPTS =
-{
-	default =
-	{
+local FMT_OPTS = {
+	default = {
 		blend = '"Normal"',
 		bold = '"Normal"',
 		italic = false,
@@ -82,16 +80,21 @@ local FMT_OPTS =
 		underline = '"None"',
 	},
 
-	map =
-	{
-		bold = function() return '"Bold"' end,
+	map = {
+		bold = function()
+			return '"Bold"'
+		end,
 		blend = function(value)
 			if value > 49 then
 				return '"Half"'
 			end
 		end,
-		underdouble = function() return '"Underdouble"' end,
-		underline = function() return '"Single"' end,
+		underdouble = function()
+			return '"Underdouble"'
+		end,
+		underline = function()
+			return '"Single"'
+		end,
 	},
 }
 
@@ -102,16 +105,17 @@ FMT_OPTS.map.underdotted = FMT_OPTS.map.underline
 --- Create a wezterm theme out of the `palette`
 --- @type highlite.export.format.module
 local function export(colorscheme, opts, dir)
-	if opts == nil then opts = {} end
+	if opts == nil then
+		opts = {}
+	end
 
 	-- checked for backwards compatability
-	dir = Util.get_normalized_dir('wezterm', dir or opts.dir, function ()
-		local wezterm_config_dir_var = vim.loop.os_uname().sysname == 'Windows' and
-			'WEZTERM_EXECUTABLE_DIR' or
-			'WEZTERM_CONFIG_DIR'
+	dir = Util.get_normalized_dir("wezterm", dir or opts.dir, function()
+		local wezterm_config_dir_var = vim.loop.os_uname().sysname == "Windows" and "WEZTERM_EXECUTABLE_DIR"
+			or "WEZTERM_CONFIG_DIR"
 
 		local wezterm_config_dir = vim.loop.os_getenv(wezterm_config_dir_var)
-		return wezterm_config_dir .. '/colors'
+		return wezterm_config_dir .. "/colors"
 	end)
 
 	local filename = opts.filename or colorscheme
@@ -121,7 +125,7 @@ local function export(colorscheme, opts, dir)
 		content = '[metadata]\nname = "' .. filename .. Fmt.string(FMT, FMT_OPTS)
 	end)
 
-	return dir .. '/' .. filename .. '.toml', content, opts
+	return dir .. "/" .. filename .. ".toml", content, opts
 end
 
 return export

@@ -1,6 +1,6 @@
-local Fmt = require 'highlite.fmt' --- @type highlite.Fmt
-local Nvim = require 'highlite.nvim' --- @type highlite.Nvim
-local Util = require 'highlite.export.util' --- @type highlite.export.Util
+local Fmt = require("highlite.fmt") --- @type highlite.Fmt
+local Nvim = require("highlite.nvim") --- @type highlite.Nvim
+local Util = require("highlite.export.util") --- @type highlite.export.Util
 
 local FMT = [[
 
@@ -593,43 +593,64 @@ vim: filetype=xml
 ]]
 
 --- @type highlite.Fmt.string.opts
-local FMT_OPTS =
-{
-	default =
-	{
-		bg = '',
-		blend = '',
-		bold = '',
-		default = '',
-		fg = '',
-		italic = '',
-		nocombine = '',
-		reverse = '',
-		sp = '',
-		standout = '',
-		strikethrough = '',
-		undercurl = '',
-		underdashed = '',
-		underdotted = '',
-		underdouble = '',
-		underline = '',
+local FMT_OPTS = {
+	default = {
+		bg = "",
+		blend = "",
+		bold = "",
+		default = "",
+		fg = "",
+		italic = "",
+		nocombine = "",
+		reverse = "",
+		sp = "",
+		standout = "",
+		strikethrough = "",
+		undercurl = "",
+		underdashed = "",
+		underdotted = "",
+		underdouble = "",
+		underline = "",
 	},
 
-	map =
-	{
+	map = {
 		--- @param value string
-		bg = function(value) return value:sub(2, -2) end,
-		blend = function() return 'blend ' end,
-		bold = function() return 'bold ' end,
-		default = function() return 'default ' end,
-		italic = function() return 'italic ' end,
-		nocombine = function() return 'nocombine ' end,
-		reverse = function() return 'reverse ' end,
-		standout = function() return 'standout ' end,
-		strikethrough = function() return 'squiggly_underline ' end, --- NOTE: Sublime Text does not support strikethrough
-		undercurl = function() return 'squiggly_underline ' end,
-		underdouble = function() return 'stippled_underline ' end,
-		underline = function() return 'underline ' end,
+		bg = function(value)
+			return value:sub(2, -2)
+		end,
+		blend = function()
+			return "blend "
+		end,
+		bold = function()
+			return "bold "
+		end,
+		default = function()
+			return "default "
+		end,
+		italic = function()
+			return "italic "
+		end,
+		nocombine = function()
+			return "nocombine "
+		end,
+		reverse = function()
+			return "reverse "
+		end,
+		standout = function()
+			return "standout "
+		end,
+		strikethrough = function()
+			return "squiggly_underline "
+		end, --- NOTE: Sublime Text does not support strikethrough
+		undercurl = function()
+			return "squiggly_underline "
+		end,
+		underdouble = function()
+			return "stippled_underline "
+		end,
+		underline = function()
+			return "underline "
+		end,
 	},
 }
 
@@ -642,12 +663,14 @@ FMT_OPTS.map.underdotted = FMT_OPTS.map.underline
 --- Create a wezterm theme out of the `palette`
 --- @type highlite.export.format.module
 local function export(colorscheme, opts, dir)
-	if opts == nil then opts = {} end
+	if opts == nil then
+		opts = {}
+	end
 
 	-- checked for backwards compatability
-	dir = Util.get_normalized_dir('bat', dir or opts.dir, function ()
-		local bat_config_dir = vim.fn.system({'bat', '--config-dir'}):sub(1, -2)
-		return bat_config_dir .. '/themes'
+	dir = Util.get_normalized_dir("bat", dir or opts.dir, function()
+		local bat_config_dir = vim.fn.system({ "bat", "--config-dir" }):sub(1, -2)
+		return bat_config_dir .. "/themes"
 	end)
 
 	local filename = opts.filename or colorscheme
@@ -660,10 +683,11 @@ local function export(colorscheme, opts, dir)
 <plist version="1.0">
 <dict>
 	<key>name</key>
-	<string>]] .. filename .. [[</string>]] .. Fmt.string(FMT, FMT_OPTS):gsub('\n(%s+)<key>%w+</key>%s+<string></string>', '')
+	<string>]] .. filename .. [[</string>]] .. Fmt.string(FMT, FMT_OPTS)
+			:gsub("\n(%s+)<key>%w+</key>%s+<string></string>", "")
 	end)
 
-	return dir .. '/' .. filename .. '.tmTheme', content, opts
+	return dir .. "/" .. filename .. ".tmTheme", content, opts
 end
 
 return export

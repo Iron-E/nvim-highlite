@@ -16,7 +16,7 @@ function Util.get_dir(name, dir, fallback)
 	if not ok then
 		vim.notify(
 			vim.inspect({
-				msg = 'Could not automatically determine ' .. name .. ' configuration directory, please pass `dir` option',
+				msg = "Could not automatically determine " .. name .. " configuration directory, please pass `dir` option",
 				err = result,
 			}),
 			vim.log.levels.WARN

@@ -1,5 +1,5 @@
-local Fmt = require 'highlite.fmt' --- @type highlite.Fmt
-local Nvim = require 'highlite.nvim' --- @type highlite.Nvim
+local Fmt = require("highlite.fmt") --- @type highlite.Fmt
+local Nvim = require("highlite.nvim") --- @type highlite.Nvim
 
 local FMT = [[
 --colors=path:none
@@ -24,16 +24,18 @@ local FMT = [[
 ]]
 
 --- @type highlite.Fmt.string.opts
-local FMT_OPTS =
-{
+local FMT_OPTS = {
 	default = {
 		bold = '"none"',
 	},
 
-	map =
-	{
-		bold = function() return 'bold' end,
-		underline = function() return 'underline' end,
+	map = {
+		bold = function()
+			return "bold"
+		end,
+		underline = function()
+			return "underline"
+		end,
 
 		--- @param value string
 		--- @return string
@@ -43,9 +45,7 @@ local FMT_OPTS =
 			local green = without_quotes:sub(4, -3)
 			local blue = without_quotes:sub(6)
 
-			return '0x' .. red .. ','
-				.. '0x' .. green .. ','
-				.. '0x' .. blue
+			return "0x" .. red .. "," .. "0x" .. green .. "," .. "0x" .. blue
 		end,
 	},
 }
@@ -70,17 +70,17 @@ local function ripgrep_config_path(colorscheme, opts)
 	-- If the dir was specified, us it
 	if opts.dir ~= nil then
 		-- use the filename if specified, else the colorscheme name
-		return opts.dir .. '/' .. (opts.filename or colorscheme)
+		return opts.dir .. "/" .. (opts.filename or colorscheme)
 	end
 
 	-- otherwise, try to use the official env var
-	local path = vim.loop.os_getenv('RIPGREP_CONFIG_PATH')
+	local path = vim.loop.os_getenv("RIPGREP_CONFIG_PATH")
 	if path ~= nil then
 		return path
 	end
 
 	-- else, default to CWD and the same filename/colorscheme fallback as above
-	return vim.loop.cwd() .. '/' .. (opts.filename or colorscheme)
+	return vim.loop.cwd() .. "/" .. (opts.filename or colorscheme)
 end
 
 --- Create a wezterm theme out of the `palette`
@@ -99,7 +99,7 @@ local function export(colorscheme, opts, dir)
 		formatted = Fmt.string(FMT, FMT_OPTS)
 	end)
 
-	local content = formatted:gsub('--colors=%w+:%w+:"none"\n', '')
+	local content = formatted:gsub('--colors=%w+:%w+:"none"\n', "")
 	return path, content, opts
 end
 

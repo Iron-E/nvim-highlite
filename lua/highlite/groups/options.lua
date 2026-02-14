@@ -17,7 +17,7 @@ function Options.parse_from_palette(opts)
 		all_vim_plugins = false
 		any_nvim_plugins = false
 		any_vim_plugins = false
-	elseif type(opts.plugins) == 'table' then
+	elseif type(opts.plugins) == "table" then
 		if opts.plugins.nvim ~= true then
 			all_nvim_plugins = false
 

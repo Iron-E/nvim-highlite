@@ -1,19 +1,17 @@
-local Fs = require 'highlite.fs' --- @type highlite.Fs
-local Table = require 'highlite.table' --- @type highlite.Table
-
+local Fs = require("highlite.fs") --- @type highlite.Fs
+local Table = require("highlite.table") --- @type highlite.Table
 
 --- @param format string
 --- @return highlite.import.format
 local function wrap(format)
 	return function(...)
-		return require('highlite.import.' .. format)(...)
+		return require("highlite.import." .. format)(...)
 	end
 end
 
 --- @class highlite.Import
-local Import =
-{
-	nvim = wrap 'native',
+local Import = {
+	nvim = wrap("native"),
 }
 
 do
@@ -26,8 +24,7 @@ Highlite.generate('%s', Highlite.groups('%s', palette), terminal_palette)
 ]]
 
 	--- The colorschemes native to Neovim, plus the defaults managed by in this plugin.
-	local DEFAULT_IGNORED =
-	{
+	local DEFAULT_IGNORED = {
 		blue = true,
 		darkblue = true,
 		default = true,
@@ -56,9 +53,9 @@ Highlite.generate('%s', Highlite.groups('%s', palette), terminal_palette)
 	}
 
 	--- @type highlite.import.format.opts
-	local IMPORT_OPTS = {convert_int_attributes = 'hex_literal'}
+	local IMPORT_OPTS = { convert_int_attributes = "hex_literal" }
 
-	local NEW_LINE = '\n\t\t\t'
+	local NEW_LINE = "\n\t\t\t"
 
 	--- The format for a new color palette file
 	local PALETTE_FMT = [[
@@ -94,16 +91,16 @@ return get
 ]]
 
 	--- @type highlite.Fs.write.opts
-	local WRITE_OPTIONS = {force = true, silent = true}
+	local WRITE_OPTIONS = { force = true, silent = true }
 
 	--- Format a palette to insert in the `PALETTE_FMT`
 	--- @package
 	--- @param p highlite.color.palette
 	--- @return string
 	local function fmt_palette(p)
-		local s = ''
+		local s = ""
 		for color, value in vim.spairs(p) do
-			s = s .. NEW_LINE .. color .. ' = ' .. value .. ','
+			s = s .. NEW_LINE .. color .. " = " .. value .. ","
 		end
 
 		return s
@@ -114,9 +111,9 @@ return get
 	--- @param t highlite.color.palette.terminal
 	--- @return string
 	local function fmt_terminal(t)
-		local s = ''
+		local s = ""
 		for i, color in ipairs(t) do
-			s = s .. NEW_LINE .. '\t[' .. i .. '] = ' .. color .. ','
+			s = s .. NEW_LINE .. "\t[" .. i .. "] = " .. color .. ","
 		end
 
 		return s
@@ -130,32 +127,38 @@ return get
 	--- @param repo_dir? string the path to the `nvim-highlite` repo on-disk
 	function Import._all_nvim_to_highlite(ignore, repo_dir)
 		if repo_dir == nil then
-			repo_dir = vim.fs.dirname(vim.fs.dirname(vim.fs.dirname(vim.fs.dirname(
-				vim.fs.normalize(vim.fn.fnamemodify(debug.getinfo(1, 'S').source, ':~:.'))
-			))))
+			repo_dir = vim.fs.dirname(
+				vim.fs.dirname(
+					vim.fs.dirname(
+						vim.fs.dirname(vim.fs.normalize(vim.fn.fnamemodify(debug.getinfo(1, "S").source, ":~:.")))
+					)
+				)
+			)
 
-			if vim.startswith(repo_dir, '@') then
+			if vim.startswith(repo_dir, "@") then
 				repo_dir = repo_dir:sub(2)
 			end
 		end
 
 		--- The place where `:colorscheme` files go
-		local colors_dir = repo_dir .. '/colors/'
+		local colors_dir = repo_dir .. "/colors/"
 
 		--- The place where palettes go
-		local groups_dir = repo_dir .. '/lua/highlite/groups/'
+		local groups_dir = repo_dir .. "/lua/highlite/groups/"
 
 		--- The place where palettes go
-		local palette_dir = repo_dir .. '/lua/highlite/color/palette/'
+		local palette_dir = repo_dir .. "/lua/highlite/color/palette/"
 
-		if Table.is_empty(ignore) then ignore = {} end
+		if Table.is_empty(ignore) then
+			ignore = {}
+		end
 		--- @cast ignore -nil
 
 		--- The colorschemes which are configured to be ignored
 		local ignored = {}
 
 		for _, pattern in ipairs(ignore.patterns or {}) do
-			for _, colorscheme in ipairs(vim.fn.getcompletion(pattern, 'color')) do
+			for _, colorscheme in ipairs(vim.fn.getcompletion(pattern, "color")) do
 				ignored[colorscheme] = true
 			end
 		end
@@ -164,7 +167,7 @@ return get
 			ignored[colorscheme] = true
 		end
 
-		for _, name in ipairs(vim.fn.getcompletion('*', 'color')) do
+		for _, name in ipairs(vim.fn.getcompletion("*", "color")) do
 			if DEFAULT_IGNORED[name] or ignored[name] then
 				goto continue -- HACK: no `continue` keyword
 			end
@@ -172,39 +175,41 @@ return get
 			local imported = Import.nvim(name, IMPORT_OPTS)
 
 			local palette_name
-			if name:find '^highlite' then
-				local colorscheme_file = colors_dir .. name .. '.lua'
+			if name:find("^highlite") then
+				local colorscheme_file = colors_dir .. name .. ".lua"
 				if Fs.exists_sync(colorscheme_file) then
 					palette_name = Fs.read_sync(colorscheme_file)[3]:match("%b''"):sub(2, -2)
 				end
 			end
 
 			if palette_name == nil then
-				palette_name = name:gsub('_', '-'):lower()
+				palette_name = name:gsub("_", "-"):lower()
 			end
 
 			Fs.write(
-				palette_dir .. palette_name .. '.lua',
+				palette_dir .. palette_name .. ".lua",
 				PALETTE_FMT:format(
-				  fmt_terminal(imported.dark.terminal),
-				  fmt_palette(imported.dark.palette),
-				  fmt_terminal(imported.light.terminal),
-				  fmt_palette(imported.light.palette)
+					fmt_terminal(imported.dark.terminal),
+					fmt_palette(imported.dark.palette),
+					fmt_terminal(imported.light.terminal),
+					fmt_palette(imported.light.palette)
 				),
 				WRITE_OPTIONS
 			)
 
-			local colorscheme_name = name:gsub('_', '-'):lower()
-			local groups_name = colorscheme_name:gsub('highlite%-', '')
-			Fs.exists(groups_dir .. groups_name .. '.lua', function(exists)
-				if not exists then groups_name = 'default' end
+			local colorscheme_name = name:gsub("_", "-"):lower()
+			local groups_name = colorscheme_name:gsub("highlite%-", "")
+			Fs.exists(groups_dir .. groups_name .. ".lua", function(exists)
+				if not exists then
+					groups_name = "default"
+				end
 
-				if colorscheme_name:find '^highlite' == nil then
-					colorscheme_name = 'highlite-' .. colorscheme_name
+				if colorscheme_name:find("^highlite") == nil then
+					colorscheme_name = "highlite-" .. colorscheme_name
 				end
 
 				Fs.write(
-					colors_dir .. colorscheme_name .. '.lua',
+					colors_dir .. colorscheme_name .. ".lua",
 					COLORSCHEME_FMT:format(palette_name, colorscheme_name, groups_name),
 					WRITE_OPTIONS
 				)

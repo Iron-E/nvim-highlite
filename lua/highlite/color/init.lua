@@ -42,14 +42,12 @@ local Color = {}
 --- @param factor integer amount to multiply the red channel by
 --- @return highlite.color.hex accented
 function Color.saturate(color, factor)
-	if type(color) == 'string' then
-		local normalized = color:gsub('#', '0x')
-		color = tonumber(normalized) or error('Could not interpret color ' .. vim.inspect(color))
+	if type(color) == "string" then
+		local normalized = color:gsub("#", "0x")
+		color = tonumber(normalized) or error("Could not interpret color " .. vim.inspect(color))
 	end
 
-	return multiply_channel(color, 16, factor) +
-		multiply_channel(color, 8, factor) +
-		multiply_channel(color, 0, factor)
+	return multiply_channel(color, 16, factor) + multiply_channel(color, 8, factor) + multiply_channel(color, 0, factor)
 end
 
 return Color
