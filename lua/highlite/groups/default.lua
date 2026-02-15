@@ -152,12 +152,12 @@ local function from_palette(palette, opts)
 			Folded = { fg = palette.text, bg = palette.fold, italic = true },
 
 			-- Diffs
-			DiffAdd = { fg = palette.bg, bg = palette.diff_add },
+			DiffAdd = { fg = palette.diff_add },
 			diffAdded = "DiffAdd",
 			DiffChange = NONE,
-			DiffDelete = { fg = palette.bg, bg = palette.diff_delete },
-			DiffText = { fg = palette.bg, bg = palette.diff_change },
+			DiffDelete = { fg = palette.diff_delete },
 			diffRemoved = "DiffDelete",
+			DiffText = { fg = palette.diff_change },
 
 			-- Jumping
 			Tag = "Underlined",
@@ -294,9 +294,9 @@ local function from_palette(palette, opts)
 			["@conceal"] = "Conceal",
 			["@constant.builtin"] = { fg = palette.constant_builtin, bold = true, nocombine = true },
 			["@constructor"] = { fg = palette.constructor, nocombine = true },
-			["@diff.delta"] = { fg = palette.diff_change },
-			["@diff.minus"] = { fg = palette.diff_delete },
-			["@diff.plus"] = { fg = palette.diff_add },
+			["@diff.delta"] = "DiffText",
+			["@diff.minus"] = "DiffDelete",
+			["@diff.plus"] = "DiffAdd",
 			["@error"] = "Error",
 			["@event"] = { fg = palette.event, nocombine = true },
 			["@function.builtin"] = { fg = palette.func_builtin, italic = true },
