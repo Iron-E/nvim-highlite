@@ -282,7 +282,7 @@ local Palette = {}
 --- @return highlite.color.palette dark palette
 function Palette.derive(accent, colors)
 	if Table.is_empty(colors) then
-		return require("highlite.color.palette.default")(accent)
+		return require("highlite.color.palette.highlite")(accent)
 	end
 	--- @cast colors -nil
 
