@@ -5,7 +5,12 @@
 
 ; debug / error
 ((identifier) @keyword.debug (#eq? @keyword.debug "debug") (#set! "priority" 128))
-((identifier) @keyword.exception (#eq? @keyword.exception "error") (#set! "priority" 128))
+(
+	(identifier) @keyword.exception
+	(#eq? @keyword.exception "error")
+	(#set! "priority" 128)
+	(#not-has-parent? @keyword.exception dot_index_expression field)
+)
 
 ; repeat
 "in" @keyword.repeat
