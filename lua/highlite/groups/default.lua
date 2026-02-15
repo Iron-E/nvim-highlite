@@ -347,7 +347,7 @@ local function from_palette(palette, opts)
 			["@markup.strong"] = "Bold",
 			["@markup.underline"] = { underline = true },
 			["@module"] = { fg = palette.namespace, bold = true, nocombine = true },
-			["@module.builtin"] = "@module", -- TODO: add builtin module palette color
+			["@module.builtin"] = { fg = palette.namespace_builtin, bold = true, nocombine = true },
 			["@operator"] = Groups.extend({ nocombine = true }, operator),
 			["@property"] = { fg = palette.property, nocombine = true },
 			["@punctuation"] = Groups.extend({ nocombine = true }, delimiter),

@@ -54,6 +54,7 @@ local Table = require("highlite.table") --- @type highlite.Table
 --- @field message highlite.color Builtin Vim messages
 --- @field method highlite.color function of a class
 --- @field namespace highlite.color e.g. `foo::bar` in Rust/C++
+--- @field namespace_builtin highlite.color namespace, but builtin
 --- @field number highlite.color number literals (e.g `9`)
 --- @field ok highlite.color positive reinforcement from LSP or Git
 --- @field operator highlite.color e.g. `+`, `-`, `&&`
@@ -155,6 +156,7 @@ local PALETTE_ALTS = {
 	message = "info",
 	method = "func",
 	namespace = "uri",
+	namespace_builtin = "namespace",
 	number = "constant",
 	operator = "keyword",
 	parameter = "identifier",
