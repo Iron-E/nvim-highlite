@@ -2,24 +2,7 @@
 
 --- @alias highlite.group.link string a |:highlight-link| to an existing highlight group
 
---- @class highlite.group.new a new highlight group
---- @field bg? highlite.color
---- @field blend? highlite.group.blend the transparency value
---- @field bold? boolean
---- @field default? boolean
---- @field fg? highlite.color
---- @field italic? boolean
---- @field link? string
---- @field nocombine? boolean
---- @field reverse? boolean
---- @field sp? highlite.color
---- @field standout? boolean
---- @field strikethrough? boolean
---- @field undercurl? boolean
---- @field underdashed? boolean
---- @field underdotted? boolean
---- @field underdouble? boolean
---- @field underline? boolean
+--- @class highlite.group.new: vim.api.keyset.highlight
 
 --- @alias highlite.group.definition highlite.group.link|highlite.group.new a link to an existing group or a new group
 

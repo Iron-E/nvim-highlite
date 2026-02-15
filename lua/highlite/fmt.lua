@@ -9,31 +9,37 @@ do
 	--- @field default? true|{[string]: highlite.Fmt.string.substitution} if `true`, use default values when formatting returns `nil` for a highlight group
 	--- @field loadstring_compat? boolean if `true`, enable compatability for `loadstring`ing the returned value
 	--- @field map? {[string]: nil|fun(value: boolean|integer|string): highlite.Fmt.string.substitution}
-	local FMT_STRING_DEFUALT_OPTS =
-	{
-		convert_int_attributes = 'hex_string',
+	local FMT_STRING_DEFUALT_OPTS = {
+		convert_int_attributes = "hex_string",
 		default = true,
 		map = {},
 	}
 
 	--- The pattern which is used to find and replace palette strings.
-	local FMT_STRING_PATTERN = '$%b{}'
+	local FMT_STRING_PATTERN = "$%b{}"
 
 	--- The defaults used for hl attributes if they are not found during formatting
-	local FMT_STRING_DEFAULT_SUBSTITUTIONS =
-	{
-		bg = 'none', fg = 'none', sp = 'none',
+	local FMT_STRING_DEFAULT_SUBSTITUTIONS = {
+		bg = "none",
+		fg = "none",
+		sp = "none",
 		blend = 0,
-		bold = false, italic = false,
+		bold = false,
+		italic = false,
 		default = false,
 		nocombine = false,
-		reverse = false, standout = false,
+		reverse = false,
+		standout = false,
 		strikethrough = false,
-		undercurl = false, underdashed = false, underdotted = false, underdouble = false, underline = false,
+		undercurl = false,
+		underdashed = false,
+		underdotted = false,
+		underdouble = false,
+		underline = false,
 	}
 
 	--- The message when a `vim.validate` fails for an attribute
-	local VALIDATE_ATTRIBUTE_MSG = table.concat(vim.tbl_keys(FMT_STRING_DEFAULT_SUBSTITUTIONS), '|')
+	local VALIDATE_ATTRIBUTE_MSG = table.concat(vim.tbl_keys(FMT_STRING_DEFAULT_SUBSTITUTIONS), "|")
 
 	--- Gets `"foobar"` from `"${foobar}"`
 	--- @param match string
@@ -61,7 +67,7 @@ do
 	local function wrap(cb)
 		return function(definition, attribute)
 			local substitution = definition[attribute]
-			if attribute ~= 'blend' and type(substitution) == 'number' then
+			if attribute ~= "blend" and type(substitution) == "number" then
 				substitution = cb(substitution)
 			end
 
@@ -82,53 +88,59 @@ do
 		if opts == nil then
 			opts = FMT_STRING_DEFUALT_OPTS
 		else
-			opts = vim.tbl_extend('keep', opts, FMT_STRING_DEFUALT_OPTS)
+			opts = vim.tbl_extend("keep", opts, FMT_STRING_DEFUALT_OPTS)
 		end
 
 		--- Cache of `get_hl`s
 		local hl_cache = {}
 
-		local left_delim, right_delim = unpack(opts.loadstring_compat and {[['"]], [["']]} or {'"', '"'})
+		local left_delim, right_delim = unpack(opts.loadstring_compat and { [['"]], [["']] } or { '"', '"' })
 
 		local fmt_attribute --- @type fun(definition: table, attribute: string): nil|integer|string
-		if opts.convert_int_attributes == 'hex_literal' then
-			local l, r = unpack(opts.loadstring_compat and {'"', '"'} or {'', ''})
-			fmt_attribute = wrap(function(s) return l .. '0x' .. bit.tohex(s, 6):upper() .. r end)
-		elseif opts.convert_int_attributes == 'hex_string' then
-			fmt_attribute = wrap(function(s) return left_delim .. '#' .. bit.tohex(s, 6):upper() .. right_delim end)
+		if opts.convert_int_attributes == "hex_literal" then
+			local l, r = unpack(opts.loadstring_compat and { '"', '"' } or { "", "" })
+			fmt_attribute = wrap(function(s)
+				return l .. "0x" .. bit.tohex(s, 6):upper() .. r
+			end)
+		elseif opts.convert_int_attributes == "hex_string" then
+			fmt_attribute = wrap(function(s)
+				return left_delim .. "#" .. bit.tohex(s, 6):upper() .. right_delim
+			end)
 		else
 			--- @param definition table
 			--- @param attribute string
 			--- @return highlite.Fmt.string.substitution
-			function fmt_attribute(definition, attribute) return definition[attribute] end
+			function fmt_attribute(definition, attribute)
+				return definition[attribute]
+			end
 		end
 
 		return format:gsub(FMT_STRING_PATTERN, function(match)
 			match = fmt_string_strip_delim(match)
 
-			if match:find '^%d+$' then -- is a terminal color
+			if match:find("^%d+$") then -- is a terminal color
 				local idx = tonumber(match)
-				vim.validate {index = {idx, validate_terminal, '1–16'}}
-				return left_delim .. (vim.g['terminal_color_' .. (idx - 1)] or ''):upper() .. right_delim
+				vim.validate({ index = { idx, validate_terminal, "1–16" } })
+				return left_delim .. (vim.g["terminal_color_" .. (idx - 1)] or ""):upper() .. right_delim
 			end
 
 			--- The last attribute whose value was checked
 			--- @type string
-			local attribute = 'fg'
+			local attribute = "fg"
 
 			--- What to replace `match` with
 			--- @type highlite.Fmt.string.substitution
 			local substitution
 
 			-- iterate over alternations in `${Foo.bg | Foo.fg}`
-			for m in vim.gsplit(match, '|', {plain = true, trimempty = true}) do
+			for m in vim.gsplit(match, "|", { plain = true, trimempty = true }) do
 				--- e.g. `@text.literal.fg` → `{'@text', 'literal', 'fg'}`
-				local split = vim.split(vim.trim(m), '.', { plain = true, trimempty = true })
+				local split = vim.split(vim.trim(m), ".", { plain = true, trimempty = true })
 
 				attribute = table.remove(split) --- @type string
-				vim.validate { attribute = { attribute, validate_attribute, VALIDATE_ATTRIBUTE_MSG } }
+				vim.validate({ attribute = { attribute, validate_attribute, VALIDATE_ATTRIBUTE_MSG } })
 
-				local group = table.concat(split, '.') --- @type string
+				local group = table.concat(split, ".") --- @type string
 
 				local definition = hl_cache[group]
 				if definition == nil then
@@ -161,7 +173,7 @@ do
 			-- Then fall back on the predetermined defaults.
 			if substitution == nil then
 				local default = FMT_STRING_DEFAULT_SUBSTITUTIONS[attribute]
-				if type(default) == 'string' then
+				if type(default) == "string" then
 					default = left_delim .. default .. right_delim
 				end
 

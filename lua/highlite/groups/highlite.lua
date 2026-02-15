@@ -1,4 +1,4 @@
-local default_groups_from_palette = require 'highlite.groups.default' --- @type highlite.groups.from_palette
+local default_groups_from_palette = require("highlite.groups.default") --- @type highlite.groups.from_palette
 
 --- Generate the default highlight groups using the `palette`.
 --- @type highlite.groups.from_palette
@@ -6,15 +6,15 @@ local function from_palette(palette, opts)
 	local groups = default_groups_from_palette(palette, opts)
 
 	groups.Folded.fg = palette.bg
-	groups['@type.builtin'].italic = true
-	groups['@lsp.typemod.interface.defaultLibrary'].italic = true
+	groups["@type.builtin"].italic = true
+	groups["@lsp.typemod.interface.defaultLibrary"].italic = true
 
 	if groups.MiniIconsBlue then -- mini.icons were generated
-		groups.MiniIconsAzure = '@markup.raw'
-		groups.MiniIconsBlue = '@keyword'
-		groups.MiniIconsCyan = '@type'
-		groups.MiniIconsPurple = '@function'
-		groups.MiniIconsYellow = '@boolean'
+		groups.MiniIconsAzure = "@markup.raw"
+		groups.MiniIconsBlue = "@keyword"
+		groups.MiniIconsCyan = "@type"
+		groups.MiniIconsPurple = "@function"
+		groups.MiniIconsYellow = "@boolean"
 	end
 
 	return groups

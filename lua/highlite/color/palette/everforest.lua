@@ -1,10 +1,9 @@
 --- @type highlite.color.palette.get
 local function get(bg, get_terminal)
 	local palette, terminal_palette
-	if bg ~= 'light' then
+	if bg ~= "light" then
 		if get_terminal then
-			terminal_palette =
-			{
+			terminal_palette = {
 				[1] = "#475258",
 				[2] = "#E67E80",
 				[3] = "#A7C080",
@@ -24,8 +23,7 @@ local function get(bg, get_terminal)
 			}
 		end
 
-		palette =
-		{
+		palette = {
 			annotation = 0xD699B6,
 			attribute = 0xD699B6,
 			bg = 0x2D353B,
@@ -119,8 +117,7 @@ local function get(bg, get_terminal)
 		}
 	else
 		if get_terminal then
-			terminal_palette =
-			{
+			terminal_palette = {
 				[1] = "#5C6A72",
 				[2] = "#F85552",
 				[3] = "#8DA101",
@@ -140,8 +137,7 @@ local function get(bg, get_terminal)
 			}
 		end
 
-		palette =
-		{
+		palette = {
 			annotation = 0xDF69BA,
 			attribute = 0xDF69BA,
 			bg = 0xFDF6E3,
@@ -235,7 +231,7 @@ local function get(bg, get_terminal)
 		}
 	end
 
-	return palette, terminal_palette
+	return require("highlite.color.palette")._derive(palette), terminal_palette
 end
 
 return get

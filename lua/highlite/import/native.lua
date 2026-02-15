@@ -1,7 +1,7 @@
-local default_groups_from_palette = require 'highlite.groups.default' --- @type highlite.groups.from_palette
-local Fmt = require 'highlite.fmt' --- @type highlite.Fmt
-local Nvim = require 'highlite.nvim' --- @type highlite.Nvim
-local Palette = require 'highlite.color.palette' --- @type highlite.color.Palette
+local default_groups_from_palette = require("highlite.groups.default") --- @type highlite.groups.from_palette
+local Fmt = require("highlite.fmt") --- @type highlite.Fmt
+local Nvim = require("highlite.nvim") --- @type highlite.Nvim
+local Palette = require("highlite.color.palette") --- @type highlite.color.Palette
 
 --- The `Fmt.string` for `Import.nvim`
 local FMT = [[return
@@ -107,9 +107,10 @@ local FMT = [[return
 }]]
 
 --- @type highlite.Fmt.string.opts
-local FMT_OPTS =
-{
-	default = vim.defaulttable(function() return 'nil' end),
+local FMT_OPTS = {
+	default = vim.defaulttable(function()
+		return "nil"
+	end),
 	loadstring_compat = true,
 }
 
@@ -121,13 +122,15 @@ local function import_bg(tbl, colorscheme, bg, opts)
 	local load, err = loadstring(Fmt.string(FMT, opts))
 	if load == nil or err then
 		error(
-			'Could not load formatted string for colorscheme ' .. colorscheme ..
-			' with options ' .. vim.inspect(opts, {indent = '', newline = ' '}) ..
-			(err == nil and '' or ': ' .. err)
+			"Could not load formatted string for colorscheme "
+				.. colorscheme
+				.. " with options "
+				.. vim.inspect(opts, { indent = "", newline = " " })
+				.. (err == nil and "" or ": " .. err)
 		)
 	end
 
-	local loaded =  load()
+	local loaded = load()
 
 	-- Fill in all missing values by deriving
 	-- NOTE: deriving doesn't resolve all color values immediately;
@@ -135,7 +138,7 @@ local function import_bg(tbl, colorscheme, bg, opts)
 	--       groups so that all of the color values will have been
 	--       indexed at least once, thus completing the derive.
 	Palette.derive(bg, loaded.palette)
-	default_groups_from_palette(loaded.palette, {plugins = true, syntax = true})
+	default_groups_from_palette(loaded.palette, { plugins = true, syntax = true })
 
 	tbl[bg] = loaded
 end
@@ -144,19 +147,23 @@ end
 --- @type highlite.import.format
 local function import(name, opts)
 	-- NOTE: we force this plugin to load colorschemes with all groups enabled
-	if name:find '^highlite' then require('highlite').setup() end
+	if name:find("^highlite") then
+		require("highlite").setup()
+	end
 
 	if opts == nil then
 		opts = FMT_OPTS
 	else
-		opts = vim.tbl_extend('force', opts, FMT_OPTS)
+		opts = vim.tbl_extend("force", opts, FMT_OPTS)
 	end
 
 	--- @type highlite.import.format.return
 	local by_bg = {}
 
 	Nvim.with_colorscheme(name, function()
-		Nvim.with_both_bgs(function(bg) import_bg(by_bg, name, bg, opts) end)
+		Nvim.with_both_bgs(function(bg)
+			import_bg(by_bg, name, bg, opts)
+		end)
 	end)
 
 	return by_bg

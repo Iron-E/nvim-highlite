@@ -1,11 +1,11 @@
-local Color = require 'highlite.color' --- @type highlite.Color
-local Table = require 'highlite.table' --- @type highlite.Table
+--- @module "highlite.color"
 
 --- @alias highlite.bg 'dark'|'light'
 
 --- @class highlite.color.palette: highlite.colors
 --- @field annotation highlite.color
 --- @field attribute highlite.color
+--- @field attribute_builtin highlite.color builtin attributes
 --- @field bg highlite.color the background color
 --- @field bg_contrast_high highlite.color an accent to the `bg` color which contrasts
 --- @field bg_contrast_low highlite.color an accent to the `bg` color which barely contrasts
@@ -38,6 +38,12 @@ local Table = require 'highlite.table' --- @type highlite.Table
 --- @field func highlite.color functions, e.g. `print('a')`
 --- @field func_builtin highlite.color builtin function
 --- @field hint highlite.color diagnostic hints
+--- @field heading_1 highlite.color level 1 heading
+--- @field heading_2 highlite.color level 2 heading
+--- @field heading_3 highlite.color level 3 heading
+--- @field heading_4 highlite.color level 4 heading
+--- @field heading_5 highlite.color level 5 heading
+--- @field heading_6 highlite.color level 6 heading
 --- @field identifier highlite.color misc. identifier
 --- @field include highlite.color e.g. `#include` in C
 --- @field info highlite.color diagnostic info
@@ -46,18 +52,27 @@ local Table = require 'highlite.table' --- @type highlite.Table
 --- @field keyword highlite.color keywords, e.g. `local` in Lua
 --- @field keyword_coroutine highlite.color e.g. `await`
 --- @field keyword_function highlite.color e.g. `fn` in Rust, `def` in Python
+--- @field keyword_modifier highlite.color modifiers for items, e.g. `public`
 --- @field keyword_operator highlite.color e.g. `and` in Lua
 --- @field keyword_return highlite.color e.g. `return`, `yield`
+--- @field keyword_type highlite.color e.g. "struct"
 --- @field label highlite.color switch cases, loop labels (e.g. `'outer for x in y { break 'outer }` in Rust)
 --- @field loop highlite.color e.g. `loop`, `for`, `while`
 --- @field macro highlite.color e.g. `println!` in Rust
 --- @field message highlite.color Builtin Vim messages
+--- @field markup_link_label highlite.color markup link/reference descriptions
+--- @field markup_list highlite.color markup list markers
+--- @field markup_list_checked highlite.color markup todo-style markers (checked)
+--- @field markup_list_unchecked highlite.color markup todo-style markers (unchecked)
+--- @field markup_quote highlite.color
 --- @field method highlite.color function of a class
 --- @field namespace highlite.color e.g. `foo::bar` in Rust/C++
+--- @field namespace_builtin highlite.color namespace, but builtin
 --- @field number highlite.color number literals (e.g `9`)
 --- @field ok highlite.color positive reinforcement from LSP or Git
 --- @field operator highlite.color e.g. `+`, `-`, `&&`
 --- @field parameter highlite.color a function parameter
+--- @field parameter_builtin highlite.color a builtin function parameter
 --- @field preproc highlite.color pre-processor commands (e.g. `#[derive]` in Rust)
 --- @field preproc_conditional highlite.color pre-processor conditionals (e.g. `#[cfg]` in Rust)
 --- @field property highlite.color a member of a class or structure which is transparently a function
@@ -71,9 +86,11 @@ local Table = require 'highlite.table' --- @type highlite.Table
 --- @field statement highlite.color programming language statements which do not fall into another category
 --- @field storage highlite.color pointer symbols (e.g. `&foo`)
 --- @field string highlite.color a misc. string
+--- @field string_documentation highlite.color strings documenting code
 --- @field string_escape highlite.color escaped characters in a string
 --- @field string_regex highlite.color regular expressions
 --- @field string_special highlite.color special strings (e.g. dates)
+--- @field string_special_symbol highlite.color symbols or atoms
 --- @field structure highlite.color plain-old data
 --- @field syntax_error highlite.color non-diagnostic errors; sometimes shown in the actual highlighting of the code you write
 --- @field tag highlite.color XML/HTML tags
@@ -90,6 +107,7 @@ local Table = require 'highlite.table' --- @type highlite.Table
 --- @field throw highlite.color a keyword which triggers or receives errors (e.g. `throw MyError`)
 --- @field todo highlite.color `TODO` comments
 --- @field type highlite.color type names e.g. `int`, `String`
+--- @field type_definition highlite.color typedefs
 --- @field type_builtin highlite.color a type from the standard library
 --- @field type_parameter highlite.color generic type
 --- @field uri highlite.color links (HTTP, tags, match paren, etc).
@@ -106,107 +124,127 @@ local Table = require 'highlite.table' --- @type highlite.Table
 --- * `statement`
 --- * `storage`
 --- * `text`
-local PALETTE_ALTS =
-{
-	annotation = 'attribute',
-	attribute = 'preproc',
-	bg_contrast_high = 'bg',
-	bg_contrast_low = 'bg',
-	boolean = 'constant',
-	buffer_active = 'text_contrast_bg_high',
-	buffer_alternate = 'search',
-	buffer_current = 'select',
-	character = 'string',
-	character_special = 'special',
-	class = 'structure',
-	comment = 'text_contrast_bg_low',
-	comment_documentation = 'comment',
-	conditional = 'keyword',
-	constant = 'storage',
-	constant_builtin = 'special',
-	constructor = 'type',
-	decorator = 'attribute',
-	define = 'preproc',
-	diff_add = 'ok',
-	diff_change = 'number',
-	diff_delete = 'error',
-	enum = 'structure',
-	event = 'loop',
-	field = 'property',
-	field_enum = 'constant',
-	float = 'number',
-	fold = 'func',
-	func = 'statement',
-	func_builtin = 'special',
-	hint = 'info',
-	identifier = 'text',
-	include = 'preproc',
-	info = 'warning',
-	interface = 'type',
-	interface_builtin = 'type_builtin',
-	keyword = 'statement',
-	keyword_coroutine = 'keyword',
-	keyword_function = 'type_builtin',
-	keyword_operator = 'operator',
-	keyword_return = 'keyword',
-	label = 'special',
-	loop = 'conditional',
-	macro = 'define',
-	message = 'info',
-	method = 'func',
-	namespace = 'uri',
-	number = 'constant',
-	operator = 'keyword',
-	parameter = 'identifier',
-	preproc = 'func',
-	preproc_conditional = 'preproc',
-	property = 'identifier',
-	punctuation = 'text_contrast_bg_high',
-	punctuation_bracket = 'punctuation',
-	punctuation_delimiter = 'punctuation',
-	punctuation_special = 'string_special',
-	search = 'select',
-	select = 'bg_contrast_low',
-	special = 'statement',
-	string = 'constant',
-	string_escape = 'character',
-	string_regex = 'string',
-	string_special = 'identifier',
-	structure = 'type',
-	syntax_error = 'error',
-	tag = 'structure',
-	tag_attribute = 'field',
-	tag_delimiter = 'punctuation_bracket',
-	text_contrast_bg_high = 'text',
-	text_contrast_bg_low = 'text',
-	text_environment = 'text_contrast_bg_low',
-	text_environment_name = 'label',
-	text_literal = 'statement',
-	text_math = 'number',
-	text_reference = 'uri',
-	throw = 'error',
-	todo = 'message',
-	type = 'keyword',
-	type_builtin = 'type',
-	type_parameter = 'type',
-	uri = 'text',
-	variable = 'identifier',
-	variable_builtin = 'keyword',
-	warning = 'error',
+local PALETTE_ALTS = {
+	annotation = "attribute",
+	attribute = "preproc",
+	attribute_builtin = "special",
+	bg_contrast_high = "bg",
+	bg_contrast_low = "bg",
+	boolean = "constant",
+	buffer_active = "text_contrast_bg_high",
+	buffer_alternate = "search",
+	buffer_current = "select",
+	character = "string",
+	character_special = "special",
+	class = "structure",
+	comment = "text_contrast_bg_low",
+	comment_documentation = "comment",
+	conditional = "keyword",
+	constant = "storage",
+	constant_builtin = "special",
+	constructor = "type",
+	decorator = "attribute",
+	define = "preproc",
+	diff_add = "ok",
+	diff_change = "number",
+	diff_delete = "error",
+	enum = "structure",
+	event = "loop",
+	field = "property",
+	field_enum = "constant",
+	float = "number",
+	fold = "func",
+	func = "statement",
+	func_builtin = "special",
+	hint = "info",
+	heading_1 = "error",
+	heading_2 = "warning",
+	heading_3 = "diff_change",
+	heading_4 = "stirng",
+	heading_5 = "type",
+	heading_6 = "fold",
+	identifier = "text",
+	include = "preproc",
+	info = "warning",
+	interface = "type",
+	interface_builtin = "type_builtin",
+	keyword = "statement",
+	keyword_coroutine = "keyword",
+	keyword_function = "type_builtin",
+	keyword_modifier = "keyword",
+	keyword_operator = "operator",
+	keyword_return = "keyword",
+	keyword_type = "keyword",
+	label = "special",
+	loop = "conditional",
+	macro = "define",
+	markup_link_label = "string_special",
+	markup_list = "string_special",
+	markup_list_checked = "string_special",
+	markup_list_unchecked = "string_special",
+	markup_quote = "comment",
+	message = "info",
+	method = "func",
+	namespace = "uri",
+	namespace_builtin = "namespace",
+	number = "constant",
+	operator = "keyword",
+	parameter = "identifier",
+	parameter_builtin = "special",
+	preproc = "func",
+	preproc_conditional = "preproc",
+	property = "identifier",
+	punctuation = "text_contrast_bg_high",
+	punctuation_bracket = "punctuation",
+	punctuation_delimiter = "punctuation",
+	punctuation_special = "string_special",
+	search = "select",
+	select = "bg_contrast_low",
+	special = "statement",
+	string = "constant",
+	string_documentation = "comment_documentation",
+	string_escape = "character",
+	string_regex = "string",
+	string_special = "identifier",
+	string_special_symbol = "string_special",
+	structure = "type",
+	syntax_error = "error",
+	tag = "structure",
+	tag_attribute = "field",
+	tag_delimiter = "punctuation_bracket",
+	text_contrast_bg_high = "text",
+	text_contrast_bg_low = "text",
+	text_environment = "text_contrast_bg_low",
+	text_environment_name = "label",
+	text_literal = "statement",
+	text_math = "number",
+	text_reference = "uri",
+	throw = "error",
+	todo = "message",
+	type = "keyword",
+	type_builtin = "type",
+	type_definition = "type",
+	type_parameter = "type",
+	uri = "text",
+	variable = "identifier",
+	variable_builtin = "keyword",
+	warning = "error",
 }
 
-local DERIVE_METATABLE = {__index = function(self, k)
-	local value = rawget(self, k)
-	if value == nil then
-		local alt = PALETTE_ALTS[k]
-		if alt ~= nil then
-			value = self[alt]
-			rawset(self, k, value) -- PERF: cache resolved value so that next time we index `k` it can return right away
+local DERIVE_METATABLE = {
+	__index = function(self, k)
+		local value = rawget(self, k)
+		if value == nil then
+			local alt = PALETTE_ALTS[k]
+			if alt ~= nil then
+				value = self[alt]
+				rawset(self, k, value) -- PERF: cache resolved value so that next time we index `k` it can return right away
+			end
 		end
-	end
 
-	return value
-end}
+		return value
+	end,
+}
 
 --- Set `color` to `alt` if it is `nil`
 --- @package
@@ -217,7 +255,7 @@ local function derive_from_saturated_alt(self, color, factor)
 	if rawget(self, color) == nil then
 		local alt_value = self[PALETTE_ALTS[color]]
 		if alt_value ~= nil then
-			alt_value = Color.saturate(alt_value, factor)
+			alt_value = require("highlite.color").saturate(alt_value, factor)
 			rawset(self, color, alt_value)
 		end
 	end
@@ -226,6 +264,15 @@ end
 --- @class highlite.color.Palette
 --- @field [string] nil|highlite.color.palette.get
 local Palette = {}
+
+--- Provides the semantics of Palette.derive, without
+--- the "bootstrapping" logic.
+--- @generic T: table
+--- @param colors T
+--- @return T # the input with a fallback metatable set
+function Palette._derive(colors)
+	return setmetatable(colors, DERIVE_METATABLE)
+end
 
 --- Use what is present in the `colors` to create a cohesive palette.
 --- These are the only groups which will not be filled in:
@@ -242,23 +289,25 @@ local Palette = {}
 --- @param colors? highlite.colors the colors to derive
 --- @return highlite.color.palette dark palette
 function Palette.derive(accent, colors)
-	if Table.is_empty(colors) then return require('highlite.color.palette.default')(accent) end
+	if require("highlite.table").is_empty(colors) then
+		return require("highlite.color.palette.highlite")(accent)
+	end
 	--- @cast colors -nil
 
-	setmetatable(colors, DERIVE_METATABLE)
+	colors = Palette._derive(colors)
 
-	if accent ~= 'light' then
-		derive_from_saturated_alt(colors, 'bg_contrast_high', 3)
-		derive_from_saturated_alt(colors, 'bg_contrast_low', 2)
-		derive_from_saturated_alt(colors, 'text_contrast_bg_high', 1.25)
-		derive_from_saturated_alt(colors, 'text_contrast_bg_low', 0.63)
-		derive_from_saturated_alt(colors, 'throw', 1.5)
+	if accent ~= "light" then
+		derive_from_saturated_alt(colors, "bg_contrast_high", 3)
+		derive_from_saturated_alt(colors, "bg_contrast_low", 2)
+		derive_from_saturated_alt(colors, "text_contrast_bg_high", 1.25)
+		derive_from_saturated_alt(colors, "text_contrast_bg_low", 0.63)
+		derive_from_saturated_alt(colors, "throw", 1.5)
 	else
-		derive_from_saturated_alt(colors, 'bg_contrast_high', 0.74)
-		derive_from_saturated_alt(colors, 'bg_contrast_low', 0.88)
-		derive_from_saturated_alt(colors, 'text_contrast_bg_high', 0.5)
-		derive_from_saturated_alt(colors, 'text_contrast_bg_low', 2)
-		derive_from_saturated_alt(colors, 'throw', 0.8)
+		derive_from_saturated_alt(colors, "bg_contrast_high", 0.74)
+		derive_from_saturated_alt(colors, "bg_contrast_low", 0.88)
+		derive_from_saturated_alt(colors, "text_contrast_bg_high", 0.5)
+		derive_from_saturated_alt(colors, "text_contrast_bg_low", 2)
+		derive_from_saturated_alt(colors, "throw", 0.8)
 	end
 
 	--- @diagnostic disable-next-line:return-type-mismatch we JUST converted the types
