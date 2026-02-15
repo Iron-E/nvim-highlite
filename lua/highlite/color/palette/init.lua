@@ -1,5 +1,4 @@
-local Color = require("highlite.color") --- @type highlite.Color
-local Table = require("highlite.table") --- @type highlite.Table
+--- @module "highlite.color"
 
 --- @alias highlite.bg 'dark'|'light'
 
@@ -256,7 +255,7 @@ local function derive_from_saturated_alt(self, color, factor)
 	if rawget(self, color) == nil then
 		local alt_value = self[PALETTE_ALTS[color]]
 		if alt_value ~= nil then
-			alt_value = Color.saturate(alt_value, factor)
+			alt_value = require("highlite.color").saturate(alt_value, factor)
 			rawset(self, color, alt_value)
 		end
 	end
@@ -265,6 +264,15 @@ end
 --- @class highlite.color.Palette
 --- @field [string] nil|highlite.color.palette.get
 local Palette = {}
+
+--- Provides the semantics of Palette.derive, without
+--- the "bootstrapping" logic.
+--- @generic T: table
+--- @param colors T
+--- @return T # the input with a fallback metatable set
+function Palette._derive(colors)
+	return setmetatable(colors, DERIVE_METATABLE)
+end
 
 --- Use what is present in the `colors` to create a cohesive palette.
 --- These are the only groups which will not be filled in:
@@ -281,12 +289,12 @@ local Palette = {}
 --- @param colors? highlite.colors the colors to derive
 --- @return highlite.color.palette dark palette
 function Palette.derive(accent, colors)
-	if Table.is_empty(colors) then
+	if require("highlite.table").is_empty(colors) then
 		return require("highlite.color.palette.highlite")(accent)
 	end
 	--- @cast colors -nil
 
-	setmetatable(colors, DERIVE_METATABLE)
+	colors = Palette._derive(colors)
 
 	if accent ~= "light" then
 		derive_from_saturated_alt(colors, "bg_contrast_high", 3)
