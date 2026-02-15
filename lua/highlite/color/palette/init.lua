@@ -61,6 +61,11 @@ local Table = require("highlite.table") --- @type highlite.Table
 --- @field loop highlite.color e.g. `loop`, `for`, `while`
 --- @field macro highlite.color e.g. `println!` in Rust
 --- @field message highlite.color Builtin Vim messages
+--- @field markup_link_label highlite.color markup link/reference descriptions
+--- @field markup_list highlite.color markup list markers
+--- @field markup_list_checked highlite.color markup todo-style markers (checked)
+--- @field markup_list_unchecked highlite.color markup todo-style markers (unchecked)
+--- @field markup_quote highlite.color
 --- @field method highlite.color function of a class
 --- @field namespace highlite.color e.g. `foo::bar` in Rust/C++
 --- @field namespace_builtin highlite.color namespace, but builtin
@@ -174,6 +179,11 @@ local PALETTE_ALTS = {
 	label = "special",
 	loop = "conditional",
 	macro = "define",
+	markup_link_label = "string_special",
+	markup_list = "string_special",
+	markup_list_checked = "string_special",
+	markup_list_unchecked = "string_special",
+	markup_quote = "comment",
 	message = "info",
 	method = "func",
 	namespace = "uri",
