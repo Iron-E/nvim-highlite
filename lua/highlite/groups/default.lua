@@ -317,6 +317,7 @@ local function from_palette(palette, opts)
 			["@keyword.operator"] = { fg = palette.keyword_operator, bold = true, nocombine = true },
 			["@keyword.repeat"] = Groups.extend({ nocombine = true }, repeat_),
 			["@keyword.return"] = { fg = palette.keyword_return, nocombine = true },
+			["@keyword.type"] = { fg = palette.keyword_type, nocombine = true },
 			["@label"] = Groups.extend({ nocombine = true }, label),
 			["@macro"] = Groups.extend({ nocombine = true }, macro),
 			["@markup"] = { fg = palette.text },
