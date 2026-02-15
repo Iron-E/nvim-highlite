@@ -152,12 +152,16 @@ local function from_palette(palette, opts)
 			Folded = { fg = palette.text, bg = palette.fold, italic = true },
 
 			-- Diffs
-			DiffAdd = { fg = palette.diff_add },
-			diffAdded = "DiffAdd",
+			DiffAdd = { bg = palette.diff_add },
 			DiffChange = NONE,
-			DiffDelete = { fg = palette.diff_delete },
+			DiffDelete = { bg = palette.diff_delete },
+			DiffText = { bg = palette.diff_change },
+
+			diffAdded = "DiffAdd",
+			diffOldFile = "Directory",
+			diffNewFile = "Directory",
 			diffRemoved = "DiffDelete",
-			DiffText = { fg = palette.diff_change },
+			diffLine = "PreProc",
 
 			-- Jumping
 			Tag = "Underlined",
