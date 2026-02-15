@@ -152,10 +152,10 @@ local function from_palette(palette, opts)
 			Folded = { fg = palette.text, bg = palette.fold, italic = true },
 
 			-- Diffs
-			DiffAdd = { fg = palette.bg, bg = palette.string },
+			DiffAdd = { fg = palette.bg, bg = palette.diff_add },
 			diffAdded = "DiffAdd",
 			DiffChange = NONE,
-			DiffDelete = { fg = palette.bg, bg = palette.error },
+			DiffDelete = { fg = palette.bg, bg = palette.diff_delete },
 			DiffText = { fg = palette.bg, bg = palette.diff_change },
 			diffRemoved = "DiffDelete",
 
