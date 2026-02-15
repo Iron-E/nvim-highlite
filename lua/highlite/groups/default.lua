@@ -354,7 +354,7 @@ local function from_palette(palette, opts)
 			["@punctuation.bracket"] = { fg = palette.punctuation_bracket, nocombine = true },
 			["@punctuation.delimiter"] = { fg = palette.punctuation_delimiter, nocombine = true },
 			["@punctuation.special"] = { fg = palette.punctuation_special, nocombine = true },
-			["@string.documentation"] = "@comment.documentation",
+			["@string.documentation"] = { fg = palette.string_documentation },
 			["@string.escape"] = { fg = palette.string_escape, italic = true, nocombine = true },
 			["@string.keycode"] = "SpecialKey",
 			["@string.regexp"] = { fg = palette.string_regex, nocombine = true },

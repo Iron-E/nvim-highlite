@@ -73,6 +73,7 @@ local Table = require("highlite.table") --- @type highlite.Table
 --- @field statement highlite.color programming language statements which do not fall into another category
 --- @field storage highlite.color pointer symbols (e.g. `&foo`)
 --- @field string highlite.color a misc. string
+--- @field string_documentation highlite.color strings documenting code
 --- @field string_escape highlite.color escaped characters in a string
 --- @field string_regex highlite.color regular expressions
 --- @field string_special highlite.color special strings (e.g. dates)
@@ -172,6 +173,7 @@ local PALETTE_ALTS = {
 	select = "bg_contrast_low",
 	special = "statement",
 	string = "constant",
+	string_documentation = "comment_documentation",
 	string_escape = "character",
 	string_regex = "string",
 	string_special = "identifier",
