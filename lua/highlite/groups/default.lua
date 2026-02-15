@@ -157,10 +157,15 @@ local function from_palette(palette, opts)
 			DiffDelete = { bg = palette.diff_delete },
 			DiffText = { bg = palette.diff_change },
 
-			diffAdded = "DiffAdd",
+			Added = { fg = palette.diff_syntax_add },
+			Changed = { fg = palette.diff_syntax_change },
+			Removed = { fg = palette.diff_syntax_delete },
+
+			diffAdded = "Added",
+			diffChanged = "Changed",
 			diffOldFile = "Directory",
 			diffNewFile = "Directory",
-			diffRemoved = "DiffDelete",
+			diffRemoved = "Removed",
 			diffLine = "PreProc",
 
 			-- Jumping
@@ -298,9 +303,9 @@ local function from_palette(palette, opts)
 			["@conceal"] = "Conceal",
 			["@constant.builtin"] = { fg = palette.constant_builtin, bold = true, nocombine = true },
 			["@constructor"] = { fg = palette.constructor, nocombine = true },
-			["@diff.delta"] = "DiffText",
-			["@diff.minus"] = "DiffDelete",
-			["@diff.plus"] = "DiffAdd",
+			["@diff.delta"] = "diffChanged",
+			["@diff.minus"] = "diffRemoved",
+			["@diff.plus"] = "diffAdded",
 			["@error"] = "Error",
 			["@event"] = { fg = palette.event, nocombine = true },
 			["@function.builtin"] = { fg = palette.func_builtin, italic = true },

@@ -28,6 +28,9 @@
 --- @field diff_add highlite.color added text
 --- @field diff_change highlite.color changed text, also applies to modified buffers in the tabline
 --- @field diff_delete highlite.color removed text
+--- @field diff_syntax_add highlite.color added text within a (universal) diff
+--- @field diff_syntax_change highlite.color changed text within a (universal) diff
+--- @field diff_syntax_delete highlite.color removed text within a (universal) diff
 --- @field enum highlite.color an enumeration
 --- @field error highlite.color diagnostic errors
 --- @field event highlite.color events e.g. `public event FooEventHandler FooEvent` in C#
@@ -148,6 +151,9 @@ local PALETTE_ALTS = {
 	diff_add = "ok",
 	diff_change = "number",
 	diff_delete = "error",
+	diff_syntax_add = "ok",
+	diff_syntax_change = "number",
+	diff_syntax_delete = "error",
 	enum = "structure",
 	event = "loop",
 	field = "property",
