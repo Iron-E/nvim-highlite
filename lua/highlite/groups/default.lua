@@ -373,6 +373,7 @@ local function from_palette(palette, opts)
 			["@variable.builtin"] = { fg = palette.variable_builtin, italic = true, nocombine = true },
 			["@variable.member"] = { fg = palette.field, nocombine = true },
 			["@variable.parameter"] = { fg = palette.parameter, italic = true, nocombine = true },
+			["@variable.parameter.builtin"] = { fg = palette.parameter_builtin, bold = true, nocombine = true },
 
 			-- HACK: these should be automatically derived, but treesitter breaking changes forces them to be explicit for
 			--       backwards compatability

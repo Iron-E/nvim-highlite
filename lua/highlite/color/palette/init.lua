@@ -58,6 +58,7 @@ local Table = require("highlite.table") --- @type highlite.Table
 --- @field ok highlite.color positive reinforcement from LSP or Git
 --- @field operator highlite.color e.g. `+`, `-`, `&&`
 --- @field parameter highlite.color a function parameter
+--- @field parameter_builtin highlite.color a builtin function parameter
 --- @field preproc highlite.color pre-processor commands (e.g. `#[derive]` in Rust)
 --- @field preproc_conditional highlite.color pre-processor conditionals (e.g. `#[cfg]` in Rust)
 --- @field property highlite.color a member of a class or structure which is transparently a function
@@ -157,6 +158,7 @@ local PALETTE_ALTS = {
 	number = "constant",
 	operator = "keyword",
 	parameter = "identifier",
+	parameter_builtin = "special",
 	preproc = "func",
 	preproc_conditional = "preproc",
 	property = "identifier",
