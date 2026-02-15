@@ -360,6 +360,7 @@ local function from_palette(palette, opts)
 			["@string.regexp"] = { fg = palette.string_regex, nocombine = true },
 			["@string.special"] = { fg = palette.string_special, nocombine = true },
 			["@string.special.path"] = { fg = palette.namespace, underline = true, nocombine = true },
+			["@string.special.symbol"] = { fg = palette.string_special_symbol, nocombine = true },
 			["@structure"] = Groups.extend({ nocombine = true }, structure),
 			["@tag"] = { fg = palette.tag, bold = true, nocombine = true },
 			["@tag.attribute"] = { fg = palette.tag_attribute, nocombine = true },

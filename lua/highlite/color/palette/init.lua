@@ -77,6 +77,7 @@ local Table = require("highlite.table") --- @type highlite.Table
 --- @field string_escape highlite.color escaped characters in a string
 --- @field string_regex highlite.color regular expressions
 --- @field string_special highlite.color special strings (e.g. dates)
+--- @field string_special_symbol highlite.color symbols or atoms
 --- @field structure highlite.color plain-old data
 --- @field syntax_error highlite.color non-diagnostic errors; sometimes shown in the actual highlighting of the code you write
 --- @field tag highlite.color XML/HTML tags
@@ -177,6 +178,7 @@ local PALETTE_ALTS = {
 	string_escape = "character",
 	string_regex = "string",
 	string_special = "identifier",
+	string_special_symbol = "string_special",
 	structure = "type",
 	syntax_error = "error",
 	tag = "structure",
