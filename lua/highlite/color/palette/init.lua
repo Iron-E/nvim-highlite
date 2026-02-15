@@ -94,6 +94,7 @@ local Table = require("highlite.table") --- @type highlite.Table
 --- @field throw highlite.color a keyword which triggers or receives errors (e.g. `throw MyError`)
 --- @field todo highlite.color `TODO` comments
 --- @field type highlite.color type names e.g. `int`, `String`
+--- @field type_definition highlite.color typedefs
 --- @field type_builtin highlite.color a type from the standard library
 --- @field type_parameter highlite.color generic type
 --- @field uri highlite.color links (HTTP, tags, match paren, etc).
@@ -195,6 +196,7 @@ local PALETTE_ALTS = {
 	todo = "message",
 	type = "keyword",
 	type_builtin = "type",
+	type_definition = "type",
 	type_parameter = "type",
 	uri = "text",
 	variable = "identifier",

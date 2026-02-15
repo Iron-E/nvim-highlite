@@ -52,7 +52,7 @@ local function from_palette(palette, opts)
 	local tabline_sel =
 		{ fg = palette.text, bg = palette.bg_contrast_low, sp = palette.buffer_current, underline = true }
 	local type_ = { fg = palette.type }
-	local type_definition = { fg = palette.type, italic = true }
+	local type_definition = { fg = palette.type_definition, italic = true }
 
 	local buffer_alternate = Groups.extend({ sp = palette.buffer_alternate, underline = true }, tabline)
 	local buffer_visible = Groups.extend({ sp = palette.buffer_active, underline = true }, tabline)
