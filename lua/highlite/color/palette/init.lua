@@ -6,6 +6,7 @@ local Table = require("highlite.table") --- @type highlite.Table
 --- @class highlite.color.palette: highlite.colors
 --- @field annotation highlite.color
 --- @field attribute highlite.color
+--- @field attribute_builtin highlite.color builtin attributes
 --- @field bg highlite.color the background color
 --- @field bg_contrast_high highlite.color an accent to the `bg` color which contrasts
 --- @field bg_contrast_low highlite.color an accent to the `bg` color which barely contrasts
@@ -114,6 +115,7 @@ local Table = require("highlite.table") --- @type highlite.Table
 local PALETTE_ALTS = {
 	annotation = "attribute",
 	attribute = "preproc",
+	attribute_builtin = "special",
 	bg_contrast_high = "bg",
 	bg_contrast_low = "bg",
 	boolean = "constant",

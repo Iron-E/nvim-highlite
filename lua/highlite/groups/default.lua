@@ -284,6 +284,7 @@ local function from_palette(palette, opts)
 			--       in many built-in highlight queries.
 			--(@keyword.debug defined below)
 			["@attribute"] = { fg = palette.attribute, nocombine = true },
+			["@attribute.builtin"] = { fg = palette.attribute_builtin, bold = true, nocombine = true },
 			["@character.special"] = { fg = palette.character_special, bold = true },
 			["@comment.documentation"] = { fg = palette.comment_documentation },
 			["@comment.error"] = { fg = palette.error },
