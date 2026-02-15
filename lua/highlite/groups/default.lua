@@ -311,7 +311,7 @@ local function from_palette(palette, opts)
 			["@keyword.exception"] = Groups.extend({ nocombine = true }, exception),
 			["@keyword.function"] = { fg = palette.keyword_function, nocombine = true },
 			["@keyword.import"] = Groups.extend({ nocombine = true }, include),
-			["@keyword.modifier"] = "@keyword",
+			["@keyword.modifier"] = { fg = palette.keyword_modifier, nocombine = true },
 			["@keyword.modifier.lifetime"] = "@attribute",
 			["@keyword.modifier.mutability"] = Groups.extend({ nocombine = true }, storage_class),
 			["@keyword.operator"] = { fg = palette.keyword_operator, bold = true, nocombine = true },

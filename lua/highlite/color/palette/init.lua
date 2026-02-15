@@ -47,6 +47,7 @@ local Table = require("highlite.table") --- @type highlite.Table
 --- @field keyword highlite.color keywords, e.g. `local` in Lua
 --- @field keyword_coroutine highlite.color e.g. `await`
 --- @field keyword_function highlite.color e.g. `fn` in Rust, `def` in Python
+--- @field keyword_modifier highlite.color modifiers for items, e.g. `public`
 --- @field keyword_operator highlite.color e.g. `and` in Lua
 --- @field keyword_return highlite.color e.g. `return`, `yield`
 --- @field keyword_type highlite.color e.g. "struct"
@@ -154,6 +155,7 @@ local PALETTE_ALTS = {
 	keyword = "statement",
 	keyword_coroutine = "keyword",
 	keyword_function = "type_builtin",
+	keyword_modifier = "keyword",
 	keyword_operator = "operator",
 	keyword_return = "keyword",
 	keyword_type = "keyword",
