@@ -39,6 +39,12 @@ local Table = require("highlite.table") --- @type highlite.Table
 --- @field func highlite.color functions, e.g. `print('a')`
 --- @field func_builtin highlite.color builtin function
 --- @field hint highlite.color diagnostic hints
+--- @field heading_1 highlite.color level 1 heading
+--- @field heading_2 highlite.color level 2 heading
+--- @field heading_3 highlite.color level 3 heading
+--- @field heading_4 highlite.color level 4 heading
+--- @field heading_5 highlite.color level 5 heading
+--- @field heading_6 highlite.color level 6 heading
 --- @field identifier highlite.color misc. identifier
 --- @field include highlite.color e.g. `#include` in C
 --- @field info highlite.color diagnostic info
@@ -147,6 +153,12 @@ local PALETTE_ALTS = {
 	func = "statement",
 	func_builtin = "special",
 	hint = "info",
+	heading_1 = "error",
+	heading_2 = "warning",
+	heading_3 = "diff_change",
+	heading_4 = "stirng",
+	heading_5 = "type",
+	heading_6 = "fold",
 	identifier = "text",
 	include = "preproc",
 	info = "warning",

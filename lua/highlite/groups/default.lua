@@ -325,18 +325,18 @@ local function from_palette(palette, opts)
 			["@markup.emphasis"] = "Italic",
 			["@markup.environment"] = { fg = palette.text_environment, nocombine = true },
 			["@markup.environment.name"] = { fg = palette.text_environment_name, nocombine = true },
-			["@markup.heading.1"] = { fg = palette.error, bold = true },
-			["@markup.heading.1.marker"] = "@punctuation.special",
-			["@markup.heading.2"] = { fg = palette.warning, bold = true },
-			["@markup.heading.2.marker"] = "@markup.heading.1.marker",
-			["@markup.heading.3"] = { fg = palette.diff_change, bold = true },
-			["@markup.heading.3.marker"] = "@markup.heading.1.marker",
-			["@markup.heading.4"] = { fg = palette.string, bold = true },
-			["@markup.heading.4.marker"] = "@markup.heading.1.marker",
-			["@markup.heading.5"] = { fg = palette.type, bold = true },
-			["@markup.heading.5.marker"] = "@markup.heading.1.marker",
-			["@markup.heading.6"] = { fg = palette.fold, bold = true },
-			["@markup.heading.6.marker"] = "@markup.heading.1.marker",
+			["@markup.heading.1"] = { fg = palette.heading_1, bold = true },
+			["@markup.heading.1.marker"] = "@punctuation.special", -- TODO: unused, remove later
+			["@markup.heading.2"] = { fg = palette.heading_2, bold = true },
+			["@markup.heading.2.marker"] = "@markup.heading.1.marker", -- TODO: unused, remove later
+			["@markup.heading.3"] = { fg = palette.heading_3, bold = true },
+			["@markup.heading.3.marker"] = "@markup.heading.1.marker", -- TODO: unused, remove later
+			["@markup.heading.4"] = { fg = palette.heading_4, bold = true },
+			["@markup.heading.4.marker"] = "@markup.heading.1.marker", -- TODO: unused, remove later
+			["@markup.heading.5"] = { fg = palette.heading_5, bold = true },
+			["@markup.heading.5.marker"] = "@markup.heading.1.marker", -- TODO: unused, remove later
+			["@markup.heading.6"] = { fg = palette.heading_6, bold = true },
+			["@markup.heading.6.marker"] = "@markup.heading.1.marker", -- TODO: unused, remove later
 			["@markup.link"] = { fg = palette.text_reference, underline = true },
 			["@markup.link.label"] = "@string.special",
 			["@markup.link.url"] = "@string.special.url",
