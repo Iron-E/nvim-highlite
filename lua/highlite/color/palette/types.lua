@@ -2,7 +2,7 @@
 
 --- @alias highlite.color.palette.get (fun(bg?: highlite.bg): highlite.color.palette)|(fun(bg?: highlite.bg, get_terminal: true): highlite.color.palette, highlite.color.palette.terminal)
 
---- @alias highlite.color.palette.shortname 'ayu'|'everforest'|'gruvbox-material'|'gruvbox'|'highlite'|'iceberg'|'molokai'|'papercolor'|'seoul256-light'|'seoul256'|'solarized8-flat'|'solarized8-high'|'solarized8-low'|'solarized8'|'sonokai'
+--- @alias highlite.color.palette.shortname 'ayu'|'everforest'|'gruvbox-material'|'gruvbox'|'highlite'|'iceberg'|'molokai'|'papercolor'|'seoul256-light'|'seoul256'|'solarized8-flat'|'solarized8-high'|'solarized8-low'|'solarized8'|'sonokai'|'tomorrow-night-blue'|'tomorrow-night-bright'|'tomorrow-night-eighties'|'tomorrow-night'|'tomorrow'
 
 --- 1. black
 --- 2. dark red
