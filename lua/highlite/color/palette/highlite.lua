@@ -45,7 +45,7 @@ local function get(bg, get_terminal)
 			decorator = 0xCF55F0,
 			define = 0x7766FF,
 			diff_add = 0x074d1c,
-			diff_change = 0x5c590d,
+			diff_change = 0x474506,
 			diff_delete = 0x4d0707,
 			diff_syntax_add = 0x22FF22,
 			diff_syntax_change = 0xF0DF33,
