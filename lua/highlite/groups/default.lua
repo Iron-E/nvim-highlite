@@ -543,40 +543,40 @@ local function from_palette(palette, opts)
 
 		if all_nvim_plugins or nvim_plugins.barbar ~= false then
 			groups.BufferAlternate = buffer_alternate
-			groups.BufferAlternateADDED = Groups.extend({ fg = palette.diff_add }, buffer_alternate)
-			groups.BufferAlternateCHANGED = Groups.extend({ fg = palette.diff_change }, buffer_alternate)
-			groups.BufferAlternateDELETED = Groups.extend({ fg = palette.diff_delete }, buffer_alternate)
-			groups.BufferAlternateERROR = Groups.extend({ fg = palette.diff_delete }, buffer_alternate)
+			groups.BufferAlternateADDED = Groups.extend({ fg = palette.diff_syntax_add }, buffer_alternate)
+			groups.BufferAlternateCHANGED = Groups.extend({ fg = palette.diff_syntax_change }, buffer_alternate)
+			groups.BufferAlternateDELETED = Groups.extend({ fg = palette.diff_syntax_delete }, buffer_alternate)
+			groups.BufferAlternateERROR = Groups.extend({ fg = palette.diff_syntax_delete }, buffer_alternate)
 			groups.BufferAlternateHINT = Groups.extend({ fg = palette.hint }, buffer_alternate)
 			groups.BufferAlternateIndex = Groups.extend({ fg = palette.number }, buffer_alternate)
 			groups.BufferAlternateINFO = Groups.extend({ fg = palette.info }, buffer_alternate)
-			groups.BufferAlternateMod = Groups.extend({ fg = palette.diff_change, bold = true }, buffer_alternate)
+			groups.BufferAlternateMod = Groups.extend({ fg = palette.diff_syntax_change, bold = true }, buffer_alternate)
 			groups.BufferAlternateSign = Groups.extend({ fg = tabline_fill.fg }, buffer_alternate)
 			groups.BufferAlternateTarget = Groups.extend({ fg = palette.buffer_alternate, bold = true }, buffer_alternate)
 			groups.BufferAlternateWARN = Groups.extend({ fg = palette.warning }, buffer_alternate)
 
 			groups.BufferCurrent = "TabLineSel"
-			groups.BufferCurrentADDED = Groups.extend({ fg = palette.diff_add }, tabline_sel)
-			groups.BufferCurrentCHANGED = Groups.extend({ fg = palette.diff_change }, tabline_sel)
-			groups.BufferCurrentDELETED = Groups.extend({ fg = palette.diff_delete }, tabline_sel)
+			groups.BufferCurrentADDED = Groups.extend({ fg = palette.diff_syntax_add }, tabline_sel)
+			groups.BufferCurrentCHANGED = Groups.extend({ fg = palette.diff_syntax_change }, tabline_sel)
+			groups.BufferCurrentDELETED = Groups.extend({ fg = palette.diff_syntax_delete }, tabline_sel)
 			groups.BufferCurrentERROR = Groups.extend({ fg = palette.error }, tabline_sel)
 			groups.BufferCurrentHINT = Groups.extend({ fg = palette.hint }, tabline_sel)
 			groups.BufferCurrentIndex = Groups.extend({ fg = palette.number }, tabline_sel)
 			groups.BufferCurrentINFO = Groups.extend({ fg = palette.info }, tabline_sel)
-			groups.BufferCurrentMod = Groups.extend({ fg = palette.diff_change, bold = true }, tabline_sel)
+			groups.BufferCurrentMod = Groups.extend({ fg = palette.diff_syntax_change, bold = true }, tabline_sel)
 			groups.BufferCurrentSign = Groups.extend({ fg = tabline_fill.fg }, tabline_sel)
 			groups.BufferCurrentTarget = Groups.extend({ fg = palette.buffer_current, bold = true }, tabline_sel)
 			groups.BufferCurrentWARN = Groups.extend({ fg = palette.warning }, tabline_sel)
 
 			groups.BufferInactive = "TabLine"
-			groups.BufferInactiveADDED = Groups.extend({ fg = palette.diff_add }, tabline)
-			groups.BufferInactiveCHANGED = Groups.extend({ fg = palette.diff_change }, tabline)
-			groups.BufferInactiveDELETED = Groups.extend({ fg = palette.diff_delete }, tabline)
+			groups.BufferInactiveADDED = Groups.extend({ fg = palette.diff_syntax_add }, tabline)
+			groups.BufferInactiveCHANGED = Groups.extend({ fg = palette.diff_syntax_change }, tabline)
+			groups.BufferInactiveDELETED = Groups.extend({ fg = palette.diff_syntax_delete }, tabline)
 			groups.BufferInactiveERROR = Groups.extend({ fg = palette.error }, tabline)
 			groups.BufferInactiveHINT = Groups.extend({ fg = palette.hint }, tabline)
 			groups.BufferInactiveIndex = Groups.extend({ fg = palette.number }, tabline)
 			groups.BufferInactiveINFO = Groups.extend({ fg = palette.info }, tabline)
-			groups.BufferInactiveMod = Groups.extend({ fg = palette.diff_change, bold = true }, tabline)
+			groups.BufferInactiveMod = Groups.extend({ fg = palette.diff_syntax_change, bold = true }, tabline)
 			groups.BufferInactiveSign = Groups.extend({ fg = tabline_fill.fg }, tabline)
 			groups.BufferInactiveTarget = Groups.extend({ bold = true }, tabline)
 			groups.BufferInactiveWARN = Groups.extend({ fg = palette.warning }, tabline)
@@ -584,14 +584,14 @@ local function from_palette(palette, opts)
 			groups.BufferTabpageFill = "TabLineFill"
 
 			groups.BufferVisible = buffer_visible
-			groups.BufferVisibleADDED = Groups.extend({ fg = palette.diff_add }, buffer_visible)
-			groups.BufferVisibleCHANGED = Groups.extend({ fg = palette.diff_change }, buffer_visible)
-			groups.BufferVisibleDELETED = Groups.extend({ fg = palette.diff_delete }, buffer_visible)
+			groups.BufferVisibleADDED = Groups.extend({ fg = palette.diff_syntax_add }, buffer_visible)
+			groups.BufferVisibleCHANGED = Groups.extend({ fg = palette.diff_syntax_change }, buffer_visible)
+			groups.BufferVisibleDELETED = Groups.extend({ fg = palette.diff_syntax_delete }, buffer_visible)
 			groups.BufferVisibleERROR = Groups.extend({ fg = palette.error }, buffer_visible)
 			groups.BufferVisibleHINT = Groups.extend({ fg = palette.hint }, buffer_visible)
 			groups.BufferVisibleIndex = Groups.extend({ fg = palette.number }, buffer_visible)
 			groups.BufferVisibleINFO = Groups.extend({ fg = palette.info }, buffer_visible)
-			groups.BufferVisibleMod = Groups.extend({ fg = palette.diff_change, bold = true }, buffer_visible)
+			groups.BufferVisibleMod = Groups.extend({ fg = palette.diff_syntax_change, bold = true }, buffer_visible)
 			groups.BufferVisibleSign = Groups.extend({ fg = tabline_fill.fg }, buffer_visible)
 			groups.BufferVisibleTarget = Groups.extend({ fg = palette.buffer_active, bold = true }, buffer_visible)
 			groups.BufferVisibleWARN = Groups.extend({ fg = palette.warning }, buffer_visible)
@@ -768,7 +768,8 @@ local function from_palette(palette, opts)
 			groups.TodoFgWARN = "@comment.warning"
 
 			groups.TodoBgFIX = { fg = palette.bg, bg = palette.error, bold = true, italic = true, nocombine = true }
-			groups.TodoBgHACK = { fg = palette.bg, bg = palette.diff_change, bold = true, italic = true, nocombine = true }
+			groups.TodoBgHACK =
+				{ fg = palette.bg, bg = palette.diff_syntax_change, bold = true, italic = true, nocombine = true }
 			groups.TodoBgNOTE = { fg = palette.bg, bg = palette.info, bold = true, italic = true, nocombine = true }
 			groups.TodoBgPERF = { fg = palette.bg, bg = palette.ok, bold = true, italic = true, nocombine = true }
 			groups.TodoBgTEST = { fg = palette.bg, bg = palette.hint, bold = true, italic = true, nocombine = true }
