@@ -84,7 +84,7 @@ local function get(bg, get_terminal)
 		}
 	end
 
-	return palette, terminal_palette
+	return require("highlite.color.palette")._derive(palette), terminal_palette
 end
 
 return get
