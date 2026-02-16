@@ -21,6 +21,7 @@ Table of Contents                                 *highlite-table-of-contents*
   - Code Style                                           |highlite-code-style|
   - Project Layout                                   |highlite-project-layout|
   - Features                                               |highlite-features|
+4. Links                                                      |highlite-links|
 
 ==============================================================================
 1. nvim-highlite                                      *highlite-nvim-highlite*
@@ -809,201 +810,254 @@ List of Palette Colors                       *highlite-List-of-Palette-Colors*
 
 **Remember:** you do not need to define all of these.
 
-  -------------------------------------------------------------------------------
-  Field                   Definition
-  ----------------------- -------------------------------------------------------
-  annotation              
+  --------------------------------------------------------------------------------------------
+  Field                   Default                 Definition
+  ----------------------- ----------------------- --------------------------------------------
+  annotation              attribute               
 
-  attribute               
+  attribute_builtin       special                 builtin attributes
 
-  bg                      the background color
+  attribute               preproc                 
 
-  bg_contrast_high        an accent to the bg color which contrasts
+  bg_contrast_high        bg                      an accent to the bg color which contrasts
 
-  bg_contrast_low         an accent to the bg color which barely contrasts
+  bg_contrast_low         bg                      an accent to the bg color which barely
+                                                  contrasts
 
-  boolean                 true and false
+  bg                                              the background color
 
-  buffer_active           the underline of an active buffer
+  boolean                 constant                true and false
 
-  buffer_alternate        the underline of the alternate buffer
+  buffer_active           text_contrast_bg_high   the underline of an active buffer
 
-  buffer_current          the underline of the current buffer
+  buffer_alternate        search                  the underline of the alternate buffer
 
-  character               character literals (e.g. 'a')
+  buffer_current          select                  the underline of the current buffer
 
-  character_special       special characters e.g. wildcards
+  character_special       special                 special characters e.g. wildcards
 
-  class                   data with behavior
+  character               string                  character literals (e.g. 'a')
 
-  comment                 normal comments
+  class                   structure               data with behavior
 
-  comment_documentation   documentation comments
+  comment_documentation   comment                 documentation comments
 
-  comment_special         special tokens in a comment
+  comment_special                                 special tokens in a comment
 
-  conditional             e.g. if, match, switch
+  comment                 text_contrast_bg_low    normal comments
 
-  constant                constant values
+  conditional             keyword                 e.g. if, match, switch
 
-  constant_builtin        built-in constant values
+  constant_builtin        special                 built-in constant values
 
-  constructor             invoked by new
+  constant                storage                 constant values
 
-  decorator               
+  constructor             type                    invoked by new
 
-  define                  e.g. #define in C
+  decorator               attribute               
 
-  diff_add                added text
+  define                  preproc                 e.g. #define in C
 
-  diff_change             changed text, also applies to modified buffers in the
-                          tabline
+  diff_add                ok                      added text
 
-  diff_delete             removed text
+  diff_change             number                  changed text, also applies to modified
+                                                  buffers in the tabline
 
-  enum                    an enumeration
+  diff_delete             error                   removed text
 
-  error                   diagnostic errors
+  diff_syntax_add         ok                      added text within a (universal) diff
 
-  event                   events e.g. public event FooEventHandler FooEvent in C#
+  diff_syntax_change      number                  changed text within a (universal) diff
 
-  field                   a member of a class/struct which is accessed directly
+  diff_syntax_delete      error                   removed text within a (universal) diff
 
-  field_enum              a variant of an enum e.g. Ok in Rust
+  enum                    structure               an enumeration
 
-  float                   floating point numbers
+  error                                           diagnostic errors
 
-  fold                    the background of &foldtext
+  event                   loop                    events
+                                                  e.g. public event FooEventHandler FooEvent
+                                                  in C#
 
-  func                    functions, e.g. print('a')
+  field_enum              constant                a variant of an enum e.g. Ok in Rust
 
-  func_builtin            builtin function
+  field                   property                a member of a class/struct which is accessed
+                                                  directly
 
-  hint                    diagnostic hints
+  float                   number                  floating point numbers
 
-  identifier              misc. identifier
+  fold                    func                    the background of &foldtext
 
-  include                 e.g. #include in C
+  func_builtin            special                 builtin function
 
-  info                    diagnostic info
+  func                    statement               functions, e.g. print('a')
 
-  interface               e.g. interface Foo
+  heading_1               error                   level 1 heading
 
-  interface_builtin       an interface which is provided by the standard library
-                          (and sometimes common libraries)
+  heading_2               warning                 level 2 heading
 
-  keyword                 keywords, e.g. local in Lua
+  heading_3               diff_change             level 3 heading
 
-  keyword_coroutine       e.g. await
+  heading_4               string                  level 4 heading
 
-  keyword_function        e.g. fn in Rust, def in Python
+  heading_5               type                    level 5 heading
 
-  keyword_operator        e.g. and in Lua
+  heading_6               fold                    level 6 heading
 
-  keyword_return          e.g. return, yield
+  hint                    info                    diagnostic hints
 
-  label                   switch cases, loop labels
-                          (e.g. 'outer for x in y { break 'outer } in Rust)
+  identifier              text                    misc. identifier
 
-  loop                    e.g. loop, for, while
+  include                 preproc                 e.g. #include in C
 
-  macro                   e.g. println! in Rust
+  info                    warning                 diagnostic info
 
-  message                 Builtin Vim messages
+  interface_builtin       type_builtin            e.g. interface Foo
 
-  method                  function of a class
+  interface               type                    e.g. interface Foo
 
-  namespace               e.g. foo::bar in Rust/C++
+  keyword_coroutine       keyword                 e.g. await
 
-  number                  number literals (e.g 9)
+  keyword_function        type_builtin            e.g. fn in Rust, def in Python
 
-  ok                      positive reinforcement from LSP or Git
+  keyword_modifier        keyword                 modifiers for items, e.g. public
 
-  operator                e.g. +, -, &&
+  keyword_operator        operator                e.g. and in Lua
 
-  parameter               a function parameter
+  keyword_return          keyword                 e.g. return, yield
 
-  preproc                 pre-processor commands (e.g. #[derive] in Rust)
+  keyword_type            keyword                 e.g. “struct”
 
-  preproc_conditional     pre-processor conditionals (e.g. #[cfg] in Rust)
+  keyword                 statement               keywords, e.g. local in Lua
 
-  property                a member of a class or structure which is transparently
-                          a function
+  label                   special                 switch cases, loop labels
+                                                  (e.g. 'outer for x in y { break 'outer } in
+                                                  Rust)
 
-  punctuation             misc. delimiters
+  loop                    conditional             e.g. loop, for, while
 
-  punctuation_bracket     balanced punctuation, e.g. [], "", ()
+  macro                   define                  e.g. println! in Rust
 
-  punctuation_delimiter   single punctuation, e.g. ,, ;
+  markup_link_label       string_special          markup link/reference descriptions
 
-  punctuation_special     special punctuation, e.g. {} in a format string
+  markup_list_checked     string_special          markup todo-style markers (checked)
 
-  search                  Doing :/ or :s/
+  markup_list_unchecked   string_special          markup todo-style markers (unchecked)
 
-  select                  selected text, e.g. in visual mode or selecting LSP
-                          completions
+  markup_list             string_special          markup list markers
 
-  special                 unclassified special symbols in a language
+  markup_quote            comment                 
 
-  statement               programming language statements which do not fall into
-                          another category
+  message                 info                    Builtin Vim messages
 
-  storage                 pointer symbols (e.g. &foo)
+  method                  func                    function of a class
 
-  string                  a misc. string
+  namespace_builtin       namespace               namespace, but builtin
 
-  string_escape           escaped characters in a string
+  namespace               uri                     e.g. foo::bar in Rust/C++
 
-  string_regex            regular expressions
+  number                  constant                number literals (e.g 9)
 
-  string_special          special strings (e.g. dates)
+  ok                                              positive reinforcement from LSP or Git
 
-  structure               plain-old data
+  operator                keyword                 e.g. +, -, &&
 
-  syntax_error            non-diagnostic errors; sometimes shown in the actual
-                          highlighting of the code you write
+  parameter_builtin       special                 a builtin function parameter
 
-  tag                     XML/HTML tags
+  parameter               identifier              a function parameter
 
-  tag_attribute           XML/HTML tag attributes
+  preproc_conditional     preproc                 pre-processor conditionals (e.g. #[cfg] in
+                                                  Rust)
 
-  tag_delimiter           </> in XML/HTML tags
+  preproc                 func                    pre-processor commands (e.g. #[derive] in
+                                                  Rust)
 
-  text                    plaintext
+  property                identifier              a member of a class or structure which is
+                                                  transparently a function
 
-  text_contrast_bg_high   an accent to the text color which contrasts
+  punctuation_bracket     punctuation             balanced punctuation, e.g. [], "", ()
 
-  text_contrast_bg_low    an accent to the text color which barely contrasts
+  punctuation_delimiter   punctuation             single punctuation, e.g. ,, ;
 
-  text_environment_name   name of a text environment
+  punctuation_special     string_special          special punctuation, e.g. {} in a format
+                                                  string
 
-  text_environment        beginning/end of a text subenvironment
+  punctuation             text_contrast_bg_high   misc. delimiters
 
-  text_literal            literal text
+  search                  select                  Doing :/ or :s/
 
-  text_math               mathematical text
+  select                  bg_contrast_low         selected text, e.g. in visual mode or
+                                                  selecting LSP completions
 
-  text_reference          references to variables in text
+  special                 statement               unclassified special symbols in a language
 
-  throw                   a keyword which triggers or receives errors
-                          (e.g. throw MyError)
+  statement                                       programming language statements which do not
+                                                  fall into another category
 
-  todo                    TODO comments
+  storage                                         pointer symbols (e.g. &foo)
 
-  type                    type names e.g. int, String
+  string_documentation    comment_documentation   strings documenting code
 
-  type_builtin            a type from the standard library
+  string_escape           character               escaped characters in a string
 
-  type_parameter          generic type
+  string_regex            string                  regular expressions
 
-  uri                     links (HTTP, tags, match paren, etc).
+  string_special_symbol   string_special          symbols or atoms
 
-  variable                a variable
+  string_special          identifier              special strings (e.g. dates)
 
-  variable_builtin        a variable from the language, e.g. self
+  string                  constant                a misc. string
 
-  warning                 diagnostic warnings
-  -------------------------------------------------------------------------------
+  structure               type                    plain-old data
+
+  syntax_error            error                   non-diagnostic errors; sometimes shown in
+                                                  the actual highlighting of the code you
+                                                  write
+
+  tag_attribute           field                   XML/HTML tag attributes
+
+  tag_delimiter           punctuation_bracket     </> in XML/HTML tags
+
+  tag                     structure               XML/HTML tags
+
+  text_contrast_bg_high   text                    an accent to the text color which contrasts
+
+  text_contrast_bg_low    text                    an accent to the text color which barely
+                                                  contrasts
+
+  text_environment_name   label                   text environment name
+
+  text_environment        text_contrast_bg_low    text environment delimiter
+
+  text_literal            statement               literal text
+
+  text_math               number                  mathematical text
+
+  text_reference          uri                     references to variables in text
+
+  text                                            plaintext
+
+  throw                   error                   a keyword which triggers or receives errors
+                                                  (e.g. throw MyError)
+
+  todo                    message                 TODO comments
+
+  type_builtin            type                    a type from the standard library
+
+  type_definition         type                    typedefs
+
+  type_parameter          type                    generic type
+
+  type                    keyword                 type names e.g. int, String
+
+  uri                     text                    links (HTTP, tags, match paren, etc).
+
+  variable_builtin        keyword                 a variable from the language, e.g. self
+
+  variable                identifier              a variable
+
+  warning                 error                   diagnostic warnings
+  --------------------------------------------------------------------------------------------
 
 EXTENDING THE PALETTE
 

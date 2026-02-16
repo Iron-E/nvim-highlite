@@ -167,102 +167,146 @@ The `terminal_palette` will automatically be `nil` when you turn off terminal hi
 
 #### List of Palette Colors
 
+<!--
+If you need to regenerate this list, you can run the following command (just make sure to update the line ranges):
+
+```fish
+bat -r 6:119 lua/highlite/color/palette/init.lua \
+| mlr --nidx --omd --fs space \
+	put -q 'emit1 {"Field": "`" . $3 . "`", "Definition": joinv(mapexcept($*, ["1", "2", "3", "4"]), OFS)}' \
+	then join \
+		--imd \
+		--ur \
+		-j Field \
+		-f (
+			bat -r 131:237 lua/highlite/color/palette/init.lua  \
+			| mlr --inidx --omd --ifs-regex '[^\\w]+' --ofs space put -q 'emit1 {"Field": "`" . $2 . "`", "Default": "`" . $3 . "`"}' \
+			| psub
+		) \
+	then unsparsify \
+	then sort -f Field
+```
+-->
+
 **Remember:** you do not need to define all of these.
 
-| Field                   | Definition                                                                                |
-|:------------------------|:------------------------------------------------------------------------------------------|
-| `annotation`            |                                                                                           |
-| `attribute`             |                                                                                           |
-| `bg`                    | the background color                                                                      |
-| `bg_contrast_high`      | an accent to the `bg` color which contrasts                                               |
-| `bg_contrast_low`       | an accent to the `bg` color which barely contrasts                                        |
-| `boolean`               | `true` and `false`                                                                        |
-| `buffer_active`         | the underline of an active buffer                                                         |
-| `buffer_alternate`      | the underline of the alternate buffer                                                     |
-| `buffer_current`        | the underline of the current buffer                                                       |
-| `character`             | character literals (e.g. `'a'`)                                                           |
-| `character_special`     | special characters e.g. wildcards                                                         |
-| `class`                 | data with behavior                                                                        |
-| `comment`               | normal comments                                                                           |
-| `comment_documentation` | documentation comments                                                                    |
-| `comment_special`       | special tokens in a comment                                                               |
-| `conditional`           | e.g. `if`, `match`, `switch`                                                              |
-| `constant`              | constant values                                                                           |
-| `constant_builtin`      | built-in constant values                                                                  |
-| `constructor`           | invoked by `new`                                                                          |
-| `decorator`             |                                                                                           |
-| `define`                | e.g. `#define` in C                                                                       |
-| `diff_add`              | added text                                                                                |
-| `diff_change`           | changed text, also applies to modified buffers in the tabline                             |
-| `diff_delete`           | removed text                                                                              |
-| `enum`                  | an enumeration                                                                            |
-| `error`                 | diagnostic errors                                                                         |
-| `event`                 | events e.g. `public event FooEventHandler FooEvent` in C#                                 |
-| `field`                 | a member of a class/struct which is accessed directly                                     |
-| `field_enum`            | a variant of an enum e.g. `Ok` in Rust                                                    |
-| `float`                 | floating point numbers                                                                    |
-| `fold`                  | the background of `&foldtext`                                                             |
-| `func`                  | functions, e.g. `print('a')`                                                              |
-| `func_builtin`          | builtin function                                                                          |
-| `hint`                  | diagnostic hints                                                                          |
-| `identifier`            | misc. identifier                                                                          |
-| `include`               | e.g. `#include` in C                                                                      |
-| `info`                  | diagnostic info                                                                           |
-| `interface`             | e.g. `interface Foo`                                                                      |
-| `interface_builtin`     | an `interface` which is provided by the standard library (and sometimes common libraries) |
-| `keyword`               | keywords, e.g. `local` in Lua                                                             |
-| `keyword_coroutine`     | e.g. `await`                                                                              |
-| `keyword_function`      | e.g. `fn` in Rust, `def` in Python                                                        |
-| `keyword_operator`      | e.g. `and` in Lua                                                                         |
-| `keyword_return`        | e.g. `return`, `yield`                                                                    |
-| `label`                 | switch cases, loop labels (e.g. `'outer for x in y { break 'outer }` in Rust)             |
-| `loop`                  | e.g. `loop`, `for`, `while`                                                               |
-| `macro`                 | e.g. `println!` in Rust                                                                   |
-| `message`               | Builtin Vim messages                                                                      |
-| `method`                | function of a class                                                                       |
-| `namespace`             | e.g. `foo::bar` in Rust/C++                                                               |
-| `number`                | number literals (e.g `9`)                                                                 |
-| `ok`                    | positive reinforcement from LSP or Git                                                    |
-| `operator`              | e.g. `+`, `-`, `&&`                                                                       |
-| `parameter`             | a function parameter                                                                      |
-| `preproc`               | pre-processor commands (e.g. `#[derive]` in Rust)                                         |
-| `preproc_conditional`   | pre-processor conditionals (e.g. `#[cfg]` in Rust)                                        |
-| `property`              | a member of a class or structure which is transparently a function                        |
-| `punctuation`           | misc. delimiters                                                                          |
-| `punctuation_bracket`   | balanced punctuation, e.g. `[]`, `""`, `()`                                               |
-| `punctuation_delimiter` | single punctuation, e.g. `,`, `;`                                                         |
-| `punctuation_special`   | special punctuation, e.g. `{}` in a format string                                         |
-| `search`                | Doing `:/` or `:s/`                                                                       |
-| `select`                | selected text, e.g. in visual mode or selecting LSP completions                           |
-| `special`               | unclassified special symbols in a language                                                |
-| `statement`             | programming language statements which do not fall into another category                   |
-| `storage`               | pointer symbols (e.g. `&foo`)                                                             |
-| `string`                | a misc. string                                                                            |
-| `string_escape`         | escaped characters in a string                                                            |
-| `string_regex`          | regular expressions                                                                       |
-| `string_special`        | special strings (e.g. dates)                                                              |
-| `structure`             | plain-old data                                                                            |
-| `syntax_error`          | non-diagnostic errors; sometimes shown in the actual highlighting of the code you write   |
-| `tag`                   | XML/HTML tags                                                                             |
-| `tag_attribute`         | XML/HTML tag attributes                                                                   |
-| `tag_delimiter`         | `<`/`>` in XML/HTML tags                                                                  |
-| `text`                  | plaintext                                                                                 |
-| `text_contrast_bg_high` | an accent to the `text` color which contrasts                                             |
-| `text_contrast_bg_low`  | an accent to the `text` color which barely contrasts                                      |
-| `text_environment_name` | name of a text environment                                                                |
-| `text_environment`      | beginning/end of a text subenvironment                                                    |
-| `text_literal`          | literal text                                                                              |
-| `text_math`             | mathematical text                                                                         |
-| `text_reference`        | references to variables in text                                                           |
-| `throw`                 | a keyword which triggers or receives errors (e.g. `throw MyError`)                        |
-| `todo`                  | `TODO` comments                                                                           |
-| `type`                  | type names e.g. `int`, `String`                                                           |
-| `type_builtin`          | a type from the standard library                                                          |
-| `type_parameter`        | generic type                                                                              |
-| `uri`                   | links (HTTP, tags, match paren, etc).                                                     |
-| `variable`              | a variable                                                                                |
-| `variable_builtin`      | a variable from the language, e.g. `self`                                                 |
-| `warning`               | diagnostic warnings                                                                       |
+| Field                   | Default                 | Definition                                                                              |
+| ---                     | ---                     | ---                                                                                     |
+| `annotation`            | `attribute`             |                                                                                         |
+| `attribute_builtin`     | `special`               | builtin attributes                                                                      |
+| `attribute`             | `preproc`               |                                                                                         |
+| `bg_contrast_high`      | `bg`                    | an accent to the `bg` color which contrasts                                             |
+| `bg_contrast_low`       | `bg`                    | an accent to the `bg` color which barely contrasts                                      |
+| `bg`                    |                         | the background color                                                                    |
+| `boolean`               | `constant`              | `true` and `false`                                                                      |
+| `buffer_active`         | `text_contrast_bg_high` | the underline of an active buffer                                                       |
+| `buffer_alternate`      | `search`                | the underline of the alternate buffer                                                   |
+| `buffer_current`        | `select`                | the underline of the current buffer                                                     |
+| `character_special`     | `special`               | special characters e.g. wildcards                                                       |
+| `character`             | `string`                | character literals (e.g. `'a'`)                                                         |
+| `class`                 | `structure`             | data with behavior                                                                      |
+| `comment_documentation` | `comment`               | documentation comments                                                                  |
+| `comment_special`       |                         | special tokens in a comment                                                             |
+| `comment`               | `text_contrast_bg_low`  | normal comments                                                                         |
+| `conditional`           | `keyword`               | e.g. `if`, `match`, `switch`                                                            |
+| `constant_builtin`      | `special`               | built-in constant values                                                                |
+| `constant`              | `storage`               | constant values                                                                         |
+| `constructor`           | `type`                  | invoked by `new`                                                                        |
+| `decorator`             | `attribute`             |                                                                                         |
+| `define`                | `preproc`               | e.g. `#define` in C                                                                     |
+| `diff_add`              | `ok`                    | added text                                                                              |
+| `diff_change`           | `number`                | changed text, also applies to modified buffers in the tabline                           |
+| `diff_delete`           | `error`                 | removed text                                                                            |
+| `diff_syntax_add`       | `ok`                    | added text within a (universal) diff                                                    |
+| `diff_syntax_change`    | `number`                | changed text within a (universal) diff                                                  |
+| `diff_syntax_delete`    | `error`                 | removed text within a (universal) diff                                                  |
+| `enum`                  | `structure`             | an enumeration                                                                          |
+| `error`                 |                         | diagnostic errors                                                                       |
+| `event`                 | `loop`                  | events e.g. `public event FooEventHandler FooEvent` in C#                               |
+| `field_enum`            | `constant`              | a variant of an enum e.g. `Ok` in Rust                                                  |
+| `field`                 | `property`              | a member of a class/struct which is accessed directly                                   |
+| `float`                 | `number`                | floating point numbers                                                                  |
+| `fold`                  | `func`                  | the background of `&foldtext`                                                           |
+| `func_builtin`          | `special`               | builtin function                                                                        |
+| `func`                  | `statement`             | functions, e.g. `print('a')`                                                            |
+| `heading_1`             | `error`                 | level 1 heading                                                                         |
+| `heading_2`             | `warning`               | level 2 heading                                                                         |
+| `heading_3`             | `diff_change`           | level 3 heading                                                                         |
+| `heading_4`             | `string`                | level 4 heading                                                                         |
+| `heading_5`             | `type`                  | level 5 heading                                                                         |
+| `heading_6`             | `fold`                  | level 6 heading                                                                         |
+| `hint`                  | `info`                  | diagnostic hints                                                                        |
+| `identifier`            | `text`                  | misc. identifier                                                                        |
+| `include`               | `preproc`               | e.g. `#include` in C                                                                    |
+| `info`                  | `warning`               | diagnostic info                                                                         |
+| `interface_builtin`     | `type_builtin`          | e.g. `interface Foo`                                                                    |
+| `interface`             | `type`                  | e.g. `interface Foo`                                                                    |
+| `keyword_coroutine`     | `keyword`               | e.g. `await`                                                                            |
+| `keyword_function`      | `type_builtin`          | e.g. `fn` in Rust, `def` in Python                                                      |
+| `keyword_modifier`      | `keyword`               | modifiers for items, e.g. `public`                                                      |
+| `keyword_operator`      | `operator`              | e.g. `and` in Lua                                                                       |
+| `keyword_return`        | `keyword`               | e.g. `return`, `yield`                                                                  |
+| `keyword_type`          | `keyword`               | e.g. "struct"                                                                           |
+| `keyword`               | `statement`             | keywords, e.g. `local` in Lua                                                           |
+| `label`                 | `special`               | switch cases, loop labels (e.g. `'outer for x in y { break 'outer }` in Rust)           |
+| `loop`                  | `conditional`           | e.g. `loop`, `for`, `while`                                                             |
+| `macro`                 | `define`                | e.g. `println!` in Rust                                                                 |
+| `markup_link_label`     | `string_special`        | markup link/reference descriptions                                                      |
+| `markup_list_checked`   | `string_special`        | markup todo-style markers (checked)                                                     |
+| `markup_list_unchecked` | `string_special`        | markup todo-style markers (unchecked)                                                   |
+| `markup_list`           | `string_special`        | markup list markers                                                                     |
+| `markup_quote`          | `comment`               |                                                                                         |
+| `message`               | `info`                  | Builtin Vim messages                                                                    |
+| `method`                | `func`                  | function of a class                                                                     |
+| `namespace_builtin`     | `namespace`             | namespace, but builtin                                                                  |
+| `namespace`             | `uri`                   | e.g. `foo::bar` in Rust/C++                                                             |
+| `number`                | `constant`              | number literals (e.g `9`)                                                               |
+| `ok`                    |                         | positive reinforcement from LSP or Git                                                  |
+| `operator`              | `keyword`               | e.g. `+`, `-`, `&&`                                                                     |
+| `parameter_builtin`     | `special`               | a builtin function parameter                                                            |
+| `parameter`             | `identifier`            | a function parameter                                                                    |
+| `preproc_conditional`   | `preproc`               | pre-processor conditionals (e.g. `#[cfg]` in Rust)                                      |
+| `preproc`               | `func`                  | pre-processor commands (e.g. `#[derive]` in Rust)                                       |
+| `property`              | `identifier`            | a member of a class or structure which is transparently a function                      |
+| `punctuation_bracket`   | `punctuation`           | balanced punctuation, e.g. `[]`, `""`, `()`                                             |
+| `punctuation_delimiter` | `punctuation`           | single punctuation, e.g. `,`, `;`                                                       |
+| `punctuation_special`   | `string_special`        | special punctuation, e.g. `{}` in a format string                                       |
+| `punctuation`           | `text_contrast_bg_high` | misc. delimiters                                                                        |
+| `search`                | `select`                | Doing `:/` or `:s/`                                                                     |
+| `select`                | `bg_contrast_low`       | selected text, e.g. in visual mode or selecting LSP completions                         |
+| `special`               | `statement`             | unclassified special symbols in a language                                              |
+| `statement`             |                         | programming language statements which do not fall into another category                 |
+| `storage`               |                         | pointer symbols (e.g. `&foo`)                                                           |
+| `string_documentation`  | `comment_documentation` | strings documenting code                                                                |
+| `string_escape`         | `character`             | escaped characters in a string                                                          |
+| `string_regex`          | `string`                | regular expressions                                                                     |
+| `string_special_symbol` | `string_special`        | symbols or atoms                                                                        |
+| `string_special`        | `identifier`            | special strings (e.g. dates)                                                            |
+| `string`                | `constant`              | a misc. string                                                                          |
+| `structure`             | `type`                  | plain-old data                                                                          |
+| `syntax_error`          | `error`                 | non-diagnostic errors; sometimes shown in the actual highlighting of the code you write |
+| `tag_attribute`         | `field`                 | XML/HTML tag attributes                                                                 |
+| `tag_delimiter`         | `punctuation_bracket`   | `<`/`>` in XML/HTML tags                                                                |
+| `tag`                   | `structure`             | XML/HTML tags                                                                           |
+| `text_contrast_bg_high` | `text`                  | an accent to the `text` color which contrasts                                           |
+| `text_contrast_bg_low`  | `text`                  | an accent to the `text` color which barely contrasts                                    |
+| `text_environment_name` | `label`                 | text environment name                                                                   |
+| `text_environment`      | `text_contrast_bg_low`  | text environment delimiter                                                              |
+| `text_literal`          | `statement`             | literal text                                                                            |
+| `text_math`             | `number`                | mathematical text                                                                       |
+| `text_reference`        | `uri`                   | references to variables in text                                                         |
+| `text`                  |                         | plaintext                                                                               |
+| `throw`                 | `error`                 | a keyword which triggers or receives errors (e.g. `throw MyError`)                      |
+| `todo`                  | `message`               | `TODO` comments                                                                         |
+| `type_builtin`          | `type`                  | a type from the standard library                                                        |
+| `type_definition`       | `type`                  | typedefs                                                                                |
+| `type_parameter`        | `type`                  | generic type                                                                            |
+| `type`                  | `keyword`               | type names e.g. `int`, `String`                                                         |
+| `uri`                   | `text`                  | links (HTTP, tags, match paren, etc).                                                   |
+| `variable_builtin`      | `keyword`               | a variable from the language, e.g. `self`                                               |
+| `variable`              | `identifier`            | a variable                                                                              |
+| `warning`               | `error`                 | diagnostic warnings                                                                     |
+
 
 ##### Extending the Palette
 
