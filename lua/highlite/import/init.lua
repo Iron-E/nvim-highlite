@@ -17,10 +17,10 @@ local Import = {
 do
 	--- The format for a new `:colorscheme` file
 	local COLORSCHEME_FMT = [[
-local Highlite = require 'highlite' --- @type Highlite
+local Highlite = require("highlite") --- @type Highlite
 
-local palette, terminal_palette = Highlite.palette '%s'
-Highlite.generate('%s', Highlite.groups('%s', palette), terminal_palette)
+local palette, terminal_palette = Highlite.palette("%s")
+Highlite.generate("%s", Highlite.groups("%s", palette), terminal_palette)
 ]]
 
 	--- The colorschemes native to Neovim, plus the defaults managed by in this plugin.
@@ -64,25 +64,21 @@ Highlite.generate('%s', Highlite.groups('%s', palette), terminal_palette)
 --- @type highlite.color.palette.get
 local function get(bg, get_terminal)
 	local palette, terminal_palette
-	if bg ~= 'light' then
+	if bg ~= "light" then
 		if get_terminal then
-			terminal_palette =
-			{%s
+			terminal_palette = {%s
 			}
 		end
 
-		palette =
-		{%s
+		palette = {%s
 		}
 	else
 		if get_terminal then
-			terminal_palette =
-			{%s
+			terminal_palette = {%s
 			}
 		end
 
-		palette =
-		{%s
+		palette = {%s
 		}
 	end
 
