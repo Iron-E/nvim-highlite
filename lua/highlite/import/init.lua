@@ -168,6 +168,12 @@ return get
 			end
 		end
 
+		for name, _ in pairs(colorschemes) do
+			if name:find("^highlite") then
+				colorschemes[name] = nil
+			end
+		end
+
 		return colorschemes
 	end
 
