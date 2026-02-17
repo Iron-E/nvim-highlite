@@ -15,7 +15,7 @@ local FMT = [[return
 	{
 		annotation = ${@annotation.fg | @lsp.mod.annotation.fg},
 		attribute = ${@attribute.fg},
-		attribute_builtin = ${@attribute.builtin},
+		attribute_builtin = ${@attribute.builtin.fg},
 		bg = ${Normal.bg},
 		bg_contrast_high = ${NonText.fg},
 		bg_contrast_low = ${CursorColumn.bg},
