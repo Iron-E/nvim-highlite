@@ -121,13 +121,67 @@ return get
 		return s
 	end
 
-	--- Import all currently installed neovim colorschemes to this repository, creating color palettes and colorscheme files
+	--- @class highlite.Import._all_nvim_to_highlite.opts.match
+	--- @field patterns? string[]
+	--- @field raw? string[]
+
+	--- @class highlite.Import._all_nvim_to_highlite.opts
+	--- @field repo_dir? string the path to the nvim-highlite repository on-disk
+	--- @field exclude? highlite.Import._all_nvim_to_highlite.opts.match
+	--- @field include? highlite.Import._all_nvim_to_highlite.opts.match
+
+	--- @async
+	--- @param opts highlite.Import._all_nvim_to_highlite.opts
+	--- @return { [string]: true }
+	local function get_selected_colorschemes(opts)
+		--- @type { [string]: true }
+		local colorschemes = {}
+		if opts.include == nil then
+			for _, v in ipairs(vim.fn.getcompletion("*", "color")) do
+				colorschemes[v] = true
+			end
+		else
+			if opts.include.raw ~= nil then
+				for _, v in ipairs(opts.include.raw) do
+					colorschemes[v] = true
+				end
+			end
+
+			if opts.include.patterns ~= nil then
+				for _, pattern in ipairs(opts.include.patterns) do
+					for _, v in ipairs(vim.fn.getcompletion(pattern, "color")) do
+						colorschemes[v] = true
+					end
+				end
+			end
+		end
+
+		if opts.exclude ~= nil then
+			if opts.include.raw ~= nil then
+				for _, v in ipairs(opts.include.raw) do
+					colorschemes[v] = nil
+				end
+			end
+
+			if opts.include.patterns ~= nil then
+				for _, pattern in ipairs(opts.include.patterns) do
+					for _, v in ipairs(vim.fn.getcompletion(pattern, "color")) do
+						colorschemes[v] = nil
+					end
+				end
+			end
+		end
+
+		return colorschemes
+	end
+
+	--- Import the selected (installed) neovim colorschemes to this repository, creating color palettes and colorscheme files
 	--- for each. The built-in colorschemes (i.e. `nvim --clean`) are ignored.
 	--- @private
 	--- @async
-	--- @param ignore? {patterns: nil|string[], raw: nil|string[]} a list of colorschemes to not import. `patterns` are passed to `getcompletion`, `raw` are given literally.
-	--- @param repo_dir? string the path to the `nvim-highlite` repo on-disk
-	function Import._all_nvim_to_highlite(ignore, repo_dir)
+	--- @param opts highlite.Import._all_nvim_to_highlite.opts
+	function Import._to_highlite(opts)
+		local repo_dir = opts.repo_dir
 		if repo_dir == nil then
 			repo_dir = vim.fs.dirname(
 				vim.fs.dirname(
@@ -151,26 +205,10 @@ return get
 		--- The place where palettes go
 		local palette_dir = repo_dir .. "/lua/highlite/color/palette/"
 
-		if Table.is_empty(ignore) then
-			ignore = {}
-		end
-		--- @cast ignore -nil
+		local colorschemes = get_selected_colorschemes(opts)
 
-		--- The colorschemes which are configured to be ignored
-		local ignored = {}
-
-		for _, pattern in ipairs(ignore.patterns or {}) do
-			for _, colorscheme in ipairs(vim.fn.getcompletion(pattern, "color")) do
-				ignored[colorscheme] = true
-			end
-		end
-
-		for _, colorscheme in ipairs(ignore.raw or {}) do
-			ignored[colorscheme] = true
-		end
-
-		for _, name in ipairs(vim.fn.getcompletion("*", "color")) do
-			if DEFAULT_IGNORED[name] or ignored[name] then
+		for name, _ in pairs(colorschemes) do
+			if DEFAULT_IGNORED[name] then
 				goto continue -- HACK: no `continue` keyword
 			end
 

@@ -241,7 +241,7 @@ function Import._all_nvim_to_highlite(ignore, repo_dir)
 For example, here is how to import all of your installed colorschemes except for `catppuccin` and a custom colorscheme:
 
 ```vim
-:lua require('highlite.import')._all_nvim_to_highlite({patterns = {'catppuccin'}, raw = {'highlite-custom'}})
+:lua require('highlite.import')._to_highlite({ exclude = { patterns = { 'catppuccin' }, raw = { 'highlite-custom' } } })
 ```
 
 * Run `git diff` just to make sure it worked correctly.
