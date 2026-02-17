@@ -47,6 +47,8 @@ Highlite.generate('%s', Highlite.groups('%s', palette), terminal_palette)
 		slate = true,
 		sorbet = true,
 		torte = true,
+		unokai = true,
+		vim = true,
 		wildcharm = true,
 		zaibatsu = true,
 		zellner = true,
