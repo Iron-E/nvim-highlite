@@ -152,7 +152,7 @@ return get
 			end
 		end
 
-		if opts.exclude ~= nil then
+		if opts.include ~= nil then
 			if opts.include.raw ~= nil then
 				for _, v in ipairs(opts.include.raw) do
 					colorschemes[v] = nil
