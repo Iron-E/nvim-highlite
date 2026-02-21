@@ -230,6 +230,9 @@ require('highlite').setup {
     <li><a href="https://github.com/hrsh7th/nvim-cmp/">
       cmp
     </a></li>
+    <li><a href="https://github.com/folke/flash.nvim">
+      flash
+    </a></li>
     <li><a href="https://github.com/ibhagwan/fzf-lua">
       fzf
     </a></li>

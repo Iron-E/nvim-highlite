@@ -628,6 +628,11 @@ local function from_palette(palette, opts)
 			groups.CmpItemKindVariable = "@variable.cmp"
 		end
 
+		if all_nvim_plugins or nvim_plugins.flash ~= false then
+			local search = groups("Search")
+			groups.FlashLabel = { fg = search.sp, bold = true }
+		end
+
 		if all_nvim_plugins or nvim_plugins.fzf ~= false then
 			groups.FzfLuaBorder = "FloatBorder"
 			groups.FzfLuaTitle = "FloatTitle"

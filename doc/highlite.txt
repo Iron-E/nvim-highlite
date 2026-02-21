@@ -196,6 +196,8 @@ bqf
 
 cmp
 
+flash
+
 fzf
 
 gitsigns
