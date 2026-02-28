@@ -294,7 +294,7 @@ local function from_palette(palette, opts)
 			--(@keyword.debug defined below)
 			["@attribute"] = { fg = palette.attribute, nocombine = true },
 			["@attribute.builtin"] = { fg = palette.attribute_builtin, bold = true, nocombine = true },
-			["@character.special"] = { fg = palette.character_special, bold = true },
+			["@character.special"] = { fg = palette.character_special, bold = true, nocombine = true },
 			["@comment.documentation"] = { fg = palette.comment_documentation },
 			["@comment.error"] = { fg = palette.error },
 			["@comment.note"] = { fg = palette.info },
@@ -630,7 +630,7 @@ local function from_palette(palette, opts)
 
 		if all_nvim_plugins or nvim_plugins.flash ~= false then
 			local search = groups("Search")
-			groups.FlashLabel = { fg = search.sp, bold = true }
+			groups.FlashLabel = { fg = search.sp, bold = true, nocombine = true }
 		end
 
 		if all_nvim_plugins or nvim_plugins.fzf ~= false then
