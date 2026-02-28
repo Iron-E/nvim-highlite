@@ -1,4 +1,4 @@
-root = false
+root = true
 
 [*]
 charset = utf-8
@@ -14,6 +14,10 @@ tab_width = 2
 
 [*.txt]
 max_line_length = 80
+
+[*.scm]
+indent_size = 2
+indent_style = space
 
 [*.lua]
 align_array_table = true

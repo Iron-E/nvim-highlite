@@ -7,7 +7,7 @@
 ; markup
 
 (text_mode
-	content: (curly_group
-		(text word: (word) @markup)
-	)
+  content: (curly_group
+    (text word: (word) @markup)
+  )
 )

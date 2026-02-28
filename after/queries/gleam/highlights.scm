@@ -3,8 +3,8 @@
 ; identifier
 
 (binary_expression
-	operator: "|>"
-	right: (field_access field: (label) @function)
+  operator: "|>"
+  right: (field_access field: (label) @function)
 )
 
 (constant name: (identifier) @constant)
@@ -14,10 +14,10 @@
 ; modifiers
 
 (attribute
-	.
-	"@" @punctuation.special
-	.
-	name: (identifier) @attribute
+  .
+  "@" @punctuation.special
+  .
+  name: (identifier) @attribute
 )
 
 ; operator
@@ -27,8 +27,8 @@
 (discard) @variable.builtin
 
 (use
-	"use" @keyword.coroutine
-	"<-" @operator
+  "use" @keyword.coroutine
+  "<-" @operator
 )
 
 ; punctuation

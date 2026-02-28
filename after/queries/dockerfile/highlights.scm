@@ -5,17 +5,17 @@
 "=" @operator
 
 (
-	[
-		"{" "}"
-		"[" "]"
-	] @punctuation.bracket
-	(#set! "priority" 99)
+  [
+    "{" "}"
+    "[" "]"
+  ] @punctuation.bracket
+  (#set! "priority" 99)
 )
 
 [
-	":"
-	","
-	(line_continuation)
+  ":"
+  ","
+  (line_continuation)
 ] @punctuation.delimiter
 
 ("\"" @string (#set! conceal ""))
@@ -29,8 +29,8 @@
 ; params
 
 [
-	(param)
-	(mount_param_param)
+  (param)
+  (mount_param_param)
 ] @parameter
 
 ((mount_param_param) @structure (#match? @structure "^(--)?from\\=") (#offset! @structure 0 5 0 0))
@@ -49,10 +49,10 @@
 (label_pair key: (_) @property)
 
 (
-	[
-		(image_tag)
-		(json_string)
-		(unquoted_string)
-	] @string
-	(#set! "priority" 99)
+  [
+    (image_tag)
+    (json_string)
+    (unquoted_string)
+  ] @string
+  (#set! "priority" 99)
 )

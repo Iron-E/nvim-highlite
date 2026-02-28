@@ -5,19 +5,19 @@
 
 ; functions
 [
-	(keyword_array)
-	(keyword_brin)
-	(keyword_btree)
-	(keyword_float)
-	(keyword_gin)
-	(keyword_gist)
-	(keyword_hash)
-	(keyword_spgist)
+  (keyword_array)
+  (keyword_brin)
+  (keyword_btree)
+  (keyword_float)
+  (keyword_gin)
+  (keyword_gist)
+  (keyword_hash)
+  (keyword_spgist)
 ] @function.builtin
 
 (invocation (object_reference
-	name: (identifier) @function.builtin
-	(#lua-match? @function.builtin "[Cc][Oo][Nn][Cc][Aa][Tt]")
+  name: (identifier) @function.builtin
+  (#lua-match? @function.builtin "[Cc][Oo][Nn][Cc][Aa][Tt]")
 ))
 
 ; ; identifiers
@@ -31,7 +31,7 @@
 (relation (object_reference name: (identifier) @structure))
 
 ((identifier) @variable.builtin
-	(#eq? @variable.builtin "EXCLUDED")
+  (#eq? @variable.builtin "EXCLUDED")
 )
 
 ; events
@@ -39,8 +39,8 @@
 
 ; operators
 [
-	(keyword_as)
-	(keyword_cast)
+  (keyword_as)
+  (keyword_cast)
 ] @keyword.operator
 
 ; punctuation

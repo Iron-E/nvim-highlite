@@ -6,12 +6,12 @@
 ; keywords
 ((augroup_name) @keyword (#lua-match? @keyword "[Ee][Nn][Dd]"))
 [
-	"<buffer>"
-	"<expr>"
-	"<nowait>"
-	"<script>"
-	"<silent>"
-	"<unique>"
+  "<buffer>"
+  "<expr>"
+  "<nowait>"
+  "<script>"
+  "<silent>"
+  "<unique>"
 ] @variable.parameter
 
 ; namespaces
@@ -22,9 +22,9 @@
 
 ; operators
 (execute_statement
-	(call_expression
-		function: (field_expression "." @operator)
-	)
+  (call_expression
+    function: (field_expression "." @operator)
+  )
 )
 
 ; options
@@ -35,7 +35,7 @@
 
 ; special keys
 ((keycode) @string.keycode
-	(#set! "priority" 101)
+  (#set! "priority" 101)
 )
 
 ; wildcards

@@ -2,17 +2,17 @@
 
 ; builtins
 (
-	[
-		(iota) @variable.builtin
-		(nil) @constant.builtin
-		[(false) (true)] @boolean
-	]
-	(#set! "priority" 128)
+  [
+    (iota) @variable.builtin
+    (nil) @constant.builtin
+    [(false) (true)] @boolean
+  ]
+  (#set! "priority" 128)
 )
 
 ((identifier) @variable.builtin
-	(#eq? @variable.builtin "_")
-	(#set! "priority" 128)
+  (#eq? @variable.builtin "_")
+  (#set! "priority" 128)
 )
 
 ; namespace

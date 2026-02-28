@@ -4,8 +4,8 @@
 (dotted_key (bare_key) @structure (bare_key) .)
 
 (; in `[foo.bar]` or `[[foo.bar]]` show `bar` as structure
-	(dotted_key (bare_key) @structure .) @_parent
-	(#not-has-parent? @_parent pair)
+  (dotted_key (bare_key) @structure .) @_parent
+  (#not-has-parent? @_parent pair)
 )
 
 ; in `[foo]` and `[[foo]]`, show `foo` as structure

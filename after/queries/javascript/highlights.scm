@@ -3,15 +3,15 @@
 ; modifiers
 
 [
-	"const"
+  "const"
 ] @keyword.modifier.mutability
 
 [
-	"static"
+  "static"
 ] @keyword.modifier.lifetime
 
 ; namespaces
 (call_expression
-	function: (identifier) @_function (#eq? @_function "require")
-	arguments: (arguments (string (string_fragment) @module))
+  function: (identifier) @_function (#eq? @_function "require")
+  arguments: (arguments (string (string_fragment) @module))
 )

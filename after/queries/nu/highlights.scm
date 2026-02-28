@@ -5,35 +5,35 @@
 (val_variable . "$"  . name: "env" @constant.builtin)
 
 ((cmd_identifier) @keyword.return
-	(#eq? @keyword.return "return"))
+  (#eq? @keyword.return "return"))
 
 ((cmd_identifier) @keyword.import
-	(#eq? @keyword.import "export"))
+  (#eq? @keyword.import "export"))
 
 ; symbols
 
 (command . head: "^" @punctuation.special)
 
 [
-	"..."
+  "..."
 ] @operator
 
 (
-	[
-		"...$"
-		"...["
-		"...{"
-	] @operator
+  [
+    "...$"
+    "...["
+    "...{"
+  ] @operator
 
-	(#offset! @operator 0 0 0 -1)
+  (#offset! @operator 0 0 0 -1)
 )
 
 [
-	(long_flag_identifier)
-	(short_flag_identifier)
+  (long_flag_identifier)
+  (short_flag_identifier)
 ] @variable.parameter
 
 (val_interpolated
-	expr: (expr_interpolated ["(" ")"] @punctuation.special))
+  expr: (expr_interpolated ["(" ")"] @punctuation.special))
 
 (val_bool) @boolean

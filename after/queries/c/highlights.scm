@@ -6,21 +6,21 @@
 
 ; de/ref
 ("*" @type.pointer
-	(#has-parent? @type.pointer abstract_pointer_declarator pointer_declarator)
+  (#has-parent? @type.pointer abstract_pointer_declarator pointer_declarator)
 )
 
 ; preprocessors
 (preproc_if ["#if" "#endif"] @keyword.directive.conditional)
 
 (
-	[
-		(preproc_def "#define" @punctuation.special)
-		(preproc_directive) @punctuation.special
-		(preproc_else "#else" @punctuation.special)
-		(preproc_if ["#if" "#endif"] @punctuation.special)
-		(preproc_include "#include" @punctuation.special)
-	]
-	(#offset-from! "start" @punctuation.special 0 0 0 1)
+  [
+    (preproc_def "#define" @punctuation.special)
+    (preproc_directive) @punctuation.special
+    (preproc_else "#else" @punctuation.special)
+    (preproc_if ["#if" "#endif"] @punctuation.special)
+    (preproc_include "#include" @punctuation.special)
+  ]
+  (#offset-from! "start" @punctuation.special 0 0 0 1)
 )
 
 (preproc_include path: (string_literal (string_content) @module))

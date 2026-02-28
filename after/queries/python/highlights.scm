@@ -9,16 +9,16 @@
 )
 
 (import_statement name: [
-	(aliased_import [
-		(dotted_name (identifier) @module)
-		(identifier) @module
-	])
-	(dotted_name (identifier) @module)
+  (aliased_import [
+    (dotted_name (identifier) @module)
+    (identifier) @module
+  ])
+  (dotted_name (identifier) @module)
 ])
 
 (import_from_statement module_name: [
-	(dotted_name (identifier) @module)
-	(relative_import (dotted_name (identifier) @module))
+  (dotted_name (identifier) @module)
+  (relative_import (dotted_name (identifier) @module))
 ])
 
 ; Privates

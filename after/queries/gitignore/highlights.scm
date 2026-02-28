@@ -1,8 +1,8 @@
 ;; extends
 
 [
-	(wildcard_chars)
-	(wildcard_chars_allow_slash)
+  (wildcard_chars)
+  (wildcard_chars_allow_slash)
 ] @character.special
 
 (bracket_char) @character

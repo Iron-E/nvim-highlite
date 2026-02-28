@@ -3,8 +3,8 @@
 ; namespaces
 
 (call_expression
-	function: (identifier) @_function (#eq? @_function "require")
-	arguments: (arguments (string (string_fragment) @module))
+  function: (identifier) @_function (#eq? @_function "require")
+  arguments: (arguments (string (string_fragment) @module))
 )
 
 (export_statement source: (string (string_fragment) @module))
@@ -14,16 +14,16 @@
 ; modifiers
 
 [
-	"const"
-	"readonly"
+  "const"
+  "readonly"
 ] @keyword.modifier.mutability
 
 [
-	"static"
+  "static"
 ] @keyword.modifier.lifetime
 
 ("*" @attribute
-	(#has-parent? @attribute generator_function_declaration method_definition)
+  (#has-parent? @attribute generator_function_declaration method_definition)
 )
 
 ; operators

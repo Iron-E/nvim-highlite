@@ -9,6 +9,6 @@
 
 ; versions
 [
-	(go_version)
-	(version)
+  (go_version)
+  (version)
 ] @string.special
