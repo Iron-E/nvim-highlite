@@ -468,6 +468,7 @@ local function from_palette(palette, opts)
 
 			-- OpenTofu
 			["@lsp.type.enumMember.opentofu"] = NONE,
+			["@lsp.type.function.opentofu"] = NONE,
 			["@lsp.type.keyword.opentofu"] = NONE,
 			["@lsp.type.property.opentofu"] = NONE,
 			["@lsp.type.string.opentofu"] = NONE,
@@ -500,6 +501,7 @@ local function from_palette(palette, opts)
 
 			-- Terraform
 			["@lsp.type.enumMember.terraform"] = NONE,
+			["@lsp.type.function.terraform"] = NONE,
 			["@lsp.type.keyword.terraform"] = NONE,
 			["@lsp.type.property.terraform"] = NONE,
 			["@lsp.type.string.terraform"] = NONE,
@@ -550,9 +552,11 @@ local function from_palette(palette, opts)
 			groups.BufferAlternateHINT = Groups.extend({ fg = palette.hint }, buffer_alternate)
 			groups.BufferAlternateIndex = Groups.extend({ fg = palette.number }, buffer_alternate)
 			groups.BufferAlternateINFO = Groups.extend({ fg = palette.info }, buffer_alternate)
-			groups.BufferAlternateMod = Groups.extend({ fg = palette.diff_syntax_change, bold = true }, buffer_alternate)
+			groups.BufferAlternateMod =
+				Groups.extend({ fg = palette.diff_syntax_change, bold = true }, buffer_alternate)
 			groups.BufferAlternateSign = Groups.extend({ fg = tabline_fill.fg }, buffer_alternate)
-			groups.BufferAlternateTarget = Groups.extend({ fg = palette.buffer_alternate, bold = true }, buffer_alternate)
+			groups.BufferAlternateTarget =
+				Groups.extend({ fg = palette.buffer_alternate, bold = true }, buffer_alternate)
 			groups.BufferAlternateWARN = Groups.extend({ fg = palette.warning }, buffer_alternate)
 
 			groups.BufferCurrent = "TabLineSel"
