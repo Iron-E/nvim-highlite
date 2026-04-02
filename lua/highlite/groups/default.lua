@@ -142,6 +142,7 @@ local function from_palette(palette, opts)
 			--(FloatTitle defined below)
 			NormalFloat = "Pmenu",
 			Pmenu = { fg = palette.text, bg = palette.bg_contrast_low },
+			PmenuBorder = "FloatBorder",
 			PmenuSbar = { bg = palette.bg_contrast_high },
 			PmenuSel = "Visual",
 			PmenuThumb = { bg = palette.text_contrast_bg_high },
