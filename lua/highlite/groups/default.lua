@@ -718,6 +718,14 @@ local function from_palette(palette, opts)
 			groups.MiniIconsRed = "DiagnosticFloatingError"
 			groups.MiniIconsYellow = "DiagnosticFloatingWarn"
 			groups.MiniIconsGrey = "@markup"
+			groups.MiniTablineTabpagesection = { fg = palette.text_contrast_bg_high }
+			groups.MiniTablineModifiedCurrent =
+				Groups.extend({ fg = palette.diff_syntax_change, bold = true }, tabline_sel)
+			groups.MiniTablineModifiedHidden = Groups.extend({ fg = palette.diff_syntax_change, bold = true }, tabline)
+			groups.MiniTablineModifiedVisible =
+				Groups.extend({ fg = palette.diff_syntax_change, bold = true }, buffer_visible)
+			groups.MiniTablineFill = "TablineFill"
+			groups.MiniTablineVisible = Groups.extend({ sp = palette.buffer_active, underline = true }, tabline)
 		end
 
 		if all_nvim_plugins or nvim_plugins.neotest ~= false then
