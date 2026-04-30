@@ -129,6 +129,10 @@ local function from_palette(palette, opts)
 			TabLineFill = tabline_fill,
 			TabLineSel = tabline_sel,
 
+			-- Winbar
+			WinBar = Groups.extend({ fg = palette.text }, tabline_fill),
+			WinBarNC = Groups.extend({ fg = palette.text_contrast_bg_low }, tabline_fill),
+
 			-- Line Highlighting
 			CursorLine = { bg = palette.bg_contrast_low },
 			CursorLineNr = Groups.extend({ fg = palette.number }, sign_column),
