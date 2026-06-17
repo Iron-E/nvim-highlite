@@ -16,6 +16,7 @@ local Export = {
 	bat = wrap("bat"),
 	fish = wrap("fish"),
 	ghostty = wrap("ghostty"),
+	leaf = wrap("leaf"),
 	nvim = wrap("native.lua"),
 	ripgrep = wrap("ripgrep"),
 	vim = wrap("native.vim"),

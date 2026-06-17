@@ -6,6 +6,7 @@
 --- @field dir? string the output directory
 --- @field filter? highlite.export.options.filter if this function returns `true`, then the `group` will be skipped
 --- @field filename? string the name of the file without an extension
+--- @field args? table export-specific args
 
 --- @alias highlite.export.format async fun(colorscheme: string, opts?: highlite.export.options, dir_DEPRECATED?: string)
 

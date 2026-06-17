@@ -549,6 +549,7 @@ This plugin has the ability to export _any_ colorscheme (not just ours!) to vari
 * `bat` theme (tmTheme; also works for Sublime Text)
 * `fish` theme (`set_color`)
 * `ghostty` theme (conf)
+* `leaf` theme (TOML)
 * `nvim` theme (Lua)
 * `ripgrep` theme (conf)
 * `vim` theme (Vimscript)
@@ -579,6 +580,12 @@ require('highlite.export').<format>(
 
     -- if `true`, the function will not notify you when it is finished.
     silent = false,
+
+    -- additional arguments
+    args = {
+      -- For leaf only. Set the base syntax theme.
+      syntax = "base16-ocean.dark",
+    },
   }
 )
 ```
