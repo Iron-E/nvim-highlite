@@ -17,6 +17,7 @@
     (preproc_def "#define" @punctuation.special)
     (preproc_directive) @punctuation.special
     (preproc_else "#else" @punctuation.special)
+    (preproc_function_def "#define" @punctuation.special)
     (preproc_if ["#if" "#endif"] @punctuation.special)
     (preproc_include "#include" @punctuation.special)
   ]
