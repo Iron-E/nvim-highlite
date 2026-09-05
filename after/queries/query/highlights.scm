@@ -18,3 +18,9 @@
 
 ; quantifier
 (quantifier) @keyword.repeat
+
+(predicate
+  parameters: (parameters
+                (identifier) @number)
+  (#lua-match? @number "^%d+$")
+  (#set! priority 105))
