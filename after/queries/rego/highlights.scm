@@ -4,6 +4,7 @@
 
 [
   (assignment)
+  (in)
   "-"
 ] @operator
 
@@ -11,9 +12,10 @@
  (#has-parent? @punctuation.delimiter object_compr array_compr set_compr))
 
 [
-  ":"
   ","
   "."
+  ":"
+  ";"
 ] @punctuation.delimiter
 
 ([
@@ -36,7 +38,7 @@
         (#eq? @constant.builtin "null"))
 
 ((var) @variable.builtin
-       (#any-of? @variable.builtin "_" "data" "input"))
+       (#any-of? @variable.builtin "_" "data" "input" "metadata"))
 
 (ref_arg_brack "_" @variable.builtin)
 
