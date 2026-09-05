@@ -10,6 +10,8 @@
 
 ; punctuation
 
+(query update: "|=" @operator)
+
 (query . [ ; when at the start of a query
   array_access: "." @variable.builtin ; <.>[].bar
   term: "." @variable.builtin ; (<.>)
