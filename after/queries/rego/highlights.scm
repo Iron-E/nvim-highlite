@@ -57,7 +57,6 @@
 
 ((import) . (ref) . (as) @keyword.import)
 
-
 (rule_head
   . (var) @variable
   (#set! priority 105))
@@ -66,6 +65,9 @@
   . (var) @function
   (rule_args)
   (#set! priority 105))
+
+; The default queries set this to @module
+(rule_head (term (ref (var) @variable)))
 
 ; keywords
 
