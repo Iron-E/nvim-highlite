@@ -480,6 +480,9 @@ local function from_palette(palette, opts)
 			["@lsp.type.type.opentofu"] = NONE,
 			["@lsp.type.variable.opentofu"] = NONE,
 
+			-- Rego
+			["@lsp.type.keyword.rego"] = NONE,
+
 			-- Rust
 			["@lsp.mod.callable.rust"] = "@lsp.type.function.rust",
 			["@lsp.type.builtinType.rust"] = "@type.builtin.rust",
