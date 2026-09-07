@@ -240,9 +240,8 @@
 
 ; highlights `contains` in `foo[bar] contains baz if { ... }` correctly.
 ; the parser thinks it is two distinct rules.
-(policy
-  . (rule
-      (rule_head (var) (open_bracket) (term) (close_bracket))
-      (rule_body (literal (expr (term (ref (var) @keyword.operator))))))
-  . (rule (rule_head (var) (if)))
-  (#eq? @keyword.operator "contains"))
+((rule
+   (rule_head (var) (open_bracket) (term) (close_bracket))
+   (rule_body (literal (expr (term (ref (var) @keyword.operator))))))
+ . (rule (rule_head (var) (if)))
+ (#eq? @keyword.operator "contains"))
