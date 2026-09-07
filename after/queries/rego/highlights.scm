@@ -78,14 +78,6 @@
 ; The default queries set this to @module
 (rule_head (term (ref (var) @variable)))
 
-(fn_name
-  . (var) @module.builtin
-  . (var) @function.builtin
-  . (#any-of? @module.builtin
-     "object"
-     "regex"
-     ))
-
 ((_) @_before
  . (comment) @keyword.directive
  (#not-any-kind-eq? @_before comment)
@@ -99,7 +91,7 @@
 
 (fn_name
   . (var) @function.builtin
-  . (#any-of?
+  . (#any-of? @function.builtin
      "abs"
      "ceil"
      "concat"
