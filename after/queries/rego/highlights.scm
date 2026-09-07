@@ -43,7 +43,7 @@
         (#eq? @constant.builtin "null"))
 
 ((var) @variable.builtin
-       (#any-of? @variable.builtin "_" "data" "input" "metadata"))
+       (#any-of? @variable.builtin "_" "data" "input"))
 
 (ref_arg_brack "_" @variable.builtin)
 
@@ -67,6 +67,152 @@
 
 ; The default queries set this to @module
 (rule_head (term (ref (var) @variable)))
+
+(fn_name
+  . (var) @module.builtin
+  . (var) @function.builtin
+  . (#any-of? @module.builtin
+     "object"
+     "regex"
+     ))
+
+((_) @_before
+ . (comment) @keyword.directive
+ (#not-any-kind-eq? @_before comment)
+ (#eq? @keyword.directive "# METADATA")
+ (#offset! @keyword.directive 0 1 0 0))
+
+(source_file
+ . (comment) @keyword.directive
+ (#eq? @keyword.directive "# METADATA")
+ (#offset! @keyword.directive 0 1 0 0))
+
+(fn_name
+  . (var) @function.builtin
+  . (#any-of?
+     "abs"
+     "ceil"
+     "concat"
+     "contains"
+     "count"
+     "endswith"
+     "floor"
+     "format_int"
+     "indexof_n"
+     "intersection"
+     "is_array"
+     "is_boolean"
+     "is_null"
+     "is_number"
+     "is_object"
+     "is_set"
+     "is_string"
+     "lower"
+     "max"
+     "min"
+     "print"
+     "product"
+     "replace"
+     "round"
+     "sort"
+     "split"
+     "sprintf"
+     "startswith"
+     "substring"
+     "sum"
+     "to_number"
+     "trace"
+     "trim"
+     "trim_left"
+     "trim_prefix"
+     "type_name"
+     "union"
+     "upper"
+     "walk"))
+
+(fn_name
+  . (var) @_first @module.builtin
+  . (var)* @module.builtin
+  . (var) @function.builtin
+  . (#any-of? @_first
+     "array"
+     "base64"
+     "base64url"
+     "bits"
+     "crypto"
+     "graph"
+     "graphql"
+     "hex"
+     "http"
+     "io"
+     "json"
+     "net"
+     "numbers"
+     "object"
+     "opa"
+     "rand"
+     "regal"
+     "regex"
+     "rego"
+     "semver"
+     "strings"
+     "time"
+     "units"
+     "uri"
+     "urlquery"
+     "uuid"
+     "yaml"))
+
+; The parser doesn't parse `io.jwt.verify_xyz("a", "b")` correctly
+(expr
+  (expr_infix
+    . (expr
+        (term
+          (ref
+            . (var) @_first @module.builtin
+            . (ref_arg
+                (ref_arg_dot
+                  (var) @module.builtin))*
+            . (ref_arg
+                (ref_arg_dot
+                  (var) @function.builtin))
+            . )))
+    . (infix_operator . (arith_operator) .)
+    . (expr
+        (expr_parens
+          . (open_paren)
+          . (expr (term))
+          . (ERROR (term)+)?
+          . (close_paren)
+          . )))
+  (#any-of? @_first
+     "array"
+     "base64"
+     "base64url"
+     "bits"
+     "crypto"
+     "graph"
+     "graphql"
+     "hex"
+     "http"
+     "io"
+     "json"
+     "net"
+     "numbers"
+     "object"
+     "opa"
+     "rand"
+     "regal"
+     "regex"
+     "rego"
+     "semver"
+     "strings"
+     "time"
+     "units"
+     "uri"
+     "urlquery"
+     "uuid"
+     "yaml"))
 
 ; keywords
 
