@@ -23,6 +23,16 @@
   "{" "}"
 ] @punctuation.bracket)
 
+; the default queries try to set variable.parameter for function calls.
+(number) @number
+(boolean) @boolean
+[
+  (quoted_string)
+  (raw_string)
+  (interpolated_string_double)
+  (interpolated_string_raw)
+] @string
+
 ([
    "$\""
    "$`"
