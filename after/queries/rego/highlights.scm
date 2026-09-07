@@ -48,10 +48,9 @@
 (ref_arg_brack "_" @variable.builtin)
 
 ((import)
- .
- (ref
-   (var) @_head @module.builtin
-   (ref_arg (ref_arg_dot (var) @module.builtin))*)
+ . (ref
+     (var) @_head @module.builtin
+     (ref_arg (ref_arg_dot (var) @module.builtin))*)
 
  (#any-of? @_head "rego" "future"))
 
@@ -92,3 +91,12 @@
 (with_modifier
   (with) @keyword.modifier
   (as) @keyword.operator)
+
+; highlights `contains` in `foo[bar] contains baz if { ... }` correctly.
+; the parser thinks it is two distinct rules.
+(policy
+  . (rule
+      (rule_head (var) (open_bracket) (term) (close_bracket))
+      (rule_body (literal (expr (term (ref (var) @keyword.operator))))))
+  . (rule (rule_head (var) (if)))
+  (#eq? @keyword.operator "contains"))
