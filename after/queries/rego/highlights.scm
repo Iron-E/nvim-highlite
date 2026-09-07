@@ -18,6 +18,11 @@
   ";"
 ] @punctuation.delimiter
 
+(ERROR [
+  ")"
+  "{" "}"
+] @punctuation.bracket)
+
 ([
    "$\""
    "$`"
