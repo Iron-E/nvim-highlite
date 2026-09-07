@@ -68,12 +68,12 @@
 
 (rule_head
   . (var) @variable
-  (#set! priority 105))
+  (#set! priority 101))
 
 (rule_head
   . (var) @function
   (rule_args)
-  (#set! priority 105))
+  (#set! priority 101))
 
 ; The default queries set this to @module
 (rule_head (term (ref (var) @variable)))
@@ -255,3 +255,17 @@
    (rule_body (literal (expr (term (ref (var) @keyword.operator))))))
  . (rule (rule_head (var) (if)))
  (#eq? @keyword.operator "contains"))
+
+; highlights `contains` in `foo[bar][..][......] contains baz if { ... }` correctly.
+; the parser thinks it is N distinct rules.
+((rule
+   (rule_head . (var) . (open_bracket) . (term) . (close_bracket) .)
+   (rule_body (literal (expr (term (ref (array . (open_bracket) . (term) . (close_bracket) .)))))))
+ . (rule (rule_head (var) @keyword.operator))
+ . (rule
+     (rule_head . (var) @keyword.conditional .)
+     (rule_body . (open_curly) . (query) . (close_curly) .))
+
+ (#eq? @keyword.operator "contains")
+ (#eq? @keyword.conditional "if")
+ (#set! priority 102))
