@@ -89,6 +89,14 @@
  (#eq? @keyword.directive "# METADATA")
  (#offset! @keyword.directive 0 1 0 0))
 
+; `foo[count(foo) - 1]` is not parsed correctly
+(expr_call
+  func_name: (fn_name (var) @variable)
+  . (ERROR
+      (open_bracket)
+      (var) @function.call)
+  . (open_paren))
+
 (fn_name
   . (var) @function.builtin
   . (#any-of? @function.builtin
