@@ -1,6 +1,6 @@
-local Fmt = require 'highlite.fmt' --- @type highlite.Fmt
-local Nvim = require 'highlite.nvim' --- @type highlite.Nvim
-local Util = require 'highlite.export.util' --- @type highlite.export.Util
+local Fmt = require("highlite.fmt") --- @type highlite.Fmt
+local Nvim = require("highlite.nvim") --- @type highlite.Nvim
+local Util = require("highlite.export.util") --- @type highlite.export.Util
 
 local FMT = [[
 		text_unselected {
@@ -34,7 +34,7 @@ local FMT = [[
 			base ${TabLine.sp | TabLine.fg}
 			background ${TabLine.bg}
 			emphasis_0 ${@markup.heading.1.fg | @comment.error.fg}
-			emphasis_1 ${@markup.heading.2.fg | @comment.warning.fg}
+			emphasis_1 ${TabLineSel.bg}
 			emphasis_2 ${@markup.heading.3.fg | @comment.todo.fg}
 			emphasis_3 ${@markup.heading.4.fg | @comment.note.fg}
 		}
@@ -104,7 +104,7 @@ local FMT = [[
 
 		exit_code_success {
 			base ${DiagnosticSignOk.sp | DiagnosticSignOk.fg}
-			background ${DiagnosticSignOk.bg}
+			background ${DiagnosticSignOk.bg | SignColumn.bg}
 			emphasis_0 ${@markup.heading.1.fg | @comment.error.fg}
 			emphasis_1 ${@markup.heading.2.fg | @comment.warning.fg}
 			emphasis_2 ${@markup.heading.3.fg | @comment.todo.fg}
@@ -112,7 +112,7 @@ local FMT = [[
 		}
 
 		exit_code_error {
-			base ${@error.sp | @error.fg | Error.sp | Error.fg}
+			base ${@error.sp | @error.fg | Error.sp | Error.fg | Normal.fg}
 			background ${@error.bg | Error.bg}
 			emphasis_0 ${@markup.heading.1.fg | @comment.error.fg}
 			emphasis_1 ${@markup.heading.2.fg | @comment.warning.fg}
@@ -135,36 +135,37 @@ local FMT = [[
 ]]
 
 --- @type highlite.Fmt.string.opts
-local FMT_OPTS =
-{
-}
+local FMT_OPTS = {}
 
 --- Create a wezterm theme out of the `palette`
 --- @type highlite.export.format.module
 local function export(colorscheme, opts, dir)
-	if opts == nil then opts = {} end
+	if opts == nil then
+		opts = {}
+	end
 
 	-- checked for backwards compatability
-	dir = Util.get_normalized_dir('zellij', dir or opts.dir, function()
-		local zellij_setup = vim.fn.system({'zellij', 'setup', '--check'})
+	dir = Util.get_normalized_dir("zellij", dir or opts.dir, function()
+		local zellij_setup = vim.fn.system({ "zellij", "setup", "--check" })
 		local config_file = zellij_setup:match('%[CONFIG DIR%]: "([^"]+)"')
-		return config_file .. '/themes'
+		return config_file .. "/themes"
 	end)
 
 	local filename = opts.filename or colorscheme
 
 	local content --- @type string
 	Nvim.with_colorscheme(colorscheme, function()
-		content =
-			'// https://github.com/Iron-E/nvim-highlite\n'
-			.. 'themes {\n'
-			.. '\t' .. colorscheme .. ' {\n'
+		content = "// https://github.com/Iron-E/nvim-highlite\n"
+			.. "themes {\n"
+			.. "\t"
+			.. colorscheme
+			.. " {\n"
 			.. Fmt.string(FMT, FMT_OPTS)
-			.. '\t}\n'
-			.. '}\n'
+			.. "\t}\n"
+			.. "}\n"
 	end)
 
-	return dir .. '/' .. filename .. '.kdl', content, opts
+	return dir .. "/" .. filename .. ".kdl", content, opts
 end
 
 return export
